@@ -892,7 +892,7 @@ export function CaseStudyView() {
   const seoDescription = isRtl
     ? `${study.tagline} التقنيات: ${techPreview}`
     : `${study.tagline} Built with: ${techPreview}`;
-  const seoImage = projectAsset?.cover || `${BASE_URL}/og-image.png`;
+  const seoImage = projectAsset?.cover || `${BASE_URL}/og-image.jpg`;
   const seoUrl = `${BASE_URL}${isRtl ? "/ar" : ""}/projects/${study.id}`;
   const caseStudyJsonLd = {
     "@context": "https://schema.org",

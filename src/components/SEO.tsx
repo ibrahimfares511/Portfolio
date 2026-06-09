@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
 
 const BASE_URL = 'https://ibrahimfares.dev'
-const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`
+const DEFAULT_IMAGE = `${BASE_URL}/og-image.jpg`
 
 const DEFAULT_TITLE = 'Ibrahim Fares — Frontend Developer'
 const DEFAULT_DESC =
