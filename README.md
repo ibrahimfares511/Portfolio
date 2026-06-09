@@ -1,5 +1,11 @@
 <div align="center">
 
+![Portfolio Preview](./public/og-image.jpg)
+
+</div>
+
+<div align="center">
+
 # Ibrahim Fares — Portfolio
 
 ### Frontend Developer · React.js · TypeScript · Next.js
