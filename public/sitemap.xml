@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Home EN -->
+  <url>
+    <loc>https://ibrahimfares.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ibrahimfares.dev/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ibrahimfares.dev/ar"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Home AR -->
+  <url>
+    <loc>https://ibrahimfares.dev/ar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ibrahimfares.dev/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ibrahimfares.dev/ar"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Case Studies EN -->
+  <url>
+    <loc>https://ibrahimfares.dev/projects/wms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ibrahimfares.dev/projects/wms"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ibrahimfares.dev/ar/projects/wms"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ibrahimfares.dev/projects/ertiqaa-academy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ibrahimfares.dev/projects/ertiqaa-academy"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ibrahimfares.dev/ar/projects/ertiqaa-academy"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ibrahimfares.dev/projects/haya-academy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ibrahimfares.dev/projects/haya-academy"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ibrahimfares.dev/ar/projects/haya-academy"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ibrahimfares.dev/projects/web-point-erp</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ibrahimfares.dev/projects/web-point-erp"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ibrahimfares.dev/ar/projects/web-point-erp"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ibrahimfares.dev/projects/mrs-ayat-asaad</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ibrahimfares.dev/projects/mrs-ayat-asaad"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://ibrahimfares.dev/ar/projects/mrs-ayat-asaad"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Case Studies AR -->
+  <url>
+    <loc>https://ibrahimfares.dev/ar/projects/wms</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ibrahimfares.dev/ar/projects/ertiqaa-academy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ibrahimfares.dev/ar/projects/haya-academy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ibrahimfares.dev/ar/projects/web-point-erp</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ibrahimfares.dev/ar/projects/mrs-ayat-asaad</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

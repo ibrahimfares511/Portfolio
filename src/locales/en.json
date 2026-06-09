@@ -1,0 +1,364 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "howIThink": "How I Think",
+    "challenges": "Challenges",
+    "experience": "Experience",
+    "contact": "Contact",
+    "letsTalk": "Let's Talk"
+  },
+  "hero": {
+    "title": "Frontend Developer",
+    "firstName": "IBRAHIM",
+    "lastName": "FARES",
+    "tagline": "I turn complex problems into clean, fast interfaces.",
+    "viewWork": "View My Work",
+    "downloadCv": "Download CV",
+    "scrollDown": "Scroll Down",
+    "stats": [
+      "Years Experience",
+      "Production Projects",
+      "Companies Partnered",
+      "Core Technologies"
+    ]
+  },
+  "about": {
+    "label": "About Me",
+    "title": "My Professional Story",
+    "description": "Building scalable React applications with a focus on performance and clean code.",
+    "profileOverview": "Profile Overview",
+    "summary": "4+ years building production-grade React applications — from large-scale LMS platforms to real-time enterprise tools. I specialize in turning Figma designs into fast, scalable interfaces that don't just look good, they perform.",
+    "expertiseFocus": "Expertise Focus",
+    "expertiseDetails": "Specialized in React.js ecosystems, responsive UI systems, global state management, and lightweight server integrations.",
+    "expertiseList": [
+      "React.js ecosystems & component architecture",
+      "Global state management (Redux, Zustand)",
+      "Responsive UI & Figma-to-code implementation"
+    ],
+    "careerStance": "Career Stance",
+    "careerStanceDetails": "Committed to clean code architectures, remote development standards, and expanding expertise into Full-Stack workflows.",
+    "careerList": [
+      "Clean code standards & scalable architecture",
+      "Remote-first & async work mindset",
+      "Continuously expanding into Full-Stack workflows"
+    ],
+    "codingHighlight": "4+ Years Coding",
+    "remoteHighlight": "Remote Veteran",
+    "education": "Education",
+    "languages": "Languages",
+    "languagesList": {
+      "arabic": {
+        "name": "Arabic",
+        "level": "Native"
+      },
+      "english": {
+        "name": "English",
+        "level": "Intermediate"
+      }
+    },
+    "educationList": [
+      {
+        "degree": "Bachelor's Degree in Civil Engineering",
+        "institution": "Zagazig University, Egypt",
+        "description": "Acquired analytical problem-solving and rigorous engineering methods."
+      },
+      {
+        "degree": "Information Technology School",
+        "institution": "Ismailia, Egypt",
+        "description": "Developed interest in programming; self-taught web development; built the school website as a graduation project."
+      }
+    ]
+  },
+  "tech": {
+    "label": "Tech Stack",
+    "title": "Technologies Showcase",
+    "description": "A continuous showcase of the modern toolkits, frameworks, and developer workflows I master."
+  },
+  "journey": {
+    "label": "Career Journey",
+    "title": "The Path So Far",
+    "description": "Every role shaped my approach to building products that matter.",
+    "journeyList": [
+      {
+        "period": "Apr 2024 – Present",
+        "location": "Remote, Full-time",
+        "description": "Engineered high-engagement web experiences and collaborated with backend teams.",
+        "highlights": [
+          "Built Warehouse Management System (WMS) from scratch — React, Redux Toolkit: visual mapping & scanner integration.",
+          "Implemented visual storage layouts and offline stock count transactions to prevent data drops.",
+          "Integrated barcode scanner inputs; connected to Laravel backend APIs via AJAX queries."
+        ]
+      },
+      {
+        "period": "Feb 2022 – Present",
+        "location": "Remote / Freelance",
+        "description": "Led the visual redesign and development of multiple digital classrooms and LMS web applications.",
+        "highlights": [
+          "Built Ertiqaa Academy's full student portal with React, Redux, Firebase, MUI & Framer Motion.",
+          "Developed 6+ interactive exam formats (MCQ, matching, ordering) with strict state validation.",
+          "Sole developer for HAYA Academy — complete classroom frontend with jQuery & Laravel."
+        ]
+      },
+      {
+        "period": "Jul 2022 – Dec 2022",
+        "location": "Remote, Full-time",
+        "description": "Refactored and modernized a legacy frontend codebase, improving performance and visual consistency.",
+        "highlights": [
+          "Refactored legacy UI components to modern CSS tokens and design standards.",
+          "Resolved critical display issues and improved rendering speeds of legacy codebases.",
+          "Improved responsive layouts across landing pages and admin dashboards."
+        ]
+      },
+      {
+        "period": "Jan 2021 – Jan 2024",
+        "location": "Hybrid, Project-based",
+        "description": "Built and sold a Restaurant ERP system deployed across 4+ active businesses.",
+        "highlights": [
+          "Built a drag-and-drop table layout builder with real-time order queue binding.",
+          "Designed the full admin dashboard: menu controls, order streams & floor plan management.",
+          "Engineered lightweight customer interfaces for digital menu browsing and checkout."
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "label": "Projects",
+    "title": "Featured Work",
+    "description": "Selected applications built for enterprise, education, and user engagement.",
+    "btnDetails": "Project Details",
+    "btnViewLive": "View Live",
+    "labelArchitecture": "Architecture & Stack",
+    "labelProblem": "Problem Statement",
+    "labelChallenges": "Key Challenges",
+    "labelSolution": "Our Solution",
+    "labelOutcomes": "Project Outcomes",
+    "labelTech": "Technical Stack",
+    "labelArchStyle": "Architecture Style",
+    "projectsList": [
+      {
+        "tagline": "Entertainment and offers platform built from scratch",
+        "description": "A comprehensive entertainment and offers system built from the ground up, featuring interactive marathons, chat streams, and geo-located discovery maps.",
+        "problem": "The client required a scalable, high-engagement entertainment and offers platform that supports real-time communication, active user challenges, and location-based discovery.",
+        "challenges": [
+          "Integrating Google Maps API with high performance.",
+          "Designing real-time chat and story updates.",
+          "Managing complex user engagement states (countdown timers, leaderboards) client-side."
+        ],
+        "solution": "Engineered the frontend using React and Redux Toolkit for clean state separation, Firebase for real-time chat/presence, and custom countdown hooks for synchronized challenges.",
+        "results": [
+          "Delivered complete product from scratch",
+          "Synchronized timed challenges & interactive leaderboards",
+          "Smooth geo-located offers search without UI lagging"
+        ]
+      },
+      {
+        "tagline": "Advanced multimedia learning management system",
+        "description": "A premium educational platform featuring multimedia classrooms, timed evaluations, progress reports, and 6+ interactive question styles.",
+        "problem": "The academy required an advanced student portal capable of rendering multiple distinct interactive exam types and video/audio lessons while ensuring progress metrics are tracked in real time.",
+        "challenges": [
+          "Developing robust and reusable renderers for 6+ question types.",
+          "Handling quiz state preservation during network interruptions.",
+          "Supporting multi-language localization seamlessly across student assets."
+        ],
+        "solution": "Created a modular question parser with strict TypeScript validation, Radix UI and Tailwind CSS for accessible inputs, and state management using Redux Toolkit and Firebase.",
+        "results": [
+          "Delivered 6+ interactive question templates",
+          "Persistent timed assessment logs",
+          "Full responsiveness for all student devices"
+        ]
+      },
+      {
+        "tagline": "Custom ERP with drag-and-drop table management",
+        "description": "An administrative and consumer restaurant suite that handles digital menu ordering, payment gateways, and visual floor plans.",
+        "problem": "Local dining establishments lacked an unified dashboard to manage orders, modify table arrangements dynamically, and present a seamless customer checkout flow.",
+        "challenges": [
+          "Designing an interactive drag-and-drop table manager.",
+          "Maintaining synchronized state between the kitchen and administrative views."
+        ],
+        "solution": "Developed a custom drag-and-drop grid canvas using HTML5 Drag and Drop APIs, combined with a highly optimized order tracking queue that manages statuses in real-time.",
+        "results": [
+          "Deployed and sold to 4+ dining businesses",
+          "Zero order dropping in peak operational hours",
+          "Intuitive graphical floor plan management"
+        ]
+      },
+      {
+        "tagline": "Custom student platform with jQuery and Laravel",
+        "description": "A traditional server-rendered educational platform with media-rich lesson plans, quizzes, and automated evaluations.",
+        "problem": "The school needed an affordable, fast e-learning system with media support and automated grading features without the complexity of a heavy single-page application framework.",
+        "challenges": [
+          "Structuring clean, modular frontend logic in jQuery without component encapsulation.",
+          "Integrating Laravel APIs seamlessly with dynamic AJAX requests."
+        ],
+        "solution": "Implemented a structured MVC layout on the Laravel backend, writing modular jQuery scripts with custom namespaces to handle quiz scoring, media playbacks, and timed actions.",
+        "results": [
+          "Developed successfully as sole frontend coder",
+          "Integrated comprehensive grading system",
+          "Lightweight rendering under 1.5 seconds"
+        ]
+      },
+      {
+        "tagline": "Redesigned and optimized educational web app",
+        "description": "A detailed redesign and code modernization phase for an active online portal, improving overall user experience and page speed scores.",
+        "problem": "The existing platform suffered from outdated UI design, poor mobile responsiveness, and high load times that negatively impacted student engagement.",
+        "challenges": [
+          "Refactoring and optimizing legacy Laravel/jQuery integrations without breaking existing user data.",
+          "Upgrading UI elements to modern standards while retaining core logic."
+        ],
+        "solution": "Conducted a complete UI/UX audit, refactored redundant CSS/JS scripts, optimized images, and modernized the layout to align with responsive design rules.",
+        "results": [
+          "Rebuilt key portals for enhanced visual clarity",
+          "Achieved 40%+ page load speed improvements",
+          "100% responsiveness on mobile tablets and phones"
+        ]
+      }
+    ]
+  },
+  "howIThink": {
+    "label": "How I Think",
+    "title": "My Workflow Roadmap",
+    "description": "A systematic process to transforming requirements into robust production products.",
+    "steps": {
+      "requirements": {
+        "title": "Requirements",
+        "description": "Deep dive into user needs, constraints, and success metrics."
+      },
+      "planning": {
+        "title": "Planning",
+        "description": "Technical specs, sprint breakdown, and risk assessment."
+      },
+      "uiArchitecture": {
+        "title": "UI Architecture",
+        "description": "Component hierarchy, design tokens, and layout systems."
+      },
+      "stateManagement": {
+        "title": "State Management",
+        "description": "Server vs client state, caching strategies, and data flow."
+      },
+      "apiIntegration": {
+        "title": "API Integration",
+        "description": "RESTful contracts, error handling, and optimistic updates."
+      },
+      "optimization": {
+        "title": "Optimization",
+        "description": "Bundle splitting, lazy loading, and performance profiling."
+      },
+      "deployment": {
+        "title": "Deployment",
+        "description": "CI/CD pipelines, monitoring, and rollback strategies."
+      }
+    }
+  },
+  "challenges": {
+    "label": "Challenges",
+    "title": "Engineering Challenges",
+    "description": "Deep dive into complex problems I solved and their architectural outcomes.",
+    "lblChallenge": "The Challenge",
+    "lblSolution": "Our Solution",
+    "lblOutcome": "The Outcome",
+    "btnViewAll": "View All Challenges",
+    "viewSolution": "View Solution",
+    "challengesList": [
+      {
+        "title": "Real-Time Leaderboard & Chat Sync",
+        "summary": "Built real-time features with Firebase and custom timer hooks. Synced live leaderboards and chat across multiple users with zero-latency updates.",
+        "challenge": "Syncing countdown timers for active marathon challenges and event chat rooms across concurrent users without lagging the main browser thread.",
+        "solution": "Implemented a unified React Context with requestAnimationFrame loop for counting, and paired it with Firebase Realtime Database observers.",
+        "outcome": "Maintained perfectly synced timers (<10ms offset) and messaging streams across users, preserving smooth 60fps rendering."
+      },
+      {
+        "title": "Polymorphic Assessment Engine",
+        "summary": "Created a flexible question renderer supporting 6+ exam formats including MCQ, ordering, and matching. Built with a single unified component architecture.",
+        "challenge": "Designing a robust client-side quiz parser that handles MCQ, matching, ordering, fill-in-the-blank, essay questions with state preservation and timer hooks.",
+        "solution": "Developed a polymorphic React component set typed strictly in TypeScript, managing a central reducer for question transitions and client state.",
+        "outcome": "Deployed to thousands of students, enabling seamless timed exams with automatic progress saving during network drops."
+      },
+      {
+        "title": "Interactive Drag & Drop Table Grid",
+        "summary": "Built custom drag-and-drop table layouts for administrative dashboards without third-party libraries. Supports dynamic row/column reordering in real time.",
+        "challenge": "Enabling restaurant administrators to visually place, resize, and connect dining tables inside a grid layout that instantly binds to order queues.",
+        "solution": "Built an interactive canvas using HTML5 Drag and Drop APIs combined with responsive coordinate calculations and client-side bounding checks.",
+        "outcome": "Successfully rolled out to 4+ active businesses, reducing layout modification time from hours to minutes."
+      },
+      {
+        "title": "Legacy Integration Modernization",
+        "summary": "Refactored jQuery/Laravel apps to meet modern frontend standards. Achieved significant improvements in responsiveness, rendering speed, and code maintainability.",
+        "challenge": "Inheriting outdated web apps with bloated stylesheets, unorganized script sheets, and slow page-load speeds.",
+        "solution": "Performed a complete audit, eliminated redundant styling classes, modularized scripts, and optimized media delivery systems.",
+        "outcome": "Reduced load times significantly and delivered clean visual responsiveness across mobile screens."
+      },
+      {
+        "title": "Geo-Located Offers Discovery",
+        "summary": "Integrated Google Maps API for location-based offers search and discovery. Implemented dynamic map markers with real-time filtering by category and distance.",
+        "challenge": "Dynamically fetching and clustering local offers on a map layout as the user pans or zooms, preventing screen stuttering or slow queries.",
+        "solution": "Implemented debounced map boundary updates, marker clustering, and custom location hooks to query offers efficiently via AJAX.",
+        "outcome": "Created an immersive, stutter-free map experience allowing students and users to find offers in real-time."
+      }
+    ]
+  },
+  "github": {
+    "title": "GitHub Activity",
+    "description": "A visual representation of my coding activity and continuous learning journey.",
+    "contributionsCount_one": "contribution",
+    "contributionsCount_other": "contributions",
+    "in": "in",
+    "less": "Less",
+    "more": "More",
+    "visitProfile": "Visit My GitHub Profile"
+  },
+  "contact": {
+    "label": "Get In Touch",
+    "title": "Let's Build Something Amazing Together",
+    "description": "Ready to bring your ideas to life? Let's discuss your next project or opportunities.",
+    "btnGetInTouch": "Get in Touch",
+    "copyright": "All rights reserved.",
+    "backToTop": "Back to Top",
+    "orDirectly": "Or contact me directly",
+    "form": {
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Ibrahim Fares",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "Ibrahim@example.com",
+      "messageLabel": "Message",
+      "messagePlaceholder": "How can I help you?",
+      "send": "Send Message →",
+      "sending": "Sending...",
+      "success": "✓ Message sent successfully! I'll get back to you within 24 hours.",
+      "error": "Something went wrong. Please try again.",
+      "validation": {
+        "nameRequired": "Full name is required",
+        "emailRequired": "Email address is required",
+        "emailInvalid": "Please enter a valid email address",
+        "messageRequired": "Message is required"
+      }
+    }
+  },
+  "caseStudy": {
+    "backToProjects": "Back to Projects",
+    "liveProject": "Live Project ↗",
+    "viewOnGithub": "View on GitHub ↗",
+    "theChallenge": "The Challenge",
+    "problem": "Problem",
+    "problemStatement": "Problem Statement",
+    "myRole": "My Contribution",
+    "myContribution": "My Contribution",
+    "keyChallenges": "Key Challenges",
+    "howISolvedIt": "How I solved it:",
+    "technicalStack": "Technical Stack",
+    "architectureDecisions": "Architecture Decisions",
+    "keyFeatures": "Key Features Built",
+    "projectScreens": "Project Screens",
+    "resultsAndImpact": "Results & Impact",
+    "previousProject": "Previous Project",
+    "nextProject": "Next Project",
+    "viewCaseStudy": "View Case Study →",
+    "status": "Status",
+    "live": "Live",
+    "role": "Role",
+    "year": "Year",
+    "type": "Type",
+    "gallery": "Gallery"
+  }
+}
