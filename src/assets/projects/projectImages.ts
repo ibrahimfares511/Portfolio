@@ -11,7 +11,7 @@ import wmsResponsive from "./WMS/Responsive.webp";
 
 // ─── Ertiqaa ──────────────────────────────────────────────────────────────────
 import ertiqaaCover from "./Ertiqaa/cover.webp";
-import ertiqaaGif from "./Ertiqaa/fullScreen.gif";
+import ertiqaaMp4 from "./Ertiqaa/fullScreen.mp4";
 import ertiqaaLessonPlayer from "./Ertiqaa/Lesson Player screen.webp";
 import ertiqaaStudentProgress from "./Ertiqaa/Student Units Progress.webp";
 import ertiqaaContentManagement from "./Ertiqaa/Teacher Content Management.webp";
@@ -21,7 +21,7 @@ import ertiqaaResponsive from "./Ertiqaa/Responsive showcase.webp";
 
 // ─── Haya ─────────────────────────────────────────────────────────────────────
 import hayaCover from "./Haya/cover.webp";
-import hayaGif from "./Haya/fullScreen.gif";
+import hayaMp4 from "./Haya/fullScreen.mp4";
 import hayaInteractiveActivity from "./Haya/Interactive Activity.webp";
 import hayaAnalyticsDashboard from "./Haya/Analytics Dashboard.webp";
 import hayaActivityCategories from "./Haya/Activity Categories.webp";
@@ -31,7 +31,7 @@ import hayaResponsive from "./Haya/05.webp";
 
 // ─── Mrs. Ayat Asaad ──────────────────────────────────────────────────────────
 import ayatCover from "./Mrs.AyatAsaad/cover.webp";
-import ayatGif from "./Mrs.AyatAsaad/fullScreen.gif";
+import ayatMp4 from "./Mrs.AyatAsaad/fullScreen.mp4";
 import ayatQuestionBank from "./Mrs.AyatAsaad/Question Bank.webp";
 import ayatAdminCategories from "./Mrs.AyatAsaad/Admin Categories.webp";
 import ayatBootcampsCatalog from "./Mrs.AyatAsaad/Bootcamps Catalog.webp";
@@ -55,7 +55,7 @@ export interface ProjectScreen {
 
 export interface ProjectImages {
   id: string;
-  cardGif?: string;
+  cardVideo?: string;
   cover: string;
   screens: ProjectScreen[];
 }
@@ -65,7 +65,7 @@ export interface ProjectImages {
 export const projectImages: ProjectImages[] = [
   {
     id: "wms",
-    cardGif: undefined,
+    cardVideo: undefined,
     cover: wmsCover,
     screens: [
       { src: wmsCover,           label: "Overview" },
@@ -81,7 +81,7 @@ export const projectImages: ProjectImages[] = [
   },
   {
     id: "ertiqaa-academy",
-    cardGif: ertiqaaGif,
+    cardVideo: ertiqaaMp4,
     cover: ertiqaaCover,
     screens: [
       { src: ertiqaaCover,              label: "Overview" },
@@ -95,7 +95,7 @@ export const projectImages: ProjectImages[] = [
   },
   {
     id: "haya-academy",
-    cardGif: hayaGif,
+    cardVideo: hayaMp4,
     cover: hayaCover,
     screens: [
       { src: hayaCover,               label: "Overview" },
@@ -109,7 +109,7 @@ export const projectImages: ProjectImages[] = [
   },
   {
     id: "mrs-ayat-asaad",
-    cardGif: ayatGif,
+    cardVideo: ayatMp4,
     cover: ayatCover,
     screens: [
       { src: ayatCover,            label: "Overview" },
@@ -122,7 +122,7 @@ export const projectImages: ProjectImages[] = [
   },
   {
     id: "web-point-erp",
-    cardGif: undefined,
+    cardVideo: undefined,
     cover: webPointCover,
     screens: [
       { src: webPointCover, label: "Table Floor Map" },

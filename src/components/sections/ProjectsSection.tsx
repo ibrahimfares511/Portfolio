@@ -74,7 +74,8 @@ export function ProjectsSection() {
             const projectLink = currentLang === 'ar' ? `/ar/projects/${project.id}` : `/projects/${project.id}`;
 
             const images = projectImages.find((p) => p.id === project.id)
-            const cardImage = images?.cardGif || images?.cover
+            const cardVideo = images?.cardVideo
+            const cardImage = cardVideo ? null : (images?.cover ?? null)
 
             // const MAX_TAGS = 4
             // const displayTags = project.tags.slice(0, MAX_TAGS)
@@ -113,7 +114,16 @@ export function ProjectsSection() {
                     {/* Mockup Screen Content */}
                     <div className="relative w-full h-[240px] overflow-hidden border-b border-border bg-black">
                       <div className="w-full h-full transition-transform duration-300 ease group-hover:scale-[1.04]">
-                        {cardImage ? (
+                        {cardVideo ? (
+                          <video
+                            src={cardVideo}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        ) : cardImage ? (
                           <img
                             src={cardImage}
                             alt={project.title}

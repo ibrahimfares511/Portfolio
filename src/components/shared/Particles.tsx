@@ -13,6 +13,14 @@ export function Particles({ count = 60 }: { count?: number }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
+    // Skip on mobile and when user prefers reduced motion
+    if (
+      window.innerWidth < 768 ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return
+    }
+
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -60,18 +68,21 @@ export function Particles({ count = 60 }: { count?: number }) {
       animationId = requestAnimationFrame(animate)
     }
 
+    // Keep a stable reference so the listener can be removed
+    const handleResize = () => {
+      resize()
+      init()
+    }
+
     resize()
     init()
     animate()
 
-    window.addEventListener('resize', () => {
-      resize()
-      init()
-    })
+    window.addEventListener('resize', handleResize, { passive: true })
 
     return () => {
       cancelAnimationFrame(animationId)
-      window.removeEventListener('resize', resize)
+      window.removeEventListener('resize', handleResize)
     }
   }, [count])
 
