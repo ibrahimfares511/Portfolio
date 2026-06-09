@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -25,9 +25,7 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(() => typeof window !== "undefined" && window.innerWidth < 640);
-  const headerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
+useEffect(() => {
     const onResize = () => setIsMobile(window.innerWidth < 640);
     window.addEventListener("resize", onResize, { passive: true });
     return () => window.removeEventListener("resize", onResize);
@@ -64,24 +62,17 @@ export function Navigation() {
 
   return (
     <>
-      <motion.header
-        ref={headerRef}
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        onAnimationComplete={() => {
-          if (headerRef.current) {
-            headerRef.current.style.transform = "none";
-            headerRef.current.style.willChange = "auto";
-          }
-        }}
+      <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           scrolled ? "py-3" : "py-5",
         )}
       >
         <div className="container-wide px-4 sm:px-6 lg:px-8">
-          <nav
+          <motion.nav
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
               "flex items-center justify-between rounded-2xl px-6 py-3 transition-all duration-500",
               scrolled
@@ -253,9 +244,9 @@ export function Navigation() {
                 )}
               </button>
             </div>
-          </nav>
+          </motion.nav>
         </div>
-      </motion.header>
+      </header>
 
       <AnimatePresence>
         {mobileOpen && (
