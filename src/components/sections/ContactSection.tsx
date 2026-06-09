@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Linkedin, Github, MessageCircle } from "lucide-react";
+import { Mail, Linkedin, Github, MessageCircle, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { AuroraBackground } from "@/components/shared/AuroraBackground";
 import { useTheme } from "@/components/shared/ThemeContext";
@@ -38,8 +38,6 @@ const socialDetails = [
     icon: "message-circle",
   },
 ] as const;
-
-const FORMSPREE_URL = import.meta.env.VITE_FORMSPREE_URL;
 
 export function ContactSection() {
   const { theme } = useTheme();
@@ -104,16 +102,14 @@ export function ContactSection() {
     setSubmitStatus("idle");
 
     try {
-      const response = await fetch(FORMSPREE_URL, {
+      const response = await fetch('/api/contact', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          ...formData,
-          _subject: "New message from Portfolio",
-          _next: "YOUR_PORTFOLIO_URL/thank-you",
+          ...formData
         }),
       });
 
@@ -121,6 +117,8 @@ export function ContactSection() {
         setSubmitStatus("success");
         setFormData({ name: "", email: "", message: "" });
         setErrors({});
+        // Auto-dismiss success banner after 8 seconds
+        setTimeout(() => setSubmitStatus("idle"), 8000);
       } else {
         setSubmitStatus("error");
       }
@@ -183,27 +181,36 @@ export function ContactSection() {
                 </p>
               </div>
 
-              {/* Form / Success Alert Switcher */}
-              <AnimatePresence mode="wait">
-                {submitStatus === "success" ? (
+              {/* Success Banner — shown above form, dismissible */}
+              <AnimatePresence>
+                {submitStatus === "success" && (
                   <motion.div
-                    key="success"
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -15 }}
-                    transition={{ duration: 0.4 }}
-                    className="p-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 text-sm leading-relaxed text-start font-medium"
+                    key="success-banner"
+                    initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    className="flex items-start justify-between gap-3 p-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 text-emerald-600 dark:text-emerald-400"
                   >
-                    {t("contact.form.success")}
+                    <span className="text-sm leading-relaxed font-medium text-start">
+                      ✓ {t("contact.form.success")}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setSubmitStatus("idle")}
+                      className="shrink-0 p-1 rounded-lg hover:bg-emerald-500/10 transition-colors cursor-pointer"
+                      aria-label="Dismiss"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
                   </motion.div>
-                ) : (
-                  <motion.form
-                    key="form"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                )}
+              </AnimatePresence>
+
+              {/* Form — always visible */}
+              <form
                     onSubmit={handleSubmit}
-                    action={FORMSPREE_URL}
+                    action="/api/contact"
                     method="POST"
                     className="space-y-5"
                     dir={isRtl ? "rtl" : "ltr"}
@@ -323,9 +330,7 @@ export function ContactSection() {
                         ? t("contact.form.sending")
                         : t("contact.form.send")}
                     </button>
-                  </motion.form>
-                )}
-              </AnimatePresence>
+              </form>
 
               {/* Or Contact Directly Divider */}
               <div className="flex items-center gap-4 py-2">
