@@ -26,6 +26,7 @@
   --aurora-opacity-2: 0.25;
   --aurora-opacity-3: 0.2;
   --noise-opacity: 0.03;
+  --backdrop: blur(40px);
 }
 
 .light {
@@ -155,13 +156,13 @@
     box-shadow: var(--shadow-hover);
   }
 
-  .glass-strong {
-    background: var(--glass-strong);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border: 1px solid var(--glass-strong-border);
-    box-shadow: var(--shadow);
-  }
+.glass-strong {
+  background: var(--glass-strong);
+  -webkit-backdrop-filter: var(--backdrop);
+  backdrop-filter: var(--backdrop);
+  border: 1px solid var(--glass-strong-border);
+  box-shadow: var(--shadow);
+}
 
   .glass-strong:hover {
     box-shadow: var(--shadow-hover);

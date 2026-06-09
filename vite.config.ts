@@ -30,3 +30,15 @@ export default defineConfig({
     }
   }
 })
+
+
+// vite.config.ts
+    // export default defineConfig({
+    //   css: {
+    //     lightningcss: undefined,  // disable lightning css
+    //     devSourcemap: true,
+    //   },
+    //   build: {
+    //     cssMinify: 'esbuild'  // استخدم esbuild بدل lightning css
+    //   }
+    // })
