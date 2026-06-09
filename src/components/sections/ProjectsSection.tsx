@@ -76,6 +76,7 @@ export function ProjectsSection() {
             const images = projectImages.find((p) => p.id === project.id)
             const cardVideo = images?.cardVideo
             const cardImage = cardVideo ? null : (images?.cover ?? null)
+            const cardImageSm = cardVideo ? null : (images?.coverSm ?? null)
 
             // const MAX_TAGS = 4
             // const displayTags = project.tags.slice(0, MAX_TAGS)
@@ -125,7 +126,9 @@ export function ProjectsSection() {
                           />
                         ) : cardImage ? (
                           <img
-                            src={cardImage}
+                            src={cardImageSm ?? cardImage}
+                            srcSet={cardImageSm ? `${cardImageSm} 800w, ${cardImage} 1536w` : undefined}
+                            sizes="(max-width: 768px) 400px, 600px"
                             alt={project.title}
                             className="w-full h-full object-cover object-top"
                           />

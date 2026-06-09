@@ -252,12 +252,12 @@ export function HeroSection() {
                     <source
                       type="image/webp"
                       srcSet={`${character400WebP} 400w, ${character800WebP} 800w, ${character1200WebP} 1200w, ${characterWebP} 2048w`}
-                      sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 400px"
+                      sizes="(max-width: 640px) 200px, (max-width: 768px) 360px, 400px"
                     />
                     <source
                       type="image/png"
                       srcSet={`${character400Png} 400w, ${character800Png} 800w, ${character1200Png} 1200w, ${characterPng} 2048w`}
-                      sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 400px"
+                      sizes="(max-width: 640px) 200px, (max-width: 768px) 360px, 400px"
                     />
                     <img
                       src={characterPng}

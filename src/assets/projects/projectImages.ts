@@ -1,5 +1,6 @@
 // ─── WMS ─────────────────────────────────────────────────────────────────────
 import wmsCover from "./WMS/cover.webp";
+import wmsCoverSm from "./WMS/cover-sm.webp";
 import wmsAnalytics from "./WMS/Analytics.webp";
 import wmsOrdersDashboard from "./WMS/Orders Dashboard.webp";
 import wmsOrderPrep from "./WMS/Order Prep.webp";
@@ -11,6 +12,7 @@ import wmsResponsive from "./WMS/Responsive.webp";
 
 // ─── Ertiqaa ──────────────────────────────────────────────────────────────────
 import ertiqaaCover from "./Ertiqaa/cover.webp";
+import ertiqaaCoverSm from "./Ertiqaa/cover-sm.webp";
 import ertiqaaMp4 from "./Ertiqaa/fullScreen.mp4";
 import ertiqaaLessonPlayer from "./Ertiqaa/Lesson Player screen.webp";
 import ertiqaaStudentProgress from "./Ertiqaa/Student Units Progress.webp";
@@ -21,6 +23,7 @@ import ertiqaaResponsive from "./Ertiqaa/Responsive showcase.webp";
 
 // ─── Haya ─────────────────────────────────────────────────────────────────────
 import hayaCover from "./Haya/cover.webp";
+import hayaCoverSm from "./Haya/cover-sm.webp";
 import hayaMp4 from "./Haya/fullScreen.mp4";
 import hayaInteractiveActivity from "./Haya/Interactive Activity.webp";
 import hayaAnalyticsDashboard from "./Haya/Analytics Dashboard.webp";
@@ -31,6 +34,7 @@ import hayaResponsive from "./Haya/05.webp";
 
 // ─── Mrs. Ayat Asaad ──────────────────────────────────────────────────────────
 import ayatCover from "./Mrs.AyatAsaad/cover.webp";
+import ayatCoverSm from "./Mrs.AyatAsaad/cover-sm.webp";
 import ayatMp4 from "./Mrs.AyatAsaad/fullScreen.mp4";
 import ayatQuestionBank from "./Mrs.AyatAsaad/Question Bank.webp";
 import ayatAdminCategories from "./Mrs.AyatAsaad/Admin Categories.webp";
@@ -40,6 +44,7 @@ import ayatDarkMode from "./Mrs.AyatAsaad/Dark Mode Landing.webp";
 
 // ─── Web Point ────────────────────────────────────────────────────────────────
 import webPointCover from "./Web Point/cover.webp";
+import webPointCoverSm from "./Web Point/cover-sm.webp";
 import webPoint02 from "./Web Point/02.webp";
 import webPoint03 from "./Web Point/03.webp";
 import webPoint04 from "./Web Point/04.webp";
@@ -57,6 +62,7 @@ export interface ProjectImages {
   id: string;
   cardVideo?: string;
   cover: string;
+  coverSm: string;
   screens: ProjectScreen[];
 }
 
@@ -67,6 +73,7 @@ export const projectImages: ProjectImages[] = [
     id: "wms",
     cardVideo: undefined,
     cover: wmsCover,
+    coverSm: wmsCoverSm,
     screens: [
       { src: wmsCover,           label: "Overview" },
       { src: wmsAnalytics,       label: "Analytics" },
@@ -83,6 +90,7 @@ export const projectImages: ProjectImages[] = [
     id: "ertiqaa-academy",
     cardVideo: ertiqaaMp4,
     cover: ertiqaaCover,
+    coverSm: ertiqaaCoverSm,
     screens: [
       { src: ertiqaaCover,              label: "Overview" },
       { src: ertiqaaLessonPlayer,       label: "Lesson Player" },
@@ -97,6 +105,7 @@ export const projectImages: ProjectImages[] = [
     id: "haya-academy",
     cardVideo: hayaMp4,
     cover: hayaCover,
+    coverSm: hayaCoverSm,
     screens: [
       { src: hayaCover,               label: "Overview" },
       { src: hayaInteractiveActivity, label: "Interactive Activity Builder" },
@@ -111,6 +120,7 @@ export const projectImages: ProjectImages[] = [
     id: "mrs-ayat-asaad",
     cardVideo: ayatMp4,
     cover: ayatCover,
+    coverSm: ayatCoverSm,
     screens: [
       { src: ayatCover,            label: "Overview" },
       { src: ayatQuestionBank,     label: "Question Bank Dashboard" },
@@ -124,6 +134,7 @@ export const projectImages: ProjectImages[] = [
     id: "web-point-erp",
     cardVideo: undefined,
     cover: webPointCover,
+    coverSm: webPointCoverSm,
     screens: [
       { src: webPointCover, label: "Table Floor Map" },
       { src: webPoint02,    label: "POS Menu & Order Cart" },
