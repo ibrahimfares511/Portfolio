@@ -261,7 +261,7 @@ export function HeroSection() {
                       sizes="(max-width: 640px) 200px, (max-width: 768px) 360px, 400px"
                     />
                     <img
-                      src={characterPng}
+                      src={characterWebP}
                       alt="Ibrahim Fares Character"
                       fetchPriority="high"
                       className="w-full h-full object-cover object-center sharp-image"
