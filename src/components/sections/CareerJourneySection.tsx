@@ -61,7 +61,7 @@ export function CareerJourneySection() {
   })
 
   return (
-    <section id="journey" className="relative section-padding" aria-label="Career Journey">
+    <section id="journey" className="relative section-padding" style={{ overflowX: 'clip' }} aria-label="Career Journey">
       <div className="container-wide">
         <SectionHeading
           label={t('journey.label')}

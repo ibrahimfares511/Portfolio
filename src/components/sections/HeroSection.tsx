@@ -79,7 +79,8 @@ export function HeroSection() {
     <LazyMotion features={domAnimation}>
       <section
         id="hero"
-        className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-32 pb-16"
+        className="relative min-h-screen flex flex-col justify-between pt-32 pb-16"
+        style={{ overflowX: "clip" }}
         aria-label="Hero"
       >
         <AuroraBackground />

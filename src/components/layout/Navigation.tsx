@@ -70,8 +70,8 @@ useEffect(() => {
       >
         <div className="container-wide px-4 sm:px-6 lg:px-8">
           <motion.nav
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className={cn(
               "flex items-center justify-between rounded-2xl px-6 py-3 transition-all duration-500",

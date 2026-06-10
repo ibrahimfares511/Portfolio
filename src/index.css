@@ -92,6 +92,7 @@
 
   html {
     scroll-behavior: auto;
+    overflow-x: clip;
   }
 
   html.lenis,
@@ -105,7 +106,6 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    overflow-x: hidden;
   }
 
   body, header, footer, section, .glass, .glass-strong, button, a, h1, h2, h3, h4, p, span, svg {
