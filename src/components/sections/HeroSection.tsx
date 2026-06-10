@@ -244,27 +244,25 @@ export function HeroSection() {
                 <m.div
                   initial={shouldAnimate ? { opacity: 0, scale: 0.9 } : false}
                   animate={shouldAnimate ? { opacity: 1, scale: 1 } : false}
-                  transition={
-                    shouldAnimate ? { duration: 1, ease: "easeOut" } : undefined
-                  }
-                  className="relative z-10 w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] md:w-[400px] md:h-[400px] rounded-full overflow-hidden border border-white/10 dark:border-white/10 light:border-black/5 shadow-xl shadow-black/5 dark:shadow-black/20 bg-gradient-to-b from-white/5 to-white/[0.02] dark:from-white/5 dark:to-white/[0.02] light:from-black/[0.02] light:to-black/[0.005]"
+                  transition={shouldAnimate ? { duration: 1, ease: "easeOut" } : undefined}
+                  className="relative z-10 w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] md:w-[400px] md:h-[400px] rounded-full overflow-hidden border border-white/10 shadow-xl shadow-black/20 transform-gpu"
                 >
-                  <picture className="w-full h-full">
+                  <picture className="w-full h-full block">
                     <source
                       type="image/webp"
                       srcSet={`${character400WebP} 400w, ${character800WebP} 800w, ${character1200WebP} 1200w, ${characterWebP} 2048w`}
-                      sizes="(max-width: 640px) 200px, (max-width: 768px) 360px, 400px"
+                      sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 400px"
                     />
                     <source
                       type="image/png"
                       srcSet={`${character400Png} 400w, ${character800Png} 800w, ${character1200Png} 1200w, ${characterPng} 2048w`}
-                      sizes="(max-width: 640px) 200px, (max-width: 768px) 360px, 400px"
+                      sizes="(max-width: 640px) 280px, (max-width: 768px) 360px, 400px"
                     />
                     <img
                       src={characterWebP}
                       alt="Ibrahim Fares Character"
                       fetchPriority="high"
-                      className="w-full h-full object-cover object-center sharp-image"
+                      className="w-full h-full object-cover object-center"
                       loading="eager"
                     />
                   </picture>
