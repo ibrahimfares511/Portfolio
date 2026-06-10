@@ -10,7 +10,7 @@ export interface CaseStudy {
   githubUrl: string;
   challengeText: string;
   contributionBullets: Array<{ icon: string; title: string; desc: string }>;
-  keyChallenges: Array<{ title: string; desc: string; solution: string }>;
+  keyChallenges: Array<{ title: string; desc: string; solution: string; imageIndex?: number }>;
   techStack: string[];
   archDecisions: string[];
   keyFeatures: string[];
@@ -55,16 +55,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "Blind Count Race Prevention",
           desc: "Multiple floor workers counting the same SKU simultaneously caused database overlaps, and showing expected counts tempted workers to copy instead of counting physically.",
           solution: "Implemented a POST lock endpoint that locks SKU tasks per user, shows locked badges to others, and uses blind numeric inputs that hide expected counts until physical entry is submitted.",
+          imageIndex: 5,
         },
         {
           title: "Split Returns Quantity Validation",
           desc: "Returned orders with mixed item conditions (Good vs Damaged) needed strict validation ensuring the sum of split quantities exactly matches the original order details.",
           solution: "Built a DOM-based validator looping through each return row, summing Good and Damaged inputs, and blocking submission via SweetAlert2 if totals don't match original quantities.",
+          imageIndex: 4,
         },
         {
           title: "Dynamic Layout Injection Engine",
           desc: "Managing unified navigation and responsive sidebars across 15 HTML pages in vanilla JS without a framework led to duplicate markup and visual lag.",
           solution: "Built layout.js as an interceptor that reads the user session role, generates headers, bottom drawers, and sidebar elements dynamically, then wraps page content in structural layout containers.",
+          imageIndex: 2,
         },
       ],
       techStack: [
@@ -137,16 +140,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "Token Refresh Race Condition",
           desc: "Multiple parallel API calls with expired tokens triggered redundant refresh requests causing race conditions.",
           solution: "Built a global RTK Query middleware using async-mutex that locks concurrent requests, refreshes the token once, then retries all waiting requests.",
+          imageIndex: 2,
         },
         {
           title: "Dynamic Drag-and-Drop Fill Blanks",
           desc: "Question text with blank markers (___) needed to be converted into live interactive drop targets inline within the text.",
           solution: "Used regex to split question text, replaced blanks with React DnD drop components, and exposed verify and reset controls via useImperativeHandle.",
+          imageIndex: 1,
         },
         {
           title: "Responsive Dual-Page PDF Viewer",
           desc: "Building a side-by-side book-style PDF reader without infinite re-render loops from inline config objects and with dynamic viewport scaling.",
           solution: "Wrapped PDF config in useMemo to prevent re-renders, attached resize listener to recalculate canvas width, and rendered two Document instances side-by-side with 2-page navigation steps.",
+          imageIndex: 5,
         },
       ],
       techStack: [
@@ -218,16 +224,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "Touch & Mouse Swipe Gestures",
           desc: "The POS cart needed swipe-to-reveal action buttons (Comment, Extra, Discount, Delete) that work on both touchscreens and desktop mouse drags.",
           solution: "Hand-built a coordinate tracker binding mousedown/touchstart events, calculating horizontal drag offset, and sliding items when exceeding a 60px threshold to reveal actions.",
+          imageIndex: 2,
         },
         {
           title: "Real-Time Checkout Calculations",
           desc: "Checkout totals needed to instantly recalculate VAT, service charges, bank commission rates, and credit card surcharges when cashier toggles any payment option.",
           solution: "Built jQuery event listeners on all payment toggles computing VAT, bank ratios, and visa surcharges in real-time without any database roundtrips.",
+          imageIndex: 3,
         },
         {
           title: "State-Aware Table Merge Logic",
           desc: "The dining hall merge tool needed to prevent double-merges, block busy tables from being selected, and handle recursive parent-child table selections.",
           solution: "Built a modal initializer reading custom table properties (follow, state, booked, master) to conditionally disable checkboxes and recursively select all child tables in a section.",
+          imageIndex: 1,
         },
       ],
       techStack: [
@@ -295,16 +304,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "Anti-Piracy Video Protection",
           desc: "Paid course videos were vulnerable to screen recording and direct URL downloads by students.",
           solution: "Built a CSS-animated floating watermark overlay showing student identity, combined with server-side range-based streaming (3MB chunks) blocking direct URL access to video files.",
+          imageIndex: 5,
         },
         {
           title: "Interactive Matching with SVG Lines",
           desc: "Building a click-to-connect matching question type that draws visual lines between paired items without using heavy diagram libraries.",
           solution: "Used LeaderLine JS to render dynamic colored SVG connector lines between matched columns, with shuffled indices on load and hidden input serialization for form submission.",
+          imageIndex: 1,
         },
         {
           title: "Browser-Based Audio Recording",
           desc: "Students needed to submit oral exam answers directly from the browser without installing any native application.",
           solution: "Implemented browser MediaRecorder API to capture microphone audio chunks, convert them to MP3 Blob format, and map them onto form inputs using DataTransfer for seamless backend submission.",
+          imageIndex: 6,
         },
       ],
       techStack: [
@@ -374,16 +386,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "Dual-Layer Anti-Piracy System",
           desc: "Paid course videos and PDF books were vulnerable to screen recording, direct URL downloads, and right-click saving by students.",
           solution: "Built a CSS-animated floating watermark showing student identity combined with FFMpeg server-side watermark burning, plus a pdf.js canvas renderer that blocks downloads and right-clicks.",
+          imageIndex: 3,
         },
         {
           title: "Multi-Type Coupon Payment Engine",
           desc: "Standard discount coupons were not enough — the platform needed payment vouchers that act like credit cards with remainder balance handling.",
           solution: "Built a transactional coupon service handling 3 types (Discount, Payment, Recharge) where payment coupons can forfeit, reuse, or transfer remaining balance to student wallet under database transactions.",
+          imageIndex: 2,
         },
         {
           title: "Single Device Account Locking",
           desc: "Students were sharing login credentials to access paid courses on multiple devices, causing revenue loss.",
           solution: "Implemented device ID binding in the mobile login API endpoint. The system validates the deviceId header against the stored device and returns 403 Forbidden if a new device attempts login.",
+          imageIndex: 1,
         },
       ],
       techStack: [
@@ -459,16 +474,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "منع التعارض في الجرد العمياء",
           desc: "عمال الجرد المتعددون الذين يعدون نفس المنتج في آن واحد تسببوا في تعارض البيانات، وإظهار الأرقام المتوقعة أغرى العمال بنسخها.",
           solution: "تطبيق نقطة نهاية قفل تقفل مهام المنتج لكل مستخدم وتُظهر شارات مقفلة للآخرين مع إخفاء الأرقام المتوقعة حتى الإدخال الفعلي.",
+          imageIndex: 5,
         },
         {
           title: "التحقق من كميات المرتجعات المقسمة",
           desc: "طلبات المرتجعات ذات الحالات المختلطة احتاجت للتحقق من أن مجموع الكميات المقسمة يطابق تفاصيل الطلب الأصلي تماماً.",
           solution: "بناء مدقق يتحقق من كل صف مرتجع ويجمع الكميات الجيدة والتالفة ويمنع الإرسال إذا لم تطابق كميات الطلب الأصلي.",
+          imageIndex: 4,
         },
         {
           title: "محرك حقن التخطيط الديناميكي",
           desc: "إدارة تنقل موحد عبر 15 صفحة HTML في vanilla JS بدون إطار عمل أدى لتكرار الكود وتأخر في العرض.",
           solution: "بناء layout.js كـ interceptor يقرأ دور المستخدم ويولد الترويسات والأشرطة الجانبية ديناميكياً ثم يلف محتوى الصفحة في حاويات هيكلية.",
+          imageIndex: 2,
         },
       ],
       techStack: [
@@ -541,16 +559,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "تعارض طلبات تجديد التوثيق",
           desc: "طلبات API المتوازية بتوكن منتهٍ كانت تُطلق طلبات تجديد متكررة مما يسبب تعارضاً في البيانات.",
           solution: "بناء middleware عالمي في RTK Query باستخدام async-mutex يقفل الطلبات المتزامنة ويجدد التوكن مرة واحدة ثم يُعيد تنفيذ الطلبات المعلقة.",
+          imageIndex: 2,
         },
         {
           title: "نظام ملء الفراغات بالسحب والإفلات",
           desc: "كان النص الذي يحتوي على فراغات (___) يحتاج لتحويله لأهداف سحب وإفلات تفاعلية داخل النص مباشرة.",
           solution: "استخدام Regex لتقسيم النص واستبدال الفراغات بمكونات React DnD، مع كشف دوال التحقق والإعادة عبر useImperativeHandle.",
+          imageIndex: 1,
         },
         {
           title: "عارض PDF ثنائي الصفحات المتجاوب",
           desc: "بناء عارض PDF بتخطيط كتاب ثنائي الصفحات دون حلقات إعادة رسم لا نهائية مع دعم التغيير الديناميكي لحجم الشاشة.",
           solution: "تغليف إعدادات PDF في useMemo لمنع إعادة الرسم، وإضافة مستمع resize لإعادة حساب عرض الـ canvas، وعرض نسختين من Document جنباً لجنب.",
+          imageIndex: 5,
         },
       ],
       techStack: [
@@ -622,16 +643,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "إيماءات السحب باللمس والماوس",
           desc: "كانت سلة الطلبات تحتاج لإيماءات سحب تكشف أزرار الإجراءات على شاشات اللمس وسطح المكتب على حد سواء.",
           solution: "بناء متتبع إحداثيات مخصص يربط أحداث mousedown/touchstart ويحسب إزاحة السحب الأفقي، ويكشف الأزرار عند تجاوز عتبة 60px.",
+          imageIndex: 2,
         },
         {
           title: "حسابات الدفع الفوري في الوقت الحقيقي",
           desc: "كانت مجاميع الدفع تحتاج لإعادة حساب ضريبة القيمة المضافة وعمولات البنك فورياً عند تغيير أي خيار دفع.",
           solution: "بناء مستمعات jQuery على جميع خيارات الدفع تحسب الضرائب والعمولات فورياً دون أي طلبات لقاعدة البيانات.",
+          imageIndex: 3,
         },
         {
           title: "منطق دمج الطاولات بوعي بالحالة",
           desc: "أداة دمج قاعة الطعام احتاجت لمنع الدمج المزدوج وحظر الطاولات المشغولة مع دعم التحديد التسلسلي للطاولات الأب والابن.",
           solution: "بناء مُهيئ modal يقرأ خصائص الطاولة المخصصة لتعطيل checkboxes بشكل شرطي وتحديد جميع الطاولات الفرعية بشكل تكراري.",
+          imageIndex: 1,
         },
       ],
       techStack: [
@@ -699,16 +723,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "حماية الفيديو من القرصنة",
           desc: "كانت دروس الفيديو المدفوعة عرضة للتسجيل والتنزيل المباشر من خلال الروابط.",
           solution: "بناء طبقة علامة مائية متحركة بـ CSS تُظهر هوية الطالب، مع بث الفيديو من الخادم بأجزاء 3MB لمنع الوصول المباشر للملفات.",
+          imageIndex: 5,
         },
         {
           title: "أسئلة التوصيل بخطوط SVG تفاعلية",
           desc: "بناء نوع سؤال توصيل تفاعلي يرسم خطوطاً بصرية بين العناصر المتطابقة دون استخدام مكتبات رسم ثقيلة.",
           solution: "استخدام LeaderLine JS لرسم خطوط SVG ملونة ديناميكية بين الأعمدة المتطابقة مع ترتيب عشوائي عند التحميل وتسلسل المدخلات المخفية للإرسال.",
+          imageIndex: 1,
         },
         {
           title: "تسجيل صوتي داخل المتصفح",
           desc: "احتاج الطلاب لتقديم إجابات شفهية مباشرة من المتصفح دون تثبيت أي تطبيق خارجي.",
           solution: "تطبيق MediaRecorder API للمتصفح لالتقاط قطع الصوت وتحويلها لصيغة MP3، ثم ربطها بمدخلات النموذج عبر DataTransfer للإرسال للخادم.",
+          imageIndex: 6,
         },
       ],
       techStack: [
@@ -778,16 +805,19 @@ export const caseStudiesData: Record<string, Record<string, CaseStudy>> = {
           title: "نظام حماية مزدوج من القرصنة",
           desc: "كانت دروس الفيديو والكتب المدفوعة عرضة للتسجيل والتنزيل المباشر وحفظ الملفات.",
           solution: "بناء علامة مائية CSS متحركة تُظهر هوية الطالب مع حرق علامة مائية بـ FFMpeg من الخادم وعارض canvas بـ pdf.js يمنع التنزيل.",
+          imageIndex: 3,
         },
         {
           title: "محرك كوبونات متعدد الأنواع",
           desc: "كوبونات الخصم العادية لم تكف — احتاجت المنصة لقسائم دفع تعمل كبطاقات ائتمان مع إدارة الرصيد المتبقي.",
           solution: "بناء خدمة كوبونات تعاملية تدير 3 أنواع حيث يمكن لكوبونات الدفع إلغاء أو إعادة استخدام أو تحويل الرصيد المتبقي للمحفظة.",
+          imageIndex: 2,
         },
         {
           title: "قفل الحساب على جهاز واحد",
           desc: "كان الطلاب يشاركون بيانات تسجيل الدخول للوصول للدورات المدفوعة على أجهزة متعددة مما تسبب في خسارة.",
           solution: "تطبيق ربط معرف الجهاز في نقطة نهاية تسجيل الدخول للموبايل. يتحقق النظام من معرف الجهاز ويُعيد خطأ 403 عند محاولة تسجيل دخول من جهاز جديد.",
+          imageIndex: 1,
         },
       ],
       techStack: [

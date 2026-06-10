@@ -72,7 +72,7 @@ const CountUp: React.FC<{ value: string; duration?: number }> = ({ value, durati
   if (!match) {
     const letters = value.split("");
     return (
-      <span ref={ref} className="inline-block">
+      <span ref={ref} className="inline-block" dir="ltr">
         {letters.map((char, i) => (
           <motion.span key={i} initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
@@ -838,7 +838,7 @@ export function CaseStudyView() {
         desc: challenge.desc,
         icon: "zap",
         challengeDetail: { solution: challenge.solution },
-        imageIndex: (idx + 4) % screensCount,
+        imageIndex: challenge.imageIndex ?? (idx + 4) % screensCount,
       };
     }),
   ];
@@ -970,7 +970,7 @@ export function CaseStudyView() {
               <motion.h1
                 variants={titleContainer} initial="hidden" animate="visible"
                 className="font-display font-extrabold tracking-tight dark:text-white text-[#0f0f14]"
-                style={{ fontSize: "clamp(2.8rem, 5vw, 5rem)", lineHeight: 1.0 }}
+                style={{ fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1.05 }}
               >
                 {titleWords.map((word, i) => (
                   <motion.span key={i} variants={titleWord} className="inline-block mr-[0.25em] rtl:ml-[0.25em]">
