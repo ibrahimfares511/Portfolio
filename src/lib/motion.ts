@@ -10,6 +10,7 @@ declare global {
       preload: () => void;
       transition: (o: { x: number; y: number; colors?: Partial<Colors>; run: () => unknown }) => Promise<boolean>;
       reduce: boolean;
+      setTheme: (t: "light" | "dark" | "system") => void;
     };
   }
 }

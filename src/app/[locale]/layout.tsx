@@ -4,10 +4,10 @@ import { Alexandria, Nunito } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing, directionOf } from "@/i18n/routing";
-import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/brand/Preloader";
+import { InlineScript } from "@/components/brand/InlineScript";
 import { MOTION_ENGINE_SCRIPT } from "@/lib/motion-engine";
 import "../globals.css";
 
@@ -29,7 +29,9 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
   return {
@@ -50,7 +52,10 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function LocaleLayout({ children, params }: LayoutProps<"/[locale]">) {
+export default async function LocaleLayout({
+  children,
+  params,
+}: LayoutProps<"/[locale]">) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
@@ -64,7 +69,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: MOTION_ENGINE_SCRIPT }} />
+        <InlineScript id="if-motion" code={MOTION_ENGINE_SCRIPT} />
         <noscript>
           <style>{`#preloader{display:none!important}[data-reveal]{opacity:1!important;animation:none!important}`}</style>
         </noscript>
@@ -72,18 +77,16 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       <body className="min-h-dvh">
         <Preloader />
         <NextIntlClientProvider>
-          <ThemeProvider>
-            <a
-              href="#main"
-              className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:text-ink"
-            >
-              {t("skip")}
-            </a>
-            <div className="brand-backdrop" aria-hidden />
-            <Header />
-            <main id="main">{children}</main>
-            <Footer />
-          </ThemeProvider>
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:text-ink"
+          >
+            {t("skip")}
+          </a>
+          <div className="brand-backdrop" aria-hidden />
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

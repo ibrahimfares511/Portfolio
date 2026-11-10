@@ -1,34 +1,27 @@
 "use client";
 
-import { useTheme } from "next-themes";
+import type { MouseEvent } from "react";
 import { useTranslations } from "next-intl";
-import { useSyncExternalStore, type MouseEvent } from "react";
 import { coverSwitch, originOf, THEME_COLORS } from "@/lib/motion";
-
-const subscribe = () => () => {};
-const useMounted = () =>
-  useSyncExternalStore(
-    subscribe,
-    () => true,
-    () => false,
-  );
+import { setTheme, useResolvedTheme } from "@/lib/theme";
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
   const t = useTranslations("switch");
-  const { resolvedTheme, setTheme } = useTheme();
-  const mounted = useMounted();
-  const isDark = mounted && resolvedTheme === "dark";
+  const theme = useResolvedTheme();
+  const isDark = theme === "dark";
+
+  const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+    // The cover is painted in the new theme's colours, so the two themes
+    // blend through the brand moment instead of flashing.
+    const next = isDark ? "light" : "dark";
+    const { x, y } = originOf(e);
+    void coverSwitch(x, y, () => setTheme(next), THEME_COLORS[next]);
+  };
 
   return (
     <button
       type="button"
-      onClick={(e: MouseEvent<HTMLButtonElement>) => {
-        // The cover is painted in the new theme's colours, so the two themes
-        // blend through the brand moment instead of flashing.
-        const next = isDark ? "light" : "dark";
-        const { x, y } = originOf(e);
-        void coverSwitch(x, y, () => setTheme(next), THEME_COLORS[next]);
-      }}
+      onClick={onClick}
       aria-label={t("theme")}
       title={isDark ? t("light") : t("dark")}
       className={`inline-flex size-10 items-center justify-center rounded-full border border-line bg-surface/60 text-ink transition-colors hover:border-petrol/40 hover:text-petrol ${className}`}

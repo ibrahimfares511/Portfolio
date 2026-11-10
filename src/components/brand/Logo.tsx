@@ -45,7 +45,13 @@ export function LogoMark({
       aria-hidden={title ? undefined : true}
     >
       {title ? <title>{title}</title> : null}
-      <g fill="none" stroke="currentColor" strokeWidth={m.stroke} strokeLinecap="round" strokeLinejoin="round">
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={m.stroke}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d={m.i} />
         <path d={m.f} />
         <path d={m.bar} />
@@ -56,7 +62,15 @@ export function LogoMark({
 }
 
 /** Mark + "ibrahim fares" in IF Pen. Always LTR, it is a drawing. */
-export function LogoLockup({ height = 36, className, title }: { height?: number; className?: string; title?: string }) {
+export function LogoLockup({
+  height = 36,
+  className,
+  title,
+}: {
+  height?: number;
+  className?: string;
+  title?: string;
+}) {
   const m = MARK.regular;
   return (
     <svg
@@ -69,7 +83,13 @@ export function LogoLockup({ height = 36, className, title }: { height?: number;
       direction="ltr"
     >
       {title ? <title>{title}</title> : null}
-      <g fill="none" stroke="currentColor" strokeWidth={m.stroke} strokeLinecap="round" strokeLinejoin="round">
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={m.stroke}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d={m.i} />
         <path d={m.f} />
         <path d={m.bar} />

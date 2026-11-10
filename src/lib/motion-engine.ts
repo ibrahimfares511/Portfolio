@@ -21,18 +21,11 @@ const engine = String.raw`
 (function () {
   if (window.__ifMotion) return;
   var doc = document, root = doc.documentElement;
-  // Apply the saved theme before first paint, so the preloader is painted
-  // in the right colours (next-themes applies the same value right after).
-  try {
-    var saved = localStorage.getItem('theme');
-    var dark = saved === 'dark' || ((!saved || saved === 'system') && matchMedia('(prefers-color-scheme: dark)').matches);
-    root.setAttribute('data-theme', dark ? 'dark' : 'light');
-  } catch (e) {}
   var reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   var STROKES = [
-    { d: 'M28 78 V46', t: 300 },
-    { d: 'M80 18 Q62 18 62 36 V82 Q62 96 48 96 H36', t: 600 },
-    { d: 'M46 48 H78', t: 300 }
+    { d: 'M28 78 V46', t: 170 },
+    { d: 'M80 18 Q62 18 62 36 V82 Q62 96 48 96 H36', t: 360 },
+    { d: 'M46 48 H78', t: 160 }
   ];
   var SVG = '<svg viewBox="0 0 100 106" class="if-mark" aria-hidden="true">' +
     '<g fill="none" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">' +
@@ -96,11 +89,26 @@ const engine = String.raw`
   // The dot drops onto the i, lands a little big, settles, pulses once.
   Mark.prototype.drop = function () {
     var self = this;
-    return tween(180, function (v) { self.setDot(1.2 * v, -18 * (1 - v)); }, inCubic)
-      .then(function () { return tween(120, function (v) { self.setDot(1.2 - 0.2 * v, 0); }); })
-      .then(function () { return wait(80); })
-      .then(function () { return tween(140, function (v) { self.setDot(1 + 0.28 * v, 0); }); })
-      .then(function () { return tween(160, function (v) { self.setDot(1.28 - 0.28 * v, 0); }); });
+    return tween(140, function (v) { self.setDot(1.2 * v, -18 * (1 - v)); }, inCubic)
+      .then(function () { return tween(90, function (v) { self.setDot(1.2 - 0.2 * v, 0); }); })
+      .then(function () { return wait(40); })
+      .then(function () { return tween(110, function (v) { self.setDot(1 + 0.26 * v, 0); }); })
+      .then(function () { return tween(130, function (v) { self.setDot(1.26 - 0.26 * v, 0); }); });
+  };
+  // While the page is still loading: the dot keeps hopping on the i, so the
+  // visitor sees it's alive. Resolves after the hop that ends past ready().
+  Mark.prototype.idle = function (ready) {
+    var self = this;
+    function hop() {
+      if (ready()) return Promise.resolve();
+      return tween(280, function (v) { self.setDot(1, -9 * v); }, outCubic)
+        .then(function () { return tween(260, function (v) { self.setDot(1, -9 * (1 - v)); }, inCubic); })
+        .then(function () { return tween(90, function (v) { self.setDot(1 + 0.14 * v, 0); }); })
+        .then(function () { return tween(110, function (v) { self.setDot(1.14 - 0.14 * v, 0); }); })
+        .then(function () { return wait(120); })
+        .then(hop);
+    }
+    return hop();
   };
   // Erase backwards: dot first, then crossbar, f, i.
   Mark.prototype.erase = function (ms) {
@@ -151,19 +159,19 @@ const engine = String.raw`
       }).then(finish);
     }
     mark.reset();
+    // Write once; if the page isn't ready yet, keep the dot alive instead of
+    // writing again.
     function cycle() {
-      return mark.write().then(function () {
-        if (loaded || Date.now() - started > 15000) return exit();
-        return wait(250).then(function () { return mark.erase(450); })
-          .then(function () { mark.reset(); return cycle(); });
-      });
+      return mark.write()
+        .then(function () { return mark.idle(function () { return loaded || Date.now() - started > 15000; }); })
+        .then(exit);
     }
     // Close the screen into the dot.
     function exit() {
       var r = mark.dot.getBoundingClientRect();
       var x = r.left + r.width / 2, y = r.top + r.height / 2, R = cover(x, y);
-      return wait(120).then(function () { return mark.erase(320); })
-        .then(function () { emit('if:reveal'); return tween(620, function (v) { clip(el, x, y, R * (1 - v)); }, inCubic); })
+      return wait(60).then(function () { return mark.erase(220); })
+        .then(function () { emit('if:reveal'); return tween(480, function (v) { clip(el, x, y, R * (1 - v)); }, inCubic); })
         .then(finish);
     }
     cycle();
@@ -199,14 +207,14 @@ const engine = String.raw`
     var x = o.x, y = o.y, R = cover(x, y);
     clip(el, x, y, 0);
     el.style.display = 'flex';
-    return tween(560, function (v) { clip(el, x, y, R * v); })
+    return tween(420, function (v) { clip(el, x, y, R * v); })
       .then(function () {
         var switched = Promise.resolve().then(o.run).catch(function () {});
         return Promise.all([switched, mark.write()]);
       })
-      .then(function () { return wait(100); })
-      .then(function () { return mark.erase(300); })
-      .then(function () { emit('if:reveal'); return tween(560, function (v) { clip(el, x, y, R * (1 - v)); }); })
+      .then(function () { return wait(60); })
+      .then(function () { return mark.erase(220); })
+      .then(function () { emit('if:reveal'); return tween(420, function (v) { clip(el, x, y, R * (1 - v)); }); })
       .then(function () {
         el.style.display = 'none';
         window.__ifBusy = false;
@@ -215,7 +223,31 @@ const engine = String.raw`
       });
   }
 
-  window.__ifMotion = { preload: preload, transition: transition, reduce: reduce };
+  // ---------------------------------------------------------------- theme
+  // The saved choice ("light" | "dark" | "system") lives in localStorage
+  // under "theme"; the resolved value is the data-theme attribute on <html>.
+  var media = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+  function resolve(t) { return t === 'dark' || (t !== 'light' && media && media.matches) ? 'dark' : 'light'; }
+  function savedTheme() { try { return localStorage.getItem('theme') || 'system'; } catch (e) { return 'system'; } }
+  function applyTheme() { root.setAttribute('data-theme', resolve(savedTheme())); }
+  function setTheme(t) { try { localStorage.setItem('theme', t); } catch (e) {} applyTheme(); }
+  applyTheme();
+  if (media && media.addEventListener) media.addEventListener('change', function () { if (savedTheme() === 'system') applyTheme(); });
+  // Keep the attribute if React re-renders <html> (it doesn't own it).
+  new MutationObserver(function () {
+    if (!root.getAttribute('data-theme')) applyTheme();
+  }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+  window.__ifMotion = { preload: preload, transition: transition, reduce: reduce, setTheme: setTheme };
+
+  // Start the preloader the moment its markup is parsed.
+  if (doc.getElementById('preloader')) preload();
+  else {
+    var watch = new MutationObserver(function () {
+      if (doc.getElementById('preloader')) { watch.disconnect(); preload(); }
+    });
+    watch.observe(root, { childList: true, subtree: true });
+  }
   // A preloader runs on every page load; until it ends, entrances wait.
   window.__ifBusy = true;
   root.classList.add('pl-active');
@@ -234,5 +266,3 @@ const engine = String.raw`
 /** Minimal whitespace trim; the code is small and readable as is. */
 export const MOTION_ENGINE_SCRIPT = engine.replace(/\n\s*/g, "\n").trim();
 
-/** Starts the preloader as soon as its markup is parsed. */
-export const PRELOADER_START_SCRIPT = "window.__ifMotion&&window.__ifMotion.preload();";
