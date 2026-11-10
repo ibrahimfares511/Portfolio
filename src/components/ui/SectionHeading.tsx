@@ -17,6 +17,9 @@ export function SectionHeading({
   sub?: string;
 }) {
   const isAr = locale === "ar";
+  // IF Pen only has lowercase, which would turn the pronoun "I" into "i".
+  // English titles with "I" use Nunito instead (Ibrahim, Nov 10, 2026).
+  const hasI = !isAr && /\bI\b/.test(title);
   const endsWithQuestion = /[?؟]\s*$/.test(title);
   return (
     <div className="max-w-2xl">
@@ -25,7 +28,9 @@ export function SectionHeading({
         className={
           isAr
             ? "text-[30px] leading-[46px] font-medium md:text-[40px] md:leading-[60px]"
-            : "font-display text-[38px] leading-[46px] lowercase md:text-[48px] md:leading-[56px]"
+            : hasI
+              ? "font-latin text-[32px] leading-[40px] font-bold tracking-[-0.02em] md:text-[42px] md:leading-[52px]"
+              : "font-display text-[38px] leading-[46px] lowercase md:text-[48px] md:leading-[56px]"
         }
       >
         <Words text={title} />

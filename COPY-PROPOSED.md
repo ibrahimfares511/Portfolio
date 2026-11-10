@@ -48,6 +48,8 @@ No new copy. Title, subline, "Read the story" and the status words (يعمل / L
 
 | Key | Arabic | English | Note |
 | --- | --- | --- | --- |
-| `otherWork.delivered` | تم التسليم (2022) | Delivered (2022) | Arabic from the sitemap; English built the same way from the approved "Delivered". **Needs approval.** |
+| `otherWork.delivered` | تم التسليم (2022) | Delivered (2022) | Arabic from the sitemap; English approved by Ibrahim (Nov 10, 2026). |
 
 Everything else is the sitemap's text. The three "What I can build" cards print each line exactly as written, bold part first ("**Internal systems for companies**: warehouses, …"); the proof chips use the project names from the cards. The "Have another idea?" card shows the thinking avatar (design system: "If you have an idea").
+
+English section titles that contain the pronoun "I" are set in Nunito (bold) instead of IF Pen, which is lowercase only (Ibrahim, Nov 10, 2026).
