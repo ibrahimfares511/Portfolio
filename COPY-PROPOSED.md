@@ -1,4 +1,6 @@
-# Proposed copy (waiting for Ibrahim's approval)
+# Proposed copy
+
+Phase 1 copy below was approved by Ibrahim on Nov 10, 2026 (with WhatsApp and email turned into icons).
 
 Text the site needs that isn't in `_brief/portfolio-sitemap.md`. Nothing here is final until Ibrahim approves it; approved lines move out of this file.
 
@@ -12,10 +14,9 @@ Text the site needs that isn't in `_brief/portfolio-sitemap.md`. Nothing here is
 | `nav.contact` | تواصل | Contact | Header and footer link → Contact |
 | `sections.otherWork` | أعمال أخرى | Other work | Title of section 3 (the sitemap gives no title) |
 | `footer.rights` | © 2026 إبراهيم فارس | © 2026 Ibrahim Fares | Footer, bottom line |
-| `footer.whatsapp` | واتساب | WhatsApp | Footer label before the number |
-| `footer.email` | البريد الإلكتروني | Email | Footer label before the address |
 | `switch.language` | English | العربية | Language button (each language shows the other one's name) |
-| GitHub / LinkedIn icons | | | Footer links to github.com/ibrahimfares511 and linkedin.com/in/ibrahimfares511 (from the CV) |
+
+Footer icons (WhatsApp, email, GitHub, LinkedIn) carry these labels for screen readers and as a hover tooltip: "واتساب / WhatsApp: +20 100 721 8535", "البريد الإلكتروني / Email: ibrahimfares511@gmail.com", "GitHub", "LinkedIn".
 
 Screen-reader only (not visible):
 
@@ -29,3 +30,7 @@ Screen-reader only (not visible):
 | `switch.light` / `switch.dark` | فاتح / داكن | Light / Dark |
 
 Page title and description reuse approved copy: the hero eyebrow and the hero subline.
+
+## Phase 2: preloader and hero
+
+No new copy. The hero uses the sitemap text word for word. The avatar's alt text is the name ("إبراهيم فارس" / "Ibrahim Fares").

@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Hero } from "@/components/sections/Hero";
 
 /**
  * Phase 1 skeleton: every home section in the sitemap order, with its
@@ -19,25 +20,10 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("sections");
-  const th = await getTranslations("hero");
-  const isAr = locale === "ar";
 
   return (
     <>
-      <section id="top" className="mx-auto flex min-h-dvh max-w-6xl flex-col justify-center px-4 pt-24 pb-16 sm:px-6">
-        <p className="text-ink-muted">{th("eyebrow")}</p>
-        <h1
-          className={
-            isAr
-              ? "mt-4 max-w-3xl text-[36px] leading-[56px] font-medium md:text-[52px] md:leading-[76px]"
-              : "mt-4 max-w-3xl text-[38px] leading-[48px] font-semibold tracking-tight md:text-[52px] md:leading-[64px]"
-          }
-        >
-          {th("headline")}
-          <span className="ms-2 inline-block size-[0.2em] rounded-full bg-clay" aria-hidden />
-        </h1>
-        <Placeholder phase={2} />
-      </section>
+      <Hero />
 
       {SECTIONS.map((s) => (
         <section key={s.id} id={s.id} aria-labelledby={`${s.id}-title`} className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">

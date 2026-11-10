@@ -37,7 +37,29 @@
   },
   "hero": {
     "eyebrow": "Ibrahim Fares · Web systems developer",
-    "headline": "I turn ideas into real, working systems"
+    "headline": "I turn ideas into real, working systems",
+    "subline": "I build the whole system, from the first idea to the day it runs, and I stay with you after launch.",
+    "primary": "Start your project",
+    "secondary": "See my work",
+    "avatarAlt": "Ibrahim Fares",
+    "proof": [
+      {
+        "value": "5",
+        "label": "warehouses on one system I built end to end"
+      },
+      {
+        "value": "+13,000",
+        "label": "employees on Elite"
+      },
+      {
+        "value": "+17,000",
+        "label": "students on two learning platforms I built the frontend for"
+      },
+      {
+        "value": "5",
+        "label": "restaurants used Web Point"
+      }
+    ]
   },
   "contact": {
     "whatsapp": "+20 100 721 8535",

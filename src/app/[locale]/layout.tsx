@@ -7,6 +7,8 @@ import { routing, directionOf } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { Preloader } from "@/components/brand/Preloader";
+import { PRELOADER_BOOT_SCRIPT } from "@/lib/preloader";
 import "../globals.css";
 
 const alexandria = Alexandria({
@@ -61,6 +63,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       className={`${alexandria.variable} ${nunito.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: PRELOADER_BOOT_SCRIPT }} />
+      </head>
       <body className="min-h-dvh">
         <NextIntlClientProvider>
           <ThemeProvider>
@@ -70,6 +75,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             >
               {t("skip")}
             </a>
+            <Preloader />
             <div className="brand-backdrop" aria-hidden />
             <Header />
             <main id="main">{children}</main>
