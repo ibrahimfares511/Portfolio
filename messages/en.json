@@ -73,5 +73,32 @@
       "live": "Live",
       "delivered": "Delivered"
     }
+  },
+  "otherWork": {
+    "title": "Other work",
+    "delivered": "Delivered (2022)"
+  },
+  "build": {
+    "title": "What can I build for you?",
+    "subline": "I'm not limited to a list of services. If your idea needs a system on the web, we sit together and turn it into a clear plan.",
+    "proofLabel": "From my work",
+    "cards": [
+      {
+        "lead": "Internal systems for companies",
+        "text": "warehouses, sales, staff and reports: one system instead of paper, Excel and scattered files.",
+        "join": ": "
+      },
+      {
+        "lead": "Platforms and web apps",
+        "text": "learning platforms, marketplaces and apps your customers or staff use every day.",
+        "join": ": "
+      },
+      {
+        "lead": "Have another idea?",
+        "text": "Tell me about it. We start with a session to understand what you need, then I suggest the solution, the price and the delivery date.",
+        "join": " "
+      }
+    ],
+    "cta": "Let's talk"
   }
 }

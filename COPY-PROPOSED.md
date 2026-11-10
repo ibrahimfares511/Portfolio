@@ -43,3 +43,11 @@ No new copy. Title, subline, "Read the story" and the status words (يعمل / L
 - Smart Control's tag: "لوحة تحكم Elite / Elite's dashboard" (site-notes), linking to Elite's card.
 - Links between cards: the `related` relation, then the other card's name (e.g. "منصة أخرى لتعليم العربية لمدارس الإمارات، لشركة مختلفة · أكاديمية إرتقاء").
 - Screen recordings' alt text: the project's `title`.
+
+## Phase 4: other work, what I can build
+
+| Key | Arabic | English | Note |
+| --- | --- | --- | --- |
+| `otherWork.delivered` | تم التسليم (2022) | Delivered (2022) | Arabic from the sitemap; English built the same way from the approved "Delivered". **Needs approval.** |
+
+Everything else is the sitemap's text. The three "What I can build" cards print each line exactly as written, bold part first ("**Internal systems for companies**: warehouses, …"); the proof chips use the project names from the cards. The "Have another idea?" card shows the thinking avatar (design system: "If you have an idea").
