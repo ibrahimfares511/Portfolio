@@ -182,6 +182,16 @@ html[lang="ar"] body {
     top: calc(96px + var(--i) * 14px);
   }
 }
+/* Room after the last card: it settles on top of the others, the whole
+   stack holds for a moment, then leaves together. */
+.stack-spacer {
+  height: 14vh;
+}
+@media (min-width: 1024px) {
+  .stack-spacer {
+    height: 22vh;
+  }
+}
 
 /* Desktop: gentle section-by-section scrolling. The page settles on the
    start of a section when you stop close to it; long sections (the project
@@ -248,11 +258,13 @@ html.pl-active {
   transform: translate(0, -18px) scale(0);
 }
 
-/* Elements that enter after the cover opens start hidden (only when motion
-   is allowed). A late fallback shows them if the entrance never runs; the
-   <noscript> style in <head> shows them at once without JS. */
+/* The hero sits under the preloader on first paint, so its entrance pieces
+   start hidden in CSS (a late fallback shows them if the entrance never
+   runs; the <noscript> style in <head> shows them without JS). Everything
+   further down is hidden by its <Reveal> on mount and enters when scrolled
+   into view. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal] {
+  #top [data-reveal] {
     opacity: 0;
     animation: reveal-fallback 0.6s ease 14s forwards;
   }

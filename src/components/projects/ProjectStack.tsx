@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Project } from "@/lib/projects";
+import { Reveal } from "@/components/ui/Reveal";
 import { ProjectCard, type CardStrings } from "./ProjectCard";
 
 /**
@@ -25,7 +26,7 @@ export function ProjectStack({
   useEffect(() => {
     const ol = list.current;
     if (!ol) return;
-    const items = Array.from(ol.querySelectorAll<HTMLLIElement>(":scope > li"));
+    const items = Array.from(ol.querySelectorAll<HTMLLIElement>(":scope > li[data-item]"));
     const cards = items.map((li) => li.querySelector<HTMLElement>("[data-card]")!);
     const shades = items.map((li) => li.querySelector<HTMLElement>("[data-shade]")!);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -73,16 +74,20 @@ export function ProjectStack({
       {projects.map((p, i) => (
         <li
           key={p.slug}
+          data-item
           id={`project-${p.slug}`}
-          className="stack-item mb-6 scroll-mt-24 lg:mb-[10vh]"
+          className="stack-item mb-6 scroll-mt-24 last:mb-0 lg:mb-[10vh] lg:last:mb-0"
           style={{ ["--i" as string]: i }}
         >
           <div data-card className="relative origin-top will-change-transform lg:h-[min(74vh,600px)]">
-            <ProjectCard project={p} index={i} total={projects.length} lang={lang} strings={strings} active={active === i} />
+            <Reveal className="h-full">
+              <ProjectCard project={p} index={i} total={projects.length} lang={lang} strings={strings} active={active === i} />
+            </Reveal>
             <div data-shade className="pointer-events-none absolute inset-0 rounded-xl bg-bg opacity-0" aria-hidden />
           </div>
         </li>
       ))}
+      <li aria-hidden className="stack-spacer" />
     </ol>
   );
 }

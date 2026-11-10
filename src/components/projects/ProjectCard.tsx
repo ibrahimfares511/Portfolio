@@ -41,7 +41,7 @@ export function ProjectCard({
     >
       {/* Media */}
       <div className="relative flex items-center justify-center overflow-hidden bg-[radial-gradient(120%_90%_at_15%_0%,var(--sky-soft),transparent_60%),radial-gradient(90%_80%_at_100%_100%,var(--clay-soft),transparent_65%)] p-4 sm:p-6 lg:col-span-7 lg:p-8 dark:bg-[radial-gradient(120%_90%_at_15%_0%,var(--sky-soft),transparent_60%),radial-gradient(80%_70%_at_100%_100%,color-mix(in_oklab,var(--clay-soft)_55%,transparent),transparent_65%)]">
-        <div className="w-full overflow-hidden rounded-lg border border-line/80 bg-surface shadow-[0_24px_50px_-28px_rgba(22,48,58,0.55)]" dir="ltr">
+        <div data-reveal="block" className="w-full overflow-hidden rounded-lg border border-line/80 bg-surface shadow-[0_24px_50px_-28px_rgba(22,48,58,0.55)]" dir="ltr">
           <div className="flex h-7 items-center gap-1.5 border-b border-line bg-bg/70 px-3" aria-hidden>
             <span className="size-2 rounded-full bg-line" />
             <span className="size-2 rounded-full bg-line" />
@@ -59,7 +59,7 @@ export function ProjectCard({
 
       {/* Text */}
       <div className="flex flex-col gap-4 p-5 sm:p-7 lg:col-span-5 lg:gap-5 lg:p-9">
-        <div className="flex items-center justify-between gap-3">
+        <div data-reveal="text" className="flex items-center justify-between gap-3">
           <span className="num font-display text-[22px] leading-none text-petrol" aria-hidden>
             {pad(index + 1)}
             <span className="text-ink-muted/60"> / {pad(total)}</span>
@@ -72,7 +72,7 @@ export function ProjectCard({
           </span>
         </div>
 
-        <div>
+        <div data-reveal="text">
           {p.partOf ? (
             <a
               href={`#project-${p.partOf.slug}`}
@@ -90,12 +90,12 @@ export function ProjectCard({
           <p className="mt-2 text-[16px] leading-[28px] text-ink-muted md:text-[17px] md:leading-[30px]">{p.card.line[lang]}</p>
         </div>
 
-        <p className="flex items-start gap-2 text-[14px] leading-[22px] text-ink">
+        <p data-reveal="text" className="flex items-start gap-2 text-[14px] leading-[22px] text-ink">
           <span className="mt-[9px] h-px w-4 shrink-0 bg-clay" aria-hidden />
           {p.card.role[lang]}
         </p>
 
-        <dl className="grid grid-cols-2 gap-4 border-t border-line pt-4">
+        <dl data-reveal="text" className="grid grid-cols-2 gap-4 border-t border-line pt-4">
           {p.card.stats.map((s, i) => (
             <div key={i} className="flex flex-col-reverse gap-1">
               <dt className="text-[13px] leading-[20px] text-ink-muted">{s.label[lang]}</dt>
@@ -104,7 +104,7 @@ export function ProjectCard({
           ))}
         </dl>
 
-        <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-1">
+        <div data-reveal="text" className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-1">
           {links.map((l) => (
             <a
               key={l.slug}
