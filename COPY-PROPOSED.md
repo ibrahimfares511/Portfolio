@@ -53,3 +53,7 @@ No new copy. Title, subline, "Read the story" and the status words (يعمل / L
 Everything else is the sitemap's text. The three "What I can build" cards print each line exactly as written, bold part first ("**Internal systems for companies**: warehouses, …"); the proof chips use the project names from the cards. The "Have another idea?" card shows the thinking avatar (design system: "If you have an idea").
 
 English section titles that contain the pronoun "I" are set in Nunito (bold) instead of IF Pen, which is lowercase only (Ibrahim, Nov 10, 2026).
+
+## Phase 5: how we work, tools
+
+No new copy. Steps and the closing line are the sitemap's text; each step prints as written ("**نفهم**: …"). The tools rows use the sitemap's lists in order; the row names (اللغات والأطر …) are read by screen readers as each row's label. Logos: the old site's SVGs where it had them, simple-icons for the new tools (Next.js, Vue, Vite, TanStack Query, Prisma, PostgreSQL, MySQL, Redis, Socket.io, Docker).

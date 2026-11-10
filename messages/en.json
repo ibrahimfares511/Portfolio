@@ -100,5 +100,86 @@
       }
     ],
     "cta": "Let's talk"
+  },
+  "process": {
+    "title": "How we work together",
+    "subline": "Clear steps, from the first meeting to after launch.",
+    "steps": [
+      {
+        "lead": "Understand",
+        "text": "a first meeting to understand your idea and what you really need, with ideas from past work."
+      },
+      {
+        "lead": "Plan",
+        "text": "we agree in writing on what will be built, the price and the delivery date."
+      },
+      {
+        "lead": "Build",
+        "text": "you follow the progress every week and see the system take shape step by step."
+      },
+      {
+        "lead": "Deliver",
+        "text": "I hand over a working system, with 2 free months for fixes and small additions, then optional monthly maintenance."
+      }
+    ],
+    "closing": "We don't part ways at delivery."
+  },
+  "tools": {
+    "title": "Tools I work with",
+    "subline": "I pick the right tool for each project, not the other way around.",
+    "rows": [
+      {
+        "label": "Languages & frameworks",
+        "items": [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Vue",
+          "Vite"
+        ]
+      },
+      {
+        "label": "State & libraries",
+        "items": [
+          "Redux Toolkit",
+          "Zustand",
+          "TanStack Query",
+          "React Hook Form",
+          "Zod",
+          "i18next"
+        ]
+      },
+      {
+        "label": "UI & design",
+        "items": [
+          "Tailwind CSS",
+          "shadcn/ui",
+          "Radix UI",
+          "Material UI",
+          "Bootstrap",
+          "Framer Motion",
+          "ApexCharts",
+          "Figma"
+        ]
+      },
+      {
+        "label": "Backend & tools",
+        "items": [
+          "Node.js",
+          "Express",
+          "Prisma",
+          "PostgreSQL",
+          "MySQL",
+          "Redis",
+          "Socket.io",
+          "Docker",
+          "Firebase",
+          "Git",
+          "GitHub",
+          "Postman",
+          "Swagger"
+        ]
+      }
+    ]
   }
 }

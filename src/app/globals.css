@@ -207,6 +207,38 @@ html[lang="ar"] body {
 }
 
 /* ------------------------------------------------------------------
+   Tools marquee (components/tools/ToolsMarquee.tsx). Chips lift on hover
+   with a shadow in the tool's own colour, as on the old site.
+   ------------------------------------------------------------------ */
+.tools-marquee > div {
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.tool-chip {
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+.tool-chip:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: color-mix(in srgb, var(--tool) 45%, var(--line));
+  box-shadow:
+    0 15px 30px -10px color-mix(in srgb, var(--tool) 30%, transparent),
+    0 5px 15px -8px color-mix(in srgb, var(--tool) 15%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tools-marquee [data-track] {
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+    row-gap: 12px;
+  }
+  .tools-marquee [data-track] > [aria-hidden="true"] {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------
    Brand motion: preloader and switch cover (lib/motion-engine.ts)
    ------------------------------------------------------------------ */
 #preloader {

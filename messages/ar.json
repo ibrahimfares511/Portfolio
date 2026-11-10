@@ -100,5 +100,86 @@
       }
     ],
     "cta": "تحدّث معي"
+  },
+  "process": {
+    "title": "كيف نعمل معًا؟",
+    "subline": "خطوات واضحة، من أول اجتماع حتى ما بعد التسليم.",
+    "steps": [
+      {
+        "lead": "نفهم",
+        "text": "اجتماع أول أفهم فيه فكرتك وما تحتاجه فعلًا، وأعرض عليك أفكارًا من أعمال سابقة."
+      },
+      {
+        "lead": "نخطط",
+        "text": "نتفق كتابيًا على ما سيُبنى، والسعر، وموعد التسليم."
+      },
+      {
+        "lead": "نبني",
+        "text": "تتابع التقدّم كل أسبوع، وترى النظام وهو يُبنى خطوة بخطوة."
+      },
+      {
+        "lead": "نسلّم",
+        "text": "أسلّمك النظام وهو يعمل، مع شهرين مجانيين لإصلاح أي مشكلة وللإضافات الصغيرة، ثم صيانة شهرية اختيارية."
+      }
+    ],
+    "closing": "علاقتنا لا تنتهي عند التسليم."
+  },
+  "tools": {
+    "title": "الأدوات التي أعمل بها",
+    "subline": "أختار الأداة المناسبة لكل مشروع، لا العكس.",
+    "rows": [
+      {
+        "label": "اللغات والأطر",
+        "items": [
+          "TypeScript",
+          "React",
+          "Next.js",
+          "Vue",
+          "Vite"
+        ]
+      },
+      {
+        "label": "إدارة البيانات والمكتبات",
+        "items": [
+          "Redux Toolkit",
+          "Zustand",
+          "TanStack Query",
+          "React Hook Form",
+          "Zod",
+          "i18next"
+        ]
+      },
+      {
+        "label": "الواجهات والتصميم",
+        "items": [
+          "Tailwind CSS",
+          "shadcn/ui",
+          "Radix UI",
+          "Material UI",
+          "Bootstrap",
+          "Framer Motion",
+          "ApexCharts",
+          "Figma"
+        ]
+      },
+      {
+        "label": "الواجهة الخلفية والأدوات",
+        "items": [
+          "Node.js",
+          "Express",
+          "Prisma",
+          "PostgreSQL",
+          "MySQL",
+          "Redis",
+          "Socket.io",
+          "Docker",
+          "Firebase",
+          "Git",
+          "GitHub",
+          "Postman",
+          "Swagger"
+        ]
+      }
+    ]
   }
 }
