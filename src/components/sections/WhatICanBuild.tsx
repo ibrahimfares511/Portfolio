@@ -13,6 +13,12 @@ const PROOF: string[][] = [
   [],
 ];
 
+// Shorter chip labels where the card name is long (Ibrahim, Nov 10, 2026;
+// the sitemap's proof column calls it "real estate platform").
+const CHIP_NAME: Record<string, { ar: string; en: string }> = {
+  "real-estate-platform": { ar: "منصة عقارات", en: "Real estate platform" },
+};
+
 const ICONS = [
   // Internal systems: a building with rows (warehouses, staff, reports)
   <svg key="0" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -72,7 +78,7 @@ export async function WhatICanBuild({ locale }: { locale: "ar" | "en" }) {
                           href={`#project-${p.slug}`}
                           className="inline-flex items-center gap-1.5 rounded-full border border-line bg-bg/60 px-3 py-1.5 text-[14px] text-ink transition-colors hover:border-petrol/50 hover:text-petrol"
                         >
-                          {p.name[locale]}
+                          {(CHIP_NAME[p.slug] ?? p.name)[locale]}
                           <svg viewBox="0 0 16 16" className="size-3 rtl:-scale-x-100" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
                             <path d="M6 3h7v7M13 3 4 12" />
                           </svg>
