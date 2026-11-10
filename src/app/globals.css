@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/* Dark mode follows next-themes' data-theme attribute on <html>. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ------------------------------------------------------------------
+   Brand tokens: "Sea and Clay" (copied from ibrahim-fares-brand-pack
+   tokens/tokens.css; keep the two in sync).
+   ------------------------------------------------------------------ */
+:root,
+[data-theme="light"] {
+  --bg: #f3efe9;
+  --surface: #ffffff;
+  --line: #e2ddd4;
+  --ink: #16303a;
+  --ink-muted: #5d6b70;
+  --petrol: #1f4e5f;
+  --sky: #b9d2da;
+  --sky-soft: #cfe0e3;
+  --clay: #c2603f;
+  --clay-strong: #b0532f;
+  --clay-soft: #f0d2c3;
+  --on-clay: #fff6f1;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0d1b21;
+  --surface: #132730;
+  --line: #21363f;
+  --ink: #eaf0f0;
+  --ink-muted: #9baeb3;
+  --petrol: #7fb3c4;
+  --sky: #b9d2da;
+  --sky-soft: #24505f;
+  --clay: #e58a66;
+  --clay-strong: #e58a66;
+  --clay-soft: #4a2618;
+  --on-clay: #0d1b21;
+  color-scheme: dark;
+}
+
+/* Before hydration, honour the OS setting when no theme was chosen yet. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1b21;
+    --surface: #132730;
+    --line: #21363f;
+    --ink: #eaf0f0;
+    --ink-muted: #9baeb3;
+    --petrol: #7fb3c4;
+    --sky-soft: #24505f;
+    --clay: #e58a66;
+    --clay-strong: #e58a66;
+    --clay-soft: #4a2618;
+    --on-clay: #0d1b21;
+  }
+}
+
+@font-face {
+  font-family: "IF Pen";
+  src: url("./IFPen-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-petrol: var(--petrol);
+  --color-sky: var(--sky);
+  --color-sky-soft: var(--sky-soft);
+  --color-clay: var(--clay);
+  --color-clay-strong: var(--clay-strong);
+  --color-clay-soft: var(--clay-soft);
+  --color-on-clay: var(--on-clay);
+
+  --font-arabic: var(--font-alexandria), "Noto Sans Arabic", system-ui, sans-serif;
+  --font-latin: var(--font-nunito), var(--font-alexandria), system-ui, sans-serif;
+  --font-display: "IF Pen", var(--font-nunito), system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Type scale from the brand tokens */
+  --text-display: 52px;
+  --text-display--line-height: 68px;
+  --text-h1: 40px;
+  --text-h1--line-height: 54px;
+  --text-h2: 28px;
+  --text-h2--line-height: 40px;
+  --text-h3: 20px;
+  --text-h3--line-height: 30px;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 32px;
+  --text-label: 13px;
+  --text-label--line-height: 18px;
+}
+
+/* ------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------ */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-latin);
+  font-size: 16px;
+  line-height: 26px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Western digits everywhere, tabular in numbers we line up. */
+  font-variant-numeric: lining-nums;
+}
+
+html[lang="ar"] body {
+  font-family: var(--font-arabic);
+  line-height: 28px;
+}
+
+::selection {
+  background: var(--sky-soft);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--petrol);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Numbers such as "+13,000" or "~100" keep their sign on the correct side
+   inside Arabic text. */
+.num {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* The page background: two soft blobs on bg (sky-soft top, clay-soft bottom). */
+.brand-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60vmax 45vmax at 85% -10%, color-mix(in oklab, var(--sky-soft) 85%, transparent), transparent 70%),
+    radial-gradient(55vmax 40vmax at 0% 110%, color-mix(in oklab, var(--clay-soft) 70%, transparent), transparent 70%),
+    var(--bg);
+}
+[dir="rtl"] .brand-backdrop {
+  transform: scaleX(-1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "title": "Ibrahim Fares · Web systems developer",
+    "description": "I build the whole system, from the first idea to the day it runs, and I stay with you after launch."
+  },
+  "nav": {
+    "work": "Work",
+    "process": "Process",
+    "about": "About",
+    "contact": "Contact",
+    "home": "Home",
+    "primary": "Main menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skip": "Skip to content"
+  },
+  "switch": {
+    "language": "العربية",
+    "languageLabel": "التبديل إلى العربية",
+    "theme": "Toggle light and dark mode",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "footer": {
+    "rights": "© 2026 Ibrahim Fares",
+    "whatsapp": "WhatsApp",
+    "email": "Email"
+  },
+  "sections": {
+    "projects": "Selected work",
+    "otherWork": "Other work",
+    "build": "What can I build for you?",
+    "process": "How we work together",
+    "tools": "Tools I work with",
+    "about": "About me",
+    "contact": "Let's start your project"
+  },
+  "hero": {
+    "eyebrow": "Ibrahim Fares · Web systems developer",
+    "headline": "I turn ideas into real, working systems"
+  },
+  "contact": {
+    "whatsapp": "+20 100 721 8535",
+    "email": "ibrahimfares511@gmail.com"
+  }
+}
