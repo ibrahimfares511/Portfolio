@@ -23,6 +23,8 @@ The same code deploys unchanged to Vercel.
 | `src/app/globals.css` | Brand tokens ("Sea and Clay"), fonts, base styles. Mirrors the brand pack's `tokens.css`. |
 | `src/components/brand/` | The `if` mark and the lockup. |
 | `src/components/layout/` | Header, footer, language and theme switches. |
+| `src/lib/motion-engine.ts` | The brand motion (preloader on every load, the cover for language and theme switches), inlined in `<head>` so it runs before any JS bundle. |
+| `src/lib/motion.ts` | React helpers around it (`onReveal`, `coverSwitch`, theme colours). |
 | `MISSING.md` | Assets that are missing and use a placeholder. |
 
 ## Copy rules

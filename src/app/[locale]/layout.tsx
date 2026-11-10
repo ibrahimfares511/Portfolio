@@ -8,7 +8,7 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Preloader } from "@/components/brand/Preloader";
-import { PRELOADER_BOOT_SCRIPT } from "@/lib/preloader";
+import { MOTION_ENGINE_SCRIPT } from "@/lib/motion-engine";
 import "../globals.css";
 
 const alexandria = Alexandria({
@@ -64,9 +64,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: PRELOADER_BOOT_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: MOTION_ENGINE_SCRIPT }} />
+        <noscript>
+          <style>{`#preloader{display:none!important}[data-reveal]{opacity:1!important;animation:none!important}`}</style>
+        </noscript>
       </head>
       <body className="min-h-dvh">
+        <Preloader />
         <NextIntlClientProvider>
           <ThemeProvider>
             <a
@@ -75,7 +79,6 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
             >
               {t("skip")}
             </a>
-            <Preloader />
             <div className="brand-backdrop" aria-hidden />
             <Header />
             <main id="main">{children}</main>

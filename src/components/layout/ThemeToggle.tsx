@@ -2,7 +2,8 @@
 
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore, type MouseEvent } from "react";
+import { coverSwitch, originOf, THEME_COLORS } from "@/lib/motion";
 
 const subscribe = () => () => {};
 const useMounted = () =>
@@ -21,7 +22,13 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
   return (
     <button
       type="button"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={(e: MouseEvent<HTMLButtonElement>) => {
+        // The cover is painted in the new theme's colours, so the two themes
+        // blend through the brand moment instead of flashing.
+        const next = isDark ? "light" : "dark";
+        const { x, y } = originOf(e);
+        void coverSwitch(x, y, () => setTheme(next), THEME_COLORS[next]);
+      }}
       aria-label={t("theme")}
       title={isDark ? t("light") : t("dark")}
       className={`inline-flex size-10 items-center justify-center rounded-full border border-line bg-surface/60 text-ink transition-colors hover:border-petrol/40 hover:text-petrol ${className}`}

@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useLocale, useMessages, useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/Button";
-import { onPreloaderDone } from "@/lib/preloader";
+import { onReveal } from "@/lib/motion";
+import { Words } from "@/components/ui/Words";
 
 type Proof = { value: string; label: string };
 
@@ -25,25 +26,41 @@ export function Hero() {
   const root = useRef<HTMLElement>(null);
   const avatar = useRef<HTMLDivElement>(null);
 
-  // Entrance after the preloader + count-up of the proof numbers.
+  // Entrance once the cover opens: the words are "typed in", each one coming
+  // out of a blur, then the buttons, the avatar and the proof numbers.
   useEffect(() => {
     const el = root.current;
     if (!el) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let ctx: gsap.Context | undefined;
-    const stop = onPreloaderDone(() => {
+    const stop = onReveal(() => {
       ctx = gsap.context(() => {
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-        tl.fromTo("[data-reveal='text']", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.09 })
+        const blurIn = { opacity: 1, filter: "blur(0px)", y: 0, clearProps: "filter,transform" };
+        const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+        tl.fromTo(
+          "[data-reveal='word']",
+          { opacity: 0, filter: "blur(12px)", y: "0.25em" },
+          { ...blurIn, duration: 0.55, stagger: 0.045 },
+        )
+          .fromTo(
+            "[data-reveal='text']",
+            { opacity: 0, filter: "blur(8px)", y: 12 },
+            { ...blurIn, duration: 0.6, stagger: 0.08 },
+            "-=0.35",
+          )
           .fromTo(
             "[data-reveal='avatar']",
-            { opacity: 0, y: 40, scale: 0.97 },
-            { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power2.out" },
-            0.1,
+            { opacity: 0, filter: "blur(16px)", y: 40, scale: 0.97 },
+            { ...blurIn, scale: 1, duration: 1, ease: "power2.out" },
+            0.15,
           )
-          .fromTo("[data-reveal='proof']", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 }, 0.35);
+          .fromTo(
+            "[data-reveal='proof']",
+            { opacity: 0, filter: "blur(10px)", y: 12 },
+            { ...blurIn, duration: 0.6, stagger: 0.07 },
+            0.5,
+          );
 
         el.querySelectorAll<HTMLElement>("[data-count]").forEach((node, i) => {
           const stat = parseStat(node.dataset.count!);
@@ -57,7 +74,7 @@ export function Hero() {
               ease: "power2.out",
               onUpdate: () => (node.textContent = `${stat.prefix}${fmt(state.n)}${stat.suffix}`),
             },
-            0.45 + i * 0.08,
+            0.6 + i * 0.07,
           );
         });
       }, el);
@@ -111,23 +128,22 @@ export function Hero() {
       <div className="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-center gap-x-8 px-4 sm:px-6 md:grid-cols-12">
         {/* Copy */}
         <div className="relative z-10 pt-10 pb-6 md:col-span-7 md:py-16">
-          <p data-reveal="text" className="text-[15px] text-ink-muted">
-            {t("eyebrow")}
+          <p className="text-[15px] text-ink-muted">
+            <Words text={t("eyebrow")} />
           </p>
           <h1
             id="hero-title"
-            data-reveal="text"
             className={
               isAr
                 ? "mt-5 text-[36px] leading-[58px] font-medium text-balance sm:text-[44px] sm:leading-[68px] lg:text-[52px] lg:leading-[80px]"
-                : "mt-5 font-display text-[40px] leading-[48px] lowercase text-balance sm:text-[50px] sm:leading-[58px] lg:text-[58px] lg:leading-[66px]"
+                : "mt-5 font-latin text-[40px] leading-[48px] font-bold tracking-[-0.02em] text-balance sm:text-[52px] sm:leading-[60px] lg:text-[60px] lg:leading-[68px]"
             }
           >
-            {t("headline")}
-            <span className="ms-2 inline-block size-[0.2em] rounded-full bg-clay" aria-hidden />
+            <Words text={t("headline")} />
+            <span data-reveal="word" className="ms-2 inline-block size-[0.2em] rounded-full bg-clay" aria-hidden />
           </h1>
-          <p data-reveal="text" className="mt-5 max-w-xl text-[17px] leading-[30px] text-ink-muted md:text-body-lg">
-            {t("subline")}
+          <p className="mt-5 max-w-xl text-[17px] leading-[30px] text-ink-muted md:text-body-lg">
+            <Words text={t("subline")} />
           </p>
           <div data-reveal="text" className="mt-8 flex flex-wrap items-center gap-3">
             <ButtonLink href={`/${locale}#contact`}>{t("primary")}</ButtonLink>

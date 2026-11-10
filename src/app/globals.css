@@ -164,53 +164,78 @@ html[lang="ar"] body {
 }
 
 /* ------------------------------------------------------------------
-   Preloader (see components/brand/Preloader.tsx)
+   Brand motion: preloader and switch cover (lib/motion-engine.ts)
    ------------------------------------------------------------------ */
-html:not(.js) #preloader,
-html.pl-skip #preloader {
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+}
+.if-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
   display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-bg, var(--bg));
+  will-change: clip-path;
 }
 html.pl-active {
   overflow: hidden;
 }
-#preloader [data-stroke] {
-  stroke-dashoffset: 1;
+.if-mark {
+  height: 110px;
+  width: auto;
+  overflow: visible;
 }
-#preloader [data-dot] {
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scale(0);
-}
-/* Safety net: never let the overlay stay if something goes wrong. */
-#preloader {
-  animation: pl-fallback 0.4s ease 8s forwards;
-}
-@keyframes pl-fallback {
-  to {
-    opacity: 0;
-    visibility: hidden;
+@media (min-width: 768px) {
+  .if-mark {
+    height: 130px;
   }
 }
+.if-mark g {
+  stroke: var(--c-ink, var(--ink));
+}
+.if-mark [data-stroke] {
+  stroke-dashoffset: 1;
+}
+.if-mark [data-nib] {
+  fill: var(--c-sky, var(--sky));
+  opacity: 0;
+}
+.if-mark [data-dot] {
+  fill: var(--c-clay, var(--clay));
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: translate(0, -18px) scale(0);
+}
 
-/* Elements that enter after the preloader start hidden, only with JS on
-   and motion allowed. A late fallback reveals them if JS never runs them. */
+/* Elements that enter after the cover opens start hidden (only when motion
+   is allowed). A late fallback shows them if the entrance never runs; the
+   <noscript> style in <head> shows them at once without JS. */
 @media (prefers-reduced-motion: no-preference) {
-  html.js [data-reveal] {
+  [data-reveal] {
     opacity: 0;
-    animation: reveal-fallback 0.6s ease 9s forwards;
+    animation: reveal-fallback 0.6s ease 14s forwards;
   }
 }
 @keyframes reveal-fallback {
   to {
     opacity: 1;
+    filter: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #preloader [data-stroke] {
+  .if-mark [data-stroke] {
     stroke-dashoffset: 0;
   }
-  #preloader [data-dot] {
+  .if-mark [data-dot] {
     transform: none;
   }
   html {
