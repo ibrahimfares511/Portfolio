@@ -57,3 +57,19 @@ English section titles that contain the pronoun "I" are set in Nunito (bold) ins
 ## Phase 5: how we work, tools
 
 No new copy. Steps and the closing line are the sitemap's text; each step prints as written ("**نفهم**: …"). The tools rows use the sitemap's lists in order; the row names (اللغات والأطر …) are read by screen readers as each row's label. Logos: the old site's SVGs where it had them, simple-icons for the new tools (Next.js, Vue, Vite, TanStack Query, Prisma, PostgreSQL, MySQL, Redis, Socket.io, Docker).
+
+## Phase 6: about, contact (needs approval)
+
+| Key | Arabic | English | Where |
+| --- | --- | --- | --- |
+| `about.info[].label` | المكان · اللغات · متاح لـ | Location · Languages · Open to | Labels of the three facts (the sitemap gives English names only) |
+| `contactSection.direct` | أو تواصل مباشرة | Or reach me directly | Above WhatsApp and email beside the form |
+| `contactSection.sending` | جارٍ الإرسال… | Sending… | Send button while sending |
+| `contactSection.required` | هذا الحقل مطلوب | This field is required | Empty field |
+| `contactSection.invalidReach` | اكتب بريدًا إلكترونيًا أو رقم واتساب صحيحًا | Enter a valid email or WhatsApp number | Field 2 |
+| `contactSection.successTitle` | وصلتني رسالتك. | Got your message. | After sending, with the thumbs-up pose |
+| `contactSection.successText` | سأرد عليك خلال 24 ساعة. | I'll reply within 24 hours. | Under it (echoes the approved subline) |
+| `contactSection.sendAnother` | أرسل رسالة أخرى | Send another message | Link back to the form |
+| `contactSection.error` | لم تُرسل الرسالة. جرّب مرة أخرى، أو راسلني على واتساب. | The message didn't go through. Try again, or message me on WhatsApp. | If sending fails |
+
+The four fields use the sitemap's text: the part before the colon is the label, the part after it the hint ("وسيلة التواصل" / "البريد الإلكتروني أو واتساب").

@@ -181,5 +181,48 @@
         ]
       }
     ]
+  },
+  "about": {
+    "title": "About me",
+    "bio": "I'm Ibrahim Fares, a web systems developer from Egypt. Since 2022 I've worked on real systems that companies, schools and restaurants in Egypt and the Gulf use every day. For founders and startups, I build the whole system, frontend and backend. With product teams, I work remotely as a frontend developer. I like everything clear and organised: what we'll build, when, and how we'll track progress.",
+    "info": [
+      {
+        "label": "Location",
+        "value": "Egypt, working remotely"
+      },
+      {
+        "label": "Languages",
+        "value": "Arabic, English"
+      },
+      {
+        "label": "Open to",
+        "value": "Freelance projects (full systems) · Remote jobs (frontend)"
+      }
+    ],
+    "cv": "Download CV"
+  },
+  "contactSection": {
+    "title": "Let's start your project",
+    "subline": "Tell me about your idea in 2 minutes, and I'll reply within 24 hours.",
+    "name": "Name",
+    "reach": "How to reach you",
+    "reachHint": "email or WhatsApp",
+    "type": "Project type",
+    "types": [
+      "internal system for a company",
+      "platform or web app",
+      "something else"
+    ],
+    "idea": "Tell me about the idea",
+    "ideaHint": "what problem do you want to solve, and who will use the system?",
+    "send": "Send details",
+    "sending": "Sending…",
+    "required": "This field is required",
+    "invalidReach": "Enter a valid email or WhatsApp number",
+    "successTitle": "Got your message.",
+    "successText": "I'll reply within 24 hours.",
+    "error": "The message didn't go through. Try again, or message me on WhatsApp.",
+    "sendAnother": "Send another message",
+    "direct": "Or reach me directly"
   }
 }

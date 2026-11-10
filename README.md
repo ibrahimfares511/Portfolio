@@ -14,6 +14,10 @@ npm run build && npm start
 `node .next/standalone/server.js` (copy `public/` and `.next/static/` next to it).
 The same code deploys unchanged to Vercel.
 
+## Contact form
+
+`/api/contact` emails each message to Ibrahim through SMTP. Copy `.env.example` to `.env.local` (or set the same variables on the server) and fill in the SMTP account. With Gmail: turn on 2-step verification, create an App password, and use it as `SMTP_PASS`. In development without SMTP, messages are printed in the terminal instead. Spam guards: a hidden honeypot field, a minimum time on the form, and 5 messages per 10 minutes per IP.
+
 ## Project content
 
 Project cards and pages read `content/projects/index.json`, generated from the packages in `../projects` (read-only):
