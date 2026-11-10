@@ -1,0 +1,333 @@
+{
+  "slug": "ertiqaa-academy",
+  "status": "live",
+  "year": "2025",
+  "role": {
+    "ar": "المطوّر الرئيسي للواجهة الأمامية",
+    "en": "Lead frontend developer"
+  },
+  "title": {
+    "ar": "أكاديمية إرتقاء",
+    "en": "Ertiqaa Academy"
+  },
+  "summary": {
+    "ar": "منصة لتعليم العربية في المدارس للطلاب الناطقين بغيرها: دروس قصيرة، وأسئلة تفاعلية، ومتابعة من المعلم والمدرسة.",
+    "en": "An Arabic-learning platform for schools: short lessons, interactive questions, and progress tracking for teachers and schools."
+  },
+  "problem": {
+    "ar": "في الإمارات تضع كل مؤسسة تعليمية منهجها بنفسها، وكانت منصات تعليم العربية لغير الناطقين بها أقل من المستوى المطلوب. فأراد العميل دخول السوق بمنتج أفضل يجمع الدروس والتدريب الفوري والاختبارات ومتابعة تقدّم كل طالب في مكان واحد.",
+    "en": "In the UAE each school sets its own curriculum, and the platforms for teaching Arabic to non-native speakers were not at a high level. The client wanted to enter the market with a better product: lessons, instant-feedback practice, timed quizzes and progress tracking in one place."
+  },
+  "solution": {
+    "ar": "تطبيق ويب واحد بأربعة أدوار. الإدارة تبني المنهج وبنك الأسئلة، والمدرسة تضيف المعلمين والطلاب، والمعلم يوزّع المهام والاختبارات ويتابع التقارير، والطالب يتعلّم ويتدرّب ويُختبر.",
+    "en": "One web app with four roles. The admin builds the curriculum and question bank, schools add teachers and students, teachers assign work and read reports, and students learn, practise and take quizzes."
+  },
+  "features": [
+    {
+      "ar": "ستة أنواع أسئلة، منها السحب والإفلات والإجابة الصوتية",
+      "en": "Six question types, including drag-and-drop and voice answers"
+    },
+    {
+      "ar": "تدريب يعطي نتيجة فورية ويسمح بإعادة المحاولة",
+      "en": "Practice with instant feedback and retries"
+    },
+    {
+      "ar": "اختبارات بعدّاد وقت، ونتيجة تعرض كل إجابة بجانب الإجابة الصحيحة",
+      "en": "Timed quizzes, with every answer shown next to the correct one"
+    },
+    {
+      "ar": "دروس بستة أشكال: نص، صورة، PDF، صوت، فيديو، رابط",
+      "en": "Lessons in six formats: text, image, PDF, audio, video, link"
+    },
+    {
+      "ar": "تقارير للمعلم حسب المهارة، مع المتفوقين ومن يحتاج إلى دعم",
+      "en": "Teacher reports by skill, with top students and students who need support"
+    },
+    {
+      "ar": "صلاحيات دقيقة لكل موظف في كل قسم",
+      "en": "Fine-grained permissions for every staff member, per section"
+    }
+  ],
+  "results": [
+    {
+      "value": "8",
+      "label": {
+        "ar": "مدارس تستخدم المنصة",
+        "en": "schools using it"
+      },
+      "verified": true
+    },
+    {
+      "value": "8,311",
+      "label": {
+        "ar": "طالبًا على المنصة",
+        "en": "students on the platform"
+      },
+      "verified": true
+    },
+    {
+      "value": "4",
+      "label": {
+        "ar": "أدوار في تطبيق واحد",
+        "en": "roles in one app"
+      },
+      "verified": true
+    },
+    {
+      "value": "6",
+      "label": {
+        "ar": "أنواع أسئلة تفاعلية",
+        "en": "interactive question types"
+      },
+      "verified": true
+    },
+    {
+      "value": "6",
+      "label": {
+        "ar": "أشكال للدروس",
+        "en": "lesson formats"
+      },
+      "verified": true
+    },
+    {
+      "value": "2",
+      "label": {
+        "ar": "لغتان مع تبديل الاتجاه",
+        "en": "languages with RTL/LTR switching"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "React",
+    "TypeScript",
+    "Vite",
+    "Redux Toolkit",
+    "RTK Query",
+    "Tailwind CSS",
+    "shadcn/ui",
+    "MUI",
+    "framer-motion",
+    "react-dnd",
+    "i18next",
+    "Firebase Cloud Messaging",
+    "Laravel API"
+  ],
+  "tech_notes": {
+    "ar": "محرّك واحد يدير أنواع الأسئلة الستة عبر واجهة verify()/reset() مشتركة. الإجابة الصوتية تُسجَّل في المتصفح عبر MediaRecorder. تبديل اتجاه الصفحة يشمل Tailwind وRadix وMUI معًا. تجديد رمز الدخول يتم خلف قفل (mutex) في طبقة API مكوّنة من 51 وحدة RTK Query.",
+    "en": "One engine drives all six question types through a shared verify()/reset() handle. Voice answers are recorded in the browser with MediaRecorder. Direction switching covers Tailwind, Radix and MUI together. Token refresh runs behind a mutex in an API layer of 51 RTK Query slices."
+  },
+  "assets": {
+    "cover": "cover/cover-1600x1000.png",
+    "cover_social": "cover/cover-1200x630.png",
+    "card_loop": "videos/card-loop.mp4",
+    "screenshots": [
+      {
+        "file": "screenshots/desktop/landing-ar.png",
+        "caption": {
+          "ar": "الصفحة الرئيسية، ومحتواها يُدار من لوحة الإدارة",
+          "en": "The landing page, with its content managed from the admin panel"
+        }
+      },
+      {
+        "file": "screenshots/desktop/student-home-ar.png",
+        "caption": {
+          "ar": "الصفحة الرئيسية للطالب: الدروس والقصص",
+          "en": "Student home: lessons and stories"
+        }
+      },
+      {
+        "file": "screenshots/desktop/unit-lessons-ar.png",
+        "caption": {
+          "ar": "دروس الوحدة، ولكل درس تدريب واختبار",
+          "en": "Lessons in a unit, each with practice and a quiz"
+        }
+      },
+      {
+        "file": "screenshots/desktop/lesson-ar.png",
+        "caption": {
+          "ar": "صفحة الدرس قبل البدء",
+          "en": "A lesson before it starts"
+        }
+      },
+      {
+        "file": "screenshots/desktop/lesson-video-ar.png",
+        "caption": {
+          "ar": "عارض الفيديو داخل الدرس",
+          "en": "The in-lesson video player"
+        }
+      },
+      {
+        "file": "screenshots/desktop/activity-matching-ar.png",
+        "caption": {
+          "ar": "توصيل الكلمة بالصورة في التدريب",
+          "en": "Matching words to pictures in a practice activity"
+        }
+      },
+      {
+        "file": "screenshots/desktop/quiz-fill-blanks-ar.png",
+        "caption": {
+          "ar": "ملء الفراغات بالسحب والإفلات، مع عدّاد الوقت",
+          "en": "Drag-and-drop blanks in a timed quiz"
+        }
+      },
+      {
+        "file": "screenshots/desktop/quiz-arrange-ar.png",
+        "caption": {
+          "ar": "ترتيب كلمات الجملة بالسحب",
+          "en": "Ordering the words of a sentence by dragging"
+        }
+      },
+      {
+        "file": "screenshots/desktop/quiz-voice-answer-ar.png",
+        "caption": {
+          "ar": "الطالب يسجّل إجابته بصوته من المتصفح",
+          "en": "The student records a voice answer in the browser"
+        }
+      },
+      {
+        "file": "screenshots/desktop/quiz-result-ar.png",
+        "caption": {
+          "ar": "نتيجة الاختبار: كل إجابة بجانب الإجابة الصحيحة",
+          "en": "Quiz result: every answer next to the correct one"
+        }
+      },
+      {
+        "file": "screenshots/desktop/profile-ar.png",
+        "caption": {
+          "ar": "صفحة الطالب: تقدّمه في كل مهارة",
+          "en": "Student profile: progress in each skill"
+        }
+      },
+      {
+        "file": "screenshots/desktop/stories-ar.png",
+        "caption": {
+          "ar": "مكتبة القصص بالتصنيفات",
+          "en": "The stories library, by category"
+        }
+      },
+      {
+        "file": "screenshots/desktop/stories-animals-ar.png",
+        "caption": {
+          "ar": "قصص تصنيف واحد، ولكل قصة أسئلة",
+          "en": "Stories in one category, each with its own questions"
+        }
+      },
+      {
+        "file": "screenshots/desktop/admin-question-bank-ar.png",
+        "caption": {
+          "ar": "بنك الأسئلة في لوحة الإدارة",
+          "en": "The question bank in the admin panel"
+        }
+      },
+      {
+        "file": "screenshots/desktop/admin-users-roles-ar.png",
+        "caption": {
+          "ar": "موظفو المنصة، ولكل موظف دور وصلاحيات",
+          "en": "Platform staff, each with a role and permissions"
+        }
+      },
+      {
+        "file": "screenshots/desktop/teacher-reports-ar.png",
+        "caption": {
+          "ar": "تقارير المعلم: المهارات والمتفوقون ومن يحتاج إلى دعم (عمل الفريق)",
+          "en": "Teacher reports: skills, top students and students who need support (team work)"
+        }
+      },
+      {
+        "file": "screenshots/mobile/landing-ar.png",
+        "caption": {
+          "ar": "الصفحة الرئيسية على الجوال",
+          "en": "The landing page on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/student-home-ar.png",
+        "caption": {
+          "ar": "الصفحة الرئيسية للطالب على الجوال",
+          "en": "Student home on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/lesson-ar.png",
+        "caption": {
+          "ar": "صفحة الدرس على الجوال",
+          "en": "A lesson on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/activity-question-ar.png",
+        "caption": {
+          "ar": "سؤال تدريب على الجوال",
+          "en": "A practice question on mobile"
+        }
+      }
+    ],
+    "videos": [
+      {
+        "file": "videos/practice-activity.mp4",
+        "webm": "videos/practice-activity.webm",
+        "caption": {
+          "ar": "التدريب: إجابة خاطئة ثم إعادة المحاولة ثم التوصيل",
+          "en": "Practice: a wrong answer, a retry, then matching"
+        }
+      },
+      {
+        "file": "videos/timed-quiz.mp4",
+        "webm": "videos/timed-quiz.webm",
+        "caption": {
+          "ar": "اختبار بوقت: سحب وإفلات، ترتيب جملة، إجابة صوتية، ثم النتيجة",
+          "en": "Timed quiz: drag and drop, sentence ordering, a voice answer, then the result"
+        }
+      },
+      {
+        "file": "videos/student-journey.mp4",
+        "webm": "videos/student-journey.webm",
+        "caption": {
+          "ar": "رحلة الطالب: من الصفحة الرئيسية إلى فيديو الدرس",
+          "en": "Student journey: from home to the lesson video"
+        }
+      }
+    ],
+    "diagram": "diagram/architecture.svg"
+  },
+  "links": {
+    "live": "https://ertiqaaedu.com/",
+    "demo": null
+  },
+  "related": [
+    {
+      "slug": "haya",
+      "relation": {
+        "ar": "منصة أخرى لتعليم العربية لمدارس الإمارات، لشركة مختلفة",
+        "en": "Another Arabic-learning platform for UAE schools, for a different company"
+      }
+    }
+  ],
+  "card": {
+    "line": {
+      "ar": "منصة لتعليم العربية لطلاب المدارس في الإمارات",
+      "en": "A platform teaching Arabic to school students in the UAE"
+    },
+    "role": {
+      "ar": "المطوّر الرئيسي للواجهة الأمامية",
+      "en": "Lead frontend developer"
+    },
+    "stats": [
+      {
+        "value": "8",
+        "label": {
+          "ar": "مدارس",
+          "en": "schools"
+        }
+      },
+      {
+        "value": "+8,300",
+        "label": {
+          "ar": "طالب",
+          "en": "students"
+        }
+      }
+    ]
+  }
+}

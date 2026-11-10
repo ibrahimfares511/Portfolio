@@ -14,6 +14,16 @@ npm run build && npm start
 `node .next/standalone/server.js` (copy `public/` and `.next/static/` next to it).
 The same code deploys unchanged to Vercel.
 
+## Project content
+
+Project cards and pages read `content/projects/index.json`, generated from the packages in `../projects` (read-only):
+
+```bash
+npm run sync   # copies project.json + case studies, optimises covers, card loops and posters into public/projects/
+```
+
+Run it again whenever a package changes. The generated files are committed, so a fresh clone builds without the packages folder.
+
 ## Where things live
 
 | Path | What |

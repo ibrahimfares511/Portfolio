@@ -1,0 +1,299 @@
+{
+  "slug": "elite",
+  "status": "live",
+  "year": "2024–2026",
+  "role": {
+    "ar": "المطوّر الرئيسي للواجهة الأمامية",
+    "en": "Lead frontend developer"
+  },
+  "title": {
+    "ar": "Elite: منصة مزايا للموظفين",
+    "en": "Elite: employee benefits platform"
+  },
+  "summary": {
+    "ar": "تطبيق ويب يربط موظفي الشركات بعروض المحلات القريبة منهم، ويجمعهم في فعاليات ونقاط وهدايا. يعمل مع 8 شركات و13,326 موظفًا.",
+    "en": "A web app that connects company employees with nearby shop offers and brings them together through events, points and gifts. Live with 8 companies and 13,326 employees."
+  },
+  "problem": {
+    "ar": "كانت Elite تطبيق جوال فقط، واحتاجت الشركة نسخة ويب بالمزايا نفسها (العروض والخريطة والمحادثات والفعاليات والنقاط) يفتحها الموظف من المتصفح، وتعمل مع كل شركة عميلة بهويتها.",
+    "en": "Elite was only a mobile app. The company needed a web version with the same benefits (offers, map, chat, events and points) that employees could open in a browser, working for every client company under its own brand."
+  },
+  "solution": {
+    "ar": "تطبيق ويب واحد بهوية كل شركة: عروض حسب القطاع والمدينة وعلى الخريطة، ومحادثة مباشرة مع المحل، وخصم في المحل بمسح رمز QR ورفع الفاتورة، وفعاليات للشركة تتحوّل إلى نقاط وهدايا.",
+    "en": "One web app that wears each company's brand: offers by sector, city and on a map, direct chat with shops, in-store redemption by QR scan and receipt upload, and company events that turn into points and gifts."
+  },
+  "features": [
+    {
+      "ar": "أقرب العروض على الخريطة بمسافة بحث يحددها الموظف",
+      "en": "Closest offers on a map, within a radius the employee sets"
+    },
+    {
+      "ar": "الخصم في المحل بمسح رمز QR ورفع صورة الفاتورة",
+      "en": "Redeem in store by scanning a QR code and uploading the receipt"
+    },
+    {
+      "ar": "محادثة مع المحل: رسائل صوتية، ومشاركة موقع، وردود، وتحويل",
+      "en": "Chat with shops: voice notes, locations, replies, forwarding"
+    },
+    {
+      "ar": "5 أنواع فعاليات: ماراثون خطوات، وتصويت، وتحدٍّ يومي، وبطولات بدعوات، واستبيان",
+      "en": "5 event types: step marathons, voting, daily streaks, tournaments with invitations, survey"
+    },
+    {
+      "ar": "نقاط تُجمع وتُرسل للزملاء وتُستبدل بهدايا",
+      "en": "Points to earn, send to colleagues and exchange for gifts"
+    },
+    {
+      "ar": "كل شركة بشعارها وألوانها من النسخة نفسها",
+      "en": "Each company's logo and colours from one build"
+    }
+  ],
+  "results": [
+    {
+      "value": "8",
+      "label": {
+        "ar": "شركات تستخدمه",
+        "en": "companies using it"
+      },
+      "verified": true
+    },
+    {
+      "value": "13,326",
+      "label": {
+        "ar": "موظفًا لديهم حساب",
+        "en": "employees with an account"
+      },
+      "verified": true
+    },
+    {
+      "value": "2",
+      "label": {
+        "ar": "أشهر من أول سطر برمجي حتى الإطلاق",
+        "en": "months from first commit to launch"
+      },
+      "verified": true
+    },
+    {
+      "value": "5",
+      "label": {
+        "ar": "أنواع فعاليات",
+        "en": "event types"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "React 18",
+    "Vite",
+    "Redux Toolkit",
+    "redux-persist",
+    "React-Bootstrap",
+    "axios",
+    "Firebase Cloud Messaging",
+    "Google Maps JS API",
+    "ApexCharts"
+  ],
+  "tech_notes": {
+    "ar": "نسخة واحدة لكل الشركات: رقم الشركة في رابط الدخول يحدد الشعار والألوان (متغيرات CSS). محادثة لحظية فوق REST عبر إشعارات Firebase ونبضة لحالة الاتصال. طبقة axios واحدة فيها وضع صيانة وخروج تلقائي عند انتهاء الجلسة، و13 slice في Redux.",
+    "en": "One build for every client: the client ID in the login link sets the logo and colours (CSS variables). Real-time chat on a REST API via Firebase push and a presence heartbeat. One axios layer with a maintenance switch and automatic logout on expired sessions; 13 Redux slices."
+  },
+  "assets": {
+    "cover": "cover/cover-1600x1000.png",
+    "cover_social": "cover/cover-1200x630.png",
+    "card_loop": "videos/card-loop.mp4",
+    "screenshots": [
+      {
+        "file": "screenshots/desktop/home-ar.png",
+        "caption": {
+          "ar": "الرئيسية بهوية شركة تجريبية: فعاليات الشركة والعروض المختارة",
+          "en": "Home in a demo company's brand: company events and picked offers"
+        }
+      },
+      {
+        "file": "screenshots/desktop/home-offers-ar.png",
+        "caption": {
+          "ar": "العروض حسب القطاع مع قصص المحلات",
+          "en": "Offers by sector, with shop stories"
+        }
+      },
+      {
+        "file": "screenshots/desktop/map-ar.png",
+        "caption": {
+          "ar": "الخريطة: المحلات داخل مسافة البحث",
+          "en": "Map: shops within the search radius"
+        }
+      },
+      {
+        "file": "screenshots/desktop/map-results-ar.png",
+        "caption": {
+          "ar": "نتائج البحث مرتبة حسب المسافة",
+          "en": "Search results sorted by distance"
+        }
+      },
+      {
+        "file": "screenshots/desktop/chat-ar.png",
+        "caption": {
+          "ar": "محادثة مع المحل: موقع، ورسالة صوتية، ورد",
+          "en": "Chat with a shop: location, voice note, reply"
+        }
+      },
+      {
+        "file": "screenshots/desktop/events-ar.png",
+        "caption": {
+          "ar": "فعاليات الشركة",
+          "en": "Company events"
+        }
+      },
+      {
+        "file": "screenshots/desktop/marathon-leaderboard-ar.png",
+        "caption": {
+          "ar": "أول 20 موظفًا في الماراثون",
+          "en": "Marathon top 20"
+        }
+      },
+      {
+        "file": "screenshots/desktop/vote-ar.png",
+        "caption": {
+          "ar": "مسابقة تصويت بين الزملاء",
+          "en": "Colleagues' voting contest"
+        }
+      },
+      {
+        "file": "screenshots/desktop/points-ar.png",
+        "caption": {
+          "ar": "رصيد النقاط وسجلها",
+          "en": "Points balance and history"
+        }
+      },
+      {
+        "file": "screenshots/desktop/gifts-ar.png",
+        "caption": {
+          "ar": "الهدايا المتاحة بالنقاط",
+          "en": "Gifts available for points"
+        }
+      },
+      {
+        "file": "screenshots/desktop/survey-ar.png",
+        "caption": {
+          "ar": "استبيان جودة الحياة",
+          "en": "Work-life survey"
+        }
+      },
+      {
+        "file": "screenshots/mobile/home-ar.png",
+        "caption": {
+          "ar": "الرئيسية على الجوال",
+          "en": "Home on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/offer-ar.png",
+        "caption": {
+          "ar": "العرض على الجوال",
+          "en": "Offer on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/map-ar.png",
+        "caption": {
+          "ar": "الخريطة على الجوال",
+          "en": "Map on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/chat-list-ar.png",
+        "caption": {
+          "ar": "المحادثات",
+          "en": "Chats"
+        }
+      },
+      {
+        "file": "screenshots/mobile/chat-ar.png",
+        "caption": {
+          "ar": "محادثة مع محل",
+          "en": "A chat with a shop"
+        }
+      },
+      {
+        "file": "screenshots/mobile/events-ar.png",
+        "caption": {
+          "ar": "الفعاليات على الجوال",
+          "en": "Events on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/points-ar.png",
+        "caption": {
+          "ar": "النقاط على الجوال",
+          "en": "Points on mobile"
+        }
+      }
+    ],
+    "videos": [
+      {
+        "file": "videos/qr-redeem.mp4",
+        "webm": "videos/qr-redeem.webm",
+        "caption": {
+          "ar": "مسح رمز المحل، ثم الخصم، ثم رفع الفاتورة",
+          "en": "Scan the shop's code, get the discount, upload the receipt"
+        }
+      },
+      {
+        "file": "videos/map-discovery.mp4",
+        "webm": "videos/map-discovery.webm",
+        "caption": {
+          "ar": "من الخريطة إلى أقرب عرض",
+          "en": "From the map to the nearest offer"
+        }
+      },
+      {
+        "file": "videos/tournament-join.mp4",
+        "webm": "videos/tournament-join.webm",
+        "caption": {
+          "ar": "قبول دعوة زميل لبطولة البادل",
+          "en": "Accepting a colleague's invite to a padel tournament"
+        }
+      }
+    ],
+    "diagram": "diagram/architecture.svg"
+  },
+  "links": {
+    "live": null,
+    "demo": null
+  },
+  "related": [
+    {
+      "slug": "smart-control",
+      "relation": {
+        "ar": "لوحة التحكم الخاصة بالمنصة",
+        "en": "The platform's dashboard"
+      }
+    }
+  ],
+  "card": {
+    "line": {
+      "ar": "منصة مزايا للموظفين: عروض وفعاليات ونقاط وهدايا",
+      "en": "Employee benefits platform: offers, events, points and gifts"
+    },
+    "role": {
+      "ar": "المطوّر الرئيسي للواجهة الأمامية",
+      "en": "Lead frontend developer"
+    },
+    "stats": [
+      {
+        "value": "8",
+        "label": {
+          "ar": "شركات",
+          "en": "companies"
+        }
+      },
+      {
+        "value": "+13,000",
+        "label": {
+          "ar": "موظف",
+          "en": "employees"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "slug": "wms",
+  "status": "live",
+  "year": "2026",
+  "role": {
+    "ar": "النظام كاملًا: الواجهة الأمامية والخلفية",
+    "en": "Full system: frontend and backend"
+  },
+  "title": {
+    "ar": "نظام إدارة المخازن",
+    "en": "Warehouse Management System"
+  },
+  "summary": {
+    "ar": "نظام واحد يربط 5 مخازن بدل الورق والإكسيل، ويستخدمه 25 موظفًا يوميًا.",
+    "en": "One system linking 5 warehouses, replacing paper and Excel, used daily by 25 employees."
+  },
+  "problem": {
+    "ar": "كانت 5 مخازن تعمل بالورق والإكسيل، كلٌّ بملفاته. لا رؤية واحدة للمخزون، والطلبات تُحضَّر من قوائم مطبوعة، والنقل بين المخازن بالمكالمات، ولا طريقة لمعرفة من غيّر أي رقم.",
+    "en": "5 warehouses ran on paper and Excel, each with its own sheets. Nobody had one view of stock, orders were picked from printed lists, transfers depended on phone calls, and nobody could tell who changed a number."
+  },
+  "solution": {
+    "ar": "نظام ويب يعمل عليه الفريق كله، من المكتب إلى أرض المخزن، بشاشات وصلاحيات لكل دور. المخزون في قاعدة بيانات واحدة، وكل حركة مسجّلة، وكل طلب يُراجَع مرتين بالباركود.",
+    "en": "A web system the whole team works in, from the office to the warehouse floor, with screens and permissions for each role. Stock lives in one database, every movement is recorded, and every order is checked twice by barcode."
+  },
+  "features": [
+    {
+      "ar": "رقم مخزون تثق فيه: كل حركة مسجّلة بمن قام بها ووقتها والرصيد قبلها وبعدها.",
+      "en": "Stock you can trust: every movement records who, when, and the balance before and after."
+    },
+    {
+      "ar": "كل طلب يُراجَع مرتين بالباركود، والأرقام التسلسلية تُسجَّل قطعةً قطعة.",
+      "en": "Every order is checked twice by barcode, with serial numbers tracked per unit."
+    },
+    {
+      "ar": "النقص يظهر مبكرًا، والطلب يعود تلقائيًا فور وصول البضاعة.",
+      "en": "Shortages show up early, and the order goes back in the queue as soon as stock arrives."
+    },
+    {
+      "ar": "نقل بين المخازن وصرف للفروع بضغطات قليلة، ويتحدّث الطرفان فورًا.",
+      "en": "Transfers between warehouses and dispatches to branches in a few clicks, with both sides updated at once."
+    },
+    {
+      "ar": "جرد على عدة أيام بدون إيقاف العمل، وأي فرق يحتاج موافقة المدير.",
+      "en": "Stock counts spread over days without stopping work, and any difference needs a manager's approval."
+    },
+    {
+      "ar": "43 صلاحية و7 قوالب أدوار وصلاحية لكل مخزن، و25 تقريرًا.",
+      "en": "43 permissions, 7 role templates, access per warehouse, and 25 reports."
+    }
+  ],
+  "results": [
+    {
+      "value": "5",
+      "label": {
+        "ar": "مخازن مربوطة",
+        "en": "linked warehouses"
+      },
+      "verified": true
+    },
+    {
+      "value": "25",
+      "label": {
+        "ar": "موظفًا يستخدمونه يوميًا",
+        "en": "employees use it daily"
+      },
+      "verified": true
+    },
+    {
+      "value": "1,000+",
+      "label": {
+        "ar": "منتج تتم إدارتها",
+        "en": "products managed"
+      },
+      "verified": true
+    },
+    {
+      "value": "2026",
+      "label": {
+        "ar": "يعمل منذ بدايتها، والنسخة الكاملة منذ يونيو",
+        "en": "live since early in the year, full version since June"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "React 19",
+    "TypeScript",
+    "Vite",
+    "Tailwind CSS",
+    "TanStack Query",
+    "Zustand",
+    "Node.js",
+    "Express 5",
+    "Prisma",
+    "PostgreSQL",
+    "Redis",
+    "BullMQ",
+    "Socket.io",
+    "Docker Compose",
+    "PWA"
+  ],
+  "tech_notes": {
+    "ar": "API مقسّم إلى طبقات فوق PostgreSQL واحدة. كل تغيير في المخزون داخل Transaction مع سطر في السجل (الرصيد قبل وبعد)، والمخزون مقسّم إلى متاح ومحجوز وتالف. تعارض الطلبات يُحلّ لحظة الحجز، ومهام الجرد تُقفَل بتحديث مشروط واحد مع مهمة BullMQ تفكّ الأقفال المتروكة، وتحديث لحظي عبر Socket.io لكل مخزن.",
+    "en": "A layered API on one PostgreSQL database. Every stock change runs in a transaction with a ledger line (balance before and after), and stock is split into available, reserved and damaged. Order conflicts are resolved at reservation time, count tasks are locked with a single conditional update plus a BullMQ job that frees abandoned locks, and Socket.io pushes live updates per warehouse."
+  },
+  "assets": {
+    "cover": "cover/cover-1600x1000.png",
+    "cover_social": "cover/cover-1200x630.png",
+    "card_loop": "videos/card-loop.mp4",
+    "card_loop_webm": "videos/card-loop.webm",
+    "screenshots": [
+      {
+        "file": "screenshots/desktop/dashboard-ar.png",
+        "caption": {
+          "ar": "لوحة التحكم: حالة الطلبات والتنبيهات في المخزن الرئيسي",
+          "en": "Dashboard: order status and alerts for the main warehouse"
+        }
+      },
+      {
+        "file": "screenshots/desktop/dashboard-analytics-ar.png",
+        "caption": {
+          "ar": "توزيع الشحن وحالات الطلبات وأكثر المنتجات طلبًا",
+          "en": "Shipping split, order statuses and top products"
+        }
+      },
+      {
+        "file": "screenshots/desktop/stock-warehouses-ar.png",
+        "caption": {
+          "ar": "المخزون لكل مخزن، والتبديل بين المخازن الخمسة",
+          "en": "Stock per warehouse, switching between the 5 warehouses"
+        }
+      },
+      {
+        "file": "screenshots/desktop/stock-ar.png",
+        "caption": {
+          "ar": "المتاح والمحجوز والتالف والحد الأدنى لكل منتج",
+          "en": "Available, reserved, damaged and minimum for each product"
+        }
+      },
+      {
+        "file": "screenshots/desktop/ledger-ar.png",
+        "caption": {
+          "ar": "سجل الحركات: الرصيد قبل وبعد، ومن قام بالحركة، ورقم الطلب",
+          "en": "Movement ledger: balance before and after, who, and the order behind it"
+        }
+      },
+      {
+        "file": "screenshots/desktop/orders-ar.png",
+        "caption": {
+          "ar": "الطلبات بكل حالاتها",
+          "en": "Orders in every status"
+        }
+      },
+      {
+        "file": "screenshots/desktop/order-detail-ar.png",
+        "caption": {
+          "ar": "تفاصيل الطلب: الرقم التسلسلي وسجل كامل بالأسماء والأوقات",
+          "en": "Order detail: serial number and a full log with names and times"
+        }
+      },
+      {
+        "file": "screenshots/desktop/preparation-queue-ar.png",
+        "caption": {
+          "ar": "قائمة التحضير",
+          "en": "Picking queue"
+        }
+      },
+      {
+        "file": "screenshots/desktop/preparation-scan-ar.png",
+        "caption": {
+          "ar": "تحضير الطلب بقارئ الباركود مع الرقم التسلسلي",
+          "en": "Picking an order with a barcode scanner, including the serial number"
+        }
+      },
+      {
+        "file": "screenshots/desktop/audit-ar.png",
+        "caption": {
+          "ar": "دورة جرد على 12 يومًا: المكتمل والمنتظر والفروقات",
+          "en": "A 12-day stock count: done, waiting and differences"
+        }
+      },
+      {
+        "file": "screenshots/desktop/audit-difference-ar.png",
+        "caption": {
+          "ar": "فروقات الجرد بانتظار موافقة المدير",
+          "en": "Count differences waiting for a manager's approval"
+        }
+      },
+      {
+        "file": "screenshots/desktop/reports-ar.png",
+        "caption": {
+          "ar": "توقع نفاد المخزون، واحد من 25 تقريرًا",
+          "en": "Stock-out forecast, one of 25 reports"
+        }
+      },
+      {
+        "file": "screenshots/desktop/users-ar.png",
+        "caption": {
+          "ar": "المستخدمون",
+          "en": "Users"
+        }
+      },
+      {
+        "file": "screenshots/desktop/permissions-ar.png",
+        "caption": {
+          "ar": "الصلاحيات لكل موظف، مع قوالب جاهزة للأدوار",
+          "en": "Permissions per employee, with ready role templates"
+        }
+      },
+      {
+        "file": "screenshots/desktop/returns-ar.png",
+        "caption": {
+          "ar": "فحص المرتجع: سليم أو تالف لكل منتج",
+          "en": "Return inspection: good or damaged for each product"
+        }
+      },
+      {
+        "file": "screenshots/desktop/dispatch-ar.png",
+        "caption": {
+          "ar": "أذونات الصرف للفروع",
+          "en": "Dispatch orders to branches"
+        }
+      },
+      {
+        "file": "screenshots/mobile/dashboard-ar.png",
+        "caption": {
+          "ar": "لوحة التحكم على الجوال",
+          "en": "Dashboard on a phone"
+        }
+      },
+      {
+        "file": "screenshots/mobile/orders-ar.png",
+        "caption": {
+          "ar": "الطلبات على الجوال",
+          "en": "Orders on a phone"
+        }
+      },
+      {
+        "file": "screenshots/mobile/preparation-scan-ar.png",
+        "caption": {
+          "ar": "التحضير بالباركود من أرض المخزن",
+          "en": "Barcode picking on the warehouse floor"
+        }
+      },
+      {
+        "file": "screenshots/mobile/driver-deliveries-ar.png",
+        "caption": {
+          "ar": "شاشة السائق: توصيلاته وتأكيد التسليم",
+          "en": "Driver screen: deliveries and proof of delivery"
+        }
+      },
+      {
+        "file": "screenshots/mobile/audit-floor-ar.png",
+        "caption": {
+          "ar": "جرد اليوم على الجوال",
+          "en": "Today's count on a phone"
+        }
+      }
+    ],
+    "videos": [
+      {
+        "file": "videos/transfer.mp4",
+        "webm": "videos/transfer.webm",
+        "caption": {
+          "ar": "نقل 8 شاشات من المخزن الرئيسي إلى الإسكندرية، والرصيد يتحدّث في الطرفين",
+          "en": "Moving 8 TVs from the main warehouse to Alexandria, with both balances updated"
+        }
+      },
+      {
+        "file": "videos/order-prep.mp4",
+        "webm": "videos/order-prep.webm",
+        "caption": {
+          "ar": "طلب واحد وشخصان: تحضير بالباركود والرقم التسلسلي، ثم مراجعة بالباركود",
+          "en": "One order, two people: picked by scan with a serial number, then checked by scan"
+        }
+      },
+      {
+        "file": "videos/stock-count.mp4",
+        "webm": "videos/stock-count.webm",
+        "caption": {
+          "ar": "جرد منتج بفرق قطعة، ثم موافقة المدير وتحديث المخزون",
+          "en": "Counting a product one unit short, then the manager approves and stock updates"
+        }
+      }
+    ],
+    "diagram": "diagram/architecture.svg"
+  },
+  "links": {
+    "live": null,
+    "demo": null
+  },
+  "card": {
+    "line": {
+      "ar": "نظام واحد يربط المخازن كلها ببعضها، بدل الورق والإكسيل",
+      "en": "One system linking all the warehouses, replacing paper and Excel"
+    },
+    "role": {
+      "ar": "النظام كاملًا: الواجهة الأمامية والخلفية",
+      "en": "Full system: frontend and backend"
+    },
+    "stats": [
+      {
+        "value": "5",
+        "label": {
+          "ar": "مخازن",
+          "en": "warehouses"
+        }
+      },
+      {
+        "value": "25",
+        "label": {
+          "ar": "موظفًا يوميًا",
+          "en": "employees daily"
+        }
+      }
+    ]
+  }
+}

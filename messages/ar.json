@@ -64,5 +64,14 @@
   "contact": {
     "whatsapp": "+20 100 721 8535",
     "email": "ibrahimfares511@gmail.com"
+  },
+  "projects": {
+    "title": "أعمال مختارة",
+    "subline": "أنظمة حقيقية لعملاء حقيقيين، مع دوري الفعلي في كل مشروع.",
+    "cta": "اقرأ القصة",
+    "status": {
+      "live": "يعمل",
+      "delivered": "تم التسليم"
+    }
   }
 }

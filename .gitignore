@@ -42,3 +42,4 @@ next-env.d.ts
 
 # brief files (read-only inputs, kept outside the repo)
 /_brief/
+/.cache/

@@ -1,13 +1,14 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { Hero } from "@/components/sections/Hero";
+import { Projects } from "@/components/sections/Projects";
 
 /**
- * Phase 1 skeleton: every home section in the sitemap order, with its
- * approved title and a dashed placeholder showing the phase that fills it.
+ * Home page, in the sitemap order. Sections not built yet show their
+ * approved title and a dashed placeholder naming the phase that fills them.
  */
-const SECTIONS = [
-  { id: "projects", key: "projects", phase: 3 },
+const PLACEHOLDERS = [
   { id: "other-work", key: "otherWork", phase: 4 },
   { id: "build", key: "build", phase: 4 },
   { id: "process", key: "process", phase: 5 },
@@ -20,27 +21,23 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("sections");
+  const lang = locale === "en" ? "en" : "ar";
 
   return (
     <>
       <Hero />
+      <Projects locale={lang} />
 
-      {SECTIONS.map((s) => (
+      {PLACEHOLDERS.map((s) => (
         <section key={s.id} id={s.id} aria-labelledby={`${s.id}-title`} className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-          <SectionHeading id={`${s.id}-title`} locale={locale}>
-            {t(s.key)}
-          </SectionHeading>
-          <Placeholder phase={s.phase} />
+          <Reveal>
+            <SectionHeading id={`${s.id}-title`} locale={locale} title={t(s.key)} />
+          </Reveal>
+          <div className="mt-10 flex h-56 items-center justify-center rounded-lg border border-dashed border-line font-latin text-sm text-ink-muted" dir="ltr">
+            Phase {s.phase}
+          </div>
         </section>
       ))}
     </>
-  );
-}
-
-function Placeholder({ phase }: { phase: number }) {
-  return (
-    <div className="mt-10 flex h-56 items-center justify-center rounded-lg border border-dashed border-line font-latin text-sm text-ink-muted" dir="ltr">
-      Phase {phase}
-    </div>
   );
 }

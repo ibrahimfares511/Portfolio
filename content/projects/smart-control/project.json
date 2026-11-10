@@ -1,0 +1,220 @@
+{
+  "slug": "smart-control",
+  "status": "live",
+  "year": "2024–2026",
+  "related": [
+    "elite"
+  ],
+  "role": {
+    "ar": "المطوّر الرئيسي للواجهة الأمامية",
+    "en": "Lead frontend developer"
+  },
+  "title": {
+    "ar": "Smart Control: لوحة تحكم مزايا الموظفين",
+    "en": "Smart Control: employee-benefits dashboard"
+  },
+  "summary": {
+    "ar": "لوحة التحكم التي تدير منصة Elite، وهي أيضًا نظام له أجزاؤه الخاصة: الشركات، والشركاء، والهدايا، والفعاليات، والتقارير في مكان واحد.",
+    "en": "The control panel behind the Elite benefits platform, and a system with parts of its own: companies, partners, gifts, events and reports in one place."
+  },
+  "problem": {
+    "ar": "لبرنامج المزايا شركات وآلاف الموظفين وشركاء وهدايا وفعاليات. ويحتاج الفريق أن يعرف يوميًا الاستخدام والمشاركة والمخزون، ومن دون لوحة واضحة تصبح المتابعة يدوية ومتأخرة.",
+    "en": "A benefits programme spans client companies, thousands of employees, partners, gifts and events. The team needs daily answers on usage, participation and stock; without one clear panel, follow-up is manual and late."
+  },
+  "solution": {
+    "ar": "لوحة واحدة للمسؤولين وفرق الموارد البشرية والشركاء، كلٌّ حسب صلاحياته: إدارة الشركات والعروض والهدايا والنقاط، والفعاليات والاستبيانات، وتقارير توضّح الاستخدام والمشاركة.",
+    "en": "One panel for admins, client HR teams and partners, each by permission: manage companies, offers, gifts and points, run events and surveys, and read usage and participation in clear reports."
+  },
+  "features": [
+    {
+      "ar": "رسم بياني لاستخدام التطبيق عليه علامات للأحداث، لمعرفة أثر كل حملة.",
+      "en": "App-usage chart with event markers, to see the effect of each campaign."
+    },
+    {
+      "ar": "متابعة استبيان جودة الحياة: من أكمل ومن لم يفتحه، وإرسال إشعار تحفيزي فورًا.",
+      "en": "Work-life survey follow-up: who finished, who never opened it, and a nudge in one click."
+    },
+    {
+      "ar": "تحديات مشي وتصويت وبطولات، مع نسبة التفاعل لكل شركة.",
+      "en": "Walking challenges, votes and tournaments with engagement per company."
+    },
+    {
+      "ar": "مخزون الهدايا في المستودع والسوق ومتجر العميل، بالريال وبالنقاط.",
+      "en": "Gift stock across warehouse, market and client store, in riyals and points."
+    },
+    {
+      "ar": "الشكاوى والتقييمات والتصنيفات الأكثر تصفحًا في مكان واحد.",
+      "en": "Complaints, ratings and most-browsed sectors in one place."
+    },
+    {
+      "ar": "صلاحيات تحدد القائمة وكل إجراء لكل مستخدم.",
+      "en": "Permissions shape the menu and every action per user."
+    }
+  ],
+  "results": [
+    {
+      "value": "22",
+      "label": {
+        "ar": "مستخدمًا للوحة من فريق التشغيل",
+        "en": "dashboard users"
+      },
+      "verified": true
+    },
+    {
+      "value": "101",
+      "label": {
+        "ar": "هدية من 85 شريكًا",
+        "en": "gifts from 85 partners"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "Laravel 8",
+    "Blade",
+    "jQuery",
+    "ApexCharts",
+    "DataTables",
+    "MySQL",
+    "Pusher",
+    "FCM / APNs"
+  ],
+  "tech_notes": {
+    "ar": "واجهة خلفية واحدة تخدم لوحة التحكم وAPI الموظفين وAPI الكاشير. علامات الأحداث على الرسم البياني بيانات محفوظة تظهر في كل الفترات، والإشعار الجماعي يرسل العدد والفلاتر بدل آلاف المعرّفات، وقوائم متابعة الاستبيان تُفتح من الرسم البياني نفسه.",
+    "en": "One backend serves the dashboard, the employee API and a cashier API. Chart events are stored data drawn at every zoom level; bulk notifications send counts and filters instead of thousands of IDs; survey follow-up lists open straight from the chart legend."
+  },
+  "assets": {
+    "cover": "cover/cover-1600x1000.png",
+    "cover_social": "cover/cover-1200x630.png",
+    "card_loop": "videos/card-loop.mp4",
+    "screenshots": [
+      {
+        "file": "screenshots/desktop/reports-usage-ar.png",
+        "caption": {
+          "ar": "معدل استخدام التطبيق مع علامات الأحداث",
+          "en": "App usage with event markers"
+        }
+      },
+      {
+        "file": "screenshots/desktop/work-life-overview-ar.png",
+        "caption": {
+          "ar": "نسبة المشاركة في استبيان جودة الحياة",
+          "en": "Work-life survey participation"
+        }
+      },
+      {
+        "file": "screenshots/desktop/work-life-didnt-view-ar.png",
+        "caption": {
+          "ar": "قائمة من لم يشاهدوا الاستبيان، مع إشعار تحفيزي",
+          "en": "Employees who didn't open the survey, ready for a nudge"
+        }
+      },
+      {
+        "file": "screenshots/desktop/work-life-answers-ar.png",
+        "caption": {
+          "ar": "تحليل الإجابات لكل سؤال",
+          "en": "Answers per question"
+        }
+      },
+      {
+        "file": "screenshots/desktop/events-analytics-ar.png",
+        "caption": {
+          "ar": "تحليلات الفعاليات ونسبة التفاعل لكل شركة",
+          "en": "Event analytics and engagement per company"
+        }
+      },
+      {
+        "file": "screenshots/desktop/gifts-warehouse-ar.png",
+        "caption": {
+          "ar": "مخزون الهدايا في المستودع الرئيسي",
+          "en": "Gift stock in the main warehouse"
+        }
+      },
+      {
+        "file": "screenshots/desktop/reports-visits-complaints-ar.png",
+        "caption": {
+          "ar": "الزيارات والشكاوى ونشاط الموظفين",
+          "en": "Visits, complaints and employee activity"
+        }
+      },
+      {
+        "file": "screenshots/mobile/reports-ar.png",
+        "caption": {
+          "ar": "التقارير على الجوال",
+          "en": "Reports on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/work-life-ar.png",
+        "caption": {
+          "ar": "الاستبيان على الجوال",
+          "en": "Survey report on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/events-ar.png",
+        "caption": {
+          "ar": "الفعاليات على الجوال",
+          "en": "Events on mobile"
+        }
+      }
+    ],
+    "videos": [
+      {
+        "file": "videos/usage-event.mp4",
+        "webm": "videos/usage-event.webm",
+        "caption": {
+          "ar": "إضافة حدث على شارت الاستخدام",
+          "en": "Pinning an event on the usage chart"
+        }
+      },
+      {
+        "file": "videos/survey-followup.mp4",
+        "webm": "videos/survey-followup.webm",
+        "caption": {
+          "ar": "متابعة من لم يشاهدوا الاستبيان",
+          "en": "Following up on employees who didn't open the survey"
+        }
+      }
+    ],
+    "diagram": "diagram/architecture.svg",
+    "card_loop_webm": "videos/card-loop.webm"
+  },
+  "links": {
+    "live": null,
+    "demo": null
+  },
+  "part_of": {
+    "slug": "elite",
+    "relation": {
+      "ar": "لوحة تحكم منصة Elite",
+      "en": "The dashboard of the Elite platform"
+    }
+  },
+  "card": {
+    "line": {
+      "ar": "لوحة تحكم Elite: الشركات والشركاء والهدايا والتقارير",
+      "en": "Elite's dashboard: companies, partners, gifts and reports"
+    },
+    "role": {
+      "ar": "المطوّر الرئيسي للواجهة الأمامية",
+      "en": "Lead frontend developer"
+    },
+    "stats": [
+      {
+        "value": "22",
+        "label": {
+          "ar": "مستخدمًا للوحة",
+          "en": "dashboard users"
+        }
+      },
+      {
+        "value": "+100",
+        "label": {
+          "ar": "هدية",
+          "en": "gifts"
+        }
+      }
+    ]
+  }
+}

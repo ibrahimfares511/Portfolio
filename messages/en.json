@@ -64,5 +64,14 @@
   "contact": {
     "whatsapp": "+20 100 721 8535",
     "email": "ibrahimfares511@gmail.com"
+  },
+  "projects": {
+    "title": "Selected work",
+    "subline": "Real systems for real clients, with my exact role in each.",
+    "cta": "Read the story",
+    "status": {
+      "live": "Live",
+      "delivered": "Delivered"
+    }
   }
 }

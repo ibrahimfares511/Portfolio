@@ -1,0 +1,211 @@
+{
+  "slug": "web-point",
+  "status": "delivered",
+  "year": "2022",
+  "role": {
+    "ar": "شريك مؤسس، والمطوّر الرئيسي للواجهة الأمامية",
+    "en": "Co-founder, lead frontend developer"
+  },
+  "title": {
+    "ar": "ويب بوينت: نظام كاشير وإدارة للمطاعم",
+    "en": "Web Point: restaurant POS and back office"
+  },
+  "summary": {
+    "ar": "نظام نقاط بيع وإدارة للمطاعم التي تجمع بين الصالة والطلبات الخارجية والتوصيل، يعمل على شاشات اللمس. استُخدم في 5 مطاعم في مصر.",
+    "en": "A touch-first point of sale and back office for sit-down restaurants with delivery. Used in 5 restaurants in Egypt."
+  },
+  "problem": {
+    "ar": "يدير المطعم المزدحم صالة وطلبات خارجية وتوصيلًا في الوقت نفسه، ولكل نوع أسعاره وضريبته وخدمته. وقبل ويب بوينت كانت هذه المطاعم تعمل بالورق أو ببرنامج كاشير آخر حسب المكان: بونات بخط اليد، وحساب يدوي، وفروقات نقدية لا تظهر إلا في اليوم التالي.",
+    "en": "A busy restaurant runs a hall, a takeaway counter and a delivery desk at once, each with its own prices, tax and service. Before Web Point, these restaurants ran on paper or on another POS, depending on the place: handwritten tickets, totals added by hand, and cash gaps that showed up the next morning."
+  },
+  "solution": {
+    "ar": "يعمل ويب بوينت من المتصفح على شاشة لمس في كل صالة، وفي المطبخ والبار طابعات فقط. يفتح الكاشير الطاولة من خريطة تشبه الصالة الحقيقية ويضيف الأصناف بلمستين، ويُطبع كل صنف في قسمه فورًا. ثم يتم الدفع وإغلاق الوردية واليوم بالطريقة نفسها، ويقرأ صاحب المطعم 10 تقارير من البيانات نفسها.",
+    "en": "Web Point runs in the browser on a touch screen in each hall, while the kitchen and the bar have just a printer. The cashier opens a table on a floor plan that matches the real room and adds dishes with a double tap, and each item prints at its own station right away. Payment, shift close and day close follow the same flow, and the owner reads ten reports from the same data."
+  },
+  "features": [
+    {
+      "ar": "الصالة كلها في نظرة: لون الطاولة يوضّح هل هي فارغة أم مشغولة أم تنتظر الحساب أم محجوزة",
+      "en": "See the whole room at a glance: a table's colour shows free, busy, waiting to pay or reserved"
+    },
+    {
+      "ar": "كل صنف يُطبع في قسمه: المشروبات في البار والطعام في المطبخ",
+      "en": "Each item prints at its own station: drinks at the bar, food in the kitchen"
+    },
+    {
+      "ar": "قائمة واحدة بثلاثة أسعار: صالة وطلب خارجي وتوصيل، ولكل نوع ضريبته وخدمته",
+      "en": "One menu, three price lists (dine-in, takeaway, delivery), each with its own tax and service"
+    },
+    {
+      "ar": "التوصيل من البداية للنهاية: الزبون برقم جواله، والتسليم للسائق، وحساب كل سائق",
+      "en": "Delivery end to end: customer by phone, hand-off to a driver, and each driver's cash"
+    },
+    {
+      "ar": "نقدية مضبوطة: إغلاق اليوم والوردية، وفواتير مرقّمة لكل جهاز، وسجل للمرتجعات ونقل الطاولات",
+      "en": "Cash that adds up: day and shift close, numbered checks per terminal, void and transfer logs"
+    },
+    {
+      "ar": "10 تقارير لصاحب المطعم: حسب الصنف والنادل والوردية والقسم والتكلفة",
+      "en": "Ten owner reports: by item, waiter, shift, menu group and cost"
+    }
+  ],
+  "results": [
+    {
+      "value": "5",
+      "label": {
+        "ar": "مطاعم استخدمته",
+        "en": "restaurants used it"
+      },
+      "verified": true
+    },
+    {
+      "value": "~100",
+      "label": {
+        "ar": "طلب يوميًا لكل مطعم",
+        "en": "orders a day per restaurant"
+      },
+      "verified": true
+    },
+    {
+      "value": "1",
+      "label": {
+        "ar": "شاشة لمس لكل صالة، وطابعة للمطبخ وأخرى للبار",
+        "en": "touch screen per hall, plus one printer each for the kitchen and the bar"
+      },
+      "verified": true
+    },
+    {
+      "value": "10",
+      "label": {
+        "ar": "تقارير للإدارة",
+        "en": "management reports"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "Laravel 6",
+    "PHP",
+    "MySQL",
+    "Blade",
+    "jQuery",
+    "AJAX",
+    "Bootstrap 4",
+    "DataTables",
+    "jQuery UI (touch)",
+    "mPDF",
+    "Spatie Permission"
+  ],
+  "tech_notes": {
+    "ar": "تطبيق Laravel واحد مقسّم إلى كاشير ولوحة تحكم وتقارير، وقواعد العمل (اليوم والوردية والترقيم والضريبة والخدمة) في مكان واحد. الطلبات في جداول صغيرة طوال اليوم وتنتقل إلى الأرشيف في نهايته، فتبقى الشاشات سريعة. والطباعة عبر جدول طابور يقرؤه برنامج طباعة على شبكة المطعم. والواجهة مصممة للمس: لوحة أرقام للدخول، ولوحة مفاتيح على الشاشة، ولمستان للإضافة، وسحب لإظهار الأوامر.",
+    "en": "One Laravel app split into POS, control panel and reports, with shared rules for days, shifts, serials, tax and service. Orders live in small tables during the day and move to history at day end, so the screens stay fast. Printing goes through a queue table read by a print agent on the restaurant network. The UI is built for touch: PIN-pad login, on-screen keyboard, double tap to add, swipe for actions."
+  },
+  "assets": {
+    "cover": "cover/cover-1600x1000.png",
+    "cover_social": "cover/cover-1200x630.png",
+    "card_loop": "videos/card-loop.mp4",
+    "screenshots": [
+      {
+        "file": "screenshots/desktop/floor-plan-en.png",
+        "caption": {
+          "ar": "خريطة الصالة: لون كل طاولة يوضّح حالتها",
+          "en": "Floor plan: each table's colour shows its state"
+        }
+      },
+      {
+        "file": "screenshots/desktop/order-en.png",
+        "caption": {
+          "ar": "شاشة الطلب: القائمة على اليسار والفاتورة على اليمين",
+          "en": "Order screen: menu on the left, the ticket on the right"
+        }
+      },
+      {
+        "file": "screenshots/desktop/item-options-en.png",
+        "caption": {
+          "ar": "خيارات الصنف (درجة الطهي) قبل إضافته",
+          "en": "Item choices (how it's cooked) before it's added"
+        }
+      },
+      {
+        "file": "screenshots/desktop/payment-en.png",
+        "caption": {
+          "ar": "الدفع نقدًا أو بالبطاقة أو ضيافة، مع حساب الخدمة والضريبة",
+          "en": "Payment by cash, card or hospitality, with service and tax worked out"
+        }
+      },
+      {
+        "file": "screenshots/desktop/delivery-customer-en.png",
+        "caption": {
+          "ar": "التوصيل: الزبون برقم جواله وعنوانه المسجّل",
+          "en": "Delivery: find the customer by phone, address already saved"
+        }
+      },
+      {
+        "file": "screenshots/desktop/report-daily-en.png",
+        "caption": {
+          "ar": "التقرير اليومي: المبيعات حسب القسم والخدمة والضريبة وطريقة الدفع",
+          "en": "Daily report: sales by menu group, service, tax and payment type"
+        }
+      },
+      {
+        "file": "screenshots/mobile/order-items-en.png",
+        "caption": {
+          "ar": "شاشة الطلب على الجوال",
+          "en": "Order screen on a phone"
+        }
+      },
+      {
+        "file": "screenshots/mobile/floor-plan-en.png",
+        "caption": {
+          "ar": "خريطة الصالة على الجوال",
+          "en": "Floor plan on a phone"
+        }
+      }
+    ],
+    "videos": [
+      {
+        "file": "videos/dine-in-order.mp4",
+        "webm": "videos/dine-in-order.webm",
+        "caption": {
+          "ar": "طلب صالة: من الطاولة إلى المطبخ",
+          "en": "Dine-in order: from the table to the kitchen"
+        }
+      }
+    ],
+    "diagram": "diagram/architecture.svg"
+  },
+  "links": {
+    "live": null,
+    "demo": null
+  },
+  "status_note": {
+    "ar": "تم التسليم، وما زال يعمل في مطعم واحد على الأقل",
+    "en": "Delivered; still running in at least one restaurant"
+  },
+  "tier": "other",
+  "card": {
+    "line": {
+      "ar": "نظام كاشير وإدارة للمطاعم",
+      "en": "Restaurant POS and back office"
+    },
+    "role": {
+      "ar": "شريك مؤسس، والمطوّر الرئيسي للواجهة الأمامية",
+      "en": "Co-founder, lead frontend developer"
+    },
+    "stats": [
+      {
+        "value": "5",
+        "label": {
+          "ar": "مطاعم",
+          "en": "restaurants"
+        }
+      },
+      {
+        "value": "~100",
+        "label": {
+          "ar": "طلب يوميًا لكل مطعم",
+          "en": "orders a day per restaurant"
+        }
+      }
+    ]
+  }
+}

@@ -34,3 +34,12 @@ Page title and description reuse approved copy: the hero eyebrow and the hero su
 ## Phase 2: preloader and hero
 
 No new copy. The hero uses the sitemap text word for word. The avatar's alt text is the name ("إبراهيم فارس" / "Ibrahim Fares").
+
+## Phase 3: projects
+
+No new copy. Title, subline, "Read the story" and the status words (يعمل / Live, تم التسليم / Delivered) come from the sitemap; everything on the cards comes from each `project.json`:
+
+- Card name: the part of `title` before the colon ("Elite: منصة مزايا للموظفين" → "Elite").
+- Smart Control's tag: "لوحة تحكم Elite / Elite's dashboard" (site-notes), linking to Elite's card.
+- Links between cards: the `related` relation, then the other card's name (e.g. "منصة أخرى لتعليم العربية لمدارس الإمارات، لشركة مختلفة · أكاديمية إرتقاء").
+- Screen recordings' alt text: the project's `title`.

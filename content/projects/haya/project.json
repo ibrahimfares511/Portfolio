@@ -1,0 +1,345 @@
+{
+  "slug": "haya",
+  "status": "live",
+  "year": "2025",
+  "role": {
+    "ar": "المطوّر الرئيسي للواجهة الأمامية",
+    "en": "Lead frontend developer"
+  },
+  "title": {
+    "ar": "هيا أكاديمي",
+    "en": "HAYA Academy"
+  },
+  "summary": {
+    "ar": "منصة تعليمية للمدارس: دروس تفاعلية في مهارات اللغة العربية، وواجبات تُصحَّح تلقائيًا، وتقرير لكل صف ولكل مهارة.",
+    "en": "A learning platform for schools: interactive Arabic-language lessons, homework that marks itself, and a report for every class and skill."
+  },
+  "problem": {
+    "ar": "في الإمارات تضع كل مؤسسة تعليمية منهجها بنفسها، وكانت منصات تعليم العربية لغير الناطقين بها أقل من المستوى المطلوب. فأراد العميل دخول السوق بمنتج أفضل: منصة لعدة مدارس، لكل مدرسة معلموها وصفوفها، ويستخدمها الأطفال بأنفسهم.",
+    "en": "In the UAE each school sets its own curriculum, and the platforms for teaching Arabic to non-native speakers were not at a high level. The client wanted to enter the market with a better product: one platform for many schools, each with its own teachers and classes, simple enough for young children to use alone."
+  },
+  "solution": {
+    "ar": "هيا منصة واحدة تخدم عدة مدارس. لكل مدرسة مدير ومعلمون وصفوف، ولا ترى إلا بياناتها. الطالب يقرأ كتبًا تفاعلية، ويحل واجبات بخمسة أنواع من الأسئلة، ويحصل على شهادة في كل مهارة. المعلم يجهّز الواجب من بنك أسئلة مشترك ويرى النتائج فورًا. ومدير المدرسة يتابع التقدّم لكل صف ولكل مهارة.",
+    "en": "HAYA is one platform that serves many schools. Each school gets its own admin, teachers and classes, and only sees its own data. Students read interactive books, solve homework with five question types, and earn a certificate for each skill. Teachers build tasks from a shared question bank and see results right away. School admins follow progress by class and by skill."
+  },
+  "features": [
+    {
+      "ar": "يحل الطالب أسئلة توصيل، وإكمال فراغ، واختيار من متعدد، وصح وخطأ، وأسئلة مقالية، وأغلبها يُصحَّح لحظة التسليم.",
+      "en": "Students solve matching, fill-the-blank, multiple-choice, true/false and essay questions, and most of them are marked the moment the task is submitted."
+    },
+    {
+      "ar": "يرسل المعلم الواجب للصف كاملًا أو لطلاب محددين، بموعد بداية ونهاية وعدد محاولات.",
+      "en": "Teachers assign homework to a whole class or to chosen students, with a time window and a set number of attempts."
+    },
+    {
+      "ar": "بعد التسليم يراجع الطالب كل إجابة: ما الصحيح، وما الخطأ، وما الإجابة الصحيحة.",
+      "en": "Each answer is reviewed after submission, so a student sees what was right, what was wrong and the correct answer."
+    },
+    {
+      "ar": "يُصدر المعلم شهادات القراءة والاستماع والكتابة والتحدث بخطوات قليلة، شهادة لكل طالب.",
+      "en": "Teachers issue certificates for reading, listening, writing and speaking in a few clicks, one image per student."
+    },
+    {
+      "ar": "يرى مدير المدرسة الطالب الأول ونتائج كل صف شهرًا بشهر، وتقدّم كل صف في كل مهارة.",
+      "en": "School admins see the top student and class results month by month, plus progress per skill for each class."
+    },
+    {
+      "ar": "كل حساب يعمل على عدد محدد من الأجهزة، حتى لا تُستخدم الحسابات بشكل مشترك.",
+      "en": "Each account can sign in on a limited number of devices, so accounts aren't shared."
+    }
+  ],
+  "results": [
+    {
+      "value": "Live",
+      "label": {
+        "ar": "تعمل على hayaedu.com",
+        "en": "running at hayaedu.com"
+      },
+      "verified": true
+    },
+    {
+      "value": "13",
+      "label": {
+        "ar": "مدرسة شريكة",
+        "en": "partner schools"
+      },
+      "verified": true
+    },
+    {
+      "value": "8,923",
+      "label": {
+        "ar": "طالبًا",
+        "en": "students"
+      },
+      "verified": true
+    },
+    {
+      "value": "5",
+      "label": {
+        "ar": "أنواع أسئلة",
+        "en": "question types"
+      },
+      "verified": true
+    },
+    {
+      "value": "4",
+      "label": {
+        "ar": "مهارات لكل منها شهادة",
+        "en": "skills, each with its own certificate"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "Laravel 11",
+    "PHP",
+    "MySQL",
+    "Blade",
+    "Bootstrap",
+    "jQuery",
+    "LeaderLine",
+    "Canvas API",
+    "Lottie",
+    "nwidart/laravel-modules",
+    "Laravel Excel",
+    "DomPDF"
+  ],
+  "tech_notes": {
+    "ar": "Laravel 11 مع واجهات Blade، وMySQL، وBootstrap وjQuery. مساحة الطالب module مستقل (nwidart/laravel-modules)، ولكل دور مجموعة routes وcontrollers خاصة به. بدأ المشروع من نظام LMS جاهز، ثم أُضيفت إليه المدارس والصفوف وبنك الأسئلة والواجبات وتكليفات القصص والشهادات والتقارير.\n\nقرارات تقنية تستحق الذكر:\n\n- **سؤال التوصيل بخطوط مرسومة.** يضغط الطالب على عنصر من كل عمود فيظهر سهم ملوّن بينهما. يتغيّر ترتيب العمودين في كل محاولة، وتُرسل الإجابة كأزواج من المعرّفات (IDs)، فيصحّح السيرفر دون الاعتماد على ترتيب الشاشة.\n- **إكمال الفراغ من نص عادي.** يكتب المعلم الجملة ويضع `___` مكان كل فراغ، فتحوّل الشاشة كل فراغ إلى خانة إجابة، وتخلط الإجابات الصحيحة مع إجابات مشتِّتة في أزرار سهلة الضغط.\n- **الشهادات تُرسم في المتصفح.** لكل مهارة قالب مرسوم خاص بها. شاشة المعلم ترسم شهادة لكل طالب على canvas وترفعها صورة جاهزة، فلا يحتاج السيرفر إلى رسم أي تصميم.",
+    "en": "Laravel 11 with server-rendered Blade, MySQL, Bootstrap and jQuery. The student area is a separate module (nwidart/laravel-modules), and each role has its own route group and controllers. The project started from a ready-made LMS base and was extended with schools, classes, the question bank, homework, story assignments, certificates and reports.\n\nThree decisions worth noting:\n\n- **Matching with drawn connections.** Students tap an item on each side and a coloured arrow connects them. Both columns are shuffled on every attempt, and the pairs are sent as IDs, so the server can mark them without trusting the order on screen.\n- **Fill-the-blank from plain text.** The teacher writes a sentence with `___` where the gaps go. The screen turns each gap into a drop zone and mixes the right answers with distractors as tappable chips.\n- **Certificates rendered in the browser.** Each skill has its own illustrated template. The teacher's screen draws a certificate per student on a canvas and uploads the finished images, so the server never has to render artwork."
+  },
+  "assets": {
+    "cover": "cover/cover-1600x1000.png",
+    "cover_social": "cover/cover-1200x630.png",
+    "card_loop": "videos/card-loop.mp4",
+    "screenshots": [
+      {
+        "file": "screenshots/desktop/task-matching-ar.png",
+        "caption": {
+          "ar": "سؤال توصيل: الطالب يصل الصورة بالكلمة بأسهم ملوّنة",
+          "en": "Matching question: students connect each picture to its word"
+        }
+      },
+      {
+        "file": "screenshots/desktop/task-result-ar.png",
+        "caption": {
+          "ar": "نتيجة الواجب مع مراجعة كل إجابة",
+          "en": "Task result with a review of every answer"
+        }
+      },
+      {
+        "file": "screenshots/desktop/lesson-book-ar.png",
+        "caption": {
+          "ar": "مشغّل الدروس مع كتاب تفاعلي وقائمة الدروس",
+          "en": "Lesson player with an interactive book and the lesson list"
+        }
+      },
+      {
+        "file": "screenshots/desktop/certificates-ar.png",
+        "caption": {
+          "ar": "شهادات الطالب في المهارات الأربع",
+          "en": "A student's certificates for the four skills"
+        }
+      },
+      {
+        "file": "screenshots/desktop/landing-ar.png",
+        "caption": {
+          "ar": "صفحة الهبوط بالعربية",
+          "en": "Landing page in Arabic"
+        }
+      },
+      {
+        "file": "screenshots/desktop/landing-en.png",
+        "caption": {
+          "ar": "صفحة الهبوط بالإنجليزية",
+          "en": "Landing page in English"
+        }
+      },
+      {
+        "file": "screenshots/desktop/student-courses-ar.png",
+        "caption": {
+          "ar": "المنهج الأساسي للطالب مع نسبة التقدّم",
+          "en": "The student's main curriculum with progress"
+        }
+      },
+      {
+        "file": "screenshots/desktop/task-blanks-ar.png",
+        "caption": {
+          "ar": "سؤال إكمال الفراغ",
+          "en": "Fill-the-blank question"
+        }
+      },
+      {
+        "file": "screenshots/desktop/certificate-view-ar.png",
+        "caption": {
+          "ar": "عرض شهادة القراءة",
+          "en": "Viewing a reading certificate"
+        }
+      },
+      {
+        "file": "screenshots/desktop/top-students-ar.png",
+        "caption": {
+          "ar": "أبطال الشهر في الصف",
+          "en": "Top students of the month in a class"
+        }
+      },
+      {
+        "file": "screenshots/desktop/login-ar.png",
+        "caption": {
+          "ar": "تسجيل الدخول",
+          "en": "Sign-in page"
+        }
+      },
+      {
+        "file": "screenshots/desktop/school-dashboard-en.png",
+        "caption": {
+          "ar": "لوحة مدير المدرسة: الطالب الأول ونتائج كل صف شهريًا",
+          "en": "School dashboard: top student and monthly results per class"
+        }
+      },
+      {
+        "file": "screenshots/desktop/school-skills-en.png",
+        "caption": {
+          "ar": "تقدّم الصف في كل مهارة وعدد التسليمات",
+          "en": "Class progress per skill and submissions per month"
+        }
+      },
+      {
+        "file": "screenshots/desktop/teacher-certificates-en.png",
+        "caption": {
+          "ar": "المعلم يُصدر شهادات لعدة طلاب مرة واحدة",
+          "en": "A teacher issuing certificates to several students at once"
+        }
+      },
+      {
+        "file": "screenshots/desktop/question-builder-en.png",
+        "caption": {
+          "ar": "منشئ سؤال التوصيل عند المعلم",
+          "en": "The matching question builder"
+        }
+      },
+      {
+        "file": "screenshots/desktop/task-matching-en.png",
+        "caption": {
+          "ar": "سؤال التوصيل بواجهة إنجليزية",
+          "en": "Matching question with the English interface"
+        }
+      },
+      {
+        "file": "screenshots/desktop/student-courses-en.png",
+        "caption": {
+          "ar": "المنهج الأساسي بواجهة إنجليزية",
+          "en": "Main curriculum with the English interface"
+        }
+      },
+      {
+        "file": "screenshots/mobile/landing-ar.png",
+        "caption": {
+          "ar": "صفحة الهبوط على الجوال",
+          "en": "Landing page on a phone"
+        }
+      },
+      {
+        "file": "screenshots/mobile/landing-en.png",
+        "caption": {
+          "ar": "صفحة الهبوط بالإنجليزية على الجوال",
+          "en": "English landing page on a phone"
+        }
+      },
+      {
+        "file": "screenshots/mobile/student-courses-ar.png",
+        "caption": {
+          "ar": "المنهج على الجوال",
+          "en": "Curriculum on a phone"
+        }
+      },
+      {
+        "file": "screenshots/mobile/certificates-ar.png",
+        "caption": {
+          "ar": "الشهادات على الجوال",
+          "en": "Certificates on a phone"
+        }
+      },
+      {
+        "file": "screenshots/mobile/certificate-view-ar.png",
+        "caption": {
+          "ar": "عرض الشهادة على الجوال",
+          "en": "Viewing a certificate on a phone"
+        }
+      },
+      {
+        "file": "screenshots/mobile/top-students-ar.png",
+        "caption": {
+          "ar": "أبطال الشهر على الجوال",
+          "en": "Top students on a phone"
+        }
+      }
+    ],
+    "videos": [
+      {
+        "file": "videos/task-solve.mp4",
+        "webm": "videos/task-solve.webm",
+        "caption": {
+          "ar": "الطالب يحل الواجب: توصيل الصور بالكلمات ثم إكمال الفراغ",
+          "en": "A student solving a task: matching pictures to words, then filling the blanks"
+        }
+      },
+      {
+        "file": "videos/task-result.mp4",
+        "webm": "videos/task-result.webm",
+        "caption": {
+          "ar": "التسليم ثم النتيجة ومراجعة الإجابات",
+          "en": "Submitting, then the result and the answer review"
+        }
+      },
+      {
+        "file": "videos/teacher-certificates.mp4",
+        "webm": "videos/teacher-certificates.webm",
+        "caption": {
+          "ar": "المعلم يختار المهارة والصف والطلاب فتظهر الشهادات جاهزة",
+          "en": "A teacher picks the skill, class and students, and the certificates are ready"
+        }
+      }
+    ],
+    "diagram": "diagram/architecture.svg"
+  },
+  "links": {
+    "live": "https://www.hayaedu.com",
+    "demo": null
+  },
+  "related": [
+    {
+      "slug": "ertiqaa-academy",
+      "relation": {
+        "ar": "منصة أخرى لتعليم العربية لمدارس الإمارات، لشركة مختلفة",
+        "en": "Another Arabic-learning platform for UAE schools, for a different company"
+      }
+    }
+  ],
+  "card": {
+    "line": {
+      "ar": "دروس تفاعلية وواجبات تُصحَّح تلقائيًا وشهادات لكل مهارة",
+      "en": "Interactive lessons, self-marking homework and a certificate for every skill"
+    },
+    "role": {
+      "ar": "المطوّر الرئيسي للواجهة الأمامية",
+      "en": "Lead frontend developer"
+    },
+    "stats": [
+      {
+        "value": "13",
+        "label": {
+          "ar": "مدرسة",
+          "en": "schools"
+        }
+      },
+      {
+        "value": "+8,900",
+        "label": {
+          "ar": "طالب",
+          "en": "students"
+        }
+      }
+    ]
+  }
+}

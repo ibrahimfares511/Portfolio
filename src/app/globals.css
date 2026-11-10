@@ -164,6 +164,39 @@ html[lang="ar"] body {
 }
 
 /* ------------------------------------------------------------------
+   Stacked project cards (components/projects/ProjectStack.tsx).
+   Sticky only where a whole card fits on screen; otherwise a plain list.
+   ------------------------------------------------------------------ */
+.stack-item {
+  position: relative;
+}
+@media (min-height: 760px) {
+  .stack-item {
+    position: sticky;
+    top: calc(76px + var(--i) * 10px);
+  }
+}
+@media (min-width: 1024px) and (min-height: 680px) {
+  .stack-item {
+    position: sticky;
+    top: calc(96px + var(--i) * 14px);
+  }
+}
+
+/* Desktop: gentle section-by-section scrolling. The page settles on the
+   start of a section when you stop close to it; long sections (the project
+   stack) still scroll freely inside. Phones keep plain native scrolling. */
+@media (min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+  main > section {
+    scroll-snap-align: start;
+    scroll-margin-top: 0;
+  }
+}
+
+/* ------------------------------------------------------------------
    Brand motion: preloader and switch cover (lib/motion-engine.ts)
    ------------------------------------------------------------------ */
 #preloader {

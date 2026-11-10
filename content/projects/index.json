@@ -1,0 +1,636 @@
+[
+  {
+    "slug": "wms",
+    "order": 0,
+    "tier": "main",
+    "status": "live",
+    "statusNote": null,
+    "year": "2026",
+    "title": {
+      "ar": "نظام إدارة المخازن",
+      "en": "Warehouse Management System"
+    },
+    "name": {
+      "ar": "نظام إدارة المخازن",
+      "en": "Warehouse Management System"
+    },
+    "summary": {
+      "ar": "نظام واحد يربط 5 مخازن بدل الورق والإكسيل، ويستخدمه 25 موظفًا يوميًا.",
+      "en": "One system linking 5 warehouses, replacing paper and Excel, used daily by 25 employees."
+    },
+    "card": {
+      "line": {
+        "ar": "نظام واحد يربط المخازن كلها ببعضها، بدل الورق والإكسيل",
+        "en": "One system linking all the warehouses, replacing paper and Excel"
+      },
+      "role": {
+        "ar": "النظام كاملًا: الواجهة الأمامية والخلفية",
+        "en": "Full system: frontend and backend"
+      },
+      "stats": [
+        {
+          "value": "5",
+          "label": {
+            "ar": "مخازن",
+            "en": "warehouses"
+          }
+        },
+        {
+          "value": "25",
+          "label": {
+            "ar": "موظفًا يوميًا",
+            "en": "employees daily"
+          }
+        }
+      ]
+    },
+    "related": [],
+    "partOf": null,
+    "links": {
+      "live": null,
+      "demo": null
+    },
+    "media": {
+      "cover": {
+        "width": 1600,
+        "height": 1000,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/cover-800.avif",
+            "webp": "/projects/wms/cover-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/cover-1600.avif",
+            "webp": "/projects/wms/cover-1600.webp"
+          }
+        }
+      },
+      "og": "/projects/wms/og.jpg",
+      "loop": {
+        "mp4": "/projects/wms/loop.mp4",
+        "webm": "/projects/wms/loop.webm",
+        "poster": {
+          "width": 1440,
+          "height": 900,
+          "sizes": {
+            "960": {
+              "avif": "/projects/wms/poster-960.avif",
+              "webp": "/projects/wms/poster-960.webp"
+            },
+            "1440": {
+              "avif": "/projects/wms/poster-1440.avif",
+              "webp": "/projects/wms/poster-1440.webp"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "slug": "elite",
+    "order": 1,
+    "tier": "main",
+    "status": "live",
+    "statusNote": null,
+    "year": "2024–2026",
+    "title": {
+      "ar": "Elite: منصة مزايا للموظفين",
+      "en": "Elite: employee benefits platform"
+    },
+    "name": {
+      "ar": "Elite",
+      "en": "Elite"
+    },
+    "summary": {
+      "ar": "تطبيق ويب يربط موظفي الشركات بعروض المحلات القريبة منهم، ويجمعهم في فعاليات ونقاط وهدايا. يعمل مع 8 شركات و13,326 موظفًا.",
+      "en": "A web app that connects company employees with nearby shop offers and brings them together through events, points and gifts. Live with 8 companies and 13,326 employees."
+    },
+    "card": {
+      "line": {
+        "ar": "منصة مزايا للموظفين: عروض وفعاليات ونقاط وهدايا",
+        "en": "Employee benefits platform: offers, events, points and gifts"
+      },
+      "role": {
+        "ar": "المطوّر الرئيسي للواجهة الأمامية",
+        "en": "Lead frontend developer"
+      },
+      "stats": [
+        {
+          "value": "8",
+          "label": {
+            "ar": "شركات",
+            "en": "companies"
+          }
+        },
+        {
+          "value": "+13,000",
+          "label": {
+            "ar": "موظف",
+            "en": "employees"
+          }
+        }
+      ]
+    },
+    "related": [
+      {
+        "slug": "smart-control",
+        "relation": {
+          "ar": "لوحة التحكم الخاصة بالمنصة",
+          "en": "The platform's dashboard"
+        }
+      }
+    ],
+    "partOf": null,
+    "links": {
+      "live": null,
+      "demo": null
+    },
+    "media": {
+      "cover": {
+        "width": 1600,
+        "height": 1000,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/cover-800.avif",
+            "webp": "/projects/elite/cover-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/cover-1600.avif",
+            "webp": "/projects/elite/cover-1600.webp"
+          }
+        }
+      },
+      "og": "/projects/elite/og.jpg",
+      "loop": {
+        "mp4": "/projects/elite/loop.mp4",
+        "webm": "/projects/elite/loop.webm",
+        "poster": {
+          "width": 960,
+          "height": 600,
+          "sizes": {
+            "960": {
+              "avif": "/projects/elite/poster-960.avif",
+              "webp": "/projects/elite/poster-960.webp"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "slug": "smart-control",
+    "order": 2,
+    "tier": "main",
+    "status": "live",
+    "statusNote": null,
+    "year": "2024–2026",
+    "title": {
+      "ar": "Smart Control: لوحة تحكم مزايا الموظفين",
+      "en": "Smart Control: employee-benefits dashboard"
+    },
+    "name": {
+      "ar": "Smart Control",
+      "en": "Smart Control"
+    },
+    "summary": {
+      "ar": "لوحة التحكم التي تدير منصة Elite، وهي أيضًا نظام له أجزاؤه الخاصة: الشركات، والشركاء، والهدايا، والفعاليات، والتقارير في مكان واحد.",
+      "en": "The control panel behind the Elite benefits platform, and a system with parts of its own: companies, partners, gifts, events and reports in one place."
+    },
+    "card": {
+      "line": {
+        "ar": "لوحة تحكم Elite: الشركات والشركاء والهدايا والتقارير",
+        "en": "Elite's dashboard: companies, partners, gifts and reports"
+      },
+      "role": {
+        "ar": "المطوّر الرئيسي للواجهة الأمامية",
+        "en": "Lead frontend developer"
+      },
+      "stats": [
+        {
+          "value": "22",
+          "label": {
+            "ar": "مستخدمًا للوحة",
+            "en": "dashboard users"
+          }
+        },
+        {
+          "value": "+100",
+          "label": {
+            "ar": "هدية",
+            "en": "gifts"
+          }
+        }
+      ]
+    },
+    "related": [],
+    "partOf": {
+      "slug": "elite",
+      "relation": {
+        "ar": "لوحة تحكم منصة Elite",
+        "en": "The dashboard of the Elite platform"
+      },
+      "tag": {
+        "ar": "لوحة تحكم Elite",
+        "en": "Elite's dashboard"
+      }
+    },
+    "links": {
+      "live": null,
+      "demo": null
+    },
+    "media": {
+      "cover": {
+        "width": 1600,
+        "height": 1000,
+        "sizes": {
+          "800": {
+            "avif": "/projects/smart-control/cover-800.avif",
+            "webp": "/projects/smart-control/cover-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/smart-control/cover-1600.avif",
+            "webp": "/projects/smart-control/cover-1600.webp"
+          }
+        }
+      },
+      "og": "/projects/smart-control/og.jpg",
+      "loop": {
+        "mp4": "/projects/smart-control/loop.mp4",
+        "webm": "/projects/smart-control/loop.webm",
+        "poster": {
+          "width": 1440,
+          "height": 900,
+          "sizes": {
+            "960": {
+              "avif": "/projects/smart-control/poster-960.avif",
+              "webp": "/projects/smart-control/poster-960.webp"
+            },
+            "1440": {
+              "avif": "/projects/smart-control/poster-1440.avif",
+              "webp": "/projects/smart-control/poster-1440.webp"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "slug": "ertiqaa-academy",
+    "order": 3,
+    "tier": "main",
+    "status": "live",
+    "statusNote": null,
+    "year": "2025",
+    "title": {
+      "ar": "أكاديمية إرتقاء",
+      "en": "Ertiqaa Academy"
+    },
+    "name": {
+      "ar": "أكاديمية إرتقاء",
+      "en": "Ertiqaa Academy"
+    },
+    "summary": {
+      "ar": "منصة لتعليم العربية في المدارس للطلاب الناطقين بغيرها: دروس قصيرة، وأسئلة تفاعلية، ومتابعة من المعلم والمدرسة.",
+      "en": "An Arabic-learning platform for schools: short lessons, interactive questions, and progress tracking for teachers and schools."
+    },
+    "card": {
+      "line": {
+        "ar": "منصة لتعليم العربية لطلاب المدارس في الإمارات",
+        "en": "A platform teaching Arabic to school students in the UAE"
+      },
+      "role": {
+        "ar": "المطوّر الرئيسي للواجهة الأمامية",
+        "en": "Lead frontend developer"
+      },
+      "stats": [
+        {
+          "value": "8",
+          "label": {
+            "ar": "مدارس",
+            "en": "schools"
+          }
+        },
+        {
+          "value": "+8,300",
+          "label": {
+            "ar": "طالب",
+            "en": "students"
+          }
+        }
+      ]
+    },
+    "related": [
+      {
+        "slug": "haya",
+        "relation": {
+          "ar": "منصة أخرى لتعليم العربية لمدارس الإمارات، لشركة مختلفة",
+          "en": "Another Arabic-learning platform for UAE schools, for a different company"
+        }
+      }
+    ],
+    "partOf": null,
+    "links": {
+      "live": "https://ertiqaaedu.com/",
+      "demo": null
+    },
+    "media": {
+      "cover": {
+        "width": 1600,
+        "height": 1000,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/cover-800.avif",
+            "webp": "/projects/ertiqaa-academy/cover-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/cover-1600.avif",
+            "webp": "/projects/ertiqaa-academy/cover-1600.webp"
+          }
+        }
+      },
+      "og": "/projects/ertiqaa-academy/og.jpg",
+      "loop": {
+        "mp4": "/projects/ertiqaa-academy/loop.mp4",
+        "webm": "/projects/ertiqaa-academy/loop.webm",
+        "poster": {
+          "width": 1440,
+          "height": 900,
+          "sizes": {
+            "960": {
+              "avif": "/projects/ertiqaa-academy/poster-960.avif",
+              "webp": "/projects/ertiqaa-academy/poster-960.webp"
+            },
+            "1440": {
+              "avif": "/projects/ertiqaa-academy/poster-1440.avif",
+              "webp": "/projects/ertiqaa-academy/poster-1440.webp"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "slug": "haya",
+    "order": 4,
+    "tier": "main",
+    "status": "live",
+    "statusNote": null,
+    "year": "2025",
+    "title": {
+      "ar": "هيا أكاديمي",
+      "en": "HAYA Academy"
+    },
+    "name": {
+      "ar": "هيا أكاديمي",
+      "en": "HAYA Academy"
+    },
+    "summary": {
+      "ar": "منصة تعليمية للمدارس: دروس تفاعلية في مهارات اللغة العربية، وواجبات تُصحَّح تلقائيًا، وتقرير لكل صف ولكل مهارة.",
+      "en": "A learning platform for schools: interactive Arabic-language lessons, homework that marks itself, and a report for every class and skill."
+    },
+    "card": {
+      "line": {
+        "ar": "دروس تفاعلية وواجبات تُصحَّح تلقائيًا وشهادات لكل مهارة",
+        "en": "Interactive lessons, self-marking homework and a certificate for every skill"
+      },
+      "role": {
+        "ar": "المطوّر الرئيسي للواجهة الأمامية",
+        "en": "Lead frontend developer"
+      },
+      "stats": [
+        {
+          "value": "13",
+          "label": {
+            "ar": "مدرسة",
+            "en": "schools"
+          }
+        },
+        {
+          "value": "+8,900",
+          "label": {
+            "ar": "طالب",
+            "en": "students"
+          }
+        }
+      ]
+    },
+    "related": [
+      {
+        "slug": "ertiqaa-academy",
+        "relation": {
+          "ar": "منصة أخرى لتعليم العربية لمدارس الإمارات، لشركة مختلفة",
+          "en": "Another Arabic-learning platform for UAE schools, for a different company"
+        }
+      }
+    ],
+    "partOf": null,
+    "links": {
+      "live": "https://www.hayaedu.com",
+      "demo": null
+    },
+    "media": {
+      "cover": {
+        "width": 1600,
+        "height": 1000,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/cover-800.avif",
+            "webp": "/projects/haya/cover-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/cover-1600.avif",
+            "webp": "/projects/haya/cover-1600.webp"
+          }
+        }
+      },
+      "og": "/projects/haya/og.jpg",
+      "loop": {
+        "mp4": "/projects/haya/loop.mp4",
+        "webm": "/projects/haya/loop.webm",
+        "poster": {
+          "width": 1200,
+          "height": 750,
+          "sizes": {
+            "960": {
+              "avif": "/projects/haya/poster-960.avif",
+              "webp": "/projects/haya/poster-960.webp"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "slug": "real-estate-platform",
+    "order": 5,
+    "tier": "main",
+    "status": "delivered",
+    "statusNote": null,
+    "year": "2026",
+    "title": {
+      "ar": "منصة عقارات بالعربية والإنجليزية",
+      "en": "Bilingual Real Estate Platform"
+    },
+    "name": {
+      "ar": "منصة عقارات بالعربية والإنجليزية",
+      "en": "Bilingual Real Estate Platform"
+    },
+    "summary": {
+      "ar": "سوق عقارات بالعربية والإنجليزية، يمرّ فيه الإعلان بكل المراحل حتى عقد موقَّع ودفعات مسجَّلة.",
+      "en": "A real estate marketplace in Arabic and English where a listing goes all the way to a signed contract and recorded payments."
+    },
+    "card": {
+      "line": {
+        "ar": "سوق عقارات من الإعلان حتى العقد الموقَّع والدفع",
+        "en": "A property marketplace, from listing to signed contract and payment"
+      },
+      "role": {
+        "ar": "المطوّر الرئيسي للواجهة الأمامية",
+        "en": "Lead frontend developer"
+      },
+      "stats": [
+        {
+          "value": "3",
+          "label": {
+            "ar": "أسابيع للبناء",
+            "en": "weeks to build"
+          }
+        },
+        {
+          "value": "2",
+          "label": {
+            "ar": "لغتان",
+            "en": "languages"
+          }
+        }
+      ]
+    },
+    "related": [],
+    "partOf": null,
+    "links": {
+      "live": null,
+      "demo": null
+    },
+    "media": {
+      "cover": {
+        "width": 1600,
+        "height": 1000,
+        "sizes": {
+          "800": {
+            "avif": "/projects/real-estate-platform/cover-800.avif",
+            "webp": "/projects/real-estate-platform/cover-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/real-estate-platform/cover-1600.avif",
+            "webp": "/projects/real-estate-platform/cover-1600.webp"
+          }
+        }
+      },
+      "og": "/projects/real-estate-platform/og.jpg",
+      "loop": {
+        "mp4": "/projects/real-estate-platform/loop.mp4",
+        "webm": "/projects/real-estate-platform/loop.webm",
+        "poster": {
+          "width": 1200,
+          "height": 750,
+          "sizes": {
+            "960": {
+              "avif": "/projects/real-estate-platform/poster-960.avif",
+              "webp": "/projects/real-estate-platform/poster-960.webp"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "slug": "web-point",
+    "order": 6,
+    "tier": "other",
+    "status": "delivered",
+    "statusNote": {
+      "ar": "تم التسليم، وما زال يعمل في مطعم واحد على الأقل",
+      "en": "Delivered; still running in at least one restaurant"
+    },
+    "year": "2022",
+    "title": {
+      "ar": "ويب بوينت: نظام كاشير وإدارة للمطاعم",
+      "en": "Web Point: restaurant POS and back office"
+    },
+    "name": {
+      "ar": "ويب بوينت",
+      "en": "Web Point"
+    },
+    "summary": {
+      "ar": "نظام نقاط بيع وإدارة للمطاعم التي تجمع بين الصالة والطلبات الخارجية والتوصيل، يعمل على شاشات اللمس. استُخدم في 5 مطاعم في مصر.",
+      "en": "A touch-first point of sale and back office for sit-down restaurants with delivery. Used in 5 restaurants in Egypt."
+    },
+    "card": {
+      "line": {
+        "ar": "نظام كاشير وإدارة للمطاعم",
+        "en": "Restaurant POS and back office"
+      },
+      "role": {
+        "ar": "شريك مؤسس، والمطوّر الرئيسي للواجهة الأمامية",
+        "en": "Co-founder, lead frontend developer"
+      },
+      "stats": [
+        {
+          "value": "5",
+          "label": {
+            "ar": "مطاعم",
+            "en": "restaurants"
+          }
+        },
+        {
+          "value": "~100",
+          "label": {
+            "ar": "طلب يوميًا لكل مطعم",
+            "en": "orders a day per restaurant"
+          }
+        }
+      ]
+    },
+    "related": [],
+    "partOf": null,
+    "links": {
+      "live": null,
+      "demo": null
+    },
+    "media": {
+      "cover": {
+        "width": 1600,
+        "height": 1000,
+        "sizes": {
+          "800": {
+            "avif": "/projects/web-point/cover-800.avif",
+            "webp": "/projects/web-point/cover-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/web-point/cover-1600.avif",
+            "webp": "/projects/web-point/cover-1600.webp"
+          }
+        }
+      },
+      "og": "/projects/web-point/og.jpg",
+      "loop": {
+        "mp4": "/projects/web-point/loop.mp4",
+        "webm": "/projects/web-point/loop.webm",
+        "poster": {
+          "width": 1440,
+          "height": 900,
+          "sizes": {
+            "960": {
+              "avif": "/projects/web-point/poster-960.avif",
+              "webp": "/projects/web-point/poster-960.webp"
+            },
+            "1440": {
+              "avif": "/projects/web-point/poster-1440.avif",
+              "webp": "/projects/web-point/poster-1440.webp"
+            }
+          }
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,423 @@
+{
+  "slug": "real-estate-platform",
+  "status": "delivered",
+  "year": "2026",
+  "role": {
+    "ar": "المطوّر الرئيسي للواجهة الأمامية",
+    "en": "Lead frontend developer"
+  },
+  "title": {
+    "ar": "منصة عقارات بالعربية والإنجليزية",
+    "en": "Bilingual Real Estate Platform"
+  },
+  "summary": {
+    "ar": "سوق عقارات بالعربية والإنجليزية، يمرّ فيه الإعلان بكل المراحل حتى عقد موقَّع ودفعات مسجَّلة.",
+    "en": "A real estate marketplace in Arabic and English where a listing goes all the way to a signed contract and recorded payments."
+  },
+  "problem": {
+    "ar": "تتوقف أغلب مواقع العقارات عند \"تواصل مع المسوّق\". وكانت المنصة تحتاج أن ينشر الملاك إعلاناتهم، ويراجعها الفريق، ويقدّم المهتمون عروضهم، ويوقّع الطرفان ويدفعا داخل النظام نفسه، بالعربية أولًا ومعها الإنجليزية.",
+    "en": "Most property sites stop at \"contact the agent\". This platform needed owners to publish listings, staff to review them, buyers and tenants to make offers, and both sides to sign and pay in the same system, Arabic first with full English."
+  },
+  "solution": {
+    "ar": "تطبيق ويب واحد بأربع تجارب: موقع للزوار ولوحات للملاك والموظفين والإدارة. يمرّ الإعلان بالمراجعة والنشر والاستفسارات والمعاينات والعروض، والعرض المقبول يتحوّل إلى عقد يوقّعه الطرفان إلكترونيًا، وتُسجَّل عليه الدفعات بإيصال PDF.",
+    "en": "One web app with four experiences: a public site plus dashboards for owners, employees and admins. A listing moves through review, publishing, inquiries, viewings and offers; an accepted offer becomes a contract both sides sign online, with payments and PDF receipts recorded against it."
+  },
+  "features": [
+    {
+      "ar": "ابحث وصفِّ حسب الغرض والمنطقة والنوع والسعر والغرف، وافتح صفحة عقار كاملة بالصور والخريطة.",
+      "en": "Search and filter by purpose, area, type, price and bedrooms, then open a full property page with gallery and map."
+    },
+    {
+      "ar": "اعرض عقارك من نموذج منظّم: السعر والمواصفات والمميزات والصور والموقع على الخريطة، باللغتين.",
+      "en": "List a property with a guided form: price, specs, amenities, photos and a pinned map location, in both languages."
+    },
+    {
+      "ar": "استفسار، أو حجز معاينة، أو عرض سعر، ويرد المالك أو الموظف من لوحته.",
+      "en": "Send inquiries, book viewings and make offers; owners and staff answer from their dashboards."
+    },
+    {
+      "ar": "توقيع العقد إلكترونيًا، وتتحدّث الحالة مع توقيع كل طرف.",
+      "en": "Sign contracts online, with the status updating as each side signs."
+    },
+    {
+      "ar": "متابعة دفعات كل عقد وتنزيل الإيصال PDF.",
+      "en": "Track payments per contract and download the receipt as PDF."
+    },
+    {
+      "ar": "تراجع الإدارة الإعلانات قبل النشر وتتابع بالتقارير وسجل النشاط.",
+      "en": "Admins review listings before they go live and follow everything through reports and activity logs."
+    }
+  ],
+  "results": [
+    {
+      "value": "3",
+      "label": {
+        "ar": "أسابيع لبناء الواجهة الأمامية كاملة",
+        "en": "weeks to build the full frontend"
+      },
+      "verified": true
+    },
+    {
+      "value": "4",
+      "label": {
+        "ar": "صلاحيات في كود واحد",
+        "en": "roles in one codebase"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS",
+    "shadcn/ui",
+    "TanStack Query",
+    "React Hook Form",
+    "Zod",
+    "next-intl",
+    "Leaflet",
+    "Laravel API (integration)"
+  ],
+  "tech_notes": {
+    "ar": "تُحدَّد الصلاحية في proxy قبل رسم الصفحة. شاشات اللوحة نفسها مشتركة بين ثلاث صلاحيات بـ variant. وتمرّ طلبات الخادم عبر safeServerFetch، فإذا تعطّل endpoint يختفي قسمه فقط. الكود مقسّم حسب الموديول (api ثم hooks ثم components) مثل موديولات الواجهة الخلفية تمامًا. وبالأرقام: 49 صفحة لكل لغة، و521 نصًا مترجمًا لكل لغة، و9 موديولات من الواجهة الخلفية مربوطة.",
+    "en": "Access is decided in an edge proxy before render. Dashboard screens are shared across three roles through a variant. Server requests go through safeServerFetch, so one failing endpoint hides only its own section. Code is organised by domain module (api → hooks → components), mirroring the backend modules one to one. In numbers: 49 pages per language, 521 translation keys per language, 9 backend modules integrated."
+  },
+  "assets": {
+    "cover": "cover/cover-1600x1000.png",
+    "cover_social": "cover/cover-1200x630.png",
+    "card_loop": "videos/card-loop.mp4",
+    "screenshots": [
+      {
+        "file": "screenshots/desktop/home-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "الصفحة الرئيسية: عقار مميز وبحث سريع",
+          "en": "Home: featured property and quick search"
+        }
+      },
+      {
+        "file": "screenshots/desktop/home-en.png",
+        "lang": "en",
+        "device": "desktop",
+        "caption": {
+          "ar": "الصفحة الرئيسية: عقار مميز وبحث سريع",
+          "en": "Home: featured property and quick search"
+        }
+      },
+      {
+        "file": "screenshots/desktop/properties-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "قائمة العقارات مع أدوات التصفية",
+          "en": "Listings with filters"
+        }
+      },
+      {
+        "file": "screenshots/desktop/properties-en.png",
+        "lang": "en",
+        "device": "desktop",
+        "caption": {
+          "ar": "قائمة العقارات مع أدوات التصفية",
+          "en": "Listings with filters"
+        }
+      },
+      {
+        "file": "screenshots/desktop/property-detail-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "صفحة العقار: الصور والسعر وطلب عرض أو معاينة",
+          "en": "Property page: gallery, price, offer and viewing"
+        }
+      },
+      {
+        "file": "screenshots/desktop/property-detail-en.png",
+        "lang": "en",
+        "device": "desktop",
+        "caption": {
+          "ar": "صفحة العقار: الصور والسعر وطلب عرض أو معاينة",
+          "en": "Property page: gallery, price, offer and viewing"
+        }
+      },
+      {
+        "file": "screenshots/desktop/property-form-map-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "نموذج العقار: تحديد الموقع على الخريطة",
+          "en": "Property form: pin the location on the map"
+        }
+      },
+      {
+        "file": "screenshots/desktop/property-form-map-en.png",
+        "lang": "en",
+        "device": "desktop",
+        "caption": {
+          "ar": "نموذج العقار: تحديد الموقع على الخريطة",
+          "en": "Property form: pin the location on the map"
+        }
+      },
+      {
+        "file": "screenshots/desktop/user-dashboard-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "لوحة المستخدم: عقاراته وعروضه وعقوده ودفعاته",
+          "en": "User dashboard: listings, offers, contracts, payments"
+        }
+      },
+      {
+        "file": "screenshots/desktop/user-dashboard-en.png",
+        "lang": "en",
+        "device": "desktop",
+        "caption": {
+          "ar": "لوحة المستخدم: عقاراته وعروضه وعقوده ودفعاته",
+          "en": "User dashboard: listings, offers, contracts, payments"
+        }
+      },
+      {
+        "file": "screenshots/desktop/offers-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "العروض الواردة: قبول أو رفض أو عرض مضاد",
+          "en": "Incoming offers: accept, reject or counter"
+        }
+      },
+      {
+        "file": "screenshots/desktop/contracts-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "العقود وحالة توقيع كل طرف",
+          "en": "Contracts and each side's signature"
+        }
+      },
+      {
+        "file": "screenshots/desktop/contracts-en.png",
+        "lang": "en",
+        "device": "desktop",
+        "caption": {
+          "ar": "العقود وحالة توقيع كل طرف",
+          "en": "Contracts and each side's signature"
+        }
+      },
+      {
+        "file": "screenshots/desktop/payment-receipt-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "إيصال الدفع قابل للتنزيل PDF",
+          "en": "Payment receipt, downloadable as PDF"
+        }
+      },
+      {
+        "file": "screenshots/desktop/payment-receipt-en.png",
+        "lang": "en",
+        "device": "desktop",
+        "caption": {
+          "ar": "إيصال الدفع قابل للتنزيل PDF",
+          "en": "Payment receipt, downloadable as PDF"
+        }
+      },
+      {
+        "file": "screenshots/desktop/admin-dashboard-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "لوحة الإدارة: كل الحالات في شاشة واحدة",
+          "en": "Admin dashboard: every status at a glance"
+        }
+      },
+      {
+        "file": "screenshots/desktop/admin-dashboard-en.png",
+        "lang": "en",
+        "device": "desktop",
+        "caption": {
+          "ar": "لوحة الإدارة: كل الحالات في شاشة واحدة",
+          "en": "Admin dashboard: every status at a glance"
+        }
+      },
+      {
+        "file": "screenshots/desktop/admin-reports-ar.png",
+        "lang": "ar",
+        "device": "desktop",
+        "caption": {
+          "ar": "تقارير أداء العقارات مع تصدير CSV",
+          "en": "Property performance reports with CSV export"
+        }
+      },
+      {
+        "file": "screenshots/desktop/admin-reports-en.png",
+        "lang": "en",
+        "device": "desktop",
+        "caption": {
+          "ar": "تقارير أداء العقارات مع تصدير CSV",
+          "en": "Property performance reports with CSV export"
+        }
+      },
+      {
+        "file": "screenshots/mobile/home-ar.png",
+        "lang": "ar",
+        "device": "mobile",
+        "caption": {
+          "ar": "الرئيسية على الجوال",
+          "en": "Home on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/home-en.png",
+        "lang": "en",
+        "device": "mobile",
+        "caption": {
+          "ar": "الرئيسية على الجوال",
+          "en": "Home on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/properties-ar.png",
+        "lang": "ar",
+        "device": "mobile",
+        "caption": {
+          "ar": "العقارات على الجوال",
+          "en": "Listings on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/properties-en.png",
+        "lang": "en",
+        "device": "mobile",
+        "caption": {
+          "ar": "العقارات على الجوال",
+          "en": "Listings on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/property-detail-ar.png",
+        "lang": "ar",
+        "device": "mobile",
+        "caption": {
+          "ar": "صفحة العقار على الجوال",
+          "en": "Property page on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/property-detail-en.png",
+        "lang": "en",
+        "device": "mobile",
+        "caption": {
+          "ar": "صفحة العقار على الجوال",
+          "en": "Property page on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/user-dashboard-ar.png",
+        "lang": "ar",
+        "device": "mobile",
+        "caption": {
+          "ar": "لوحة المستخدم على الجوال",
+          "en": "User dashboard on mobile"
+        }
+      },
+      {
+        "file": "screenshots/mobile/user-dashboard-en.png",
+        "lang": "en",
+        "device": "mobile",
+        "caption": {
+          "ar": "لوحة المستخدم على الجوال",
+          "en": "User dashboard on mobile"
+        }
+      }
+    ],
+    "videos": [
+      {
+        "file": "videos/search-filter-ar.mp4",
+        "webm": "videos/search-filter-ar.webm",
+        "lang": "ar",
+        "caption": {
+          "ar": "البحث والتصفية، ثم فتح صفحة العقار",
+          "en": "Search, filter and open a property"
+        }
+      },
+      {
+        "file": "videos/search-filter-en.mp4",
+        "webm": "videos/search-filter-en.webm",
+        "lang": "en",
+        "caption": {
+          "ar": "البحث والتصفية، ثم فتح صفحة العقار",
+          "en": "Search, filter and open a property"
+        }
+      },
+      {
+        "file": "videos/make-offer-ar.mp4",
+        "webm": "videos/make-offer-ar.webm",
+        "lang": "ar",
+        "caption": {
+          "ar": "تقديم عرض سعر وظهوره في لوحة المستخدم",
+          "en": "Make an offer and see it in the dashboard"
+        }
+      },
+      {
+        "file": "videos/make-offer-en.mp4",
+        "webm": "videos/make-offer-en.webm",
+        "lang": "en",
+        "caption": {
+          "ar": "تقديم عرض سعر وظهوره في لوحة المستخدم",
+          "en": "Make an offer and see it in the dashboard"
+        }
+      },
+      {
+        "file": "videos/sign-contract-ar.mp4",
+        "webm": "videos/sign-contract-ar.webm",
+        "lang": "ar",
+        "caption": {
+          "ar": "توقيع العقد حتى يصبح ساريًا",
+          "en": "Sign a contract and watch it go active"
+        }
+      },
+      {
+        "file": "videos/sign-contract-en.mp4",
+        "webm": "videos/sign-contract-en.webm",
+        "lang": "en",
+        "caption": {
+          "ar": "توقيع العقد حتى يصبح ساريًا",
+          "en": "Sign a contract and watch it go active"
+        }
+      }
+    ],
+    "diagram": "diagram/architecture.svg"
+  },
+  "links": {
+    "live": null,
+    "demo": null
+  },
+  "card": {
+    "line": {
+      "ar": "سوق عقارات من الإعلان حتى العقد الموقَّع والدفع",
+      "en": "A property marketplace, from listing to signed contract and payment"
+    },
+    "role": {
+      "ar": "المطوّر الرئيسي للواجهة الأمامية",
+      "en": "Lead frontend developer"
+    },
+    "stats": [
+      {
+        "value": "3",
+        "label": {
+          "ar": "أسابيع للبناء",
+          "en": "weeks to build"
+        }
+      },
+      {
+        "value": "2",
+        "label": {
+          "ar": "لغتان",
+          "en": "languages"
+        }
+      }
+    ]
+  }
+}
