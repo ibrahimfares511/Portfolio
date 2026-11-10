@@ -20,11 +20,7 @@ export async function HowWeWork({ locale }: { locale: "ar" | "en" }) {
         <SectionHeading id="process-title" locale={locale} title={t("title")} sub={t("subline")} />
       </Reveal>
 
-      <Reveal>
-        <div data-reveal="block">
-          <ProcessSteps steps={steps} lang={locale} />
-        </div>
-      </Reveal>
+      <ProcessSteps steps={steps} lang={locale} />
 
       <Reveal className="mt-16 text-center md:mt-20">
         <p

@@ -2,15 +2,15 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { onReveal } from "@/lib/motion";
 
 type Step = { lead: string; text: string; pose: string };
 
 /**
- * The four steps. A thin line runs through the step dots and is drawn as the
- * reader scrolls (the brand's pen, writing the way forward); each dot turns
- * clay when the line reaches it. Horizontal on desktop, down the side on
- * phones. Reduced motion: the line is simply drawn.
+ * The four steps. When the list comes into view they appear one after
+ * another (out of a blur), while a thin line, the brand's pen, runs from dot
+ * to dot and each dot turns clay. Horizontal on desktop; on phones the steps
+ * are stacked, so each one appears as the reader scrolls down to it. Reduced motion: everything is simply there.
  */
 export function ProcessSteps({ steps, lang }: { steps: Step[]; lang: "ar" | "en" }) {
   const root = useRef<HTMLOListElement>(null);
@@ -18,27 +18,76 @@ export function ProcessSteps({ steps, lang }: { steps: Step[]; lang: "ar" | "en"
   useEffect(() => {
     const el = root.current;
     if (!el) return;
-    gsap.registerPlugin(ScrollTrigger);
     const lines = el.querySelectorAll<HTMLElement>("[data-line]");
     const dots = Array.from(el.querySelectorAll<HTMLElement>("[data-dot]"));
+    const items = Array.from(el.querySelectorAll<HTMLElement>("[data-step]"));
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const paint = (p: number) => {
+    const draw = (p: number) =>
       lines.forEach((l) => (l.style.transform = l.dataset.line === "x" ? `scaleX(${p})` : `scaleY(${p})`));
-      dots.forEach((d, i) => d.toggleAttribute("data-on", p >= i / (dots.length - 1) - 0.02));
-    };
+
     if (reduced) {
-      paint(1);
+      draw(1);
+      dots.forEach((d) => d.setAttribute("data-on", ""));
       return;
     }
-    paint(0);
-    const st = ScrollTrigger.create({
-      trigger: el,
-      start: "top 75%",
-      end: "bottom 55%",
-      scrub: 0.6,
-      onUpdate: (self) => paint(self.progress),
+
+    // Hidden until the list comes into view, then the steps appear one after
+    // another while the pen line runs from dot to dot.
+    draw(0);
+    gsap.set(items, { opacity: 0, filter: "blur(12px)", y: 24 });
+    const STEP = 0.45; // seconds between two steps
+    let tl: gsap.core.Timeline | undefined;
+    let io: IntersectionObserver | undefined;
+    const desktop = window.matchMedia("(min-width: 1024px)").matches;
+    const show = (i: number) =>
+      gsap.to(items[i], { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.6, ease: "power2.out", clearProps: "filter,transform" });
+
+    const stop = onReveal(() => {
+      if (!desktop) {
+        // Phones: the steps are stacked, so each one appears as the reader
+        // reaches it, and the line grows down to it.
+        let reached = -1;
+        const line = { p: 0 };
+        io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              const i = items.indexOf(e.target as HTMLElement);
+              io?.unobserve(e.target);
+              show(i);
+              dots[i]?.setAttribute("data-on", "");
+              if (i > reached) {
+                reached = i;
+                gsap.to(line, { p: (i + 0.5) / items.length, duration: 0.6, ease: "power2.out", onUpdate: () => draw(line.p) });
+              }
+            });
+          },
+          { threshold: 0.35, rootMargin: "0px 0px -12% 0px" },
+        );
+        items.forEach((item) => io!.observe(item));
+        return;
+      }
+      io = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((e) => e.isIntersecting)) return;
+          io?.disconnect();
+          const line = { p: 0 };
+          tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+          items.forEach((item, i) => {
+            tl!.to(item, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.6, clearProps: "filter,transform" }, i * STEP);
+            tl!.call(() => dots[i]?.setAttribute("data-on", ""), [], i * STEP + 0.1);
+          });
+          tl.to(line, { p: 1, duration: STEP * (items.length - 1), ease: "none", onUpdate: () => draw(line.p) }, 0.1);
+        },
+        { threshold: 0.25, rootMargin: "0px 0px -10% 0px" },
+      );
+      io.observe(el);
     });
-    return () => st.kill();
+    return () => {
+      stop();
+      io?.disconnect();
+      tl?.kill();
+    };
   }, []);
 
   return (
@@ -58,7 +107,7 @@ export function ProcessSteps({ steps, lang }: { steps: Step[]; lang: "ar" | "en"
       />
 
       {steps.map((s, i) => (
-        <li key={i} className="relative">
+        <li key={i} data-step className="relative">
           <div className="relative mx-auto hidden h-[250px] w-full items-end justify-center overflow-hidden rounded-xl bg-[radial-gradient(closest-side_at_50%_75%,var(--sky-soft),transparent)] lg:flex">
             <Pose name={s.pose} className="h-[250px] w-auto" />
           </div>
