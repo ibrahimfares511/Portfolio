@@ -1,0 +1,740 @@
+{
+  "slug": "wms",
+  "role": {
+    "ar": "النظام كاملًا: الواجهة الأمامية والخلفية",
+    "en": "Full system: frontend and backend"
+  },
+  "problem": {
+    "ar": "كانت 5 مخازن تعمل بالورق والإكسيل، كلٌّ بملفاته. لا رؤية واحدة للمخزون، والطلبات تُحضَّر من قوائم مطبوعة، والنقل بين المخازن بالمكالمات، ولا طريقة لمعرفة من غيّر أي رقم.",
+    "en": "5 warehouses ran on paper and Excel, each with its own sheets. Nobody had one view of stock, orders were picked from printed lists, transfers depended on phone calls, and nobody could tell who changed a number."
+  },
+  "solution": {
+    "ar": "نظام ويب يعمل عليه الفريق كله، من المكتب إلى أرض المخزن، بشاشات وصلاحيات لكل دور. المخزون في قاعدة بيانات واحدة، وكل حركة مسجّلة، وكل طلب يُراجَع مرتين بالباركود.",
+    "en": "A web system the whole team works in, from the office to the warehouse floor, with screens and permissions for each role. Stock lives in one database, every movement is recorded, and every order is checked twice by barcode."
+  },
+  "features": [
+    {
+      "ar": "رقم مخزون تثق فيه: كل حركة مسجّلة بمن قام بها ووقتها والرصيد قبلها وبعدها.",
+      "en": "Stock you can trust: every movement records who, when, and the balance before and after."
+    },
+    {
+      "ar": "كل طلب يُراجَع مرتين بالباركود، والأرقام التسلسلية تُسجَّل قطعةً قطعة.",
+      "en": "Every order is checked twice by barcode, with serial numbers tracked per unit."
+    },
+    {
+      "ar": "النقص يظهر مبكرًا، والطلب يعود تلقائيًا فور وصول البضاعة.",
+      "en": "Shortages show up early, and the order goes back in the queue as soon as stock arrives."
+    },
+    {
+      "ar": "نقل بين المخازن وصرف للفروع بضغطات قليلة، ويتحدّث الطرفان فورًا.",
+      "en": "Transfers between warehouses and dispatches to branches in a few clicks, with both sides updated at once."
+    },
+    {
+      "ar": "جرد على عدة أيام بدون إيقاف العمل، وأي فرق يحتاج موافقة المدير.",
+      "en": "Stock counts spread over days without stopping work, and any difference needs a manager's approval."
+    },
+    {
+      "ar": "43 صلاحية و7 قوالب أدوار وصلاحية لكل مخزن، و25 تقريرًا.",
+      "en": "43 permissions, 7 role templates, access per warehouse, and 25 reports."
+    }
+  ],
+  "results": [
+    {
+      "value": "5",
+      "label": {
+        "ar": "مخازن مربوطة",
+        "en": "linked warehouses"
+      },
+      "verified": true
+    },
+    {
+      "value": "25",
+      "label": {
+        "ar": "موظفًا يستخدمونه يوميًا",
+        "en": "employees use it daily"
+      },
+      "verified": true
+    },
+    {
+      "value": "1,000+",
+      "label": {
+        "ar": "منتج تتم إدارتها",
+        "en": "products managed"
+      },
+      "verified": true
+    },
+    {
+      "value": "2026",
+      "label": {
+        "ar": "يعمل منذ بدايتها، والنسخة الكاملة منذ يونيو",
+        "en": "live since early in the year, full version since June"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "React 19",
+    "TypeScript",
+    "Vite",
+    "Tailwind CSS",
+    "TanStack Query",
+    "Zustand",
+    "Node.js",
+    "Express 5",
+    "Prisma",
+    "PostgreSQL",
+    "Redis",
+    "BullMQ",
+    "Socket.io",
+    "Docker Compose",
+    "PWA"
+  ],
+  "techNotes": {
+    "ar": "API مقسّم إلى طبقات فوق PostgreSQL واحدة. كل تغيير في المخزون داخل Transaction مع سطر في السجل (الرصيد قبل وبعد)، والمخزون مقسّم إلى متاح ومحجوز وتالف. تعارض الطلبات يُحلّ لحظة الحجز، ومهام الجرد تُقفَل بتحديث مشروط واحد مع مهمة BullMQ تفكّ الأقفال المتروكة، وتحديث لحظي عبر Socket.io لكل مخزن.",
+    "en": "A layered API on one PostgreSQL database. Every stock change runs in a transaction with a ledger line (balance before and after), and stock is split into available, reserved and damaged. Order conflicts are resolved at reservation time, count tasks are locked with a single conditional update plus a BullMQ job that frees abandoned locks, and Socket.io pushes live updates per warehouse."
+  },
+  "caseStudy": {
+    "ar": {
+      "title": "نظام إدارة المخازن",
+      "lead": "نظام واحد يربط 5 مخازن بدل الورق والإكسيل. لكل قطعة في المخزون تاريخ مسجّل، وكل طلب يُراجَع مرتين قبل أن يخرج.",
+      "sections": [
+        {
+          "heading": "المشكلة قبل النظام",
+          "kind": "plain",
+          "html": "<p>كانت الشركة تدير 5 مخازن بالورق والإكسيل. لكل مخزن ملفاته الخاصة، فلم يكن أحد يستطيع أن يرى في مكان واحد ما هو الموجود، وأين هو، وما الذي حُجز لعميل بالفعل. كانت الطلبات تُحضَّر من قوائم مطبوعة، وكان العميل هو من يكتشف الخطأ. ونقل البضاعة بين المخازن كان يعتمد على المكالمات. وإذا ظهر رقم خاطئ، لم تكن هناك طريقة لمعرفة من غيّره ومتى.</p>"
+        },
+        {
+          "heading": "ما الذي بنيته",
+          "kind": "plain",
+          "html": "<p>نظام ويب يعمل عليه الفريق كله: موظفو المكتب، والمحضّرون، والمراجعون، والسائقون، وموظفو المرتجعات، والمدققون، ولكلٍّ منهم شاشاته وصلاحياته. المخزون كله في قاعدة بيانات واحدة، مقسّم حسب المخزن والقسم، وكل حركة تمرّ بالقواعد نفسها: الاستلام، والتحضير، والشحن، والمرتجعات، والنقل بين المخازن، والصرف للفروع، والإرجاع للموردين، والجرد. يعمل على الكمبيوتر في المكتب، وكتطبيق على الجوال داخل المخزن.</p>"
+        },
+        {
+          "heading": "أهم المميزات",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>رقم مخزون تثق فيه.</strong> تُسجَّل كل حركة مع اسم من قام بها، ووقتها، ورقم الطلب أو الإذن، والرصيد قبلها وبعدها.</li>\n<li><strong>كل طلب يُراجَع مرتين.</strong> شخص يحضّر الطلب بالباركود، وشخص آخر يراجعه بالباركود، والمنتجات التي لها رقم تسلسلي تُسجَّل قطعةً قطعة.</li>\n<li><strong>المشكلة تظهر مبكرًا.</strong> إذا أخذ طلب آخر آخر القطع، يُعلَّم الطلب المنتظر بالنقص بالضبط، ويعود إلى قائمة التحضير تلقائيًا فور وصول البضاعة.</li>\n<li><strong>نقل بدون مكالمات.</strong> نقل البضاعة بين المخازن أو صرفها للفروع يتم بضغطات قليلة، ويتحدّث الطرفان في اللحظة نفسها.</li>\n<li><strong>جرد بدون إيقاف العمل.</strong> يُقسَّم الجرد على عدة أيام، ولا يمكن لشخصين جرد المنتج نفسه في الوقت نفسه، وأي فرق يحتاج موافقة المدير مع ذكر السبب.</li>\n<li><strong>كل موظف يرى ما يخصّه.</strong> 43 صلاحية، و7 قوالب للأدوار، وصلاحية لكل مخزن، و25 تقريرًا.</li>\n</ul>"
+        },
+        {
+          "heading": "دوري",
+          "kind": "role",
+          "html": "<p>بنيت النظام كاملًا بنفسي: تصميم قاعدة البيانات، والواجهة الخلفية، والواجهة الأمامية، والتشغيل على السيرفر.</p>"
+        },
+        {
+          "heading": "النتائج",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>5</strong> مخازن مربوطة في نظام واحد</li>\n<li><strong>25</strong> موظفًا يستخدمونه يوميًا</li>\n<li>أكثر من <strong>1,000</strong> منتج تتم إدارتها</li>\n<li>من الورق والإكسيل إلى نظام واحد: نسخة أولى مصغّرة منذ بداية 2026، ثم النسخة الكاملة الحالية منذ يونيو 2026</li>\n</ul>"
+        },
+        {
+          "heading": "من الداخل (للتقنيين)",
+          "kind": "tech",
+          "html": "<p><strong>التقنيات:</strong> React 19، TypeScript، Vite، Tailwind، TanStack Query، Zustand، Node.js، Express 5، Prisma، PostgreSQL 16، Redis، BullMQ، Socket.io، Docker Compose.</p>\n<p><strong>البنية:</strong> واجهة برمجية (API) مقسّمة إلى طبقات: المسارات وفحص الصلاحيات، ثم المتحكّمات، ثم الخدمات، ثم طبقة الوصول للبيانات، فوق قاعدة بيانات PostgreSQL واحدة. يتولّى Redis التحديث اللحظي والمهام الخلفية. ويعمل النظام كله على Docker Compose، وقاعدة البيانات غير مكشوفة خارج السيرفر.</p>\n<p><strong>ثلاثة قرارات هندسية:</strong></p>\n<ol>\n<li><p><strong>المخزون سجلّ حركات، وليس رقمًا.</strong> كل تغيير يتم داخل Transaction في قاعدة البيانات، ويكتب سطرًا في السجل فيه الرصيد قبل وبعد. والمخزون مقسّم إلى متاح ومحجوز وتالف، فالقطع المحجوزة لطلب لا تظهر أبدًا كأنها متاحة. ويمكن الرجوع إلى أصل أي رقم سطرًا سطرًا.</p>\n</li>\n<li><p><strong>تعارض الطلبات يُحلّ لحظة الحجز.</strong> عندما يؤكّد المحضّر طلبًا، تُراجَع الطلبات المنتظرة التي تحتاج المنتجات نفسها داخل الـ Transaction نفسه. إذا أصبح فيها نقص، تتحوّل إلى &quot;مشكلة&quot; مع السبب. وعند وصول البضاعة تُراجَع مرة أخرى وتعود تلقائيًا.</p>\n</li>\n<li><p><strong>الجرد آمن مع عدد كبير من الموظفين.</strong> كل مهمة جرد تُقفَل بأمر تحديث واحد مشروط، فلا يأخذ شخصان المنتج نفسه. وهناك مهمة خلفية تفكّ أي قفل متروك لأكثر من 30 دقيقة، وتتحدّث كل شاشات المخزن لحظيًا. كما أن قراءة قارئ الباركود تعتمد على موضع الزر الفعلي، فيعمل المسح حتى لو كانت لغة لوحة المفاتيح عربية.</p>\n</li>\n</ol>"
+        },
+        {
+          "heading": "الحالة",
+          "kind": "plain",
+          "html": "<p><strong>يعمل.</strong> يُستخدم يوميًا منذ بداية 2026 (والنسخة الكاملة الحالية منذ يونيو 2026)، والربط مع نظام نقاط البيع لدى الشركة هو المرحلة القادمة.</p>\n<p><em>الصور والفيديوهات تعرض بيانات تجريبية مختلَقة، ولا تظهر فيها أي بيانات حقيقية للعميل.</em></p>"
+        }
+      ]
+    },
+    "en": {
+      "title": "Warehouse Management System",
+      "lead": "One system for 5 linked warehouses, replacing paper and Excel. Every unit of stock has a recorded history, and every order is checked twice before it leaves.",
+      "sections": [
+        {
+          "heading": "The problem",
+          "kind": "plain",
+          "html": "<p>The business ran 5 warehouses on paper and Excel. Each warehouse kept its own sheets, so nobody could see in one place what was in stock, where it was, or what was already promised to a customer. Orders were prepared from printed lists, mistakes were found by the customer, and moving stock between warehouses depended on phone calls. When a number was wrong, there was no way to find out who changed it or when.</p>"
+        },
+        {
+          "heading": "What was built",
+          "kind": "plain",
+          "html": "<p>A web system that the whole operation runs on: office staff, pickers, reviewers, drivers, returns staff and auditors, each with their own screens and permissions. Stock lives in one database, split per warehouse and per section, and every change goes through the same rules: receiving, picking, shipping, returns, transfers, dispatches to branches, supplier returns and stock counts. It runs on desktop in the office and as an installable app on phones on the warehouse floor.</p>"
+        },
+        {
+          "heading": "Key features",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>Stock you can trust.</strong> Every movement is saved with who did it, when, the order or document behind it, and the balance before and after.</li>\n<li><strong>Every order is checked twice.</strong> One person picks by scanning, a second person checks by scanning, and products that need serial numbers are tracked per unit.</li>\n<li><strong>Problems are caught early.</strong> If another order takes the last units, the waiting order is flagged with the exact shortage, and it goes back in the queue as soon as new stock arrives.</li>\n<li><strong>Transfers without phone calls.</strong> Stock moves between warehouses or out to branches in a few clicks, and both sides update at once.</li>\n<li><strong>Stock counts without closing the warehouse.</strong> A count is spread over several days, two people can&#39;t count the same item at once, and any difference needs a manager&#39;s approval and a reason.</li>\n<li><strong>The right screen for each person.</strong> 43 permissions, 7 role templates and access per warehouse, plus 25 reports.</li>\n</ul>"
+        },
+        {
+          "heading": "My role",
+          "kind": "role",
+          "html": "<p>I built the full system on my own: the database design, backend, frontend and deployment.</p>"
+        },
+        {
+          "heading": "Results",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>5</strong> warehouses linked in one system</li>\n<li><strong>25</strong> employees use it every day</li>\n<li><strong>1,000+</strong> products managed</li>\n<li>From paper and Excel to one system: a smaller first version since early 2026, then the full current version since June 2026</li>\n</ul>"
+        },
+        {
+          "heading": "Under the hood",
+          "kind": "tech",
+          "html": "<p><strong>Stack:</strong> React 19, TypeScript, Vite, Tailwind, TanStack Query, Zustand, Node.js, Express 5, Prisma, PostgreSQL 16, Redis, BullMQ, Socket.io, Docker Compose.</p>\n<p><strong>Architecture:</strong> a layered API (routes and permission checks, controllers, services, repositories) on one PostgreSQL database. Redis handles live updates and background jobs. The whole system runs in Docker Compose, and the database is never exposed outside the server.</p>\n<p><strong>Three engineering decisions:</strong></p>\n<ol>\n<li><strong>Stock is a ledger, not a number.</strong> Every change runs inside a database transaction and writes a ledger line with the balance before and after. Stock is split into available, reserved and damaged, so units already promised to an order never show as free. Any count can be traced back line by line.</li>\n<li><strong>Order conflicts are resolved at the moment of reservation.</strong> When a picker confirms an order, other waiting orders that need the same products are re-checked in the same transaction. If they are now short, they move to &quot;Issue&quot; with the exact reason. When stock arrives, they are checked again and released automatically.</li>\n<li><strong>Counting is safe with many people on the floor.</strong> Each count task is locked with a single conditional update, so two people can&#39;t take the same item. A background job frees locks that were abandoned for 30 minutes, and every screen in that warehouse updates live. The barcode-scanner input also reads physical key positions, so scans still work when the PC keyboard is set to Arabic.</li>\n</ol>"
+        },
+        {
+          "heading": "Status",
+          "kind": "plain",
+          "html": "<p><strong>Live.</strong> In daily use since early 2026 (the full current version since June 2026). Integration with the company&#39;s POS is planned as the next phase.</p>\n<p><em>Screens and videos use invented demo data. No real client data is shown.</em></p>"
+        }
+      ]
+    }
+  },
+  "shots": [
+    {
+      "name": "dashboard-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "لوحة التحكم: حالة الطلبات والتنبيهات في المخزن الرئيسي",
+        "en": "Dashboard: order status and alerts for the main warehouse"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-dashboard-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-dashboard-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-dashboard-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-dashboard-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "dashboard-analytics-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "توزيع الشحن وحالات الطلبات وأكثر المنتجات طلبًا",
+        "en": "Shipping split, order statuses and top products"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-dashboard-analytics-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-dashboard-analytics-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-dashboard-analytics-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-dashboard-analytics-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "stock-warehouses-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "المخزون لكل مخزن، والتبديل بين المخازن الخمسة",
+        "en": "Stock per warehouse, switching between the 5 warehouses"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-stock-warehouses-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-stock-warehouses-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-stock-warehouses-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-stock-warehouses-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "stock-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "المتاح والمحجوز والتالف والحد الأدنى لكل منتج",
+        "en": "Available, reserved, damaged and minimum for each product"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-stock-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-stock-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-stock-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-stock-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "ledger-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "سجل الحركات: الرصيد قبل وبعد، ومن قام بالحركة، ورقم الطلب",
+        "en": "Movement ledger: balance before and after, who, and the order behind it"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-ledger-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-ledger-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-ledger-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-ledger-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "orders-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الطلبات بكل حالاتها",
+        "en": "Orders in every status"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-orders-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-orders-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-orders-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-orders-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "order-detail-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "تفاصيل الطلب: الرقم التسلسلي وسجل كامل بالأسماء والأوقات",
+        "en": "Order detail: serial number and a full log with names and times"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-order-detail-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-order-detail-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-order-detail-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-order-detail-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "preparation-queue-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "قائمة التحضير",
+        "en": "Picking queue"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-preparation-queue-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-preparation-queue-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-preparation-queue-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-preparation-queue-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "preparation-scan-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "تحضير الطلب بقارئ الباركود مع الرقم التسلسلي",
+        "en": "Picking an order with a barcode scanner, including the serial number"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-preparation-scan-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-preparation-scan-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-preparation-scan-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-preparation-scan-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "audit-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "دورة جرد على 12 يومًا: المكتمل والمنتظر والفروقات",
+        "en": "A 12-day stock count: done, waiting and differences"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-audit-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-audit-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-audit-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-audit-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "audit-difference-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "فروقات الجرد بانتظار موافقة المدير",
+        "en": "Count differences waiting for a manager's approval"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-audit-difference-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-audit-difference-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-audit-difference-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-audit-difference-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "reports-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "توقع نفاد المخزون، واحد من 25 تقريرًا",
+        "en": "Stock-out forecast, one of 25 reports"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-reports-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-reports-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-reports-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-reports-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "users-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "المستخدمون",
+        "en": "Users"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-users-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-users-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-users-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-users-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "permissions-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الصلاحيات لكل موظف، مع قوالب جاهزة للأدوار",
+        "en": "Permissions per employee, with ready role templates"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-permissions-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-permissions-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-permissions-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-permissions-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "returns-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "فحص المرتجع: سليم أو تالف لكل منتج",
+        "en": "Return inspection: good or damaged for each product"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-returns-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-returns-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-returns-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-returns-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "dispatch-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "أذونات الصرف للفروع",
+        "en": "Dispatch orders to branches"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/wms/shots/desktop-dispatch-ar-800.avif",
+            "webp": "/projects/wms/shots/desktop-dispatch-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/wms/shots/desktop-dispatch-ar-1600.avif",
+            "webp": "/projects/wms/shots/desktop-dispatch-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "dashboard-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "لوحة التحكم على الجوال",
+        "en": "Dashboard on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/wms/shots/mobile-dashboard-ar-390.avif",
+            "webp": "/projects/wms/shots/mobile-dashboard-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/wms/shots/mobile-dashboard-ar-780.avif",
+            "webp": "/projects/wms/shots/mobile-dashboard-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "orders-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "الطلبات على الجوال",
+        "en": "Orders on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/wms/shots/mobile-orders-ar-390.avif",
+            "webp": "/projects/wms/shots/mobile-orders-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/wms/shots/mobile-orders-ar-780.avif",
+            "webp": "/projects/wms/shots/mobile-orders-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "preparation-scan-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "التحضير بالباركود من أرض المخزن",
+        "en": "Barcode picking on the warehouse floor"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/wms/shots/mobile-preparation-scan-ar-390.avif",
+            "webp": "/projects/wms/shots/mobile-preparation-scan-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/wms/shots/mobile-preparation-scan-ar-780.avif",
+            "webp": "/projects/wms/shots/mobile-preparation-scan-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "driver-deliveries-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "شاشة السائق: توصيلاته وتأكيد التسليم",
+        "en": "Driver screen: deliveries and proof of delivery"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/wms/shots/mobile-driver-deliveries-ar-390.avif",
+            "webp": "/projects/wms/shots/mobile-driver-deliveries-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/wms/shots/mobile-driver-deliveries-ar-780.avif",
+            "webp": "/projects/wms/shots/mobile-driver-deliveries-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "audit-floor-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "جرد اليوم على الجوال",
+        "en": "Today's count on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/wms/shots/mobile-audit-floor-ar-390.avif",
+            "webp": "/projects/wms/shots/mobile-audit-floor-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/wms/shots/mobile-audit-floor-ar-780.avif",
+            "webp": "/projects/wms/shots/mobile-audit-floor-ar-780.webp"
+          }
+        }
+      }
+    }
+  ],
+  "videos": [
+    {
+      "name": "transfer",
+      "lang": null,
+      "caption": {
+        "ar": "نقل 8 شاشات من المخزن الرئيسي إلى الإسكندرية، والرصيد يتحدّث في الطرفين",
+        "en": "Moving 8 TVs from the main warehouse to Alexandria, with both balances updated"
+      },
+      "mp4": "/projects/wms/videos/transfer.mp4",
+      "webm": "/projects/wms/videos/transfer.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/wms/videos/transfer-poster-960.avif",
+            "webp": "/projects/wms/videos/transfer-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/wms/videos/transfer-poster-1440.avif",
+            "webp": "/projects/wms/videos/transfer-poster-1440.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "order-prep",
+      "lang": null,
+      "caption": {
+        "ar": "طلب واحد وشخصان: تحضير بالباركود والرقم التسلسلي، ثم مراجعة بالباركود",
+        "en": "One order, two people: picked by scan with a serial number, then checked by scan"
+      },
+      "mp4": "/projects/wms/videos/order-prep.mp4",
+      "webm": "/projects/wms/videos/order-prep.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/wms/videos/order-prep-poster-960.avif",
+            "webp": "/projects/wms/videos/order-prep-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/wms/videos/order-prep-poster-1440.avif",
+            "webp": "/projects/wms/videos/order-prep-poster-1440.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "stock-count",
+      "lang": null,
+      "caption": {
+        "ar": "جرد منتج بفرق قطعة، ثم موافقة المدير وتحديث المخزون",
+        "en": "Counting a product one unit short, then the manager approves and stock updates"
+      },
+      "mp4": "/projects/wms/videos/stock-count.mp4",
+      "webm": "/projects/wms/videos/stock-count.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/wms/videos/stock-count-poster-960.avif",
+            "webp": "/projects/wms/videos/stock-count-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/wms/videos/stock-count-poster-1440.avif",
+            "webp": "/projects/wms/videos/stock-count-poster-1440.webp"
+          }
+        }
+      }
+    }
+  ],
+  "diagram": "/projects/wms/diagram.svg"
+}

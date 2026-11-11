@@ -10,9 +10,13 @@
  * Writes:
  *   content/projects/<slug>/project.json, case-study.ar.md, case-study.en.md
  *   content/projects/index.json        normalised data the site imports
+ *   content/projects/<slug>/page.json  the case-study page: sections parsed
+ *                                      from the case studies (HTML), gallery,
+ *                                      videos, diagram
  *   public/projects/<slug>/...         covers (AVIF + WebP, 2 sizes), social
  *                                      cover (JPEG), card loop (MP4 + WebM)
- *                                      and its poster (AVIF + WebP)
+ *                                      and its poster, screenshots (AVIF +
+ *                                      WebP, 2 sizes), videos, diagram
  *
  * Order and tiers follow _brief/portfolio-site-notes.md.
  */
@@ -23,6 +27,7 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import ffmpegPath from "ffmpeg-static";
 import { z } from "zod";
+import { marked } from "marked";
 
 const SITE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = path.resolve(process.env.PROJECTS_DIR ?? path.join(SITE, "..", "projects"));
@@ -75,14 +80,105 @@ const shortName = (t) => t.split(":")[0].trim();
 async function image(src, outBase, widths) {
   const meta = await sharp(src).metadata();
   const out = {};
-  for (const w of widths.filter((w) => w <= meta.width)) {
+  const fit = widths.filter((w) => w <= meta.width);
+  for (const w of fit.length ? fit : [meta.width]) {
     const avif = `${outBase}-${w}.avif`;
     const webp = `${outBase}-${w}.webp`;
-    if (!fresh(avif, src)) await sharp(src).resize({ width: w }).avif({ quality: 55, effort: 6 }).toFile(avif);
+    if (!fresh(avif, src)) await sharp(src).resize({ width: w }).avif({ quality: 55, effort: 4 }).toFile(avif);
     if (!fresh(webp, src)) await sharp(src).resize({ width: w }).webp({ quality: 78, effort: 6 }).toFile(webp);
     out[w] = { avif: "/" + path.relative(path.join(SITE, "public"), avif), webp: "/" + path.relative(path.join(SITE, "public"), webp) };
   }
   return { width: meta.width, height: meta.height, sizes: out };
+}
+
+/**
+ * A case study in Markdown → { title, lead, sections: [{ heading, kind, html }] }.
+ * kind: "role" (My role), "tech" (Under the hood), or "plain" (the rest).
+ */
+function parseCaseStudy(md) {
+  const lines = md.replace(/\r/g, "").split("\n").filter((l) => l.trim() !== "---");
+  let title = "";
+  const lead = [];
+  const sections = [];
+  let cur = null;
+  for (const line of lines) {
+    if (line.startsWith("# ")) title = line.slice(2).trim();
+    else if (line.startsWith("## ")) {
+      cur = { heading: line.slice(3).trim(), body: [] };
+      sections.push(cur);
+    } else if (cur) cur.body.push(line);
+    else if (line.trim()) lead.push(line);
+  }
+  const kindOf = (h) =>
+    /دوري|my role/i.test(h) ? "role" : /من الداخل|under the hood/i.test(h) ? "tech" : "plain";
+  const html = (md) => marked.parse(md, { async: false, gfm: true }).trim();
+  return {
+    title,
+    lead: lead.join("\n").replace(/^\*\*|\*\*$/g, "").trim(),
+    sections: sections.map((sec) => ({ heading: sec.heading, kind: kindOf(sec.heading), html: html(sec.body.join("\n")) })),
+  };
+}
+
+async function buildPage(slug, dir, p, pdir) {
+  const a = p.assets;
+  const shots = [];
+  ensure(path.join(pdir, "shots"));
+  for (const sh of a.screenshots) {
+    const src = path.join(dir, sh.file);
+    const device = sh.device ?? (sh.file.includes("/mobile/") ? "mobile" : "desktop");
+    const name = path.basename(sh.file, path.extname(sh.file));
+    const img = await image(src, path.join(pdir, "shots", `${device}-${name}`), device === "mobile" ? [390, 780] : [800, 1600]);
+    shots.push({ name, device, lang: sh.lang ?? null, caption: sh.caption, image: img });
+  }
+  const videos = [];
+  ensure(path.join(pdir, "videos"));
+  const cache = path.join(SITE, ".cache", "posters");
+  for (const v of a.videos) {
+    const name = path.basename(v.file, path.extname(v.file));
+    const src = path.join(dir, v.file);
+    const mp4 = path.join(pdir, "videos", `${name}.mp4`);
+    const webm = path.join(pdir, "videos", `${name}.webm`);
+    if (!fresh(mp4, src)) ffmpeg("-i", src, "-an", "-c:v", "copy", "-movflags", "+faststart", mp4);
+    if (v.webm && !fresh(webm, path.join(dir, v.webm))) copy(path.join(dir, v.webm), webm);
+    const png = path.join(cache, `${slug}-${name}.png`);
+    if (!fresh(png, src)) ffmpeg("-i", src, "-frames:v", "1", png);
+    const poster = await image(png, path.join(pdir, "videos", `${name}-poster`), [960, 1440]);
+    videos.push({
+      name,
+      lang: v.lang ?? null,
+      caption: v.caption,
+      mp4: `/projects/${slug}/videos/${name}.mp4`,
+      webm: v.webm ? `/projects/${slug}/videos/${name}.webm` : null,
+      poster,
+    });
+  }
+  let diagram = null;
+  if (a.diagram) {
+    copy(path.join(dir, a.diagram), path.join(pdir, "diagram.svg"));
+    diagram = `/projects/${slug}/diagram.svg`;
+  }
+  const read = (lang) => parseCaseStudy(fs.readFileSync(path.join(dir, `case-study.${lang}.md`), "utf8"));
+  const page = {
+    slug,
+    role: p.role,
+    problem: p.problem,
+    solution: p.solution,
+    features: p.features,
+    results: p.results,
+    stack: p.stack,
+    techNotes: p.tech_notes,
+    caseStudy: { ar: read("ar"), en: read("en") },
+    shots,
+    videos,
+    diagram,
+  };
+  fs.writeFileSync(path.join(CONTENT, slug, "page.json"), JSON.stringify(page, null, 2) + "\n");
+}
+
+/** Copy a file; the source packages are read-only, the copies must not be. */
+function copy(src, dest) {
+  fs.copyFileSync(src, dest);
+  fs.chmodSync(dest, 0o644);
 }
 
 async function main() {
@@ -101,7 +197,7 @@ async function main() {
     const cdir = path.join(CONTENT, slug);
     ensure(cdir);
     for (const f of ["project.json", "case-study.ar.md", "case-study.en.md"]) {
-      fs.copyFileSync(path.join(dir, f), path.join(cdir, f));
+      copy(path.join(dir, f), path.join(cdir, f));
     }
 
     // 2. Media.
@@ -124,7 +220,7 @@ async function main() {
     // WebM: the package's own when it has one, otherwise encoded here (VP9).
     const webmSrc = p.assets.card_loop_webm ? path.join(dir, p.assets.card_loop_webm) : fs.existsSync(path.join(dir, "videos/card-loop.webm")) ? path.join(dir, "videos/card-loop.webm") : null;
     if (webmSrc) {
-      if (!fresh(webm, webmSrc)) fs.copyFileSync(webmSrc, webm);
+      if (!fresh(webm, webmSrc)) copy(webmSrc, webm);
     } else if (!fresh(webm, loopSrc)) {
       ffmpeg("-i", loopSrc, "-an", "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "38", "-row-mt", "1", "-deadline", "good", "-cpu-used", "2", webm);
     }
@@ -143,6 +239,8 @@ async function main() {
     for (const r of [...related, ...(p.part_of ? [p.part_of] : [])]) {
       if (!ORDER.includes(r.slug)) throw new Error(`${slug}: links to unknown project "${r.slug}"`);
     }
+
+    await buildPage(slug, dir, p, pdir);
 
     index.push({
       slug,

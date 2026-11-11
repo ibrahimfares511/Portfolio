@@ -1,0 +1,389 @@
+{
+  "slug": "web-point",
+  "role": {
+    "ar": "شريك مؤسس، والمطوّر الرئيسي للواجهة الأمامية",
+    "en": "Co-founder, lead frontend developer"
+  },
+  "problem": {
+    "ar": "يدير المطعم المزدحم صالة وطلبات خارجية وتوصيلًا في الوقت نفسه، ولكل نوع أسعاره وضريبته وخدمته. وقبل ويب بوينت كانت هذه المطاعم تعمل بالورق أو ببرنامج كاشير آخر حسب المكان: بونات بخط اليد، وحساب يدوي، وفروقات نقدية لا تظهر إلا في اليوم التالي.",
+    "en": "A busy restaurant runs a hall, a takeaway counter and a delivery desk at once, each with its own prices, tax and service. Before Web Point, these restaurants ran on paper or on another POS, depending on the place: handwritten tickets, totals added by hand, and cash gaps that showed up the next morning."
+  },
+  "solution": {
+    "ar": "يعمل ويب بوينت من المتصفح على شاشة لمس في كل صالة، وفي المطبخ والبار طابعات فقط. يفتح الكاشير الطاولة من خريطة تشبه الصالة الحقيقية ويضيف الأصناف بلمستين، ويُطبع كل صنف في قسمه فورًا. ثم يتم الدفع وإغلاق الوردية واليوم بالطريقة نفسها، ويقرأ صاحب المطعم 10 تقارير من البيانات نفسها.",
+    "en": "Web Point runs in the browser on a touch screen in each hall, while the kitchen and the bar have just a printer. The cashier opens a table on a floor plan that matches the real room and adds dishes with a double tap, and each item prints at its own station right away. Payment, shift close and day close follow the same flow, and the owner reads ten reports from the same data."
+  },
+  "features": [
+    {
+      "ar": "الصالة كلها في نظرة: لون الطاولة يوضّح هل هي فارغة أم مشغولة أم تنتظر الحساب أم محجوزة",
+      "en": "See the whole room at a glance: a table's colour shows free, busy, waiting to pay or reserved"
+    },
+    {
+      "ar": "كل صنف يُطبع في قسمه: المشروبات في البار والطعام في المطبخ",
+      "en": "Each item prints at its own station: drinks at the bar, food in the kitchen"
+    },
+    {
+      "ar": "قائمة واحدة بثلاثة أسعار: صالة وطلب خارجي وتوصيل، ولكل نوع ضريبته وخدمته",
+      "en": "One menu, three price lists (dine-in, takeaway, delivery), each with its own tax and service"
+    },
+    {
+      "ar": "التوصيل من البداية للنهاية: الزبون برقم جواله، والتسليم للسائق، وحساب كل سائق",
+      "en": "Delivery end to end: customer by phone, hand-off to a driver, and each driver's cash"
+    },
+    {
+      "ar": "نقدية مضبوطة: إغلاق اليوم والوردية، وفواتير مرقّمة لكل جهاز، وسجل للمرتجعات ونقل الطاولات",
+      "en": "Cash that adds up: day and shift close, numbered checks per terminal, void and transfer logs"
+    },
+    {
+      "ar": "10 تقارير لصاحب المطعم: حسب الصنف والنادل والوردية والقسم والتكلفة",
+      "en": "Ten owner reports: by item, waiter, shift, menu group and cost"
+    }
+  ],
+  "results": [
+    {
+      "value": "5",
+      "label": {
+        "ar": "مطاعم استخدمته",
+        "en": "restaurants used it"
+      },
+      "verified": true
+    },
+    {
+      "value": "~100",
+      "label": {
+        "ar": "طلب يوميًا لكل مطعم",
+        "en": "orders a day per restaurant"
+      },
+      "verified": true
+    },
+    {
+      "value": "1",
+      "label": {
+        "ar": "شاشة لمس لكل صالة، وطابعة للمطبخ وأخرى للبار",
+        "en": "touch screen per hall, plus one printer each for the kitchen and the bar"
+      },
+      "verified": true
+    },
+    {
+      "value": "10",
+      "label": {
+        "ar": "تقارير للإدارة",
+        "en": "management reports"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "Laravel 6",
+    "PHP",
+    "MySQL",
+    "Blade",
+    "jQuery",
+    "AJAX",
+    "Bootstrap 4",
+    "DataTables",
+    "jQuery UI (touch)",
+    "mPDF",
+    "Spatie Permission"
+  ],
+  "techNotes": {
+    "ar": "تطبيق Laravel واحد مقسّم إلى كاشير ولوحة تحكم وتقارير، وقواعد العمل (اليوم والوردية والترقيم والضريبة والخدمة) في مكان واحد. الطلبات في جداول صغيرة طوال اليوم وتنتقل إلى الأرشيف في نهايته، فتبقى الشاشات سريعة. والطباعة عبر جدول طابور يقرؤه برنامج طباعة على شبكة المطعم. والواجهة مصممة للمس: لوحة أرقام للدخول، ولوحة مفاتيح على الشاشة، ولمستان للإضافة، وسحب لإظهار الأوامر.",
+    "en": "One Laravel app split into POS, control panel and reports, with shared rules for days, shifts, serials, tax and service. Orders live in small tables during the day and move to history at day end, so the screens stay fast. Printing goes through a queue table read by a print agent on the restaurant network. The UI is built for touch: PIN-pad login, on-screen keyboard, double tap to add, swipe for actions."
+  },
+  "caseStudy": {
+    "ar": {
+      "title": "ويب بوينت: نظام كاشير وإدارة للمطاعم",
+      "lead": "نظام نقاط بيع وإدارة للمطاعم التي تجمع بين الصالة والطلبات الخارجية والتوصيل، يعمل على شاشات اللمس. استُخدم في 5 مطاعم في مصر.",
+      "sections": [
+        {
+          "heading": "المشكلة قبل النظام",
+          "kind": "plain",
+          "html": "<p>يدير المطعم المزدحم ثلاثة أنواع من العمل في الوقت نفسه: صالة فيها طاولات تُفتح وتُدمج وتُنقل، وشباك للطلبات الخارجية، ومكتب توصيل يستقبل المكالمات. ولكل نوع أسعاره وضريبته ونسبة الخدمة الخاصة به. ويجب أن يصل كل طلب إلى القسم الصحيح (الشواء أو المطبخ أو البار) فور تسجيله، ويحتاج صاحب المطعم أن تتطابق النقدية في نهاية كل وردية.</p>\n<p>قبل ويب بوينت، كانت هذه المطاعم تعمل بالورق أو ببرنامج كاشير آخر حسب المكان. والورق يعني بونات بخط اليد، وحسابًا يدويًا، وعدم وجود تقارير. أما البرنامج العام فيتعامل مع كل ذلك كقائمة فواتير واحدة. وفي الحالتين كان العمل يدور حول قصور الأدوات، ولا يكتشف صاحب المطعم الفروقات إلا في صباح اليوم التالي.</p>"
+        },
+        {
+          "heading": "ما الذي بُني",
+          "kind": "plain",
+          "html": "<p>يعمل ويب بوينت من المتصفح على شاشة لمس في كل صالة، أما المطبخ والبار فلكلٍّ منهما طابعة فقط. يفتح الكاشير الطاولة من خريطة تشبه الصالة الحقيقية، ويضيف الأصناف بلمستين، ويحذف أي سطر بسحبه بإصبعه. وفور تسجيل الطلب يُطبع كل صنف في قسمه: الطعام في المطبخ، والمشروبات في البار. ثم يتم الدفع وإغلاق الوردية وإغلاق اليوم بالطريقة نفسها، ويقرأ صاحب المطعم 10 تقارير من البيانات نفسها.</p>"
+        },
+        {
+          "heading": "أهم المميزات",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>الصالة كلها في نظرة واحدة:</strong> لكل صالة خريطة بأحجام الطاولات الحقيقية، ولون الطاولة يوضّح هل هي فارغة أم مشغولة أم تنتظر الحساب أم محجوزة.</li>\n<li><strong>كل صنف يُطبع في قسمه:</strong> العصير يُطبع في البار، والمشويات في المطبخ، فور تسجيل الطلب. ويمكن أن يختلف اسم الصنف في بون المطبخ عن اسمه في فاتورة الزبون.</li>\n<li><strong>قائمة واحدة لثلاثة أنواع من الطلبات:</strong> لكل صنف سعر للصالة وسعر للطلب الخارجي وسعر للتوصيل، ولكل نوع قواعد الضريبة والخدمة الخاصة به.</li>\n<li><strong>التوصيل من البداية إلى النهاية:</strong> يُعثر على الزبون برقم جواله مع عنوانه المسجّل ورسوم منطقته، ويُسلَّم الطلب للسائق، ويُغلق حساب كل سائق.</li>\n<li><strong>نقدية مضبوطة:</strong> إغلاق اليوم والوردية، وفواتير مرقّمة لكل جهاز مع كشف أي رقم ناقص، وسجل للمرتجعات ونقل الطاولات، وحد أقصى للخصم لكل مستخدم.</li>\n<li><strong>10 تقارير لصاحب المطعم:</strong> المبيعات حسب الصنف والنادل والوردية ونوع الطلب، والخصومات، والمرتجعات، ونقل الطاولات، والتكلفة، وتكلفة المبيعات.</li>\n</ul>"
+        },
+        {
+          "heading": "دوري",
+          "kind": "role",
+          "html": "<p>شريك مؤسس. كنت مسؤولًا عن الواجهة الأمامية: شاشات الكاشير (الدخول، وخريطة الصالة، والطلب والدفع، والتوصيل، والخيارات)، وواجهات لوحة التحكم والتقارير. أما منطق الواجهة الخلفية فلم يكن من عملي.</p>"
+        },
+        {
+          "heading": "النتائج",
+          "kind": "plain",
+          "html": "<ul>\n<li>استُخدم في <strong>5 مطاعم</strong> في مصر.</li>\n<li>حوالي <strong>100 طلب يوميًا</strong> في كل مطعم.</li>\n<li><strong>تجهيز بسيط:</strong> شاشة لمس لكل صالة، وطابعة فقط في المطبخ وأخرى في البار.</li>\n<li>حلّ محل <strong>الورق أو برنامج كاشير آخر</strong> حسب المطعم.</li>\n<li><strong>ما زال يعمل</strong> حتى اليوم في مطعم واحد على الأقل.</li>\n</ul>"
+        },
+        {
+          "heading": "من الداخل (للتقنيين)",
+          "kind": "tech",
+          "html": "<p><strong>التقنيات:</strong> ‏Laravel 6 ‏(PHP)، وMySQL، وBlade، وjQuery مع AJAX، وBootstrap 4، وDataTables، وjQuery UI مع دعم اللمس، وmPDF للتقارير المطبوعة، وSpatie للصلاحيات.</p>\n<p><strong>البنية:</strong> تطبيق Laravel واحد مقسّم إلى ثلاثة أجزاء: الكاشير (<code>/menu</code>)، ولوحة التحكم (<code>/admin</code>)، والتقارير (<code>/Reports</code>). قواعد العمل المشتركة (اليوم والوردية وترقيم الفواتير والضريبة والخدمة) موجودة في مكان واحد وتستخدمها كل الشاشات. وأغلب العمليات تتم بطلبات AJAX، فلا تُعاد تحميل الشاشة أثناء العمل.</p>\n<p>قرارات في تصميم النظام (عمل الفريق):</p>\n<ol>\n<li><strong>يوم تشغيل وأرشيف:</strong> تُسجَّل الطلبات في جداول صغيرة طوال اليوم، وعند إغلاق اليوم تنتقل كلها إلى الأرشيف دفعة واحدة. فتبقى شاشات الكاشير سريعة، وتقرأ التقارير من الأرشيف.</li>\n<li><strong>الطباعة عبر طابور:</strong> لا يتواصل النظام مع الطابعات مباشرة، بل يكتب أوامر الطباعة في جدول، ويرسل برنامج طباعة على شبكة المطعم كل صنف إلى قسمه. فلا تعطّل الطباعة شاشة الكاشير.</li>\n<li><strong>مصمَّم للمس لا للماوس</strong> (من عملي في الواجهة): الدخول باختيار الاسم ورقم سري من لوحة أرقام، ولوحة مفاتيح على الشاشة بالعربية والإنجليزية، وإضافة الصنف بلمستين حتى لا تضيف لمسة خاطئة طبقًا، وظهور أوامر أي سطر في الطلب بالسحب.</li>\n</ol>"
+        },
+        {
+          "heading": "الحالة",
+          "kind": "plain",
+          "html": "<p>تم التسليم. استُخدم في 5 مطاعم في مصر، وما زال يعمل في مطعم واحد على الأقل منها. ولا يوجد عليه تطوير حاليًا.</p>\n<p><em>كل الشاشات هنا تعرض بيانات تجريبية مختلَقة (مطعم وأسماء وأسعار غير حقيقية)، ولا تظهر فيها أي بيانات لعملاء.</em></p>"
+        }
+      ]
+    },
+    "en": {
+      "title": "Web Point: a restaurant POS built for the floor",
+      "lead": "A touch-first point of sale and back office for sit-down restaurants with delivery. Used in 5 restaurants in Egypt.",
+      "sections": [
+        {
+          "heading": "The problem",
+          "kind": "plain",
+          "html": "<p>A busy restaurant runs three businesses at once. There&#39;s the hall, with tables that open, merge and move. There&#39;s the takeaway counter. And there&#39;s a delivery desk taking calls. Each one has its own prices, tax and service charge. Each order has to reach the right station (grill, kitchen or bar) the moment it&#39;s taken, and the owner needs the cash to match at the end of every shift.</p>\n<p>Before Web Point, these restaurants ran on paper orders or on another POS, depending on the place. Paper means handwritten tickets, totals added by hand and no reports. The generic POS treated all of this as one list of receipts. Either way, waiters worked around the tools, and the owner only found the gaps the next morning.</p>"
+        },
+        {
+          "heading": "What we built",
+          "kind": "plain",
+          "html": "<p>Web Point runs in the browser on a touch screen in each hall, while the kitchen and the bar each have just a printer. The cashier opens a table on a floor plan that matches the real room and adds dishes with a double tap. A short swipe on a line removes it. When the order is taken, every item prints at its own station: food in the kitchen, drinks at the bar. Payment, shift close and day close follow the same flow, and the owner reads ten reports from the same data.</p>"
+        },
+        {
+          "heading": "Key features",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>See the whole room at a glance.</strong> Each hall has its own floor plan with real table sizes. A table&#39;s colour tells you if it&#39;s free, busy, waiting for payment or reserved.</li>\n<li><strong>Each item prints at its own station.</strong> A juice prints at the bar and a grill dish in the kitchen, as soon as the order is taken. Kitchen slips can use a different item name from the customer check.</li>\n<li><strong>Three channels, one menu.</strong> Every item has its own dine-in, takeaway and delivery price, and each channel has its own tax and service rules.</li>\n<li><strong>Delivery handled end to end.</strong> Find the customer by phone with their saved address and delivery fee, hand the order to a driver, and settle each driver&#39;s cash.</li>\n<li><strong>Cash that adds up.</strong> Day and shift close, numbered checks per terminal with gap detection, void and transfer logs, and per-user discount limits.</li>\n<li><strong>Ten reports for the owner.</strong> Sales by item, waiter, shift and channel, plus discounts, voids, transfers, cost and cost of sold items.</li>\n</ul>"
+        },
+        {
+          "heading": "My role",
+          "kind": "role",
+          "html": "<p>Co-founder. I led the frontend: the POS screens (login, floor plan, order and payment, delivery, options) and the control-panel and report interfaces. The backend logic was not mine.</p>"
+        },
+        {
+          "heading": "Results",
+          "kind": "plain",
+          "html": "<ul>\n<li>Used in <strong>5 restaurants</strong> in Egypt.</li>\n<li>About <strong>100 orders a day</strong> in each restaurant.</li>\n<li>A <strong>lean setup</strong>: one touch screen per hall, and just a printer in the kitchen and at the bar.</li>\n<li>Replaced <strong>paper orders or another POS</strong>, depending on the restaurant.</li>\n<li><strong>Still in use</strong> in at least one of the restaurants today.</li>\n</ul>"
+        },
+        {
+          "heading": "Under the hood",
+          "kind": "tech",
+          "html": "<p><strong>Stack:</strong> Laravel 6 (PHP), MySQL, Blade views, jQuery and AJAX, Bootstrap 4, DataTables, jQuery UI with touch support, mPDF for printed reports, Spatie roles and permissions.</p>\n<p><strong>Architecture:</strong> one Laravel application split into three areas: <code>/menu</code> (the POS), <code>/admin</code> (control panel) and <code>/Reports</code>. Shared business rules for days, shifts, serials, tax and service live in one place and every screen uses them. Most actions are AJAX calls, so terminals never reload during service.</p>\n<p>Decisions in the system design (team work):</p>\n<ol>\n<li><strong>Live day vs. history.</strong> Orders sit in small &quot;live&quot; tables during service. When the day ends, everything moves to history tables in one step. The screens waiters use stay fast, and reports read from a separate set.</li>\n<li><strong>Printing goes through a queue.</strong> The app doesn&#39;t talk to printers. It writes print jobs to a queue table, and a print agent on the restaurant network sends each item to its station. Printing never holds up the cashier&#39;s screen.</li>\n<li><strong>Built for touch, not a mouse</strong> (my part, in the interface). Login is a user picker plus a PIN pad. There&#39;s an on-screen keyboard with English and Arabic layouts, items are added by double tap (so a stray touch doesn&#39;t add a dish), and ticket lines open their actions with a swipe.</li>\n</ol>"
+        },
+        {
+          "heading": "Status",
+          "kind": "plain",
+          "html": "<p>Delivered. Used in 5 restaurants in Egypt, and at least one still runs it today. Not in active development.</p>\n<p><em>Screens in this case study use invented demo data (a fictional restaurant, names and prices). No client data is shown.</em></p>"
+        }
+      ]
+    }
+  },
+  "shots": [
+    {
+      "name": "floor-plan-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "خريطة الصالة: لون كل طاولة يوضّح حالتها",
+        "en": "Floor plan: each table's colour shows its state"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/web-point/shots/desktop-floor-plan-en-800.avif",
+            "webp": "/projects/web-point/shots/desktop-floor-plan-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/web-point/shots/desktop-floor-plan-en-1600.avif",
+            "webp": "/projects/web-point/shots/desktop-floor-plan-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "order-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "شاشة الطلب: القائمة على اليسار والفاتورة على اليمين",
+        "en": "Order screen: menu on the left, the ticket on the right"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/web-point/shots/desktop-order-en-800.avif",
+            "webp": "/projects/web-point/shots/desktop-order-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/web-point/shots/desktop-order-en-1600.avif",
+            "webp": "/projects/web-point/shots/desktop-order-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "item-options-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "خيارات الصنف (درجة الطهي) قبل إضافته",
+        "en": "Item choices (how it's cooked) before it's added"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/web-point/shots/desktop-item-options-en-800.avif",
+            "webp": "/projects/web-point/shots/desktop-item-options-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/web-point/shots/desktop-item-options-en-1600.avif",
+            "webp": "/projects/web-point/shots/desktop-item-options-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "payment-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الدفع نقدًا أو بالبطاقة أو ضيافة، مع حساب الخدمة والضريبة",
+        "en": "Payment by cash, card or hospitality, with service and tax worked out"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/web-point/shots/desktop-payment-en-800.avif",
+            "webp": "/projects/web-point/shots/desktop-payment-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/web-point/shots/desktop-payment-en-1600.avif",
+            "webp": "/projects/web-point/shots/desktop-payment-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "delivery-customer-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "التوصيل: الزبون برقم جواله وعنوانه المسجّل",
+        "en": "Delivery: find the customer by phone, address already saved"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/web-point/shots/desktop-delivery-customer-en-800.avif",
+            "webp": "/projects/web-point/shots/desktop-delivery-customer-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/web-point/shots/desktop-delivery-customer-en-1600.avif",
+            "webp": "/projects/web-point/shots/desktop-delivery-customer-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "report-daily-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "التقرير اليومي: المبيعات حسب القسم والخدمة والضريبة وطريقة الدفع",
+        "en": "Daily report: sales by menu group, service, tax and payment type"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/web-point/shots/desktop-report-daily-en-800.avif",
+            "webp": "/projects/web-point/shots/desktop-report-daily-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/web-point/shots/desktop-report-daily-en-1600.avif",
+            "webp": "/projects/web-point/shots/desktop-report-daily-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "order-items-en",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "شاشة الطلب على الجوال",
+        "en": "Order screen on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/web-point/shots/mobile-order-items-en-390.avif",
+            "webp": "/projects/web-point/shots/mobile-order-items-en-390.webp"
+          },
+          "780": {
+            "avif": "/projects/web-point/shots/mobile-order-items-en-780.avif",
+            "webp": "/projects/web-point/shots/mobile-order-items-en-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "floor-plan-en",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "خريطة الصالة على الجوال",
+        "en": "Floor plan on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/web-point/shots/mobile-floor-plan-en-390.avif",
+            "webp": "/projects/web-point/shots/mobile-floor-plan-en-390.webp"
+          },
+          "780": {
+            "avif": "/projects/web-point/shots/mobile-floor-plan-en-780.avif",
+            "webp": "/projects/web-point/shots/mobile-floor-plan-en-780.webp"
+          }
+        }
+      }
+    }
+  ],
+  "videos": [
+    {
+      "name": "dine-in-order",
+      "lang": null,
+      "caption": {
+        "ar": "طلب صالة: من الطاولة إلى المطبخ",
+        "en": "Dine-in order: from the table to the kitchen"
+      },
+      "mp4": "/projects/web-point/videos/dine-in-order.mp4",
+      "webm": "/projects/web-point/videos/dine-in-order.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/web-point/videos/dine-in-order-poster-960.avif",
+            "webp": "/projects/web-point/videos/dine-in-order-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/web-point/videos/dine-in-order-poster-1440.avif",
+            "webp": "/projects/web-point/videos/dine-in-order-poster-1440.webp"
+          }
+        }
+      }
+    }
+  ],
+  "diagram": "/projects/web-point/diagram.svg"
+}

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720" font-family="Nunito, 'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F4E5F"/>
+    </marker>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+  </defs>
+  <rect width="1200" height="720" fill="#F3EFE9"/>
+  <circle cx="110" cy="70" r="230" fill="#CFE0E3" filter="url(#blur)"/>
+  <circle cx="1110" cy="680" r="210" fill="#F0D2C3" filter="url(#blur)"/>
+
+  <text x="60" y="66" font-size="26" font-weight="800" fill="#16303A">Smart Control — how the parts fit</text>
+  <text x="60" y="94" font-size="15" fill="#1F4E5F">One Laravel backend, three audiences. Ibrahim's work: the admin dashboard UI (highlighted).</text>
+
+  <!-- users -->
+  <g font-size="14" fill="#16303A">
+    <rect x="60" y="150" width="230" height="96" rx="16" fill="#fff" stroke="#B9D2DA"/>
+    <text x="80" y="182" font-weight="800" font-size="16">Panel users</text>
+    <text x="80" y="206">Admins, client HR teams,</text>
+    <text x="80" y="226">client staff &amp; partners</text>
+
+    <rect x="60" y="312" width="230" height="96" rx="16" fill="#fff" stroke="#B9D2DA"/>
+    <text x="80" y="344" font-weight="800" font-size="16">Employees</text>
+    <text x="80" y="368">Client companies' staff,</text>
+    <text x="80" y="388">via the Elite apps</text>
+
+    <rect x="60" y="474" width="230" height="96" rx="16" fill="#fff" stroke="#B9D2DA"/>
+    <text x="80" y="506" font-weight="800" font-size="16">Partner cashiers</text>
+    <text x="80" y="530">Stores that redeem offers</text>
+    <text x="80" y="550">and gift codes by QR</text>
+  </g>
+
+  <!-- entry points -->
+  <g font-size="14" fill="#16303A">
+    <rect x="370" y="134" width="300" height="128" rx="18" fill="#1F4E5F"/>
+    <rect x="370" y="134" width="300" height="128" rx="18" fill="none" stroke="#C2603F" stroke-width="3"/>
+    <text x="392" y="168" font-weight="800" font-size="17" fill="#fff">Admin dashboard (Blade)</text>
+    <text x="392" y="193" fill="#CFE0E3">Reports · events · surveys · gifts</text>
+    <text x="392" y="213" fill="#CFE0E3">ApexCharts · DataTables · jQuery</text>
+    <text x="392" y="240" fill="#F0D2C3" font-weight="700">← Ibrahim's frontend work</text>
+
+    <rect x="370" y="312" width="300" height="96" rx="18" fill="#fff" stroke="#1F4E5F" stroke-width="1.5"/>
+    <text x="392" y="346" font-weight="800" font-size="17">Employee API (v1)</text>
+    <text x="392" y="370">Sanctum auth · REST · Swagger</text>
+    <text x="392" y="390">feeds the Elite apps</text>
+
+    <rect x="370" y="474" width="300" height="96" rx="18" fill="#fff" stroke="#1F4E5F" stroke-width="1.5"/>
+    <text x="392" y="508" font-weight="800" font-size="17">Cashier API</text>
+    <text x="392" y="532">Offers, orders, QR redemption</text>
+    <text x="392" y="552">per partner branch</text>
+  </g>
+
+  <!-- core -->
+  <g font-size="14" fill="#16303A">
+    <rect x="750" y="200" width="200" height="300" rx="20" fill="#fff" stroke="#16303A" stroke-width="2"/>
+    <text x="772" y="236" font-weight="800" font-size="17">Laravel 8 core</text>
+    <text x="772" y="266">Clients &amp; employees</text>
+    <text x="772" y="290">Providers &amp; offers</text>
+    <text x="772" y="314">Gifts, stock, points</text>
+    <text x="772" y="338">Events &amp; surveys</text>
+    <text x="772" y="362">Complaints &amp; ratings</text>
+    <text x="772" y="386">Roles &amp; permissions</text>
+    <text x="772" y="410">Action / app logs</text>
+    <text x="772" y="446" fill="#1F4E5F" font-size="13">Excel import/export,</text>
+    <text x="772" y="466" fill="#1F4E5F" font-size="13">PDF invoices</text>
+  </g>
+
+  <!-- services -->
+  <g font-size="14" fill="#16303A">
+    <rect x="1010" y="150" width="140" height="70" rx="14" fill="#CFE0E3"/>
+    <text x="1028" y="182" font-weight="800">MySQL</text><text x="1028" y="202">~118 tables</text>
+    <rect x="1010" y="240" width="140" height="70" rx="14" fill="#CFE0E3"/>
+    <text x="1028" y="272" font-weight="800">Push</text><text x="1028" y="292">FCM · APNs</text>
+    <rect x="1010" y="330" width="140" height="70" rx="14" fill="#CFE0E3"/>
+    <text x="1028" y="362" font-weight="800">Real-time</text><text x="1028" y="382">Pusher</text>
+    <rect x="1010" y="420" width="140" height="70" rx="14" fill="#CFE0E3"/>
+    <text x="1028" y="452" font-weight="800">Search</text><text x="1028" y="472">Meilisearch</text>
+    <rect x="1010" y="510" width="140" height="70" rx="14" fill="#CFE0E3"/>
+    <text x="1028" y="542" font-weight="800">Files</text><text x="1028" y="562">S3 storage</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#1F4E5F" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M290 198 H366"/>
+    <path d="M290 360 H366"/>
+    <path d="M290 522 H366"/>
+    <path d="M670 198 C710 198 710 260 746 260"/>
+    <path d="M670 360 H746"/>
+    <path d="M670 522 C710 522 710 440 746 440"/>
+    <path d="M950 230 C980 230 980 185 1006 185"/>
+    <path d="M950 290 C980 290 980 275 1006 275"/>
+    <path d="M950 360 H1006"/>
+    <path d="M950 420 C980 420 980 455 1006 455"/>
+    <path d="M950 470 C980 470 980 545 1006 545"/>
+  </g>
+
+  <text x="60" y="660" font-size="13" fill="#1F4E5F">Backend, APIs and infrastructure: the company's backend team. Labels describe the codebase, not live traffic.</text>
+</svg>

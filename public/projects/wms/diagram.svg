@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" font-family="Nunito, 'Segoe UI', Arial, sans-serif">
+  <title>WMS architecture</title>
+  <desc>Browser and PWA clients talk to an Express API over REST and Socket.io. The API runs business rules in database transactions through Prisma on PostgreSQL. Redis backs live updates and a BullMQ job queue. Everything runs in Docker Compose.</desc>
+  <defs>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="70"/></filter>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1F4E5F"/></marker>
+    <marker id="arrc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#C2603F"/></marker>
+    <style>
+      .t{fill:#16303A;font-size:17px;font-weight:700}
+      .s{fill:#5D6B70;font-size:13px}
+      .k{fill:#1F4E5F;font-size:12px;font-weight:700;letter-spacing:.06em}
+      .box{fill:#FFFFFF;stroke:#E2DDD4;stroke-width:1.5}
+      .dark{fill:#16303A}
+      .tw{fill:#EAF0F0;font-size:17px;font-weight:700}
+      .sw{fill:#B9D2DA;font-size:13px}
+      .line{stroke:#1F4E5F;stroke-width:2;fill:none}
+      .dash{stroke:#C2603F;stroke-width:2;fill:none;stroke-dasharray:6 6}
+      .lbl{fill:#1F4E5F;font-size:12px;font-weight:600}
+      .layer{fill:#F3EFE9;stroke:#CFE0E3;stroke-width:1.5}
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" fill="#F3EFE9"/>
+  <ellipse cx="160" cy="80" rx="360" ry="260" fill="#CFE0E3" filter="url(#blur)" opacity=".9"/>
+  <ellipse cx="1080" cy="720" rx="340" ry="240" fill="#F0D2C3" filter="url(#blur)" opacity=".85"/>
+
+  <text x="48" y="58" fill="#16303A" font-size="26" font-weight="800">Warehouse Management System</text>
+  <circle cx="483" cy="54" r="5" fill="#C2603F"/>
+  <text x="48" y="84" class="s">How the parts fit together · 5 warehouses · one database · live updates</text>
+
+  <!-- CLIENTS -->
+  <text x="48" y="136" class="k">CLIENTS</text>
+  <rect x="48" y="150" width="300" height="118" rx="16" class="box"/>
+  <text x="70" y="182" class="t">Office web app</text>
+  <text x="70" y="206" class="s">React 19 · TypeScript · Vite · Tailwind</text>
+  <text x="70" y="226" class="s">TanStack Query · Zustand · i18next (AR / EN)</text>
+  <text x="70" y="246" class="s">Dashboard, orders, stock, reports, admin</text>
+
+  <rect x="48" y="286" width="300" height="118" rx="16" class="box"/>
+  <text x="70" y="318" class="t">Floor PWA (phones)</text>
+  <text x="70" y="342" class="s">Pick, review, count, deliver</text>
+  <text x="70" y="362" class="s">USB / Bluetooth scanner or phone camera</text>
+  <text x="70" y="382" class="s">Serial numbers captured per unit</text>
+
+  <rect x="48" y="422" width="300" height="84" rx="16" class="box"/>
+  <text x="70" y="454" class="t">Excel in / out</text>
+  <text x="70" y="478" class="s">Bulk orders, courier status sheets, exports</text>
+
+  <!-- API -->
+  <text x="436" y="136" class="k">API · NODE.JS + EXPRESS 5</text>
+  <rect x="436" y="150" width="340" height="420" rx="20" class="dark"/>
+  <text x="460" y="184" class="tw">REST API</text>
+  <text x="460" y="206" class="sw">JWT access token + httpOnly refresh cookie</text>
+
+  <rect x="460" y="224" width="292" height="58" rx="12" fill="#1F4E5F"/>
+  <text x="478" y="249" fill="#EAF0F0" font-size="14" font-weight="700">Routes + guards</text>
+  <text x="478" y="269" class="sw">43 permissions · per-warehouse access</text>
+
+  <rect x="460" y="294" width="292" height="44" rx="12" fill="#1F4E5F"/>
+  <text x="478" y="321" fill="#EAF0F0" font-size="14" font-weight="700">Controllers</text>
+
+  <rect x="460" y="350" width="292" height="78" rx="12" fill="#1F4E5F"/>
+  <text x="478" y="375" fill="#EAF0F0" font-size="14" font-weight="700">Services · business rules</text>
+  <text x="478" y="395" class="sw">Each stock change = one DB transaction</text>
+  <text x="478" y="413" class="sw">+ ledger line (balance before / after)</text>
+
+  <rect x="460" y="440" width="292" height="44" rx="12" fill="#1F4E5F"/>
+  <text x="478" y="467" fill="#EAF0F0" font-size="14" font-weight="700">Repositories · Prisma 6</text>
+
+  <rect x="460" y="496" width="140" height="56" rx="12" fill="#24505F"/>
+  <text x="474" y="520" fill="#EAF0F0" font-size="13" font-weight="700">Socket.io</text>
+  <text x="474" y="539" class="sw" font-size="12">room per warehouse</text>
+  <rect x="612" y="496" width="140" height="56" rx="12" fill="#24505F"/>
+  <text x="626" y="520" fill="#EAF0F0" font-size="13" font-weight="700">BullMQ worker</text>
+  <text x="626" y="539" class="sw" font-size="12">frees stale locks</text>
+
+  <!-- DATA -->
+  <text x="864" y="136" class="k">DATA</text>
+  <rect x="864" y="150" width="288" height="200" rx="16" class="box"/>
+  <text x="886" y="182" class="t">PostgreSQL 16</text>
+  <text x="886" y="206" class="s">29 tables</text>
+  <text x="886" y="230" class="s">Stock per warehouse: available /</text>
+  <text x="886" y="248" class="s">reserved / damaged / minimum</text>
+  <text x="886" y="272" class="s">Ledger · 12 movement types</text>
+  <text x="886" y="296" class="s">Orders · 14 statuses · full log</text>
+  <text x="886" y="320" class="s">Counts, transfers, dispatches, returns</text>
+
+  <rect x="864" y="368" width="288" height="96" rx="16" class="box"/>
+  <text x="886" y="400" class="t">Redis 7</text>
+  <text x="886" y="424" class="s">Socket.io adapter (pub/sub)</text>
+  <text x="886" y="444" class="s">BullMQ job queue</text>
+
+  <rect x="864" y="482" width="288" height="88" rx="16" fill="none" stroke="#C2603F" stroke-width="1.8" stroke-dasharray="7 6"/>
+  <text x="886" y="514" fill="#C2603F" font-size="17" font-weight="700">Company POS</text>
+  <text x="886" y="538" class="s">Integration planned · next phase</text>
+
+  <!-- arrows -->
+  <path class="line" d="M348 209 C 392 209, 392 250, 434 250" marker-end="url(#arr)"/>
+  <path class="line" d="M348 345 C 392 345, 392 270, 434 262" marker-end="url(#arr)"/>
+  <path class="line" d="M348 464 C 392 464, 392 300, 434 290" marker-end="url(#arr)"/>
+  <text x="362" y="234" class="lbl">REST</text>
+
+  <path class="line" d="M436 524 C 392 524, 392 380, 350 372" marker-end="url(#arr)"/>
+  <text x="358" y="540" class="lbl">live updates</text>
+
+  <path class="line" d="M776 462 C 820 462, 820 260, 862 252" marker-end="url(#arr)"/>
+  <text x="790" y="300" class="lbl">SQL</text>
+  <path class="line" d="M776 524 C 820 524, 820 418, 862 416" marker-end="url(#arr)"/>
+  <path class="dash" d="M862 540 C 830 540, 820 560, 778 560" marker-end="url(#arrc)"/>
+
+  <!-- deployment band -->
+  <rect x="48" y="600" width="1104" height="112" rx="20" class="layer"/>
+  <text x="72" y="634" class="k">DEPLOYMENT · DOCKER COMPOSE ON A VPS</text>
+  <g font-size="14" font-weight="700" fill="#16303A">
+    <rect x="72" y="650" width="240" height="40" rx="10" fill="#FFFFFF" stroke="#E2DDD4"/><text x="90" y="675">frontend · nginx</text>
+    <rect x="328" y="650" width="240" height="40" rx="10" fill="#FFFFFF" stroke="#E2DDD4"/><text x="346" y="675">backend · node</text>
+    <rect x="584" y="650" width="240" height="40" rx="10" fill="#FFFFFF" stroke="#E2DDD4"/><text x="602" y="675">postgres (internal only)</text>
+    <rect x="840" y="650" width="240" height="40" rx="10" fill="#FFFFFF" stroke="#E2DDD4"/><text x="858" y="675">redis (internal only)</text>
+  </g>
+  <text x="48" y="742" class="s">npm-workspaces monorepo (apps/frontend · apps/backend · packages/shared)</text>
+</svg>

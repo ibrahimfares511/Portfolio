@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 760" width="1280" height="760" font-family="Nunito, 'Segoe UI', Arial, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1F4E5F"/></marker></defs>
+<rect width="1280" height="760" fill="#F3EFE9"/>
+<ellipse cx="120" cy="60" rx="340" ry="220" fill="#CFE0E3" opacity=".7"/><ellipse cx="1180" cy="720" rx="320" ry="200" fill="#F0D2C3" opacity=".7"/>
+<text x="40" y="56" font-size="24" font-weight="800" fill="#16303A" text-anchor="start">Ertiqaa Academy — system overview</text>
+<text x="40" y="82" font-size="14" font-weight="500" fill="#1F4E5F" text-anchor="start">Learning platform for teaching Arabic to non-native speakers · 4 roles · one React app</text>
+<text x="40" y="138" font-size="12" font-weight="800" fill="#C2603F" text-anchor="start">USERS</text>
+<rect x="40" y="154" width="250" height="74" rx="14" fill="#fff" stroke="#1F4E5F" stroke-width="1.5"/>
+<text x="58" y="184" font-size="16" font-weight="800" fill="#16303A" text-anchor="start">Student</text>
+<text x="58" y="207" font-size="12.5" font-weight="500" fill="#1F4E5F" text-anchor="start">lessons, activities, quizzes, stories</text>
+<rect x="40" y="246" width="250" height="74" rx="14" fill="#fff" stroke="#1F4E5F" stroke-width="1.5"/>
+<text x="58" y="276" font-size="16" font-weight="800" fill="#16303A" text-anchor="start">Teacher</text>
+<text x="58" y="299" font-size="12.5" font-weight="500" fill="#1F4E5F" text-anchor="start">tasks, exams, grading, reports</text>
+<rect x="40" y="338" width="250" height="74" rx="14" fill="#fff" stroke="#1F4E5F" stroke-width="1.5"/>
+<text x="58" y="368" font-size="16" font-weight="800" fill="#16303A" text-anchor="start">School</text>
+<text x="58" y="391" font-size="12.5" font-weight="500" fill="#1F4E5F" text-anchor="start">teachers &amp; students, Excel import</text>
+<rect x="40" y="430" width="250" height="74" rx="14" fill="#fff" stroke="#1F4E5F" stroke-width="1.5"/>
+<text x="58" y="460" font-size="16" font-weight="800" fill="#16303A" text-anchor="start">Admin + staff</text>
+<text x="58" y="483" font-size="12.5" font-weight="500" fill="#1F4E5F" text-anchor="start">curriculum, quiz bank, CMS, roles</text>
+<rect x="340" y="120" width="620" height="560" rx="20" fill="#FFFFFF" stroke="#16303A" stroke-width="2"/>
+<text x="362" y="152" font-size="18" font-weight="800" fill="#16303A" text-anchor="start">React 18 + TypeScript SPA (Vite)</text>
+<text x="362" y="174" font-size="12.5" font-weight="600" fill="#C2603F" text-anchor="start">frontend by a 2-person team · student experience led by Ibrahim</text>
+<path d="M290 191 L340 191" stroke="#1F4E5F" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+<path d="M290 283 L340 283" stroke="#1F4E5F" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+<path d="M290 375 L340 375" stroke="#1F4E5F" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+<path d="M290 467 L340 467" stroke="#1F4E5F" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+<rect x="362" y="196" width="280" height="96" rx="12" fill="#CFE0E3" stroke="#1F4E5F" stroke-width="1.2"/>
+<text x="378" y="226" font-size="15" font-weight="800" fill="#16303A" text-anchor="start">Role routing &amp; guards</text>
+<text x="378" y="252" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">ProtectedRoute by user type</text>
+<text x="378" y="272" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">ProtectedComponent by permission</text>
+<rect x="658" y="196" width="280" height="96" rx="12" fill="#CFE0E3" stroke="#1F4E5F" stroke-width="1.2"/>
+<text x="674" y="226" font-size="15" font-weight="800" fill="#16303A" text-anchor="start">i18n + RTL / LTR</text>
+<text x="674" y="252" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">i18next (ar / en)</text>
+<text x="674" y="272" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">MUI emotion RTL cache · Tailwind</text>
+<rect x="362" y="308" width="576" height="118" rx="12" fill="#F0D2C3" stroke="#1F4E5F" stroke-width="1.2"/>
+<text x="378" y="338" font-size="15" font-weight="800" fill="#16303A" text-anchor="start">Question engine  (QuestionContainer)</text>
+<text x="378" y="364" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">6 types: multiple choice · true/false · drag-and-drop blanks · matching ·</text>
+<text x="378" y="384" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">sentence ordering · voice / text answers (MediaRecorder) — practice, timed quiz, exam</text>
+<rect x="362" y="442" width="280" height="96" rx="12" fill="#CFE0E3" stroke="#1F4E5F" stroke-width="1.2"/>
+<text x="378" y="472" font-size="15" font-weight="800" fill="#16303A" text-anchor="start">Lesson players</text>
+<text x="378" y="498" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">text · image · PDF · audio</text>
+<text x="378" y="518" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">video file · video link</text>
+<rect x="658" y="442" width="280" height="96" rx="12" fill="#CFE0E3" stroke="#1F4E5F" stroke-width="1.2"/>
+<text x="674" y="472" font-size="15" font-weight="800" fill="#16303A" text-anchor="start">Dashboards</text>
+<text x="674" y="498" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">admin · school · teacher · student</text>
+<text x="674" y="518" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">reports, certificates, CMS</text>
+<rect x="362" y="554" width="576" height="104" rx="12" fill="#E8EEF0" stroke="#1F4E5F" stroke-width="1.2"/>
+<text x="378" y="584" font-size="15" font-weight="800" fill="#16303A" text-anchor="start">State &amp; data layer</text>
+<text x="378" y="610" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">Redux Toolkit + RTK Query (51 API slices, cache tags)</text>
+<text x="378" y="630" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">Bearer token · mutex-guarded refresh on 401 (one refresh for parallel calls)</text>
+<text x="1010" y="138" font-size="12" font-weight="800" fill="#C2603F" text-anchor="start">SERVICES</text>
+<rect x="1010" y="154" width="230" height="150" rx="14" fill="#fff" stroke="#1F4E5F" stroke-width="1.5"/>
+<text x="1028" y="186" font-size="16" font-weight="800" fill="#16303A" text-anchor="start">Laravel REST API</text>
+<text x="1028" y="210" font-size="12.5" font-weight="500" fill="#1F4E5F" text-anchor="start">api/v1 · separate backend team</text>
+<text x="1028" y="232" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">auth, curriculum, attempts,</text>
+<text x="1028" y="252" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">answers, results, reports</text>
+<text x="1028" y="272" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">media files</text>
+<rect x="1010" y="330" width="230" height="96" rx="14" fill="#fff" stroke="#1F4E5F" stroke-width="1.5"/>
+<text x="1028" y="362" font-size="15" font-weight="800" fill="#16303A" text-anchor="start">Firebase Cloud Messaging</text>
+<text x="1028" y="386" font-size="12.5" font-weight="500" fill="#1F4E5F" text-anchor="start">push notifications</text>
+<text x="1028" y="406" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">to students &amp; teachers</text>
+<rect x="1010" y="452" width="230" height="96" rx="14" fill="#fff" stroke="#1F4E5F" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="1028" y="484" font-size="15" font-weight="800" fill="#16303A" text-anchor="start">GitHub Actions</text>
+<text x="1028" y="508" font-size="12.5" font-weight="500" fill="#1F4E5F" text-anchor="start">build &amp; deploy pipeline</text>
+<text x="1028" y="528" font-size="12.5" font-weight="500" fill="#16303A" text-anchor="start">(separate DevOps role)</text>
+<path d="M938 620 H985 V230 H1008" stroke="#1F4E5F" stroke-width="1.6" fill="none" marker-end="url(#ar)" marker-start="url(#ar)"/>
+<path d="M1010 380 H962" stroke="#1F4E5F" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+<text x="993" y="590" font-size="11.5" font-weight="700" fill="#1F4E5F" text-anchor="start">HTTPS / JSON</text>
+</svg>

@@ -326,3 +326,77 @@ html.pl-active {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Case-study text (Markdown rendered at sync time). */
+.case-prose {
+  font-size: 17px;
+  line-height: 31px;
+  color: var(--ink);
+}
+.case-prose > * + * {
+  margin-top: 1em;
+}
+.case-prose p,
+.case-prose li {
+  color: color-mix(in oklab, var(--ink) 86%, var(--ink-muted));
+}
+.case-prose strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.case-prose ul,
+.case-prose ol {
+  display: grid;
+  gap: 0.7em;
+}
+.case-prose ul > li {
+  position: relative;
+  padding-inline-start: 1.4em;
+}
+.case-prose ul > li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0.15em;
+  top: 0.68em;
+  width: 0.42em;
+  height: 0.42em;
+  border-radius: 999px;
+  background: var(--clay);
+}
+.case-prose ol {
+  list-style: decimal;
+  padding-inline-start: 1.3em;
+}
+.case-prose ol > li::marker {
+  color: var(--petrol);
+  font-variant-numeric: tabular-nums;
+}
+.case-prose a {
+  color: var(--petrol);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--petrol) 35%, transparent);
+  text-underline-offset: 4px;
+}
+.case-prose a:hover {
+  text-decoration-color: var(--petrol);
+}
+.case-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.86em;
+  direction: ltr;
+  unicode-bidi: isolate;
+  padding: 0.1em 0.4em;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--sky-soft) 60%, transparent);
+}
+.case-prose h3 {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 1.6em;
+}
+@media (min-width: 768px) {
+  .case-prose {
+    font-size: 18px;
+    line-height: 33px;
+  }
+}

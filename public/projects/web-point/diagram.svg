@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="t d">
+  <title id="t">Web Point architecture</title>
+  <desc id="d">Touch terminals talk to one Laravel monolith over AJAX. Business rules live in shared traits. MySQL keeps a small live-day set of tables that is archived at end of day. Kitchen and cashier printing goes through a print-queue table read by a print agent on the restaurant network.</desc>
+  <defs>
+    <radialGradient id="blobSky" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#CFE0E3" stop-opacity="0.95"/><stop offset="1" stop-color="#CFE0E3" stop-opacity="0"/></radialGradient>
+    <radialGradient id="blobClay" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#F0D2C3" stop-opacity="0.9"/><stop offset="1" stop-color="#F0D2C3" stop-opacity="0"/></radialGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F4E5F"/></marker>
+    <marker id="arrC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C2603F"/></marker>
+    <style>
+      .h{font-family:Nunito,'Segoe UI',system-ui,sans-serif;font-weight:700;fill:#16303A}
+      .t{font-family:Nunito,'Segoe UI',system-ui,sans-serif;font-weight:400;fill:#16303A}
+      .m{font-family:Nunito,'Segoe UI',system-ui,sans-serif;font-weight:400;fill:#5D6B70}
+      .lab{font-family:Nunito,'Segoe UI',system-ui,sans-serif;font-weight:700;fill:#1F4E5F;letter-spacing:.06em}
+      .card{fill:#FFFFFF;stroke:#E2DDD4;stroke-width:1.5}
+      .zone{fill:none;stroke:#B9D2DA;stroke-width:1.5;stroke-dasharray:6 6}
+      .ln{stroke:#1F4E5F;stroke-width:2;fill:none}
+      .lc{stroke:#C2603F;stroke-width:2;fill:none}
+    </style>
+  </defs>
+  <rect width="1600" height="1000" fill="#F3EFE9"/>
+  <ellipse cx="220" cy="120" rx="520" ry="300" fill="url(#blobSky)"/>
+  <ellipse cx="1420" cy="900" rx="520" ry="300" fill="url(#blobClay)"/>
+
+  <text x="64" y="84" class="h" font-size="34">Web Point · system architecture</text>
+  <text x="64" y="118" class="m" font-size="18">Restaurant POS and back office · Laravel 6 monolith · MySQL · touch-first browser UI</text>
+
+  <!-- column labels -->
+  <text x="64" y="186" class="lab" font-size="14">ON THE FLOOR</text>
+  <text x="520" y="186" class="lab" font-size="14">APPLICATION</text>
+  <text x="1140" y="186" class="lab" font-size="14">DATA</text>
+
+  <!-- terminals -->
+  <rect x="64" y="204" width="380" height="132" rx="16" class="card"/>
+  <circle cx="96" cy="238" r="6" fill="#C2603F"/>
+  <text x="114" y="244" class="h" font-size="20">Cashier &amp; waiter terminals</text>
+  <text x="88" y="276" class="t" font-size="15">PIN-pad login · floor plan · order ticket</text>
+  <text x="88" y="300" class="t" font-size="15">swipe actions · on-screen keyboard (EN / AR)</text>
+  <text x="88" y="322" class="m" font-size="14">each terminal has a device number + its own printer</text>
+
+  <rect x="64" y="356" width="380" height="110" rx="16" class="card"/>
+  <text x="88" y="394" class="h" font-size="20">Delivery desk</text>
+  <text x="88" y="424" class="t" font-size="15">customer by phone · saved addresses · areas</text>
+  <text x="88" y="448" class="t" font-size="15">hold list · hand-off to driver · driver cash</text>
+
+  <rect x="64" y="486" width="380" height="110" rx="16" class="card"/>
+  <text x="88" y="524" class="h" font-size="20">Manager / owner</text>
+  <text x="88" y="554" class="t" font-size="15">control panel · menu &amp; 3 price lists · halls</text>
+  <text x="88" y="578" class="t" font-size="15">shift &amp; day close · 10 reports</text>
+
+  <!-- browser layer note -->
+  <text x="64" y="636" class="m" font-size="14">Blade views + jQuery / AJAX · Bootstrap 4 · DataTables · jQuery UI touch</text>
+
+  <!-- app -->
+  <rect x="520" y="204" width="540" height="430" rx="24" class="zone"/>
+  <text x="548" y="242" class="h" font-size="22">Laravel 6 application</text>
+
+  <rect x="548" y="262" width="156" height="92" rx="14" class="card"/>
+  <text x="566" y="296" class="h" font-size="17">/menu</text>
+  <text x="566" y="320" class="m" font-size="13">tables, orders, pay,</text>
+  <text x="566" y="338" class="m" font-size="13">delivery, shifts</text>
+  <rect x="716" y="262" width="156" height="92" rx="14" class="card"/>
+  <text x="734" y="296" class="h" font-size="17">/admin</text>
+  <text x="734" y="320" class="m" font-size="13">menu, items, halls,</text>
+  <text x="734" y="338" class="m" font-size="13">printers, devices</text>
+  <rect x="884" y="262" width="148" height="92" rx="14" class="card"/>
+  <text x="902" y="296" class="h" font-size="17">/Reports</text>
+  <text x="902" y="320" class="m" font-size="13">10 reports,</text>
+  <text x="902" y="338" class="m" font-size="13">PDF via mPDF</text>
+
+  <rect x="548" y="374" width="484" height="148" rx="14" fill="#16303A"/>
+  <text x="572" y="408" font-family="Nunito,system-ui,sans-serif" font-weight="700" font-size="18" fill="#F3EFE9">Shared business rules (traits)</text>
+  <text x="572" y="438" font-family="Nunito,system-ui,sans-serif" font-size="14.5" fill="#CFE0E3">• day open / auto day-end at a set hour · shift close with checks</text>
+  <text x="572" y="462" font-family="Nunito,system-ui,sans-serif" font-size="14.5" fill="#CFE0E3">• tax &amp; service per channel: dine-in, take-away, delivery</text>
+  <text x="572" y="486" font-family="Nunito,system-ui,sans-serif" font-size="14.5" fill="#CFE0E3">• check serials per terminal + gap detection</text>
+  <text x="572" y="510" font-family="Nunito,system-ui,sans-serif" font-size="14.5" fill="#CFE0E3">• end-of-day archive · void / transfer / action logs</text>
+  <circle cx="1010" cy="402" r="6" fill="#C2603F"/>
+
+  <rect x="548" y="540" width="484" height="70" rx="14" class="card"/>
+  <text x="572" y="572" class="h" font-size="17">Roles &amp; permissions (Spatie)</text>
+  <text x="572" y="596" class="m" font-size="14">60+ permissions · per-hall access · per-user discount limit</text>
+
+  <!-- data -->
+  <rect x="1140" y="204" width="396" height="190" rx="16" class="card"/>
+  <text x="1164" y="240" class="h" font-size="20">Live day</text>
+  <text x="1164" y="268" class="t" font-size="15">orders · wait_orders · extras · details</text>
+  <text x="1164" y="292" class="t" font-size="15">tables (state, merged, reserved)</text>
+  <text x="1164" y="316" class="t" font-size="15">serial_check · serial_shift</text>
+  <text x="1164" y="348" class="m" font-size="14">kept small, so the POS stays fast</text>
+  <text x="1164" y="370" class="m" font-size="14">during service</text>
+
+  <rect x="1140" y="456" width="396" height="138" rx="16" class="card"/>
+  <text x="1164" y="492" class="h" font-size="20">History</text>
+  <text x="1164" y="520" class="t" font-size="15">orders_m · wait_orders_m · void_m</text>
+  <text x="1164" y="544" class="t" font-size="15">close_shift · log_transfers · log_infos</text>
+  <text x="1164" y="574" class="m" font-size="14">what the reports read</text>
+
+  <path d="M1338 394 L1338 452" class="ln" marker-end="url(#arr)"/>
+  <text x="1352" y="430" class="m" font-size="14">end of day: archive + clear</text>
+
+  <!-- printing -->
+  <rect x="520" y="700" width="540" height="232" rx="24" class="zone"/>
+  <text x="548" y="738" class="h" font-size="22">Printing (decoupled)</text>
+  <rect x="548" y="760" width="230" height="146" rx="14" fill="#F0D2C3"/>
+  <text x="568" y="794" class="h" font-size="17">order_print queue</text>
+  <text x="568" y="820" class="t" font-size="14">one row per job: new items,</text>
+  <text x="568" y="842" class="t" font-size="14">check, shift report</text>
+  <text x="568" y="868" class="m" font-size="13">printing runs outside the</text>
+  <text x="568" y="886" class="m" font-size="13">cashier's request</text>
+  <rect x="802" y="760" width="230" height="146" rx="14" class="card"/>
+  <text x="822" y="794" class="h" font-size="17">Print agent</text>
+  <text x="822" y="820" class="t" font-size="14">on the restaurant LAN</text>
+  <text x="822" y="842" class="m" font-size="13">(separate program,</text>
+  <text x="822" y="860" class="m" font-size="13">not in this repository)</text>
+  <path d="M778 833 L798 833" class="lc" marker-end="url(#arrC)"/>
+
+  <rect x="1140" y="700" width="396" height="232" rx="16" class="card"/>
+  <text x="1164" y="738" class="h" font-size="20">Printers, routed per item</text>
+  <rect x="1164" y="760" width="166" height="44" rx="10" fill="#CFE0E3"/><text x="1182" y="788" class="t" font-size="15">Grill kitchen</text>
+  <rect x="1346" y="760" width="166" height="44" rx="10" fill="#CFE0E3"/><text x="1364" y="788" class="t" font-size="15">Hot kitchen</text>
+  <rect x="1164" y="816" width="166" height="44" rx="10" fill="#CFE0E3"/><text x="1182" y="844" class="t" font-size="15">Bar</text>
+  <rect x="1346" y="816" width="166" height="44" rx="10" fill="#CFE0E3"/><text x="1364" y="844" class="t" font-size="15">Cashier (check)</text>
+  <text x="1164" y="896" class="m" font-size="14">kitchen slips use a separate item name</text>
+  <text x="1164" y="916" class="m" font-size="14">(e.g. Arabic) from the customer check</text>
+  <path d="M1032 833 L1136 833" class="lc" marker-end="url(#arrC)"/>
+
+  <!-- flows -->
+  <path d="M444 270 L516 300" class="ln" marker-end="url(#arr)"/>
+  <path d="M444 410 L516 330" class="ln" marker-end="url(#arr)"/>
+  <path d="M444 540 L516 360" class="ln" marker-end="url(#arr)"/>
+  <text x="458" y="236" class="m" font-size="13">AJAX</text>
+  <path d="M1060 300 L1136 300" class="ln" marker-end="url(#arr)"/>
+  <path d="M1060 525 L1136 525" class="ln" marker-end="url(#arr)"/>
+  <path d="M790 634 L790 696" class="lc" marker-end="url(#arrC)"/>
+  <text x="804" y="672" class="m" font-size="13">writes print jobs</text>
+
+  <text x="64" y="968" class="m" font-size="14">Demo diagram of the Web Point codebase. Names of tables and folders are taken from the code.</text>
+</svg>

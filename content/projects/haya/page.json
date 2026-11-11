@@ -1,0 +1,791 @@
+{
+  "slug": "haya",
+  "role": {
+    "ar": "المطوّر الرئيسي للواجهة الأمامية",
+    "en": "Lead frontend developer"
+  },
+  "problem": {
+    "ar": "في الإمارات تضع كل مؤسسة تعليمية منهجها بنفسها، وكانت منصات تعليم العربية لغير الناطقين بها أقل من المستوى المطلوب. فأراد العميل دخول السوق بمنتج أفضل: منصة لعدة مدارس، لكل مدرسة معلموها وصفوفها، ويستخدمها الأطفال بأنفسهم.",
+    "en": "In the UAE each school sets its own curriculum, and the platforms for teaching Arabic to non-native speakers were not at a high level. The client wanted to enter the market with a better product: one platform for many schools, each with its own teachers and classes, simple enough for young children to use alone."
+  },
+  "solution": {
+    "ar": "هيا منصة واحدة تخدم عدة مدارس. لكل مدرسة مدير ومعلمون وصفوف، ولا ترى إلا بياناتها. الطالب يقرأ كتبًا تفاعلية، ويحل واجبات بخمسة أنواع من الأسئلة، ويحصل على شهادة في كل مهارة. المعلم يجهّز الواجب من بنك أسئلة مشترك ويرى النتائج فورًا. ومدير المدرسة يتابع التقدّم لكل صف ولكل مهارة.",
+    "en": "HAYA is one platform that serves many schools. Each school gets its own admin, teachers and classes, and only sees its own data. Students read interactive books, solve homework with five question types, and earn a certificate for each skill. Teachers build tasks from a shared question bank and see results right away. School admins follow progress by class and by skill."
+  },
+  "features": [
+    {
+      "ar": "يحل الطالب أسئلة توصيل، وإكمال فراغ، واختيار من متعدد، وصح وخطأ، وأسئلة مقالية، وأغلبها يُصحَّح لحظة التسليم.",
+      "en": "Students solve matching, fill-the-blank, multiple-choice, true/false and essay questions, and most of them are marked the moment the task is submitted."
+    },
+    {
+      "ar": "يرسل المعلم الواجب للصف كاملًا أو لطلاب محددين، بموعد بداية ونهاية وعدد محاولات.",
+      "en": "Teachers assign homework to a whole class or to chosen students, with a time window and a set number of attempts."
+    },
+    {
+      "ar": "بعد التسليم يراجع الطالب كل إجابة: ما الصحيح، وما الخطأ، وما الإجابة الصحيحة.",
+      "en": "Each answer is reviewed after submission, so a student sees what was right, what was wrong and the correct answer."
+    },
+    {
+      "ar": "يُصدر المعلم شهادات القراءة والاستماع والكتابة والتحدث بخطوات قليلة، شهادة لكل طالب.",
+      "en": "Teachers issue certificates for reading, listening, writing and speaking in a few clicks, one image per student."
+    },
+    {
+      "ar": "يرى مدير المدرسة الطالب الأول ونتائج كل صف شهرًا بشهر، وتقدّم كل صف في كل مهارة.",
+      "en": "School admins see the top student and class results month by month, plus progress per skill for each class."
+    },
+    {
+      "ar": "كل حساب يعمل على عدد محدد من الأجهزة، حتى لا تُستخدم الحسابات بشكل مشترك.",
+      "en": "Each account can sign in on a limited number of devices, so accounts aren't shared."
+    }
+  ],
+  "results": [
+    {
+      "value": "Live",
+      "label": {
+        "ar": "تعمل على hayaedu.com",
+        "en": "running at hayaedu.com"
+      },
+      "verified": true
+    },
+    {
+      "value": "13",
+      "label": {
+        "ar": "مدرسة شريكة",
+        "en": "partner schools"
+      },
+      "verified": true
+    },
+    {
+      "value": "8,923",
+      "label": {
+        "ar": "طالبًا",
+        "en": "students"
+      },
+      "verified": true
+    },
+    {
+      "value": "5",
+      "label": {
+        "ar": "أنواع أسئلة",
+        "en": "question types"
+      },
+      "verified": true
+    },
+    {
+      "value": "4",
+      "label": {
+        "ar": "مهارات لكل منها شهادة",
+        "en": "skills, each with its own certificate"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "Laravel 11",
+    "PHP",
+    "MySQL",
+    "Blade",
+    "Bootstrap",
+    "jQuery",
+    "LeaderLine",
+    "Canvas API",
+    "Lottie",
+    "nwidart/laravel-modules",
+    "Laravel Excel",
+    "DomPDF"
+  ],
+  "techNotes": {
+    "ar": "Laravel 11 مع واجهات Blade، وMySQL، وBootstrap وjQuery. مساحة الطالب module مستقل (nwidart/laravel-modules)، ولكل دور مجموعة routes وcontrollers خاصة به. بدأ المشروع من نظام LMS جاهز، ثم أُضيفت إليه المدارس والصفوف وبنك الأسئلة والواجبات وتكليفات القصص والشهادات والتقارير.\n\nقرارات تقنية تستحق الذكر:\n\n- **سؤال التوصيل بخطوط مرسومة.** يضغط الطالب على عنصر من كل عمود فيظهر سهم ملوّن بينهما. يتغيّر ترتيب العمودين في كل محاولة، وتُرسل الإجابة كأزواج من المعرّفات (IDs)، فيصحّح السيرفر دون الاعتماد على ترتيب الشاشة.\n- **إكمال الفراغ من نص عادي.** يكتب المعلم الجملة ويضع `___` مكان كل فراغ، فتحوّل الشاشة كل فراغ إلى خانة إجابة، وتخلط الإجابات الصحيحة مع إجابات مشتِّتة في أزرار سهلة الضغط.\n- **الشهادات تُرسم في المتصفح.** لكل مهارة قالب مرسوم خاص بها. شاشة المعلم ترسم شهادة لكل طالب على canvas وترفعها صورة جاهزة، فلا يحتاج السيرفر إلى رسم أي تصميم.",
+    "en": "Laravel 11 with server-rendered Blade, MySQL, Bootstrap and jQuery. The student area is a separate module (nwidart/laravel-modules), and each role has its own route group and controllers. The project started from a ready-made LMS base and was extended with schools, classes, the question bank, homework, story assignments, certificates and reports.\n\nThree decisions worth noting:\n\n- **Matching with drawn connections.** Students tap an item on each side and a coloured arrow connects them. Both columns are shuffled on every attempt, and the pairs are sent as IDs, so the server can mark them without trusting the order on screen.\n- **Fill-the-blank from plain text.** The teacher writes a sentence with `___` where the gaps go. The screen turns each gap into a drop zone and mixes the right answers with distractors as tappable chips.\n- **Certificates rendered in the browser.** Each skill has its own illustrated template. The teacher's screen draws a certificate per student on a canvas and uploads the finished images, so the server never has to render artwork."
+  },
+  "caseStudy": {
+    "ar": {
+      "title": "هيا أكاديمي",
+      "lead": "منصة تعليمية للمدارس: دروس تفاعلية في مهارات اللغة العربية، وواجبات تُصحَّح تلقائيًا، وتقرير لكل صف ولكل مهارة.",
+      "sections": [
+        {
+          "heading": "المشكلة",
+          "kind": "plain",
+          "html": "<p>في الإمارات، تضع كل مؤسسة تعليمية منهجها بنفسها وتتحمّل مسؤوليته كاملًا. وكانت المنصات المتاحة لتعليم العربية لغير الناطقين بها أقل من المستوى المطلوب، فأراد العميل دخول هذا السوق بمنتج أفضل: منصة تخدم عدة مدارس، لكل مدرسة معلموها وصفوفها، ويستخدمها الأطفال بأنفسهم بسهولة.</p>"
+        },
+        {
+          "heading": "الحل",
+          "kind": "plain",
+          "html": "<p>هيا منصة واحدة تخدم عدة مدارس. لكل مدرسة مدير ومعلمون وصفوف، ولا ترى إلا بياناتها. الطالب يقرأ كتبًا تفاعلية، ويحل واجبات بخمسة أنواع من الأسئلة، ويحصل على شهادة في كل مهارة. المعلم يجهّز الواجب من بنك أسئلة مشترك ويرى النتائج فورًا. ومدير المدرسة يتابع التقدّم لكل صف ولكل مهارة.</p>"
+        },
+        {
+          "heading": "أهم المميزات",
+          "kind": "plain",
+          "html": "<ul>\n<li>يحل الطالب أسئلة توصيل، وإكمال فراغ، واختيار من متعدد، وصح وخطأ، وأسئلة مقالية، وأغلبها يُصحَّح لحظة التسليم.</li>\n<li>يرسل المعلم الواجب للصف كاملًا أو لطلاب محددين، بموعد بداية ونهاية وعدد محاولات.</li>\n<li>بعد التسليم يراجع الطالب كل إجابة: ما الصحيح، وما الخطأ، وما الإجابة الصحيحة.</li>\n<li>يُصدر المعلم شهادات القراءة والاستماع والكتابة والتحدث بخطوات قليلة، شهادة لكل طالب.</li>\n<li>يرى مدير المدرسة الطالب الأول ونتائج كل صف شهرًا بشهر، وتقدّم كل صف في كل مهارة.</li>\n<li>كل حساب يعمل على عدد محدد من الأجهزة، حتى لا تُستخدم الحسابات بشكل مشترك.</li>\n</ul>"
+        },
+        {
+          "heading": "دوري",
+          "kind": "role",
+          "html": "<p>مطوّر الواجهة الأمامية الوحيد في المشروع. بنيت كل ما يراه الطالب: صفحة الهبوط بالعربية والإنجليزية، وتسجيل الدخول، ومساحة الطالب، ومشغّل الدروس، وأنواع الأسئلة الخمسة (شاشات الطالب ومنشئ الأسئلة عند المعلم)، وشاشات النتائج، وقوالب الشهادات. أما الواجهة الخلفية فبناها مطوّران للـ backend. وهي واحدة من منصتين لتعليم العربية لمدارس الإمارات بنيت واجهتهما، لشركتين مختلفتين.</p>"
+        },
+        {
+          "heading": "النتائج",
+          "kind": "plain",
+          "html": "<ul>\n<li>المنصة تعمل على <a href=\"https://www.hayaedu.com\">hayaedu.com</a></li>\n<li>13 مدرسة شريكة</li>\n<li>8,923 طالبًا</li>\n</ul>"
+        },
+        {
+          "heading": "من الداخل",
+          "kind": "tech",
+          "html": "<p>Laravel 11 مع واجهات Blade، وMySQL، وBootstrap وjQuery. مساحة الطالب module مستقل (nwidart/laravel-modules)، ولكل دور مجموعة routes وcontrollers خاصة به. بدأ المشروع من نظام LMS جاهز، ثم أُضيفت إليه المدارس والصفوف وبنك الأسئلة والواجبات وتكليفات القصص والشهادات والتقارير.</p>\n<p>قرارات تقنية تستحق الذكر:</p>\n<ul>\n<li><strong>سؤال التوصيل بخطوط مرسومة.</strong> يضغط الطالب على عنصر من كل عمود فيظهر سهم ملوّن بينهما. يتغيّر ترتيب العمودين في كل محاولة، وتُرسل الإجابة كأزواج من المعرّفات (IDs)، فيصحّح السيرفر دون الاعتماد على ترتيب الشاشة.</li>\n<li><strong>إكمال الفراغ من نص عادي.</strong> يكتب المعلم الجملة ويضع <code>___</code> مكان كل فراغ، فتحوّل الشاشة كل فراغ إلى خانة إجابة، وتخلط الإجابات الصحيحة مع إجابات مشتِّتة في أزرار سهلة الضغط.</li>\n<li><strong>الشهادات تُرسم في المتصفح.</strong> لكل مهارة قالب مرسوم خاص بها. شاشة المعلم ترسم شهادة لكل طالب على canvas وترفعها صورة جاهزة، فلا يحتاج السيرفر إلى رسم أي تصميم.</li>\n</ul>"
+        },
+        {
+          "heading": "الحالة",
+          "kind": "plain",
+          "html": "<p>تعمل حاليًا.</p>"
+        }
+      ]
+    },
+    "en": {
+      "title": "HAYA Academy",
+      "lead": "A learning platform for schools: interactive Arabic-language lessons, homework that marks itself, and a report for every class and skill.",
+      "sections": [
+        {
+          "heading": "The problem",
+          "kind": "plain",
+          "html": "<p>In the UAE, each school sets its own curriculum and is responsible for all of it, and the platforms available for teaching Arabic to non-native speakers were not at a high level. The client wanted to enter that market with a better product: one platform serving many schools, each with its own teachers and classes, simple enough for young children to use on their own.</p>"
+        },
+        {
+          "heading": "What was built",
+          "kind": "plain",
+          "html": "<p>HAYA is one platform that serves many schools. Each school gets its own admin, teachers and classes, and only sees its own data. Students read interactive books, solve homework with five question types, and earn a certificate for each skill. Teachers build tasks from a shared question bank and see results right away. School admins follow progress by class and by skill.</p>"
+        },
+        {
+          "heading": "Key features",
+          "kind": "plain",
+          "html": "<ul>\n<li>Students solve matching, fill-the-blank, multiple-choice, true/false and essay questions, and most of them are marked the moment the task is submitted.</li>\n<li>Teachers assign homework to a whole class or to chosen students, with a time window and a set number of attempts.</li>\n<li>Each answer is reviewed after submission, so a student sees what was right, what was wrong and the correct answer.</li>\n<li>Teachers issue certificates for reading, listening, writing and speaking in a few clicks, one image per student.</li>\n<li>School admins see the top student and class results month by month, plus progress per skill for each class.</li>\n<li>Each account can sign in on a limited number of devices, so accounts aren&#39;t shared.</li>\n</ul>"
+        },
+        {
+          "heading": "My role",
+          "kind": "role",
+          "html": "<p>The only frontend developer on the project. I built everything the student sees: the Arabic and English landing page, login, the student area, the lesson player, all five question types (both the student screens and the teacher&#39;s question builder), result screens and the certificate templates. The backend was built by two backend developers. This is one of two Arabic-learning platforms for UAE schools whose frontend I built, for two different companies.</p>"
+        },
+        {
+          "heading": "Results",
+          "kind": "plain",
+          "html": "<ul>\n<li>Live at <a href=\"https://www.hayaedu.com\">hayaedu.com</a></li>\n<li>13 partner schools</li>\n<li>8,923 students</li>\n</ul>"
+        },
+        {
+          "heading": "Under the hood",
+          "kind": "tech",
+          "html": "<p>Laravel 11 with server-rendered Blade, MySQL, Bootstrap and jQuery. The student area is a separate module (nwidart/laravel-modules), and each role has its own route group and controllers. The project started from a ready-made LMS base and was extended with schools, classes, the question bank, homework, story assignments, certificates and reports.</p>\n<p>Three decisions worth noting:</p>\n<ul>\n<li><strong>Matching with drawn connections.</strong> Students tap an item on each side and a coloured arrow connects them. Both columns are shuffled on every attempt, and the pairs are sent as IDs, so the server can mark them without trusting the order on screen.</li>\n<li><strong>Fill-the-blank from plain text.</strong> The teacher writes a sentence with <code>___</code> where the gaps go. The screen turns each gap into a drop zone and mixes the right answers with distractors as tappable chips.</li>\n<li><strong>Certificates rendered in the browser.</strong> Each skill has its own illustrated template. The teacher&#39;s screen draws a certificate per student on a canvas and uploads the finished images, so the server never has to render artwork.</li>\n</ul>"
+        },
+        {
+          "heading": "Status",
+          "kind": "plain",
+          "html": "<p>Live.</p>"
+        }
+      ]
+    }
+  },
+  "shots": [
+    {
+      "name": "task-matching-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "سؤال توصيل: الطالب يصل الصورة بالكلمة بأسهم ملوّنة",
+        "en": "Matching question: students connect each picture to its word"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-task-matching-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-task-matching-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-task-matching-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-task-matching-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "task-result-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "نتيجة الواجب مع مراجعة كل إجابة",
+        "en": "Task result with a review of every answer"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-task-result-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-task-result-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-task-result-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-task-result-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "lesson-book-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "مشغّل الدروس مع كتاب تفاعلي وقائمة الدروس",
+        "en": "Lesson player with an interactive book and the lesson list"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-lesson-book-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-lesson-book-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-lesson-book-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-lesson-book-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "certificates-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "شهادات الطالب في المهارات الأربع",
+        "en": "A student's certificates for the four skills"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-certificates-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-certificates-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-certificates-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-certificates-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "landing-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "صفحة الهبوط بالعربية",
+        "en": "Landing page in Arabic"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-landing-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-landing-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-landing-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-landing-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "landing-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "صفحة الهبوط بالإنجليزية",
+        "en": "Landing page in English"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-landing-en-800.avif",
+            "webp": "/projects/haya/shots/desktop-landing-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-landing-en-1600.avif",
+            "webp": "/projects/haya/shots/desktop-landing-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "student-courses-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "المنهج الأساسي للطالب مع نسبة التقدّم",
+        "en": "The student's main curriculum with progress"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-student-courses-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-student-courses-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-student-courses-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-student-courses-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "task-blanks-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "سؤال إكمال الفراغ",
+        "en": "Fill-the-blank question"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-task-blanks-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-task-blanks-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-task-blanks-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-task-blanks-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "certificate-view-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "عرض شهادة القراءة",
+        "en": "Viewing a reading certificate"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-certificate-view-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-certificate-view-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-certificate-view-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-certificate-view-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "top-students-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "أبطال الشهر في الصف",
+        "en": "Top students of the month in a class"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-top-students-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-top-students-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-top-students-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-top-students-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "login-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "تسجيل الدخول",
+        "en": "Sign-in page"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-login-ar-800.avif",
+            "webp": "/projects/haya/shots/desktop-login-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-login-ar-1600.avif",
+            "webp": "/projects/haya/shots/desktop-login-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "school-dashboard-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "لوحة مدير المدرسة: الطالب الأول ونتائج كل صف شهريًا",
+        "en": "School dashboard: top student and monthly results per class"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-school-dashboard-en-800.avif",
+            "webp": "/projects/haya/shots/desktop-school-dashboard-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-school-dashboard-en-1600.avif",
+            "webp": "/projects/haya/shots/desktop-school-dashboard-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "school-skills-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "تقدّم الصف في كل مهارة وعدد التسليمات",
+        "en": "Class progress per skill and submissions per month"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-school-skills-en-800.avif",
+            "webp": "/projects/haya/shots/desktop-school-skills-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-school-skills-en-1600.avif",
+            "webp": "/projects/haya/shots/desktop-school-skills-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "teacher-certificates-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "المعلم يُصدر شهادات لعدة طلاب مرة واحدة",
+        "en": "A teacher issuing certificates to several students at once"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-teacher-certificates-en-800.avif",
+            "webp": "/projects/haya/shots/desktop-teacher-certificates-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-teacher-certificates-en-1600.avif",
+            "webp": "/projects/haya/shots/desktop-teacher-certificates-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "question-builder-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "منشئ سؤال التوصيل عند المعلم",
+        "en": "The matching question builder"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-question-builder-en-800.avif",
+            "webp": "/projects/haya/shots/desktop-question-builder-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-question-builder-en-1600.avif",
+            "webp": "/projects/haya/shots/desktop-question-builder-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "task-matching-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "سؤال التوصيل بواجهة إنجليزية",
+        "en": "Matching question with the English interface"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-task-matching-en-800.avif",
+            "webp": "/projects/haya/shots/desktop-task-matching-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-task-matching-en-1600.avif",
+            "webp": "/projects/haya/shots/desktop-task-matching-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "student-courses-en",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "المنهج الأساسي بواجهة إنجليزية",
+        "en": "Main curriculum with the English interface"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/haya/shots/desktop-student-courses-en-800.avif",
+            "webp": "/projects/haya/shots/desktop-student-courses-en-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/haya/shots/desktop-student-courses-en-1600.avif",
+            "webp": "/projects/haya/shots/desktop-student-courses-en-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "landing-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "صفحة الهبوط على الجوال",
+        "en": "Landing page on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/haya/shots/mobile-landing-ar-390.avif",
+            "webp": "/projects/haya/shots/mobile-landing-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/haya/shots/mobile-landing-ar-780.avif",
+            "webp": "/projects/haya/shots/mobile-landing-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "landing-en",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "صفحة الهبوط بالإنجليزية على الجوال",
+        "en": "English landing page on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/haya/shots/mobile-landing-en-390.avif",
+            "webp": "/projects/haya/shots/mobile-landing-en-390.webp"
+          },
+          "780": {
+            "avif": "/projects/haya/shots/mobile-landing-en-780.avif",
+            "webp": "/projects/haya/shots/mobile-landing-en-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "student-courses-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "المنهج على الجوال",
+        "en": "Curriculum on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/haya/shots/mobile-student-courses-ar-390.avif",
+            "webp": "/projects/haya/shots/mobile-student-courses-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/haya/shots/mobile-student-courses-ar-780.avif",
+            "webp": "/projects/haya/shots/mobile-student-courses-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "certificates-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "الشهادات على الجوال",
+        "en": "Certificates on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/haya/shots/mobile-certificates-ar-390.avif",
+            "webp": "/projects/haya/shots/mobile-certificates-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/haya/shots/mobile-certificates-ar-780.avif",
+            "webp": "/projects/haya/shots/mobile-certificates-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "certificate-view-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "عرض الشهادة على الجوال",
+        "en": "Viewing a certificate on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/haya/shots/mobile-certificate-view-ar-390.avif",
+            "webp": "/projects/haya/shots/mobile-certificate-view-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/haya/shots/mobile-certificate-view-ar-780.avif",
+            "webp": "/projects/haya/shots/mobile-certificate-view-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "top-students-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "أبطال الشهر على الجوال",
+        "en": "Top students on a phone"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/haya/shots/mobile-top-students-ar-390.avif",
+            "webp": "/projects/haya/shots/mobile-top-students-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/haya/shots/mobile-top-students-ar-780.avif",
+            "webp": "/projects/haya/shots/mobile-top-students-ar-780.webp"
+          }
+        }
+      }
+    }
+  ],
+  "videos": [
+    {
+      "name": "task-solve",
+      "lang": null,
+      "caption": {
+        "ar": "الطالب يحل الواجب: توصيل الصور بالكلمات ثم إكمال الفراغ",
+        "en": "A student solving a task: matching pictures to words, then filling the blanks"
+      },
+      "mp4": "/projects/haya/videos/task-solve.mp4",
+      "webm": "/projects/haya/videos/task-solve.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/haya/videos/task-solve-poster-960.avif",
+            "webp": "/projects/haya/videos/task-solve-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/haya/videos/task-solve-poster-1440.avif",
+            "webp": "/projects/haya/videos/task-solve-poster-1440.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "task-result",
+      "lang": null,
+      "caption": {
+        "ar": "التسليم ثم النتيجة ومراجعة الإجابات",
+        "en": "Submitting, then the result and the answer review"
+      },
+      "mp4": "/projects/haya/videos/task-result.mp4",
+      "webm": "/projects/haya/videos/task-result.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/haya/videos/task-result-poster-960.avif",
+            "webp": "/projects/haya/videos/task-result-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/haya/videos/task-result-poster-1440.avif",
+            "webp": "/projects/haya/videos/task-result-poster-1440.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "teacher-certificates",
+      "lang": null,
+      "caption": {
+        "ar": "المعلم يختار المهارة والصف والطلاب فتظهر الشهادات جاهزة",
+        "en": "A teacher picks the skill, class and students, and the certificates are ready"
+      },
+      "mp4": "/projects/haya/videos/teacher-certificates.mp4",
+      "webm": "/projects/haya/videos/teacher-certificates.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/haya/videos/teacher-certificates-poster-960.avif",
+            "webp": "/projects/haya/videos/teacher-certificates-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/haya/videos/teacher-certificates-poster-1440.avif",
+            "webp": "/projects/haya/videos/teacher-certificates-poster-1440.webp"
+          }
+        }
+      }
+    }
+  ],
+  "diagram": "/projects/haya/diagram.svg"
+}

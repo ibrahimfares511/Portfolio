@@ -1,0 +1,675 @@
+{
+  "slug": "elite",
+  "role": {
+    "ar": "المطوّر الرئيسي للواجهة الأمامية",
+    "en": "Lead frontend developer"
+  },
+  "problem": {
+    "ar": "كانت Elite تطبيق جوال فقط، واحتاجت الشركة نسخة ويب بالمزايا نفسها (العروض والخريطة والمحادثات والفعاليات والنقاط) يفتحها الموظف من المتصفح، وتعمل مع كل شركة عميلة بهويتها.",
+    "en": "Elite was only a mobile app. The company needed a web version with the same benefits (offers, map, chat, events and points) that employees could open in a browser, working for every client company under its own brand."
+  },
+  "solution": {
+    "ar": "تطبيق ويب واحد بهوية كل شركة: عروض حسب القطاع والمدينة وعلى الخريطة، ومحادثة مباشرة مع المحل، وخصم في المحل بمسح رمز QR ورفع الفاتورة، وفعاليات للشركة تتحوّل إلى نقاط وهدايا.",
+    "en": "One web app that wears each company's brand: offers by sector, city and on a map, direct chat with shops, in-store redemption by QR scan and receipt upload, and company events that turn into points and gifts."
+  },
+  "features": [
+    {
+      "ar": "أقرب العروض على الخريطة بمسافة بحث يحددها الموظف",
+      "en": "Closest offers on a map, within a radius the employee sets"
+    },
+    {
+      "ar": "الخصم في المحل بمسح رمز QR ورفع صورة الفاتورة",
+      "en": "Redeem in store by scanning a QR code and uploading the receipt"
+    },
+    {
+      "ar": "محادثة مع المحل: رسائل صوتية، ومشاركة موقع، وردود، وتحويل",
+      "en": "Chat with shops: voice notes, locations, replies, forwarding"
+    },
+    {
+      "ar": "5 أنواع فعاليات: ماراثون خطوات، وتصويت، وتحدٍّ يومي، وبطولات بدعوات، واستبيان",
+      "en": "5 event types: step marathons, voting, daily streaks, tournaments with invitations, survey"
+    },
+    {
+      "ar": "نقاط تُجمع وتُرسل للزملاء وتُستبدل بهدايا",
+      "en": "Points to earn, send to colleagues and exchange for gifts"
+    },
+    {
+      "ar": "كل شركة بشعارها وألوانها من النسخة نفسها",
+      "en": "Each company's logo and colours from one build"
+    }
+  ],
+  "results": [
+    {
+      "value": "8",
+      "label": {
+        "ar": "شركات تستخدمه",
+        "en": "companies using it"
+      },
+      "verified": true
+    },
+    {
+      "value": "13,326",
+      "label": {
+        "ar": "موظفًا لديهم حساب",
+        "en": "employees with an account"
+      },
+      "verified": true
+    },
+    {
+      "value": "2",
+      "label": {
+        "ar": "أشهر من أول سطر برمجي حتى الإطلاق",
+        "en": "months from first commit to launch"
+      },
+      "verified": true
+    },
+    {
+      "value": "5",
+      "label": {
+        "ar": "أنواع فعاليات",
+        "en": "event types"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "React 18",
+    "Vite",
+    "Redux Toolkit",
+    "redux-persist",
+    "React-Bootstrap",
+    "axios",
+    "Firebase Cloud Messaging",
+    "Google Maps JS API",
+    "ApexCharts"
+  ],
+  "techNotes": {
+    "ar": "نسخة واحدة لكل الشركات: رقم الشركة في رابط الدخول يحدد الشعار والألوان (متغيرات CSS). محادثة لحظية فوق REST عبر إشعارات Firebase ونبضة لحالة الاتصال. طبقة axios واحدة فيها وضع صيانة وخروج تلقائي عند انتهاء الجلسة، و13 slice في Redux.",
+    "en": "One build for every client: the client ID in the login link sets the logo and colours (CSS variables). Real-time chat on a REST API via Firebase push and a presence heartbeat. One axios layer with a maintenance switch and automatic logout on expired sessions; 13 Redux slices."
+  },
+  "caseStudy": {
+    "ar": {
+      "title": "Elite: منصة مزايا للموظفين",
+      "lead": "تطبيق ويب يربط موظفي الشركات بعروض وخصومات المحلات والمطاعم والنوادي، ويجمعهم في فعاليات ونقاط وهدايا. الحالة: يعمل حاليًا مع 8 شركات و13,326 موظفًا.",
+      "sections": [
+        {
+          "heading": "المشكلة قبل النظام",
+          "kind": "plain",
+          "html": "<p>كانت Elite متاحة كتطبيق جوال فقط. واحتاجت الشركة نسخة ويب تقدّم المزايا نفسها (العروض والخريطة والمحادثات والفعاليات والنقاط)، يفتحها الموظف من المتصفح، وتعمل مع كل شركة عميلة بهويتها الخاصة.</p>"
+        },
+        {
+          "heading": "ما الذي بُني",
+          "kind": "plain",
+          "html": "<p>تطبيق ويب واحد يأخذ هوية كل شركة (الشعار والألوان)، لذلك تظهر الصور هنا بهوية شركة تجريبية. يدخل الموظف برقم جواله أو بريده الإلكتروني، ويجد العروض حسب القطاع والمدينة وعلى الخريطة، ويراسل المحل في محادثة مباشرة، ويحصل على الخصم في المحل بمسح رمز QR ورفع صورة الفاتورة. وفي التطبيق نفسه تنظّم الشركة فعاليات لموظفيها، وتتحوّل كل مشاركة إلى نقاط يستبدلها الموظف بهدايا.</p>"
+        },
+        {
+          "heading": "أهم المميزات",
+          "kind": "plain",
+          "html": "<ul>\n<li>يجد الموظف أقرب عرض إليه على الخريطة، ويحدّد مسافة البحث بنفسه.</li>\n<li>يُطبَّق الخصم في المحل بمسح رمز QR ورفع صورة الفاتورة، فترى الشركة الاستفادة الحقيقية.</li>\n<li>يراسل الموظف المحل في محادثة فيها رسائل صوتية ومشاركة موقع وردود وتحويل رسائل.</li>\n<li>تنظّم الشركة 5 أنواع من الفعاليات: ماراثون خطوات بترتيب حسب الأقسام، ومسابقات تصويت، وتحديات يومية، وبطولات بدعوات بين الزملاء، واستبيان جودة الحياة.</li>\n<li>تُجمع النقاط من الفعاليات، وتُرسَل إلى الزملاء، وتُستبدَل بهدايا.</li>\n<li>تظهر كل شركة بشعارها وألوانها من النسخة نفسها، دون إصدار منفصل.</li>\n</ul>"
+        },
+        {
+          "heading": "دوري",
+          "kind": "role",
+          "html": "<p>المطوّر الرئيسي للواجهة الأمامية (Frontend). بنيت التطبيق من أول سطر برمجي خلال شهرين (يونيو 2024)، وما زلت أتابع التعديلات والإضافات عليه حتى اليوم. كتبت 283 من أصل 289 commit.</p>"
+        },
+        {
+          "heading": "لوحة التحكم: Smart Control",
+          "kind": "plain",
+          "html": "<p>خلف التطبيق لوحة تحكم اسمها Smart Control، تدير منها الإدارة والشركات العميلة والشركاء العروض والهدايا والفعاليات والتقارير. وهي نظام له أجزاؤه الخاصة أيضًا، وأعمل على واجهتها منذ 2024. تفاصيلها في صفحتها المستقلة.</p>"
+        },
+        {
+          "heading": "النتائج",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>8</strong> شركات تستخدم التطبيق حاليًا</li>\n<li><strong>13,326</strong> موظفًا لديهم حساب عليه</li>\n<li><strong>شهران</strong> من أول سطر برمجي حتى الإطلاق</li>\n<li><strong>5</strong> أنواع فعاليات، إلى جانب النقاط والهدايا</li>\n</ul>"
+        },
+        {
+          "heading": "من الداخل (للتقنيين)",
+          "kind": "tech",
+          "html": "<p><strong>الأدوات:</strong> React 18 وVite وRedux Toolkit مع redux-persist وReact-Bootstrap وaxios وFirebase Cloud Messaging وGoogle Maps.</p>\n<p><strong>قرارات هندسية:</strong></p>\n<ol>\n<li><strong>نسخة واحدة لكل الشركات.</strong> يحمل رابط الدخول رقم الشركة، فيجلب التطبيق شعارها ويستخدمه أيضًا أيقونةً للمتصفح، ويطبّق ألوانها كمتغيرات CSS. الكود نفسه والـ build نفسه لكل العملاء.</li>\n<li><strong>محادثة لحظية فوق REST.</strong> تصل الرسائل الجديدة عبر إشعارات Firebase وتدخل الـ store مباشرة، وتتحدّث حالة &quot;متصل&quot; بنبضة كلما فتح الموظف التبويب أو أغلقه أو انقطع الاتصال.</li>\n<li><strong>طبقة API واحدة تحمي التطبيق.</strong> وضع صيانة يوقف كل الطلبات برسالة واحدة، وأي جلسة منتهية تعيد الموظف إلى تسجيل الدخول تلقائيًا. والـ state مقسّم إلى 13 slice، لكل endpoint منها thunk خاص به.</li>\n</ol>"
+        },
+        {
+          "heading": "الحالة",
+          "kind": "plain",
+          "html": "<p>يعمل</p>"
+        }
+      ]
+    },
+    "en": {
+      "title": "Elite: employee benefits platform",
+      "lead": "A web app that gives company employees discounts at local shops, restaurants and gyms, and brings them together through events, points and gifts. Status: live with 8 companies and 13,326 employees.",
+      "sections": [
+        {
+          "heading": "The problem",
+          "kind": "plain",
+          "html": "<p>Elite was only available as a mobile app. The company needed a web version with the same benefits (offers, the map, chat, events and points) that employees could open in a browser, and that would work for every client company under its own brand.</p>"
+        },
+        {
+          "heading": "What was built",
+          "kind": "plain",
+          "html": "<p>One web app that wears each company&#39;s brand (logo and colours), so the screens here use a demo company&#39;s brand. Employees sign in with their phone number or email, browse offers by sector, city or on a map, message the shop directly, and redeem in store by scanning the shop&#39;s QR code and uploading a photo of the receipt. In the same app, the company runs events for its staff, and every bit of participation turns into points employees can spend on gifts.</p>"
+        },
+        {
+          "heading": "Key features",
+          "kind": "plain",
+          "html": "<ul>\n<li>Find the closest offers on a map, with a search radius the employee sets.</li>\n<li>Redeem in store by scanning a QR code and uploading the receipt, so the company sees real usage.</li>\n<li>Chat with shops: voice notes, shared locations, replies and forwarded messages.</li>\n<li>Five event types for the company to run: step marathons with a department leaderboard, photo voting, daily streaks, tournaments with invitations between colleagues, and a work-life survey.</li>\n<li>Points earned from events, sent to colleagues and exchanged for gifts.</li>\n<li>Every company gets its own logo and colours without a separate build.</li>\n</ul>"
+        },
+        {
+          "heading": "My role",
+          "kind": "role",
+          "html": "<p>Lead frontend developer. I built the app from the first commit in two months (June 2024), and I have kept shipping changes and new features on it since. 283 of the 289 commits are mine.</p>"
+        },
+        {
+          "heading": "The dashboard: Smart Control",
+          "kind": "plain",
+          "html": "<p>Behind the app is a dashboard called Smart Control, where the admin team, client companies and partners manage offers, gifts, events and reports. It is also a system with parts of its own, and I have worked on its interface since 2024. It has its own page.</p>"
+        },
+        {
+          "heading": "Results",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>8</strong> companies using it today</li>\n<li><strong>13,326</strong> employees with an account</li>\n<li><strong>2 months</strong> from first commit to launch</li>\n<li><strong>5</strong> event types, plus points and gifts</li>\n</ul>"
+        },
+        {
+          "heading": "Under the hood",
+          "kind": "tech",
+          "html": "<p><strong>Stack:</strong> React 18, Vite, Redux Toolkit with redux-persist, React-Bootstrap, axios, Firebase Cloud Messaging, Google Maps JS API.</p>\n<p><strong>Engineering decisions:</strong></p>\n<ol>\n<li><strong>One build, many brands.</strong> The login link carries the client&#39;s ID; the app loads that client&#39;s logo (also swapped into the favicon and home-screen icon) and applies its colours as CSS variables. Same code and the same deployment for every client.</li>\n<li><strong>Real-time chat on top of a REST API.</strong> New messages arrive as Firebase push events and go straight into the Redux store. Online status is kept fresh by a heartbeat on tab visibility and network changes.</li>\n<li><strong>One API layer that protects the whole app.</strong> A single maintenance switch stops every request with one message, and an expired session sends the user back to login automatically. State is split into 13 slices with one async thunk per endpoint.</li>\n</ol>"
+        },
+        {
+          "heading": "Status",
+          "kind": "plain",
+          "html": "<p>Live</p>"
+        }
+      ]
+    }
+  },
+  "shots": [
+    {
+      "name": "home-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الرئيسية بهوية شركة تجريبية: فعاليات الشركة والعروض المختارة",
+        "en": "Home in a demo company's brand: company events and picked offers"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-home-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-home-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-home-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-home-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "home-offers-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "العروض حسب القطاع مع قصص المحلات",
+        "en": "Offers by sector, with shop stories"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-home-offers-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-home-offers-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-home-offers-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-home-offers-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "map-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الخريطة: المحلات داخل مسافة البحث",
+        "en": "Map: shops within the search radius"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-map-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-map-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-map-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-map-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "map-results-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "نتائج البحث مرتبة حسب المسافة",
+        "en": "Search results sorted by distance"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-map-results-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-map-results-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-map-results-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-map-results-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "chat-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "محادثة مع المحل: موقع، ورسالة صوتية، ورد",
+        "en": "Chat with a shop: location, voice note, reply"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-chat-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-chat-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-chat-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-chat-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "events-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "فعاليات الشركة",
+        "en": "Company events"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-events-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-events-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-events-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-events-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "marathon-leaderboard-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "أول 20 موظفًا في الماراثون",
+        "en": "Marathon top 20"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-marathon-leaderboard-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-marathon-leaderboard-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-marathon-leaderboard-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-marathon-leaderboard-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "vote-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "مسابقة تصويت بين الزملاء",
+        "en": "Colleagues' voting contest"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-vote-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-vote-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-vote-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-vote-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "points-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "رصيد النقاط وسجلها",
+        "en": "Points balance and history"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-points-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-points-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-points-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-points-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "gifts-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الهدايا المتاحة بالنقاط",
+        "en": "Gifts available for points"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-gifts-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-gifts-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-gifts-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-gifts-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "survey-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "استبيان جودة الحياة",
+        "en": "Work-life survey"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/elite/shots/desktop-survey-ar-800.avif",
+            "webp": "/projects/elite/shots/desktop-survey-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/elite/shots/desktop-survey-ar-1600.avif",
+            "webp": "/projects/elite/shots/desktop-survey-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "home-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "الرئيسية على الجوال",
+        "en": "Home on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/elite/shots/mobile-home-ar-390.avif",
+            "webp": "/projects/elite/shots/mobile-home-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/elite/shots/mobile-home-ar-780.avif",
+            "webp": "/projects/elite/shots/mobile-home-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "offer-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "العرض على الجوال",
+        "en": "Offer on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/elite/shots/mobile-offer-ar-390.avif",
+            "webp": "/projects/elite/shots/mobile-offer-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/elite/shots/mobile-offer-ar-780.avif",
+            "webp": "/projects/elite/shots/mobile-offer-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "map-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "الخريطة على الجوال",
+        "en": "Map on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/elite/shots/mobile-map-ar-390.avif",
+            "webp": "/projects/elite/shots/mobile-map-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/elite/shots/mobile-map-ar-780.avif",
+            "webp": "/projects/elite/shots/mobile-map-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "chat-list-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "المحادثات",
+        "en": "Chats"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/elite/shots/mobile-chat-list-ar-390.avif",
+            "webp": "/projects/elite/shots/mobile-chat-list-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/elite/shots/mobile-chat-list-ar-780.avif",
+            "webp": "/projects/elite/shots/mobile-chat-list-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "chat-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "محادثة مع محل",
+        "en": "A chat with a shop"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/elite/shots/mobile-chat-ar-390.avif",
+            "webp": "/projects/elite/shots/mobile-chat-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/elite/shots/mobile-chat-ar-780.avif",
+            "webp": "/projects/elite/shots/mobile-chat-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "events-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "الفعاليات على الجوال",
+        "en": "Events on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/elite/shots/mobile-events-ar-390.avif",
+            "webp": "/projects/elite/shots/mobile-events-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/elite/shots/mobile-events-ar-780.avif",
+            "webp": "/projects/elite/shots/mobile-events-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "points-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "النقاط على الجوال",
+        "en": "Points on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/elite/shots/mobile-points-ar-390.avif",
+            "webp": "/projects/elite/shots/mobile-points-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/elite/shots/mobile-points-ar-780.avif",
+            "webp": "/projects/elite/shots/mobile-points-ar-780.webp"
+          }
+        }
+      }
+    }
+  ],
+  "videos": [
+    {
+      "name": "qr-redeem",
+      "lang": null,
+      "caption": {
+        "ar": "مسح رمز المحل، ثم الخصم، ثم رفع الفاتورة",
+        "en": "Scan the shop's code, get the discount, upload the receipt"
+      },
+      "mp4": "/projects/elite/videos/qr-redeem.mp4",
+      "webm": "/projects/elite/videos/qr-redeem.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/elite/videos/qr-redeem-poster-960.avif",
+            "webp": "/projects/elite/videos/qr-redeem-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/elite/videos/qr-redeem-poster-1440.avif",
+            "webp": "/projects/elite/videos/qr-redeem-poster-1440.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "map-discovery",
+      "lang": null,
+      "caption": {
+        "ar": "من الخريطة إلى أقرب عرض",
+        "en": "From the map to the nearest offer"
+      },
+      "mp4": "/projects/elite/videos/map-discovery.mp4",
+      "webm": "/projects/elite/videos/map-discovery.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/elite/videos/map-discovery-poster-960.avif",
+            "webp": "/projects/elite/videos/map-discovery-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/elite/videos/map-discovery-poster-1440.avif",
+            "webp": "/projects/elite/videos/map-discovery-poster-1440.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "tournament-join",
+      "lang": null,
+      "caption": {
+        "ar": "قبول دعوة زميل لبطولة البادل",
+        "en": "Accepting a colleague's invite to a padel tournament"
+      },
+      "mp4": "/projects/elite/videos/tournament-join.mp4",
+      "webm": "/projects/elite/videos/tournament-join.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/elite/videos/tournament-join-poster-960.avif",
+            "webp": "/projects/elite/videos/tournament-join-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/elite/videos/tournament-join-poster-1440.avif",
+            "webp": "/projects/elite/videos/tournament-join-poster-1440.webp"
+          }
+        }
+      }
+    }
+  ],
+  "diagram": "/projects/elite/diagram.svg"
+}

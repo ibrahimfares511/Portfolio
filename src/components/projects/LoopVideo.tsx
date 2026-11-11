@@ -16,7 +16,7 @@ export function LoopVideo({
   label,
 }: {
   mp4: string;
-  webm: string;
+  webm?: string | null;
   poster: ImageSet;
   active: boolean;
   label: string;
@@ -67,7 +67,7 @@ export function LoopVideo({
         className="absolute inset-0 size-full object-cover object-top opacity-0 transition-opacity duration-500 data-[on]:opacity-100"
         onPlaying={(e) => (e.currentTarget.dataset.on = "1")}
       >
-        <source src={webm} type="video/webm" />
+        {webm ? <source src={webm} type="video/webm" /> : null}
         <source src={mp4} type="video/mp4" />
       </video>
     </div>

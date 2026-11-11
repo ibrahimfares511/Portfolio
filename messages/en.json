@@ -224,5 +224,29 @@
     "error": "The message didn't go through. Try again, or message me on WhatsApp.",
     "sendAnother": "Send another message",
     "direct": "Or reach me directly"
+  },
+  "caseStudy": {
+    "back": "All work",
+    "lensLabel": "View",
+    "plain": "Plain",
+    "technical": "Technical",
+    "role": "Role",
+    "year": "Year",
+    "status": "Status",
+    "visit": "Visit site",
+    "videos": "Short videos",
+    "screens": "Screens",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "stack": "Stack",
+    "architecture": "Architecture",
+    "next": "Next project",
+    "close": "Close",
+    "prev": "Previous",
+    "nextShot": "Next"
+  },
+  "notFound": {
+    "title": "This page doesn't exist.",
+    "home": "Back to home"
   }
 }

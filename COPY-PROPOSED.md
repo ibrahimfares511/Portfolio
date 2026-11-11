@@ -58,7 +58,7 @@ English section titles that contain the pronoun "I" are set in Nunito (bold) ins
 
 No new copy. Steps and the closing line are the sitemap's text; each step prints as written ("**نفهم**: …"). The tools rows use the sitemap's lists in order; the row names (اللغات والأطر …) are read by screen readers as each row's label. Logos: the old site's SVGs where it had them, simple-icons for the new tools (Next.js, Vue, Vite, TanStack Query, Prisma, PostgreSQL, MySQL, Redis, Socket.io, Docker).
 
-## Phase 6: about, contact (needs approval)
+## Phase 6: about, contact (approved)
 
 | Key | Arabic | English | Where |
 | --- | --- | --- | --- |
@@ -73,3 +73,26 @@ No new copy. Steps and the closing line are the sitemap's text; each step prints
 | `contactSection.error` | لم تُرسل الرسالة. جرّب مرة أخرى، أو راسلني على واتساب. | The message didn't go through. Try again, or message me on WhatsApp. | If sending fails |
 
 The four fields use the sitemap's text: the part before the colon is the label, the part after it the hint ("وسيلة التواصل" / "البريد الإلكتروني أو واتساب").
+
+## Phase 7: project pages, 404 (needs approval)
+
+The case-study text itself is copied as written from each package's `case-study.ar.md` / `case-study.en.md` (title, lead, every section). Role, year, status, captions and stack come from `project.json`. The closing box reuses approved copy (Contact title and subline, the hero's "Start your project" button). Only these interface labels are new:
+
+| Key | Arabic | English | Where |
+| --- | --- | --- | --- |
+| `caseStudy.back` | كل الأعمال | All work | Back link to the projects section |
+| `caseStudy.plain` / `technical` | مبسّط · تقني | Plain · Technical | The two lenses (sitemap names) |
+| `caseStudy.lensLabel` | طريقة العرض | View | Screen-reader label of the switch |
+| `caseStudy.role` / `year` / `status` | الدور · السنة · الحالة | Role · Year · Status | Facts box |
+| `caseStudy.visit` | زيارة الموقع | Visit site | Ertiqaa and HAYA only (they have a live link) |
+| `caseStudy.videos` | فيديوهات قصيرة | Short videos | Plain lens |
+| `caseStudy.screens` | الشاشات | Screens | Plain lens |
+| `caseStudy.desktop` / `mobile` | على الكمبيوتر · على الجوال | Desktop · Mobile | Gallery groups |
+| `caseStudy.stack` | الأدوات المستخدمة | Stack | Technical lens |
+| `caseStudy.architecture` | بنية النظام | Architecture | Technical lens, the diagram |
+| `caseStudy.next` | المشروع التالي | Next project | End of the page |
+| `caseStudy.close` / `prev` / `nextShot` | إغلاق · السابق · التالي | Close · Previous · Next | Screen viewer buttons |
+| `notFound.title` | هذه الصفحة غير موجودة. | This page doesn't exist. | 404, with the shrug pose |
+| `notFound.home` | العودة إلى الرئيسية | Back to home | 404 button |
+
+Which section goes where: "دوري / My role" and "من الداخل / Under the hood" are the technical lens; every other section of the case study is the plain lens, in the file's order.

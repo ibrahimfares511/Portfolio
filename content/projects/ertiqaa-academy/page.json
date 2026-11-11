@@ -1,0 +1,723 @@
+{
+  "slug": "ertiqaa-academy",
+  "role": {
+    "ar": "المطوّر الرئيسي للواجهة الأمامية",
+    "en": "Lead frontend developer"
+  },
+  "problem": {
+    "ar": "في الإمارات تضع كل مؤسسة تعليمية منهجها بنفسها، وكانت منصات تعليم العربية لغير الناطقين بها أقل من المستوى المطلوب. فأراد العميل دخول السوق بمنتج أفضل يجمع الدروس والتدريب الفوري والاختبارات ومتابعة تقدّم كل طالب في مكان واحد.",
+    "en": "In the UAE each school sets its own curriculum, and the platforms for teaching Arabic to non-native speakers were not at a high level. The client wanted to enter the market with a better product: lessons, instant-feedback practice, timed quizzes and progress tracking in one place."
+  },
+  "solution": {
+    "ar": "تطبيق ويب واحد بأربعة أدوار. الإدارة تبني المنهج وبنك الأسئلة، والمدرسة تضيف المعلمين والطلاب، والمعلم يوزّع المهام والاختبارات ويتابع التقارير، والطالب يتعلّم ويتدرّب ويُختبر.",
+    "en": "One web app with four roles. The admin builds the curriculum and question bank, schools add teachers and students, teachers assign work and read reports, and students learn, practise and take quizzes."
+  },
+  "features": [
+    {
+      "ar": "ستة أنواع أسئلة، منها السحب والإفلات والإجابة الصوتية",
+      "en": "Six question types, including drag-and-drop and voice answers"
+    },
+    {
+      "ar": "تدريب يعطي نتيجة فورية ويسمح بإعادة المحاولة",
+      "en": "Practice with instant feedback and retries"
+    },
+    {
+      "ar": "اختبارات بعدّاد وقت، ونتيجة تعرض كل إجابة بجانب الإجابة الصحيحة",
+      "en": "Timed quizzes, with every answer shown next to the correct one"
+    },
+    {
+      "ar": "دروس بستة أشكال: نص، صورة، PDF، صوت، فيديو، رابط",
+      "en": "Lessons in six formats: text, image, PDF, audio, video, link"
+    },
+    {
+      "ar": "تقارير للمعلم حسب المهارة، مع المتفوقين ومن يحتاج إلى دعم",
+      "en": "Teacher reports by skill, with top students and students who need support"
+    },
+    {
+      "ar": "صلاحيات دقيقة لكل موظف في كل قسم",
+      "en": "Fine-grained permissions for every staff member, per section"
+    }
+  ],
+  "results": [
+    {
+      "value": "8",
+      "label": {
+        "ar": "مدارس تستخدم المنصة",
+        "en": "schools using it"
+      },
+      "verified": true
+    },
+    {
+      "value": "8,311",
+      "label": {
+        "ar": "طالبًا على المنصة",
+        "en": "students on the platform"
+      },
+      "verified": true
+    },
+    {
+      "value": "4",
+      "label": {
+        "ar": "أدوار في تطبيق واحد",
+        "en": "roles in one app"
+      },
+      "verified": true
+    },
+    {
+      "value": "6",
+      "label": {
+        "ar": "أنواع أسئلة تفاعلية",
+        "en": "interactive question types"
+      },
+      "verified": true
+    },
+    {
+      "value": "6",
+      "label": {
+        "ar": "أشكال للدروس",
+        "en": "lesson formats"
+      },
+      "verified": true
+    },
+    {
+      "value": "2",
+      "label": {
+        "ar": "لغتان مع تبديل الاتجاه",
+        "en": "languages with RTL/LTR switching"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "React",
+    "TypeScript",
+    "Vite",
+    "Redux Toolkit",
+    "RTK Query",
+    "Tailwind CSS",
+    "shadcn/ui",
+    "MUI",
+    "framer-motion",
+    "react-dnd",
+    "i18next",
+    "Firebase Cloud Messaging",
+    "Laravel API"
+  ],
+  "techNotes": {
+    "ar": "محرّك واحد يدير أنواع الأسئلة الستة عبر واجهة verify()/reset() مشتركة. الإجابة الصوتية تُسجَّل في المتصفح عبر MediaRecorder. تبديل اتجاه الصفحة يشمل Tailwind وRadix وMUI معًا. تجديد رمز الدخول يتم خلف قفل (mutex) في طبقة API مكوّنة من 51 وحدة RTK Query.",
+    "en": "One engine drives all six question types through a shared verify()/reset() handle. Voice answers are recorded in the browser with MediaRecorder. Direction switching covers Tailwind, Radix and MUI together. Token refresh runs behind a mutex in an API layer of 51 RTK Query slices."
+  },
+  "caseStudy": {
+    "ar": {
+      "title": "أكاديمية إرتقاء",
+      "lead": "منصة لتعليم اللغة العربية في المدارس للطلاب الناطقين بغيرها. يتدرّب الطالب على الاستماع والتحدث والقراءة والكتابة من خلال دروس قصيرة وأسئلة تفاعلية، ويتابع المعلم والمدرسة تقدّمه.",
+      "sections": [
+        {
+          "heading": "المشكلة",
+          "kind": "plain",
+          "html": "<p>في الإمارات، تضع كل مؤسسة تعليمية منهجها بنفسها وتتحمّل مسؤوليته كاملًا. وكانت المنصات المتاحة لتعليم العربية لغير الناطقين بها أقل من المستوى المطلوب، فأراد العميل دخول هذا السوق بمنتج أفضل: مكان واحد يجمع رحلة التعلّم كاملة:</p>\n<ul>\n<li>دروس بأشكال مختلفة.</li>\n<li>تدريب يعطي الطالب نتيجة فورية.</li>\n<li>اختبارات بوقت محدد.</li>\n<li>طريقة يعرف بها المعلم من يتقدّم ومن يحتاج إلى مساعدة.</li>\n</ul>"
+        },
+        {
+          "heading": "ما تم بناؤه",
+          "kind": "plain",
+          "html": "<p>تطبيق ويب واحد بأربعة أدوار:</p>\n<ul>\n<li><strong>مدير المنصة:</strong> يبني المنهج (صفوف، مستويات، وحدات، دروس) وبنك أسئلة مشتركًا.</li>\n<li><strong>المدرسة:</strong> تضيف المعلمين والطلاب، أو ترفعهم من ملف Excel.</li>\n<li><strong>المعلم:</strong> يوزّع المهام والاختبارات، ويصحّح الإجابات المفتوحة، ويمنح الشهادات، ويطّلع على التقارير.</li>\n<li><strong>الطالب:</strong> يتنقّل بين وحداته، يشاهد الدرس أو يقرؤه، يتدرّب، ثم يدخل اختبارات بوقت محدد.</li>\n</ul>"
+        },
+        {
+          "heading": "أهم المميزات",
+          "kind": "plain",
+          "html": "<ul>\n<li>يجيب الطالب عن ستة أنواع من الأسئلة: اختيار من متعدد، صح وخطأ، ملء الفراغات بالسحب والإفلات، توصيل الكلمة بالصورة، ترتيب الجملة، وإجابة صوتية يسجّلها من المتصفح.</li>\n<li>في التدريب، إذا أخطأ الطالب يسمع صوتًا ويعود السؤال من جديد، فيحاول حتى يصل إلى الإجابة الصحيحة. وفي الاختبار يظهر عدّاد للوقت.</li>\n<li>الدروس بستة أشكال: نص، صورة، PDF، صوت، فيديو، ورابط فيديو، ولكل شكل عارض خاص به.</li>\n<li>بعد الاختبار يرى الطالب كل إجابة بجانب الإجابة الصحيحة، ومعها ملاحظة المعلم ودرجته على الإجابة الصوتية.</li>\n<li>يرى المعلم تقدّم طلابه في كل مهارة، ويعرف المتفوقين ومن يحتاج إلى دعم.</li>\n<li>يحصل كل موظف على الصلاحيات التي يحتاجها فقط (عرض، إضافة، تعديل، حذف) في كل قسم.</li>\n</ul>"
+        },
+        {
+          "heading": "دوري",
+          "kind": "role",
+          "html": "<p>مطوّر واجهات أمامية في فريق من شخصين. كنت مسؤولًا عن تجربة الطالب: عارضات الدروس، وأنواع الأسئلة الستة، ومسار الاختبار والعدّاد، والنتائج، وصفحة الطالب.</p>\n<p>عملت أيضًا على أجزاء من لوحة الإدارة، والصفحة الرئيسية، وطبقة الربط مع الـ API.</p>\n<p>لوحتا المعلم والمدرسة من عمل زميلي في الفريق بشكل أساسي، والواجهة الخلفية (Laravel) بناها فريق آخر. وهي واحدة من منصتين لتعليم العربية لمدارس الإمارات بنيت واجهتهما، لشركتين مختلفتين.</p>"
+        },
+        {
+          "heading": "النتائج",
+          "kind": "plain",
+          "html": "<ul>\n<li>تستخدمها 8 مدارس.</li>\n<li>8,311 طالبًا على المنصة.</li>\n<li>4 أدوار في تطبيق واحد (طالب، معلم، مدرسة، إدارة).</li>\n<li>6 أنواع أسئلة تفاعلية، و6 أشكال للدروس.</li>\n<li>لغتان، مع تبديل كامل لاتجاه الصفحة بين اليمين واليسار.</li>\n</ul>"
+        },
+        {
+          "heading": "من الداخل",
+          "kind": "tech",
+          "html": "<p>React 18، TypeScript، Vite، Redux Toolkit مع RTK Query، Tailwind مع shadcn/Radix، MUI، framer-motion، react-dnd، i18next، وFirebase Cloud Messaging، فوق REST API مبني بـ Laravel.</p>\n<ul>\n<li><p><strong>محرّك واحد لكل أنواع الأسئلة.</strong> كل نوع يطبّق الواجهة نفسها (<code>verify()</code> و<code>reset()</code>)، ومكوّن واحد يدير المسار كله:</p>\n<ul>\n<li>في التدريب: إعادة المحاولة مع صوت.</li>\n<li>في الاختبار: انتقال تلقائي مع عدّاد.</li>\n</ul>\n<p>إضافة نوع جديد لا تغيّر المسار.</p>\n</li>\n<li><p><strong>إجابة صوتية من المتصفح.</strong> سؤال التعبير يسجّل صوت الطالب عبر MediaRecorder ثم يرفعه، فيصبح التدريب على التحدث جزءًا من الاختبار نفسه.</p>\n</li>\n<li><p><strong>تبديل الاتجاه في ثلاث مكتبات تصميم معًا.</strong> تغيير اللغة يقلب i18next واتجاه الصفحة وثيم MUI وذاكرة emotion الخاصة بالاتجاه من اليمين لليسار في خطوة واحدة، فتنعكس مكوّنات Tailwind وRadix وMUI كلها بشكل صحيح.</p>\n</li>\n<li><p><strong>تجديد آمن لرمز الدخول.</strong> طبقة الـ API (51 وحدة RTK Query) تجدّد الرمز المنتهي خلف قفل (mutex)، فإذا انطلقت عدة طلبات معًا يحدث تجديد واحد فقط.</p>\n</li>\n</ul>"
+        },
+        {
+          "heading": "الحالة",
+          "kind": "plain",
+          "html": "<p>تعمل المنصة حاليًا ويستخدمها الطلاب. انطلقت في 2025 وما زالت مستمرة.</p>\n<p>الموقع الرسمي: <a href=\"https://ertiqaaedu.com/\">https://ertiqaaedu.com/</a></p>"
+        }
+      ]
+    },
+    "en": {
+      "title": "Ertiqaa Academy",
+      "lead": "An Arabic-learning platform for schools: students practise listening, speaking, reading and writing through short lessons and interactive questions, while teachers and schools follow their progress.",
+      "sections": [
+        {
+          "heading": "The problem",
+          "kind": "plain",
+          "html": "<p>In the UAE, each school sets its own curriculum and is responsible for all of it, and the platforms available for teaching Arabic to non-native speakers were not at a high level. The client wanted to enter that market with a better product: one place for the whole learning path: lessons in different formats, practice that gives instant feedback, timed quizzes, and a way for teachers to see who is moving ahead and who needs help.</p>"
+        },
+        {
+          "heading": "What was built",
+          "kind": "plain",
+          "html": "<p>One web app with four roles. The platform admin builds the curriculum (grades, levels, units, lessons) and a shared question bank. Schools add their teachers and students, or import them from Excel. Teachers assign tasks and exams, grade open answers, issue certificates and read reports. Students follow their units, watch or read the lesson, practise, and take timed quizzes.</p>"
+        },
+        {
+          "heading": "Key features",
+          "kind": "plain",
+          "html": "<ul>\n<li>Students answer six question types: multiple choice, true/false, drag-and-drop blanks, word-to-picture matching, sentence ordering, and voice answers recorded in the browser.</li>\n<li>In practice mode a wrong answer resets with a sound, so the student tries again until it&#39;s right. In quiz mode a countdown timer runs.</li>\n<li>Lessons come in six formats (text, image, PDF, audio, video file, video link), each with its own player.</li>\n<li>After a quiz, students see every answer next to the correct one, plus the teacher&#39;s note and grade on voice answers.</li>\n<li>Teachers see skill-by-skill progress, their strongest students and the students who need support.</li>\n<li>Staff accounts get exactly the permissions they need (read, add, edit or delete, per section).</li>\n</ul>"
+        },
+        {
+          "heading": "My role",
+          "kind": "role",
+          "html": "<p>Frontend developer in a two-person frontend team. I led the student learning experience: the lesson players, all six question types, the quiz flow and timer, results and the student profile. I also built parts of the admin dashboard, the landing page and the API layer. The teacher and school dashboards were mainly built by my teammate, and the Laravel backend by a separate team. This is one of two Arabic-learning platforms for UAE schools whose frontend I built, for two different companies.</p>"
+        },
+        {
+          "heading": "Results",
+          "kind": "plain",
+          "html": "<ul>\n<li>Used by 8 schools.</li>\n<li>8,311 students on the platform.</li>\n<li>4 roles served by one app (student, teacher, school, admin).</li>\n<li>6 interactive question types and 6 lesson formats.</li>\n<li>2 languages with full right-to-left / left-to-right switching.</li>\n</ul>"
+        },
+        {
+          "heading": "Under the hood",
+          "kind": "tech",
+          "html": "<p>React 18, TypeScript, Vite, Redux Toolkit with RTK Query, Tailwind with shadcn/Radix, MUI, framer-motion, react-dnd, i18next and Firebase Cloud Messaging, on a Laravel REST API.</p>\n<ul>\n<li><strong>One engine for every question type.</strong> Each type implements the same <code>verify()</code> / <code>reset()</code> handle, and a single container drives the flow: retry with sound in practice, auto-advance and a countdown in quizzes. Adding a new type doesn&#39;t change the flow.</li>\n<li><strong>Voice answers in the browser.</strong> The essay question records the student with the MediaRecorder API and uploads the file, so speaking practice happens inside the quiz.</li>\n<li><strong>Direction switching across three styling systems.</strong> Changing the language flips i18next, the document direction, the MUI theme and an emotion RTL cache together, so Tailwind, Radix and MUI components all mirror correctly.</li>\n<li><strong>Safe token refresh.</strong> The API layer (51 RTK Query slices) refreshes an expired token behind a mutex, so parallel requests trigger only one refresh.</li>\n</ul>"
+        },
+        {
+          "heading": "Status",
+          "kind": "plain",
+          "html": "<p>Live and in use. The platform was launched in 2025 and is still running.</p>\n<p>Live site: <a href=\"https://ertiqaaedu.com/\">https://ertiqaaedu.com/</a></p>"
+        }
+      ]
+    }
+  },
+  "shots": [
+    {
+      "name": "landing-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الصفحة الرئيسية، ومحتواها يُدار من لوحة الإدارة",
+        "en": "The landing page, with its content managed from the admin panel"
+      },
+      "image": {
+        "width": 1460,
+        "height": 928,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-landing-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-landing-ar-800.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "student-home-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الصفحة الرئيسية للطالب: الدروس والقصص",
+        "en": "Student home: lessons and stories"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-student-home-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-student-home-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-student-home-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-student-home-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "unit-lessons-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "دروس الوحدة، ولكل درس تدريب واختبار",
+        "en": "Lessons in a unit, each with practice and a quiz"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-unit-lessons-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-unit-lessons-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-unit-lessons-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-unit-lessons-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "lesson-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "صفحة الدرس قبل البدء",
+        "en": "A lesson before it starts"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-lesson-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-lesson-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-lesson-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-lesson-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "lesson-video-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "عارض الفيديو داخل الدرس",
+        "en": "The in-lesson video player"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-lesson-video-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-lesson-video-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-lesson-video-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-lesson-video-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "activity-matching-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "توصيل الكلمة بالصورة في التدريب",
+        "en": "Matching words to pictures in a practice activity"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-activity-matching-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-activity-matching-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-activity-matching-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-activity-matching-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "quiz-fill-blanks-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "ملء الفراغات بالسحب والإفلات، مع عدّاد الوقت",
+        "en": "Drag-and-drop blanks in a timed quiz"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-quiz-fill-blanks-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-quiz-fill-blanks-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-quiz-fill-blanks-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-quiz-fill-blanks-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "quiz-arrange-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "ترتيب كلمات الجملة بالسحب",
+        "en": "Ordering the words of a sentence by dragging"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-quiz-arrange-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-quiz-arrange-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-quiz-arrange-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-quiz-arrange-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "quiz-voice-answer-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الطالب يسجّل إجابته بصوته من المتصفح",
+        "en": "The student records a voice answer in the browser"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-quiz-voice-answer-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-quiz-voice-answer-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-quiz-voice-answer-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-quiz-voice-answer-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "quiz-result-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "نتيجة الاختبار: كل إجابة بجانب الإجابة الصحيحة",
+        "en": "Quiz result: every answer next to the correct one"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-quiz-result-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-quiz-result-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-quiz-result-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-quiz-result-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "profile-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "صفحة الطالب: تقدّمه في كل مهارة",
+        "en": "Student profile: progress in each skill"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-profile-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-profile-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-profile-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-profile-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "stories-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "مكتبة القصص بالتصنيفات",
+        "en": "The stories library, by category"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-stories-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-stories-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-stories-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-stories-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "stories-animals-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "قصص تصنيف واحد، ولكل قصة أسئلة",
+        "en": "Stories in one category, each with its own questions"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-stories-animals-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-stories-animals-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-stories-animals-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-stories-animals-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "admin-question-bank-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "بنك الأسئلة في لوحة الإدارة",
+        "en": "The question bank in the admin panel"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-admin-question-bank-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-admin-question-bank-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-admin-question-bank-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-admin-question-bank-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "admin-users-roles-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "موظفو المنصة، ولكل موظف دور وصلاحيات",
+        "en": "Platform staff, each with a role and permissions"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-admin-users-roles-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-admin-users-roles-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-admin-users-roles-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-admin-users-roles-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "teacher-reports-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "تقارير المعلم: المهارات والمتفوقون ومن يحتاج إلى دعم (عمل الفريق)",
+        "en": "Teacher reports: skills, top students and students who need support (team work)"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-teacher-reports-ar-800.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-teacher-reports-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/ertiqaa-academy/shots/desktop-teacher-reports-ar-1600.avif",
+            "webp": "/projects/ertiqaa-academy/shots/desktop-teacher-reports-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "landing-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "الصفحة الرئيسية على الجوال",
+        "en": "The landing page on mobile"
+      },
+      "image": {
+        "width": 383,
+        "height": 820,
+        "sizes": {
+          "383": {
+            "avif": "/projects/ertiqaa-academy/shots/mobile-landing-ar-383.avif",
+            "webp": "/projects/ertiqaa-academy/shots/mobile-landing-ar-383.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "student-home-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "الصفحة الرئيسية للطالب على الجوال",
+        "en": "Student home on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/ertiqaa-academy/shots/mobile-student-home-ar-390.avif",
+            "webp": "/projects/ertiqaa-academy/shots/mobile-student-home-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/ertiqaa-academy/shots/mobile-student-home-ar-780.avif",
+            "webp": "/projects/ertiqaa-academy/shots/mobile-student-home-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "lesson-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "صفحة الدرس على الجوال",
+        "en": "A lesson on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/ertiqaa-academy/shots/mobile-lesson-ar-390.avif",
+            "webp": "/projects/ertiqaa-academy/shots/mobile-lesson-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/ertiqaa-academy/shots/mobile-lesson-ar-780.avif",
+            "webp": "/projects/ertiqaa-academy/shots/mobile-lesson-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "activity-question-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "سؤال تدريب على الجوال",
+        "en": "A practice question on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/ertiqaa-academy/shots/mobile-activity-question-ar-390.avif",
+            "webp": "/projects/ertiqaa-academy/shots/mobile-activity-question-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/ertiqaa-academy/shots/mobile-activity-question-ar-780.avif",
+            "webp": "/projects/ertiqaa-academy/shots/mobile-activity-question-ar-780.webp"
+          }
+        }
+      }
+    }
+  ],
+  "videos": [
+    {
+      "name": "practice-activity",
+      "lang": null,
+      "caption": {
+        "ar": "التدريب: إجابة خاطئة ثم إعادة المحاولة ثم التوصيل",
+        "en": "Practice: a wrong answer, a retry, then matching"
+      },
+      "mp4": "/projects/ertiqaa-academy/videos/practice-activity.mp4",
+      "webm": "/projects/ertiqaa-academy/videos/practice-activity.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/ertiqaa-academy/videos/practice-activity-poster-960.avif",
+            "webp": "/projects/ertiqaa-academy/videos/practice-activity-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/ertiqaa-academy/videos/practice-activity-poster-1440.avif",
+            "webp": "/projects/ertiqaa-academy/videos/practice-activity-poster-1440.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "timed-quiz",
+      "lang": null,
+      "caption": {
+        "ar": "اختبار بوقت: سحب وإفلات، ترتيب جملة، إجابة صوتية، ثم النتيجة",
+        "en": "Timed quiz: drag and drop, sentence ordering, a voice answer, then the result"
+      },
+      "mp4": "/projects/ertiqaa-academy/videos/timed-quiz.mp4",
+      "webm": "/projects/ertiqaa-academy/videos/timed-quiz.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/ertiqaa-academy/videos/timed-quiz-poster-960.avif",
+            "webp": "/projects/ertiqaa-academy/videos/timed-quiz-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/ertiqaa-academy/videos/timed-quiz-poster-1440.avif",
+            "webp": "/projects/ertiqaa-academy/videos/timed-quiz-poster-1440.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "student-journey",
+      "lang": null,
+      "caption": {
+        "ar": "رحلة الطالب: من الصفحة الرئيسية إلى فيديو الدرس",
+        "en": "Student journey: from home to the lesson video"
+      },
+      "mp4": "/projects/ertiqaa-academy/videos/student-journey.mp4",
+      "webm": "/projects/ertiqaa-academy/videos/student-journey.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/ertiqaa-academy/videos/student-journey-poster-960.avif",
+            "webp": "/projects/ertiqaa-academy/videos/student-journey-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/ertiqaa-academy/videos/student-journey-poster-1440.avif",
+            "webp": "/projects/ertiqaa-academy/videos/student-journey-poster-1440.webp"
+          }
+        }
+      }
+    }
+  ],
+  "diagram": "/projects/ertiqaa-academy/diagram.svg"
+}

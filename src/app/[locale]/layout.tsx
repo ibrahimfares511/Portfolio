@@ -69,7 +69,7 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
-        <InlineScript id="if-motion" code={MOTION_ENGINE_SCRIPT} />
+        <InlineScript id="if-motion" code={MOTION_ENGINE_SCRIPT} ready="__ifMotion" />
         <noscript>
           <style>{`#preloader{display:none!important}[data-reveal]{opacity:1!important;animation:none!important}`}</style>
         </noscript>

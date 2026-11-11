@@ -1,0 +1,440 @@
+{
+  "slug": "smart-control",
+  "role": {
+    "ar": "المطوّر الرئيسي للواجهة الأمامية",
+    "en": "Lead frontend developer"
+  },
+  "problem": {
+    "ar": "لبرنامج المزايا شركات وآلاف الموظفين وشركاء وهدايا وفعاليات. ويحتاج الفريق أن يعرف يوميًا الاستخدام والمشاركة والمخزون، ومن دون لوحة واضحة تصبح المتابعة يدوية ومتأخرة.",
+    "en": "A benefits programme spans client companies, thousands of employees, partners, gifts and events. The team needs daily answers on usage, participation and stock; without one clear panel, follow-up is manual and late."
+  },
+  "solution": {
+    "ar": "لوحة واحدة للمسؤولين وفرق الموارد البشرية والشركاء، كلٌّ حسب صلاحياته: إدارة الشركات والعروض والهدايا والنقاط، والفعاليات والاستبيانات، وتقارير توضّح الاستخدام والمشاركة.",
+    "en": "One panel for admins, client HR teams and partners, each by permission: manage companies, offers, gifts and points, run events and surveys, and read usage and participation in clear reports."
+  },
+  "features": [
+    {
+      "ar": "رسم بياني لاستخدام التطبيق عليه علامات للأحداث، لمعرفة أثر كل حملة.",
+      "en": "App-usage chart with event markers, to see the effect of each campaign."
+    },
+    {
+      "ar": "متابعة استبيان جودة الحياة: من أكمل ومن لم يفتحه، وإرسال إشعار تحفيزي فورًا.",
+      "en": "Work-life survey follow-up: who finished, who never opened it, and a nudge in one click."
+    },
+    {
+      "ar": "تحديات مشي وتصويت وبطولات، مع نسبة التفاعل لكل شركة.",
+      "en": "Walking challenges, votes and tournaments with engagement per company."
+    },
+    {
+      "ar": "مخزون الهدايا في المستودع والسوق ومتجر العميل، بالريال وبالنقاط.",
+      "en": "Gift stock across warehouse, market and client store, in riyals and points."
+    },
+    {
+      "ar": "الشكاوى والتقييمات والتصنيفات الأكثر تصفحًا في مكان واحد.",
+      "en": "Complaints, ratings and most-browsed sectors in one place."
+    },
+    {
+      "ar": "صلاحيات تحدد القائمة وكل إجراء لكل مستخدم.",
+      "en": "Permissions shape the menu and every action per user."
+    }
+  ],
+  "results": [
+    {
+      "value": "22",
+      "label": {
+        "ar": "مستخدمًا للوحة من فريق التشغيل",
+        "en": "dashboard users"
+      },
+      "verified": true
+    },
+    {
+      "value": "101",
+      "label": {
+        "ar": "هدية من 85 شريكًا",
+        "en": "gifts from 85 partners"
+      },
+      "verified": true
+    }
+  ],
+  "stack": [
+    "Laravel 8",
+    "Blade",
+    "jQuery",
+    "ApexCharts",
+    "DataTables",
+    "MySQL",
+    "Pusher",
+    "FCM / APNs"
+  ],
+  "techNotes": {
+    "ar": "واجهة خلفية واحدة تخدم لوحة التحكم وAPI الموظفين وAPI الكاشير. علامات الأحداث على الرسم البياني بيانات محفوظة تظهر في كل الفترات، والإشعار الجماعي يرسل العدد والفلاتر بدل آلاف المعرّفات، وقوائم متابعة الاستبيان تُفتح من الرسم البياني نفسه.",
+    "en": "One backend serves the dashboard, the employee API and a cashier API. Chart events are stored data drawn at every zoom level; bulk notifications send counts and filters instead of thousands of IDs; survey follow-up lists open straight from the chart legend."
+  },
+  "caseStudy": {
+    "ar": {
+      "title": "Smart Control: لوحة تحكم منصة مزايا الموظفين",
+      "lead": "لوحة التحكم التي تدير منصة Elite لمزايا الموظفين: الشركات العميلة، والشركاء، والهدايا، والفعاليات، والتقارير، في مكان واحد.",
+      "sections": [
+        {
+          "heading": "المشكلة",
+          "kind": "plain",
+          "html": "<p>لبرنامج مزايا الموظفين أطراف كثيرة: شركات عميلة، وآلاف الموظفين، وشركاء لديهم عروض وهدايا، وفعاليات تشجّع الموظفين على المشاركة. ويحتاج الفريق المسؤول أن يعرف كل يوم: كم يُستخدم التطبيق؟ من شارك في الفعالية ومن لم يشارك؟ كم تبقّى من مخزون الهدايا؟ ومن دون لوحة واضحة تتأخر هذه الإجابات وتصبح المتابعة يدوية.</p>"
+        },
+        {
+          "heading": "ما الذي بُني",
+          "kind": "plain",
+          "html": "<p>Smart Control هي لوحة التحكم الخاصة بـ Elite، وهي أيضًا نظام له أجزاؤه الخاصة. يستخدمها المسؤولون، وفريق الموارد البشرية في كل شركة عميلة، والشركاء التابعون للعميل، ويرى كلٌّ منهم ما يخصه حسب صلاحياته. ومنها يدير الفريق الشركات والموظفين والشركاء والعروض، ويوزّع الهدايا والنقاط، وينظّم الفعاليات والاستبيانات، ويتابع النتائج في تقارير واضحة.</p>"
+        },
+        {
+          "heading": "أهم المميزات",
+          "kind": "plain",
+          "html": "<ul>\n<li>متابعة معدل استخدام التطبيق يومًا بيوم، مع إضافة &quot;حدث&quot; على الرسم البياني، مثل إطلاق عروض أو إشعار تذكير، لمعرفة هل زاد الاستخدام بعده أم لا.</li>\n<li>في استبيان جودة الحياة الوظيفية: معرفة من أكمل، ومن توقف في المنتصف، ومن لم يفتح الاستبيان أصلًا، ثم إرسال إشعار تحفيزي لهم من الشاشة نفسها.</li>\n<li>إدارة تحديات المشي والتصويت والبطولات، ومتابعة التفاعل لكل شركة.</li>\n<li>متابعة مخزون الهدايا في المستودع الرئيسي والسوق ومتجر العميل، وقيمته بالريال وبالنقاط.</li>\n<li>متابعة الشكاوى والتقييمات والتصنيفات الأكثر تصفحًا من مكان واحد.</li>\n<li>الصلاحيات تتحكم في القائمة الجانبية وفي كل إجراء، فلا يرى كل مستخدم إلا ما يخصه.</li>\n</ul>"
+        },
+        {
+          "heading": "دوري",
+          "kind": "role",
+          "html": "<p>مطوّر الواجهة الأمامية (Frontend) للوحة Smart Control منذ 2024: طوّرت كل الشاشات الموجودة، وبنيت شاشات جديدة من الصفر، مثل الفعاليات والبطولات، وإدارة الهدايا، وتقارير الاستخدام، وتقرير استبيان جودة الحياة، والرد الآلي. أما الواجهة الخلفية (backend) فكانت مسؤولية فريق الشركة.</p>\n<p>كانت اللوحة موجودة قبل انضمامي، لكن كانت فيها مشكلات في السرعة والتصميم. عملت على الاثنين، وأصبحت مسؤولًا عن واجهتها منذ ذلك الحين. واليوم كتبت بنفسي حوالي <strong>68%</strong> من كود شاشاتها.</p>"
+        },
+        {
+          "heading": "النتائج",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>22</strong> شخصًا من فريق التشغيل يستخدمون اللوحة.</li>\n<li><strong>101</strong> هدية من <strong>85</strong> شريك هدايا تُدار من خلالها.</li>\n</ul>\n<p>تدير اللوحة منصة Elite، وأرقام المنصة (الشركات والموظفون) موجودة في صفحة Elite.</p>"
+        },
+        {
+          "heading": "من الداخل (للتقنيين)",
+          "kind": "tech",
+          "html": "<ul>\n<li><strong>التقنيات:</strong> Laravel 8 وBlade وjQuery، وApexCharts للرسوم البيانية، وDataTables وSelect2 وFlatpickr، وواجهة عربية كاملة من اليمين إلى اليسار.</li>\n<li><strong>البنية:</strong> واجهة خلفية واحدة تخدم ثلاث جهات: لوحة التحكم، وAPI الموظفين لتطبيقات Elite، وAPI الكاشير لدى الشركاء. تُرسَل الإشعارات عبر FCM وAPNs، والتحديث اللحظي عبر Pusher.</li>\n<li><strong>قرارات هندسية:</strong><ul>\n<li>علامات الأحداث على الرسم البياني تُحفظ كبيانات، وتظهر في كل الفترات (يوم، شهر، سنة)، مع شريط يعرض أحداث الفترة الحالية.</li>\n<li>عند اختيار &quot;تحديد الكل&quot; في قائمة المشاركين، ترسل الشاشة إلى الخادم العدد والفلاتر بدل آلاف المعرّفات، فيبقى الإشعار الجماعي سريعًا.</li>\n<li>قوائم متابعة الاستبيان تُفتح مباشرة من مفتاح الرسم البياني نفسه، مع بحث وتقسيم صفحات وتصدير Excel.</li>\n</ul>\n</li>\n</ul>"
+        },
+        {
+          "heading": "الحالة",
+          "kind": "plain",
+          "html": "<p><strong>يعمل</strong>، وما زال التطوير مستمرًا.</p>"
+        }
+      ]
+    },
+    "en": {
+      "title": "Smart Control: the dashboard behind an employee-benefits platform",
+      "lead": "The control panel for the Elite employee-benefits platform: client companies, partners, gifts, engagement events and reports in one place.",
+      "sections": [
+        {
+          "heading": "The problem",
+          "kind": "plain",
+          "html": "<p>An employee-benefits programme has many moving parts: client companies, thousands of employees, partner brands with offers and gifts, and events that get people to take part. The team running it needs answers every day — how much is the app used, who joined the survey and who didn&#39;t, how much gift stock is left. Without one clear panel, those answers come late and follow-up is manual.</p>"
+        },
+        {
+          "heading": "What was built",
+          "kind": "plain",
+          "html": "<p>Smart Control is Elite&#39;s dashboard, and also a system with parts of its own. Admins, each client company&#39;s HR team and partners linked to a client all use it, and each sees only what their permissions allow. From it the team manages companies, employees, partners and offers, hands out gifts and points, runs events and surveys, and reads the results in clear reports.</p>"
+        },
+        {
+          "heading": "Key features",
+          "kind": "plain",
+          "html": "<ul>\n<li>See app usage day by day and pin &quot;events&quot; — an offer launch, a reminder — on the chart to see whether usage moved afterwards.</li>\n<li>For the work-life survey, see who finished, who stopped halfway and who never opened it, then nudge them with a notification from the same screen.</li>\n<li>Run walking challenges, photo votes and tournaments, and track engagement per company.</li>\n<li>Track gift stock across the main warehouse, the market and each client&#39;s store, in riyals and points.</li>\n<li>Follow complaints, ratings and the most-browsed sectors in one place.</li>\n<li>Permissions shape the menu and every action, so each user sees only their part.</li>\n</ul>"
+        },
+        {
+          "heading": "My role",
+          "kind": "role",
+          "html": "<p>Frontend developer of the Smart Control dashboard since 2024. I reworked every existing screen and built new ones from scratch — engagement events and tournaments, gift management, usage reports, the work-life survey report and auto-reply. The backend was built by the company&#39;s backend team.</p>\n<p>The dashboard existed before I joined, with real problems in speed and design. I worked on both and have owned its interface since; today about <strong>68%</strong> of its screen code is mine.</p>"
+        },
+        {
+          "heading": "Results",
+          "kind": "plain",
+          "html": "<ul>\n<li><strong>22</strong> operations staff use the dashboard.</li>\n<li><strong>101</strong> gifts from <strong>85</strong> gift partners are managed through it.</li>\n</ul>\n<p>It runs the Elite platform; the platform&#39;s numbers (companies and employees) are on the Elite page.</p>"
+        },
+        {
+          "heading": "Under the hood",
+          "kind": "tech",
+          "html": "<ul>\n<li><strong>Stack:</strong> Laravel 8, Blade and jQuery, ApexCharts, DataTables, Select2, Flatpickr; full Arabic RTL interface.</li>\n<li><strong>Architecture:</strong> one backend serving three audiences — the dashboard, the employee API used by the Elite apps, and a cashier API for partner stores. Push through FCM/APNs, real-time updates through Pusher.</li>\n<li><strong>Engineering decisions:</strong><ul>\n<li>Chart events are stored as data and drawn as annotations at every zoom level (day, month, year), with a bar listing the events in the current period.</li>\n<li>&quot;Select all&quot; on event participants sends counts and filters to the server instead of thousands of IDs, so bulk notifications stay fast.</li>\n<li>Survey follow-up lists open straight from the chart legend, with search, paging and Excel export.</li>\n</ul>\n</li>\n</ul>"
+        },
+        {
+          "heading": "Status",
+          "kind": "plain",
+          "html": "<p><strong>Live</strong>, still being extended.</p>"
+        }
+      ]
+    }
+  },
+  "shots": [
+    {
+      "name": "reports-usage-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "معدل استخدام التطبيق مع علامات الأحداث",
+        "en": "App usage with event markers"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/smart-control/shots/desktop-reports-usage-ar-800.avif",
+            "webp": "/projects/smart-control/shots/desktop-reports-usage-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/smart-control/shots/desktop-reports-usage-ar-1600.avif",
+            "webp": "/projects/smart-control/shots/desktop-reports-usage-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "work-life-overview-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "نسبة المشاركة في استبيان جودة الحياة",
+        "en": "Work-life survey participation"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/smart-control/shots/desktop-work-life-overview-ar-800.avif",
+            "webp": "/projects/smart-control/shots/desktop-work-life-overview-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/smart-control/shots/desktop-work-life-overview-ar-1600.avif",
+            "webp": "/projects/smart-control/shots/desktop-work-life-overview-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "work-life-didnt-view-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "قائمة من لم يشاهدوا الاستبيان، مع إشعار تحفيزي",
+        "en": "Employees who didn't open the survey, ready for a nudge"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/smart-control/shots/desktop-work-life-didnt-view-ar-800.avif",
+            "webp": "/projects/smart-control/shots/desktop-work-life-didnt-view-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/smart-control/shots/desktop-work-life-didnt-view-ar-1600.avif",
+            "webp": "/projects/smart-control/shots/desktop-work-life-didnt-view-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "work-life-answers-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "تحليل الإجابات لكل سؤال",
+        "en": "Answers per question"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/smart-control/shots/desktop-work-life-answers-ar-800.avif",
+            "webp": "/projects/smart-control/shots/desktop-work-life-answers-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/smart-control/shots/desktop-work-life-answers-ar-1600.avif",
+            "webp": "/projects/smart-control/shots/desktop-work-life-answers-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "events-analytics-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "تحليلات الفعاليات ونسبة التفاعل لكل شركة",
+        "en": "Event analytics and engagement per company"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/smart-control/shots/desktop-events-analytics-ar-800.avif",
+            "webp": "/projects/smart-control/shots/desktop-events-analytics-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/smart-control/shots/desktop-events-analytics-ar-1600.avif",
+            "webp": "/projects/smart-control/shots/desktop-events-analytics-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "gifts-warehouse-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "مخزون الهدايا في المستودع الرئيسي",
+        "en": "Gift stock in the main warehouse"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/smart-control/shots/desktop-gifts-warehouse-ar-800.avif",
+            "webp": "/projects/smart-control/shots/desktop-gifts-warehouse-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/smart-control/shots/desktop-gifts-warehouse-ar-1600.avif",
+            "webp": "/projects/smart-control/shots/desktop-gifts-warehouse-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "reports-visits-complaints-ar",
+      "device": "desktop",
+      "lang": null,
+      "caption": {
+        "ar": "الزيارات والشكاوى ونشاط الموظفين",
+        "en": "Visits, complaints and employee activity"
+      },
+      "image": {
+        "width": 2880,
+        "height": 1800,
+        "sizes": {
+          "800": {
+            "avif": "/projects/smart-control/shots/desktop-reports-visits-complaints-ar-800.avif",
+            "webp": "/projects/smart-control/shots/desktop-reports-visits-complaints-ar-800.webp"
+          },
+          "1600": {
+            "avif": "/projects/smart-control/shots/desktop-reports-visits-complaints-ar-1600.avif",
+            "webp": "/projects/smart-control/shots/desktop-reports-visits-complaints-ar-1600.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "reports-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "التقارير على الجوال",
+        "en": "Reports on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/smart-control/shots/mobile-reports-ar-390.avif",
+            "webp": "/projects/smart-control/shots/mobile-reports-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/smart-control/shots/mobile-reports-ar-780.avif",
+            "webp": "/projects/smart-control/shots/mobile-reports-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "work-life-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "الاستبيان على الجوال",
+        "en": "Survey report on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/smart-control/shots/mobile-work-life-ar-390.avif",
+            "webp": "/projects/smart-control/shots/mobile-work-life-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/smart-control/shots/mobile-work-life-ar-780.avif",
+            "webp": "/projects/smart-control/shots/mobile-work-life-ar-780.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "events-ar",
+      "device": "mobile",
+      "lang": null,
+      "caption": {
+        "ar": "الفعاليات على الجوال",
+        "en": "Events on mobile"
+      },
+      "image": {
+        "width": 1170,
+        "height": 2532,
+        "sizes": {
+          "390": {
+            "avif": "/projects/smart-control/shots/mobile-events-ar-390.avif",
+            "webp": "/projects/smart-control/shots/mobile-events-ar-390.webp"
+          },
+          "780": {
+            "avif": "/projects/smart-control/shots/mobile-events-ar-780.avif",
+            "webp": "/projects/smart-control/shots/mobile-events-ar-780.webp"
+          }
+        }
+      }
+    }
+  ],
+  "videos": [
+    {
+      "name": "usage-event",
+      "lang": null,
+      "caption": {
+        "ar": "إضافة حدث على شارت الاستخدام",
+        "en": "Pinning an event on the usage chart"
+      },
+      "mp4": "/projects/smart-control/videos/usage-event.mp4",
+      "webm": "/projects/smart-control/videos/usage-event.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/smart-control/videos/usage-event-poster-960.avif",
+            "webp": "/projects/smart-control/videos/usage-event-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/smart-control/videos/usage-event-poster-1440.avif",
+            "webp": "/projects/smart-control/videos/usage-event-poster-1440.webp"
+          }
+        }
+      }
+    },
+    {
+      "name": "survey-followup",
+      "lang": null,
+      "caption": {
+        "ar": "متابعة من لم يشاهدوا الاستبيان",
+        "en": "Following up on employees who didn't open the survey"
+      },
+      "mp4": "/projects/smart-control/videos/survey-followup.mp4",
+      "webm": "/projects/smart-control/videos/survey-followup.webm",
+      "poster": {
+        "width": 1440,
+        "height": 900,
+        "sizes": {
+          "960": {
+            "avif": "/projects/smart-control/videos/survey-followup-poster-960.avif",
+            "webp": "/projects/smart-control/videos/survey-followup-poster-960.webp"
+          },
+          "1440": {
+            "avif": "/projects/smart-control/videos/survey-followup-poster-1440.avif",
+            "webp": "/projects/smart-control/videos/survey-followup-poster-1440.webp"
+          }
+        }
+      }
+    }
+  ],
+  "diagram": "/projects/smart-control/diagram.svg"
+}
