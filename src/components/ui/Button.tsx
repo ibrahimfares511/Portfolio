@@ -5,7 +5,7 @@ type Variant = "primary" | "secondary";
 const styles: Record<Variant, string> = {
   // The one thing to press: clay-strong with on-clay text. One per view.
   primary:
-    "bg-clay-strong text-on-clay hover:brightness-[1.06] active:brightness-95 shadow-[0_8px_24px_-12px_var(--clay-strong)]",
+    "bg-clay-strong text-on-clay hover:brightness-[0.94] active:brightness-90 shadow-[0_8px_24px_-12px_var(--clay-strong)]",
   secondary: "border-[1.5px] border-line text-ink hover:border-petrol/50 hover:text-petrol bg-surface/40",
 };
 

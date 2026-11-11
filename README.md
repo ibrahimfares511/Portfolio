@@ -45,3 +45,10 @@ Run it again whenever a package changes. The generated files are committed, so a
 
 - Arabic: simple Modern Standard Arabic. Numbers: Western digits only (never format numbers with an `ar` locale without `-u-nu-latn`).
 - Wrap numbers such as `+13,000` or `~100` in `className="num"` so their sign stays in place inside Arabic text.
+
+## SEO and social images
+
+- `src/app/sitemap.ts` and `src/app/robots.ts` build `/sitemap.xml` and `/robots.txt` from the project list.
+- Every page has its title, description, canonical and `ar`/`en` alternates; the base address is `https://ibrahimfares.dev` (or `NEXT_PUBLIC_SITE_URL`).
+- Social images: case studies use each package's `og.jpg` (copied by `npm run sync`); the home page uses `public/og/home-ar.jpg` and `home-en.jpg`. To redraw those after changing the hero text: run a build on port 3100, then `python3 scripts/og/render.py` (needs Python Playwright).
+- Structured data (JSON-LD): Person + WebSite on the home page, CreativeWork + breadcrumbs on each case study.

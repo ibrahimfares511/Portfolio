@@ -38,10 +38,16 @@ export function Gallery({ shots, lang, strings }: { shots: Shot[]; lang: "ar" | 
   const dialog = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState<number | null>(null);
 
-  const show = (i: number) => {
-    setOpen(i);
-    dialog.current?.showModal();
-  };
+  const closeBtn = useRef<HTMLButtonElement>(null);
+  const show = (i: number) => setOpen(i);
+
+  // Open once the content is rendered, then put focus on "Close".
+  useEffect(() => {
+    const el = dialog.current;
+    if (open === null || !el || el.open) return;
+    el.showModal();
+    closeBtn.current?.focus();
+  }, [open]);
   const count = all.length;
   const step = useCallback(
     (d: number) => setOpen((i) => (i === null ? i : (i + d + count) % count)),
@@ -141,7 +147,7 @@ export function Gallery({ shots, lang, strings }: { shots: Shot[]; lang: "ar" | 
                 <button type="button" onClick={() => step(1)} aria-label={strings.next} className="grid size-11 place-items-center rounded-full border border-white/20 hover:bg-white/10">
                   <svg viewBox="0 0 24 24" className="size-5 rtl:rotate-180" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 6l6 6-6 6" /></svg>
                 </button>
-                <button type="button" onClick={() => dialog.current?.close()} aria-label={strings.close} className="grid size-11 place-items-center rounded-full bg-white/10 hover:bg-white/20">
+                <button ref={closeBtn} type="button" onClick={() => dialog.current?.close()} aria-label={strings.close} className="grid size-11 place-items-center rounded-full bg-white/10 hover:bg-white/20">
                   <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
                 </button>
               </div>

@@ -293,10 +293,12 @@ html.pl-active {
 /* The hero sits under the preloader on first paint, so its entrance pieces
    start hidden in CSS (a late fallback shows them if the entrance never
    runs; the <noscript> style in <head> shows them without JS). Everything
-   further down is hidden by its <Reveal> on mount and enters when scrolled
-   into view. */
+   further down waits in its <Reveal> (opacity only, so the first paint
+   costs nothing) and enters when scrolled into view; once a Reveal has
+   started, [data-shown] hands its pieces to the animation. */
 @media (prefers-reduced-motion: no-preference) {
-  #top [data-reveal] {
+  #top [data-reveal],
+  html.if-js [data-reveal-root]:not([data-shown]) [data-reveal] {
     opacity: 0;
     animation: reveal-fallback 0.6s ease 14s forwards;
   }

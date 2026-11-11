@@ -21,6 +21,7 @@ const engine = String.raw`
 (function () {
   if (window.__ifMotion) return;
   var doc = document, root = doc.documentElement;
+  root.classList.add('if-js');
   var reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   var STROKES = [
     { d: 'M28 78 V46', t: 170 },

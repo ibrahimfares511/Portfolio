@@ -74,7 +74,7 @@ No new copy. Steps and the closing line are the sitemap's text; each step prints
 
 The four fields use the sitemap's text: the part before the colon is the label, the part after it the hint ("وسيلة التواصل" / "البريد الإلكتروني أو واتساب").
 
-## Phase 7: project pages, 404 (needs approval)
+## Phase 7: project pages, 404 (approved)
 
 The case-study text itself is copied as written from each package's `case-study.ar.md` / `case-study.en.md` (title, lead, every section). Role, year, status, captions and stack come from `project.json`. The closing box reuses approved copy (Contact title and subline, the hero's "Start your project" button). Only these interface labels are new:
 

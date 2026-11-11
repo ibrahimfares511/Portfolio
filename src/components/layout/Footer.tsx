@@ -21,7 +21,8 @@ export async function Footer() {
             <LogoLockup height={34} />
           </a>
 
-          <nav aria-label={t("primary")}>
+          {/* The header already has the primary <nav>; one landmark per name. */}
+          <div>
             <ul className="grid grid-cols-2 gap-x-10 gap-y-3 sm:flex sm:gap-8">
               {NAV_ITEMS.map((item) => (
                 <li key={item.key}>
@@ -31,7 +32,7 @@ export async function Footer() {
                 </li>
               ))}
             </ul>
-          </nav>
+          </div>
         </div>
 
         <SocialLinks className="mt-10" />

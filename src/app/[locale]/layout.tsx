@@ -1,3 +1,4 @@
+import { SITE_URL, OG_LOCALE } from "@/lib/site";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Alexandria, Nunito } from "next/font/google";
@@ -34,13 +35,41 @@ export async function generateMetadata({
 }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
+  const lang = locale === "en" ? "en" : "ar";
   return {
-    metadataBase: new URL("https://ibrahimfares.dev"),
+    metadataBase: new URL(SITE_URL),
     title: t("title"),
     description: t("description"),
+    applicationName: t("title"),
+    authors: [
+      { name: lang === "ar" ? "إبراهيم فارس" : "Ibrahim Fares", url: SITE_URL },
+    ],
     alternates: {
       canonical: `/${locale}`,
-      languages: { ar: "/ar", en: "/en" },
+      languages: { ar: "/ar", en: "/en", "x-default": "/ar" },
+    },
+    openGraph: {
+      type: "website",
+      url: `/${locale}`,
+      siteName: t("title"),
+      title: t("title"),
+      description: t("description"),
+      locale: OG_LOCALE[lang],
+      alternateLocale: OG_LOCALE[lang === "ar" ? "en" : "ar"],
+      images: [
+        {
+          url: `/og/home-${lang}.jpg`,
+          width: 1200,
+          height: 630,
+          alt: t("title"),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: [`/og/home-${lang}.jpg`],
     },
   };
 }
@@ -69,7 +98,11 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <head>
-        <InlineScript id="if-motion" code={MOTION_ENGINE_SCRIPT} ready="__ifMotion" />
+        <InlineScript
+          id="if-motion"
+          code={MOTION_ENGINE_SCRIPT}
+          ready="__ifMotion"
+        />
         <noscript>
           <style>{`#preloader{display:none!important}[data-reveal]{opacity:1!important;animation:none!important}`}</style>
         </noscript>

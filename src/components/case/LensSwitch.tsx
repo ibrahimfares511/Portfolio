@@ -59,7 +59,17 @@ export function LensSwitch({
               type="button"
               aria-selected={lens === k}
               aria-controls={`panel-${k}`}
+              tabIndex={lens === k ? 0 : -1}
               onClick={() => choose(k)}
+              onKeyDown={(e) => {
+                // Tabs pattern: arrows (and Home/End) move between the two.
+                if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+                e.preventDefault();
+                const other: Lens = k === "plain" ? "technical" : "plain";
+                const to = e.key === "Home" ? "plain" : e.key === "End" ? "technical" : other;
+                choose(to);
+                document.getElementById(`lens-${to}`)?.focus();
+              }}
               className={`relative z-10 h-10 rounded-full text-[15px] font-medium transition-colors duration-300 ${
                 lens === k ? "text-bg" : "text-ink-muted hover:text-ink"
               }`}

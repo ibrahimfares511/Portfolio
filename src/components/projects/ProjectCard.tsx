@@ -62,7 +62,7 @@ export function ProjectCard({
         <div data-reveal="text" className="flex items-center justify-between gap-3">
           <span className="num font-display text-[22px] leading-none text-petrol" aria-hidden>
             {pad(index + 1)}
-            <span className="text-ink-muted/60"> / {pad(total)}</span>
+            <span className="text-ink-muted"> / {pad(total)}</span>
           </span>
           <span className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 text-[13px] text-ink-muted">
             <span className={`relative size-2 rounded-full ${live ? "bg-petrol" : "bg-ink-muted/50"}`} aria-hidden>

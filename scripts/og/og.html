@@ -1,0 +1,36 @@
+<!doctype html>
+<!-- Social image (1200×630) for the home page. Rendered to public/og/home-<lang>.png (saved as .jpg)
+     by scripts/og/render.py against a running build (it borrows the site's fonts). -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="__CSS__">
+<style>
+  html,body{margin:0}
+  .og{width:1200px;height:630px;position:relative;overflow:hidden;background:
+    radial-gradient(700px 480px at 88% -8%, #CFE0E3 0%, transparent 70%),
+    radial-gradient(640px 420px at -4% 112%, #F0D2C3 0%, transparent 70%), #F3EFE9;
+    color:#16303A;display:flex;align-items:center;box-sizing:border-box;padding:0 84px}
+  .txt{width:640px;display:flex;flex-direction:column;gap:22px;position:relative;z-index:2}
+  .mark{width:58px;height:77px}
+  .eyebrow{font-size:26px;color:#1F4E5F}
+  .head{font-weight:500;font-size:62px;line-height:1.38}
+  [lang=en] .head{font-family:Nunito;font-weight:700;font-size:64px;line-height:1.12;letter-spacing:-0.02em}
+  [lang=en] .eyebrow{font-family:Nunito;font-weight:600}
+  .url{font-family:Nunito;font-weight:700;font-size:24px;color:#C2603F;direction:ltr;unicode-bidi:isolate}
+  [lang=ar] .txt{font-family:Alexandria}
+  [lang=ar] .url{text-align:right}
+  .av{position:absolute;bottom:-40px;height:640px;inset-inline-end:40px}
+</style></head>
+<body><div class="og" lang="__LANG__" dir="__DIR__">
+  <div class="txt">
+    <svg class="mark" viewBox="16.5 8.5 73 97" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M28 78 V46" stroke="#16303A" stroke-width="11"/>
+      <path d="M80 18 Q62 18 62 36 V82 Q62 96 48 96 H36" stroke="#16303A" stroke-width="11"/>
+      <path d="M46 48 H78" stroke="#16303A" stroke-width="11"/>
+      <circle cx="28" cy="27" r="7.5" fill="#C2603F"/>
+    </svg>
+    <div class="eyebrow">__EYEBROW__</div>
+    <div class="head">__HEAD__</div>
+    <div class="url">ibrahimfares.dev</div>
+  </div>
+  <img class="av" src="__AVATAR__">
+</div></body></html>

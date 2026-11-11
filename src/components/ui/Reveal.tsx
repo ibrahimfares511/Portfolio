@@ -27,17 +27,14 @@ export function Reveal({
     let ctx: gsap.Context | undefined;
     let io: IntersectionObserver | undefined;
 
-    // Hidden from the start (below the fold, so nobody sees the switch).
+    // Waiting pieces are hidden by CSS (opacity only). Blur and offset are
+    // added only when the entrance starts, so mounting a section is cheap.
     const hidden = {
       word: { opacity: 0, filter: "blur(12px)", y: "0.25em" },
       text: { opacity: 0, filter: "blur(8px)", y: 12 },
       block: { opacity: 0, filter: "blur(14px)", y: 32 },
     };
     const pick = (k: keyof typeof hidden) => el.querySelectorAll(`[data-reveal='${k}']`);
-    (Object.keys(hidden) as (keyof typeof hidden)[]).forEach((k) => {
-      const nodes = pick(k);
-      if (nodes.length) gsap.set(nodes, hidden[k]);
-    });
 
     const stop = onReveal(() => {
       io = new IntersectionObserver(
@@ -50,9 +47,10 @@ export function Reveal({
             const words = pick("word");
             const texts = pick("text");
             const blocks = pick("block");
-            if (words.length) tl.to(words, { ...done, duration: 0.5, stagger: 0.04 });
-            if (blocks.length) tl.to(blocks, { ...done, duration: 0.8, stagger: 0.1 }, 0);
-            if (texts.length) tl.to(texts, { ...done, duration: 0.55, stagger: 0.07 }, words.length ? "-=0.3" : 0.1);
+            if (words.length) tl.fromTo(words, hidden.word, { ...done, duration: 0.5, stagger: 0.04 });
+            if (blocks.length) tl.fromTo(blocks, hidden.block, { ...done, duration: 0.8, stagger: 0.1 }, 0);
+            if (texts.length) tl.fromTo(texts, hidden.text, { ...done, duration: 0.55, stagger: 0.07 }, words.length ? "-=0.3" : 0.1);
+            el.setAttribute("data-shown", "");
           }, el);
         },
         // Starts as the element comes up into the lower part of the screen.
@@ -65,11 +63,12 @@ export function Reveal({
       stop();
       io?.disconnect();
       ctx?.revert();
+      el.removeAttribute("data-shown");
     };
   }, [threshold]);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} data-reveal-root="">
       {children}
     </div>
   );
