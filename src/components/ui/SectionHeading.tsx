@@ -52,8 +52,8 @@ export function SectionHeading({
         <path
           data-reveal="pen"
           d="M3 9 C 40 3, 80 3, 118 7 S 190 12, 217 5"
-          pathLength={1}
-          strokeDasharray="1"
+          pathLength={100}
+          strokeDasharray="100"
           stroke="currentColor"
           strokeWidth="3.2"
           strokeLinecap="round"

@@ -39,7 +39,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <Band label={ts("build")}>
         <WhatICanBuild locale={lang} />
       </Band>
-      <Band label={ts("process")} tone="petrol" grid>
+      <Band label={ts("process")} tone="petrol">
         <HowWeWork locale={lang} />
       </Band>
       <Band label={ts("tools")} tone="sky">

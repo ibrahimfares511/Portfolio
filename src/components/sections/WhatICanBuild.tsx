@@ -92,35 +92,20 @@ export async function WhatICanBuild({ locale }: { locale: "ar" | "en" }) {
                   <div className="relative z-10 mt-auto flex items-end pt-8 max-lg:min-h-[200px]">
                     <ButtonLink href={`/${locale}#contact`}>{t("cta")}</ButtonLink>
                   </div>
-                  {/* A pen sketch instead of another avatar: an idea (the dot) → a system. */}
-                  <svg
-                    aria-hidden
-                    viewBox="0 0 220 170"
-                    fill="none"
-                    className="pointer-events-none absolute end-4 bottom-4 z-0 h-[150px] w-auto text-petrol md:h-[180px] rtl:-scale-x-100"
-                  >
-                    {[
-                      "M30 38 C 70 20, 96 60, 112 84",
-                      "M104 70 L113 86 L96 84",
-                      "M120 92 h80 a10 10 0 0 1 10 10 v46 a10 10 0 0 1 -10 10 h-80 a10 10 0 0 1 -10 -10 v-46 a10 10 0 0 1 10 -10 z",
-                      "M126 110 h40 M126 122 h64 M126 134 h28",
-                      "M178 132 v14 M188 126 v20 M198 118 v28",
-                    ].map((d, i) => (
-                      <path
-                        key={i}
-                        data-reveal="pen"
-                        d={d}
-                        pathLength={1}
-                        strokeDasharray="1"
-                        stroke="currentColor"
-                        strokeOpacity={i < 2 ? 0.8 : 0.55}
-                        strokeWidth="2.6"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    ))}
-                    <circle cx="30" cy="38" r="9" fill="var(--clay)" />
-                  </svg>
+                  <picture>
+                    <source type="image/avif" srcSet="/avatar/08-thinking-320.avif 320w, /avatar/08-thinking-480.avif 480w" sizes="200px" />
+                    <img
+                      src="/avatar/08-thinking-320.webp"
+                      srcSet="/avatar/08-thinking-320.webp 320w, /avatar/08-thinking-480.webp 480w"
+                      sizes="200px"
+                      width={848}
+                      height={1264}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="pointer-events-none absolute -bottom-4 end-0 z-0 h-[210px] w-auto select-none md:h-[260px]"
+                    />
+                  </picture>
                 </>
               )}
             </article>

@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useLocale, useMessages, useTranslations } from "next-intl";
-import { HeroSystem } from "./HeroSystem";
 import { ButtonLink } from "@/components/ui/Button";
 import { onReveal } from "@/lib/motion";
 import { Words } from "@/components/ui/Words";
@@ -160,7 +159,6 @@ export function Hero() {
             aria-hidden
             className="absolute bottom-[-10%] left-1/2 aspect-square w-[115%] max-w-[560px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--sky-soft),transparent)] opacity-90 dark:opacity-100"
           />
-          <HeroSystem />
           <div ref={avatar} data-reveal="avatar" className="relative will-change-transform">
             <picture>
               <source

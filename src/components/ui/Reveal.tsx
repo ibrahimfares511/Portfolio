@@ -32,7 +32,9 @@ export function Reveal({
     const hidden = {
       word: { opacity: 0, filter: "blur(12px)", y: "0.25em" },
       text: { opacity: 0, filter: "blur(8px)", y: 12 },
-      block: { opacity: 0, filter: "blur(14px)", y: 32 },
+      // No blur on big blocks (screenshots, cards): blurring large layers while
+      // the page is scrolling is what makes it stutter.
+      block: { opacity: 0, filter: "blur(0px)", y: 40 },
     };
     const pick = (k: keyof typeof hidden) => el.querySelectorAll(`[data-reveal='${k}']`);
 
@@ -50,10 +52,16 @@ export function Reveal({
             if (words.length) tl.fromTo(words, hidden.word, { ...done, duration: 0.5, stagger: 0.04 });
             if (blocks.length) tl.fromTo(blocks, hidden.block, { ...done, duration: 0.8, stagger: 0.1 }, 0);
             if (texts.length) tl.fromTo(texts, hidden.text, { ...done, duration: 0.55, stagger: 0.07 }, words.length ? "-=0.3" : 0.1);
-            // Pen strokes (pathLength=1) draw themselves after the words.
+            // Pen strokes (pathLength=100; GSAP rounds px values, so 0–1 would
+            // jump) draw themselves after the words.
             const pens = el.querySelectorAll("[data-reveal='pen']");
             if (pens.length)
-              tl.fromTo(pens, { opacity: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut", stagger: 0.1 }, words.length ? "-=0.25" : 0.2);
+              tl.fromTo(
+                pens,
+                { opacity: 1, strokeDashoffset: 100 },
+                { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut", stagger: 0.12 },
+                words.length ? "-=0.2" : 0.2,
+              );
             el.setAttribute("data-shown", "");
           }, el);
         },
