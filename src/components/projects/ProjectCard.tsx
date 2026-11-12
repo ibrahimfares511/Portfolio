@@ -55,6 +55,14 @@ export function ProjectCard({
             label={p.title[lang]}
           />
         </div>
+        {/* The picture opens the story too (mouse only; the button below is the real link). */}
+        <a
+          href={`/${lang}/projects/${p.slug}`}
+          aria-hidden
+          tabIndex={-1}
+          data-cursor-label={strings.cta}
+          className="absolute inset-0 z-10"
+        />
       </div>
 
       {/* Text */}

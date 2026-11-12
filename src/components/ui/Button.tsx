@@ -17,8 +17,9 @@ export function ButtonLink({
 }: AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: Variant; children: ReactNode }) {
   return (
     <a
+      data-magnetic=""
       {...props}
-      className={`inline-flex h-12 items-center justify-center gap-2 rounded-md px-6 text-[16px] font-medium transition-[filter,color,border-color,transform] duration-200 hover:-translate-y-px focus-visible:outline-clay ${styles[variant]} ${className}`}
+      className={`inline-flex h-12 items-center justify-center gap-2 rounded-md px-6 text-[16px] font-medium transition-[filter,color,border-color] duration-200 focus-visible:outline-clay ${styles[variant]} ${className}`}
     >
       {children}
     </a>

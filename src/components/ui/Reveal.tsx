@@ -50,6 +50,10 @@ export function Reveal({
             if (words.length) tl.fromTo(words, hidden.word, { ...done, duration: 0.5, stagger: 0.04 });
             if (blocks.length) tl.fromTo(blocks, hidden.block, { ...done, duration: 0.8, stagger: 0.1 }, 0);
             if (texts.length) tl.fromTo(texts, hidden.text, { ...done, duration: 0.55, stagger: 0.07 }, words.length ? "-=0.3" : 0.1);
+            // Pen strokes (pathLength=1) draw themselves after the words.
+            const pens = el.querySelectorAll("[data-reveal='pen']");
+            if (pens.length)
+              tl.fromTo(pens, { opacity: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut", stagger: 0.1 }, words.length ? "-=0.25" : 0.2);
             el.setAttribute("data-shown", "");
           }, el);
         },

@@ -105,28 +105,23 @@ export async function Contact({ locale }: { locale: "ar" | "en" }) {
             data-reveal="block"
             className="relative mt-8 hidden self-center lg:mt-auto lg:block"
           >
-            <span
-              aria-hidden
-              className="absolute bottom-0 left-1/2 aspect-square w-[120%] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--sky-soft),transparent)]"
-            />
-            <picture>
-              <source
-                type="image/avif"
-                srcSet="/avatar/05-contact-320.avif 320w, /avatar/05-contact-480.avif 480w"
-                sizes="240px"
-              />
-              <img
-                src="/avatar/05-contact-320.webp"
-                srcSet="/avatar/05-contact-320.webp 320w, /avatar/05-contact-480.webp 480w"
-                sizes="240px"
-                width={848}
-                height={1264}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                className="relative h-[340px] w-auto select-none"
-              />
-            </picture>
+            {/* The logo, written by the pen: the site signs off. */}
+            <svg aria-hidden viewBox="0 0 100 106" className="mx-auto h-[200px] w-auto text-ink" fill="none">
+              {["M28 78 V46", "M80 18 Q62 18 62 36 V82 Q62 96 48 96 H36", "M46 48 H78"].map((d, i) => (
+                <path
+                  key={i}
+                  data-reveal="pen"
+                  d={d}
+                  pathLength={1}
+                  strokeDasharray="1"
+                  stroke={i === 2 ? "var(--petrol)" : "currentColor"}
+                  strokeWidth="11"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              ))}
+              <circle cx="28" cy="27" r="7.5" fill="var(--clay)" />
+            </svg>
           </div>
         </Reveal>
       </div>

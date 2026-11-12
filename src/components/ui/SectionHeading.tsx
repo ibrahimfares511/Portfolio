@@ -42,6 +42,23 @@ export function SectionHeading({
           />
         )}
       </h2>
+      {/* A pen stroke under the title, drawn as it enters. */}
+      <svg
+        aria-hidden
+        viewBox="0 0 220 14"
+        className="mt-3 block h-[12px] w-[150px] text-clay md:w-[190px] rtl:-scale-x-100"
+        fill="none"
+      >
+        <path
+          data-reveal="pen"
+          d="M3 9 C 40 3, 80 3, 118 7 S 190 12, 217 5"
+          pathLength={1}
+          strokeDasharray="1"
+          stroke="currentColor"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+        />
+      </svg>
       {sub ? (
         <p data-reveal="text" className="mt-4 text-[17px] leading-[30px] text-ink-muted md:text-body-lg">
           {sub}

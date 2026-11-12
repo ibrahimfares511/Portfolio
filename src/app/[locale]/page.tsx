@@ -1,5 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { JsonLd, personLd } from "@/components/seo/JsonLd";
+import { Band } from "@/components/layout/Band";
+import { SectionPager } from "@/components/layout/SectionPager";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { OtherWork } from "@/components/sections/OtherWork";
@@ -9,26 +11,47 @@ import { Tools } from "@/components/sections/Tools";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 
-/** Home page, in the sitemap order. */
+/**
+ * Home page, in the sitemap order. Each section sits in a band; the tones
+ * alternate so the page changes colour as you go: light, light, sky, light,
+ * petrol (squared paper), sky, light, clay.
+ */
 export default async function Home({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const lang = locale === "en" ? "en" : "ar";
   const t = await getTranslations("hero");
-  // The role half of the eyebrow ("إبراهيم فارس · مطوّر أنظمة ويب").
-  const jobTitle = t("eyebrow").split("·").pop()!.trim();
+  const ts = await getTranslations("sections");
+  const [name, role] = t("eyebrow").split("·").map((s) => s.trim());
 
   return (
     <>
-      <JsonLd data={personLd(lang, jobTitle)} />
-      <Hero />
-      <Projects locale={lang} />
-      <OtherWork locale={lang} />
-      <WhatICanBuild locale={lang} />
-      <HowWeWork locale={lang} />
-      <Tools locale={lang} />
-      <About locale={lang} />
-      <Contact locale={lang} />
+      <JsonLd data={personLd(lang, role)} />
+      <Band label={name}>
+        <Hero />
+      </Band>
+      <Band label={ts("projects")}>
+        <Projects locale={lang} />
+      </Band>
+      <Band label={ts("otherWork")} tone="sky">
+        <OtherWork locale={lang} />
+      </Band>
+      <Band label={ts("build")}>
+        <WhatICanBuild locale={lang} />
+      </Band>
+      <Band label={ts("process")} tone="petrol" grid>
+        <HowWeWork locale={lang} />
+      </Band>
+      <Band label={ts("tools")} tone="sky">
+        <Tools locale={lang} />
+      </Band>
+      <Band label={ts("about")}>
+        <About locale={lang} />
+      </Band>
+      <Band label={ts("contact")} tone="clay">
+        <Contact locale={lang} />
+      </Band>
+      <SectionPager />
     </>
   );
 }

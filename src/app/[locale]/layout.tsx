@@ -1,3 +1,4 @@
+import { Cursor } from "@/components/layout/Cursor";
 import { SITE_URL, OG_LOCALE } from "@/lib/site";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
@@ -120,6 +121,7 @@ export default async function LocaleLayout({
           <Header />
           <main id="main">{children}</main>
           <Footer />
+          <Cursor />
         </NextIntlClientProvider>
       </body>
     </html>

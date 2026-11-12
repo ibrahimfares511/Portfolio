@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useLocale, useMessages, useTranslations } from "next-intl";
+import { HeroSystem } from "./HeroSystem";
 import { ButtonLink } from "@/components/ui/Button";
 import { onReveal } from "@/lib/motion";
 import { Words } from "@/components/ui/Words";
@@ -159,6 +160,7 @@ export function Hero() {
             aria-hidden
             className="absolute bottom-[-10%] left-1/2 aspect-square w-[115%] max-w-[560px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--sky-soft),transparent)] opacity-90 dark:opacity-100"
           />
+          <HeroSystem />
           <div ref={avatar} data-reveal="avatar" className="relative will-change-transform">
             <picture>
               <source
@@ -192,7 +194,7 @@ export function Hero() {
               data-reveal="proof"
               className="flex flex-col gap-1 border-line py-5 odd:pe-4 even:border-s even:ps-4 [&:nth-child(-n+2)]:border-b md:py-7 md:odd:pe-6 md:even:ps-6 md:[&:nth-child(-n+2)]:border-b-0 md:[&:nth-child(n+2)]:border-s md:[&:nth-child(n+2)]:ps-6"
             >
-              <span className="num self-start font-display text-[32px] leading-[38px] text-petrol sm:text-[40px] sm:leading-[44px] lg:text-[52px] lg:leading-[56px]">
+              <span className="num self-start font-display text-[36px] leading-[42px] text-petrol sm:text-[44px] sm:leading-[50px] lg:text-[52px] lg:leading-[58px] xl:text-[58px] xl:leading-[62px]">
                 <span aria-hidden data-count={p.value}>
                   {p.value}
                 </span>
