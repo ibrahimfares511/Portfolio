@@ -91,7 +91,7 @@ export function Hero() {
       ref={root}
       id="top"
       aria-labelledby="hero-title"
-      className="relative flex min-h-dvh flex-col overflow-hidden pt-16 md:pt-[72px]"
+      className="relative flex min-h-dvh flex-col overflow-hidden pt-16 md:pt-[72px] lg:h-dvh"
     >
       {/* Stage lighting: a soft spotlight behind the head, two calm rings, a vignette at the edges */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -104,7 +104,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(130%_100%_at_50%_45%,transparent_60%,color-mix(in_srgb,var(--bg)_85%,black)_100%)] opacity-40 dark:opacity-70" />
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6 lg:min-h-0">
         {/* Headline, centred above the character */}
         <div className="relative z-10 pt-6 text-center md:pt-8">
           <p className="inline-flex items-center gap-2 rounded-full border border-line bg-bg/60 px-4 py-1.5 text-[14px] text-ink-muted backdrop-blur-sm">
@@ -130,7 +130,7 @@ export function Hero() {
           <p className="mx-auto mt-4 max-w-md text-[16px] leading-[28px] text-ink-muted xl:hidden">
             <Words text={t("subline")} />
           </p>
-          <div data-reveal="text" className="mt-6 flex flex-wrap items-center justify-center gap-3 xl:hidden">
+          <div data-reveal="text" className="mt-6 flex flex-wrap items-center justify-center gap-3 xl:hidden [&>a]:min-w-44">
             <ButtonLink href={`/${locale}#contact`}>{t("primary")}</ButtonLink>
             <ButtonLink href={`/${locale}#projects`} variant="secondary" data-portrait="contact">
               {t("secondary")}
@@ -140,11 +140,11 @@ export function Hero() {
 
         {/* The character, centred and standing on the proof strip: a living portrait (eyes follow
             the cursor, reacts to hover, taps and pulls). Previous still kept in /public/avatar/hero-front-*. */}
-        <div className="relative flex min-h-[300px] flex-1 items-end justify-center">
-          <div data-reveal="avatar" className="relative">
+        <div className="relative flex min-h-[300px] flex-1 items-end justify-center lg:min-h-0">
+          <div data-reveal="avatar" className="relative lg:flex lg:h-full lg:items-end">
             <LivingPortrait
               alt={t("avatarAlt")}
-              className="w-[min(96vw,440px)] sm:w-[min(84vw,540px)] lg:w-[min(56vw,calc(100dvh-470px),700px)] xl:w-[min(56vw,calc(100dvh-400px),760px)]"
+              className="w-[min(96vw,440px)] sm:w-[min(84vw,540px)] lg:aspect-square lg:h-full lg:max-h-[min(56vw,760px)] lg:w-auto"
             />
           </div>
 
@@ -155,7 +155,7 @@ export function Hero() {
           >
             {t("subline")}
           </p>
-          <div data-reveal="text" className="absolute end-0 bottom-8 z-10 hidden flex-col items-end gap-3 xl:flex xl:items-start">
+          <div data-reveal="text" className="absolute end-0 bottom-8 z-10 hidden flex-col items-stretch gap-3 xl:flex">
             <ButtonLink href={`/${locale}#contact`}>{t("primary")}</ButtonLink>
             <ButtonLink href={`/${locale}#projects`} variant="secondary" data-portrait="contact">
               {t("secondary")}
