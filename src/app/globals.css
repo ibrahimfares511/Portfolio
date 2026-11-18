@@ -577,3 +577,8 @@ html.pl-active {
     line-height: 33px;
   }
 }
+
+/* Hero: the brand dot travelling slowly around the ring behind the character */
+@keyframes hero-orbit { to { transform: translate(-50%, -50%) rotate(360deg); } }
+.hero-orbit { animation: hero-orbit 48s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .hero-orbit { animation: none; } }

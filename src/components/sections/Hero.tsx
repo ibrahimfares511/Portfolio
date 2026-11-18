@@ -125,27 +125,40 @@ export function Hero() {
       aria-labelledby="hero-title"
       className="relative flex min-h-dvh flex-col overflow-hidden pt-16 md:pt-[72px]"
     >
-      <div className="mx-auto grid w-full max-w-6xl flex-1 grid-cols-1 items-center gap-x-8 px-4 sm:px-6 md:grid-cols-12">
-        {/* Copy */}
-        <div className="relative z-10 pt-10 pb-6 md:col-span-7 md:py-16">
-          <p className="text-[15px] text-ink-muted">
+      {/* Stage lighting: a soft spotlight behind the head, two calm rings, a vignette at the edges */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute top-[66%] left-1/2 aspect-square w-[min(120vw,1100px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,var(--sky-soft),transparent_72%)] opacity-80 dark:opacity-100" />
+        <div className="absolute top-[68%] left-1/2 aspect-square w-[min(84vw,600px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-line/80" />
+        <div className="hero-orbit absolute top-[68%] left-1/2 aspect-square w-[min(84vw,600px)] -translate-x-1/2 -translate-y-1/2">
+          <span className="absolute top-0 left-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-clay shadow-[0_0_0_6px_var(--clay-soft)]" />
+        </div>
+        <div className="absolute top-[68%] left-1/2 aspect-square w-[min(120vw,900px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-line/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(130%_100%_at_50%_45%,transparent_60%,color-mix(in_srgb,var(--bg)_85%,black)_100%)] opacity-40 dark:opacity-70" />
+      </div>
+
+      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 sm:px-6 xl:px-20">
+        {/* Headline, centred above the character */}
+        <div className="relative z-10 pt-6 text-center md:pt-8">
+          <p className="inline-flex items-center gap-2 rounded-full border border-line bg-bg/60 px-4 py-1.5 text-[14px] text-ink-muted backdrop-blur-sm">
+            <span aria-hidden className="size-2 rounded-full bg-clay" />
             <Words text={t("eyebrow")} />
           </p>
           <h1
             id="hero-title"
             className={
               isAr
-                ? "mt-5 text-[36px] leading-[58px] font-medium text-balance sm:text-[44px] sm:leading-[68px] lg:text-[52px] lg:leading-[80px]"
-                : "mt-5 font-latin text-[40px] leading-[48px] font-bold tracking-[-0.02em] text-balance sm:text-[52px] sm:leading-[60px] lg:text-[60px] lg:leading-[68px]"
+                ? "mx-auto mt-4 max-w-5xl text-[36px] leading-[58px] font-semibold text-balance sm:text-[48px] sm:leading-[74px] lg:text-[56px] lg:leading-[84px] lg:whitespace-nowrap xl:text-[64px] xl:leading-[96px]"
+                : "mx-auto mt-4 max-w-5xl font-latin text-[38px] leading-[44px] font-bold tracking-[-0.03em] text-balance sm:text-[52px] sm:leading-[58px] lg:text-[58px] lg:leading-[66px] lg:whitespace-nowrap xl:text-[66px] xl:leading-[74px]"
             }
           >
             <Words text={t("headline")} />
-            <span data-reveal="word" className="ms-2 inline-block size-[0.2em] rounded-full bg-clay" aria-hidden />
+            <span data-reveal="word" className="ms-2 inline-block size-[0.18em] rounded-full bg-clay" aria-hidden />
           </h1>
-          <p className="mt-5 max-w-xl text-[17px] leading-[30px] text-ink-muted md:text-body-lg">
+          {/* On small screens the subline + buttons sit under the headline */}
+          <p className="mx-auto mt-4 max-w-md text-[16px] leading-[28px] text-ink-muted xl:hidden">
             <Words text={t("subline")} />
           </p>
-          <div data-reveal="text" className="mt-8 flex flex-wrap items-center gap-3">
+          <div data-reveal="text" className="mt-6 flex flex-wrap items-center justify-center gap-3 xl:hidden">
             <ButtonLink href={`/${locale}#contact`}>{t("primary")}</ButtonLink>
             <ButtonLink href={`/${locale}#projects`} variant="secondary">
               {t("secondary")}
@@ -153,32 +166,47 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Avatar, standing on the proof strip */}
-        <div className="relative flex h-full items-end justify-center md:col-span-5 [perspective:900px]">
+        {/* The character, centred and standing on the proof strip.
+            Previous full-body pose kept in /public/avatar/06-arms-crossed-* as a backup. */}
+        <div className="relative flex min-h-[300px] flex-1 items-end justify-center [perspective:1200px]">
           <div
-            aria-hidden
-            className="absolute bottom-[-10%] left-1/2 aspect-square w-[115%] max-w-[560px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--sky-soft),transparent)] opacity-90 dark:opacity-100"
-          />
-          <div ref={avatar} data-reveal="avatar" className="relative will-change-transform">
-            <picture>
+            ref={avatar}
+            data-reveal="avatar"
+            className="relative w-[min(100vw,520px)] origin-[50%_85%] will-change-transform sm:w-[min(90vw,640px)] lg:w-[min(64vw,calc((100dvh-470px)*1.225),860px)] xl:w-[min(64vw,calc((100dvh-400px)*1.225),860px)]"
+          >
+            <picture className="block drop-shadow-[0_24px_60px_rgba(19,48,59,0.18)] dark:drop-shadow-[0_0_40px_rgba(127,179,196,0.22)]">
               <source
                 type="image/avif"
-                srcSet="/avatar/06-arms-crossed-420.avif 420w, /avatar/06-arms-crossed-640.avif 640w, /avatar/06-arms-crossed-848.avif 848w"
-                sizes="(min-width: 768px) 420px, 300px"
+                srcSet="/avatar/hero-front-640.avif 640w, /avatar/hero-front-960.avif 960w, /avatar/hero-front-1280.avif 1280w, /avatar/hero-front-1808.avif 1808w"
+                sizes="(min-width: 1024px) 860px, 92vw"
               />
               <img
-                src="/avatar/06-arms-crossed-640.webp"
-                srcSet="/avatar/06-arms-crossed-420.webp 420w, /avatar/06-arms-crossed-640.webp 640w, /avatar/06-arms-crossed-848.webp 848w"
-                sizes="(min-width: 768px) 420px, 300px"
-                width={848}
-                height={1264}
+                src="/avatar/hero-front-1280.webp"
+                srcSet="/avatar/hero-front-640.webp 640w, /avatar/hero-front-960.webp 960w, /avatar/hero-front-1280.webp 1280w, /avatar/hero-front-1808.webp 1808w"
+                sizes="(min-width: 1024px) 860px, 92vw"
+                width={1808}
+                height={1476}
                 alt={t("avatarAlt")}
                 fetchPriority="high"
                 decoding="async"
-                className="block h-[min(50vh,380px)] w-auto select-none md:h-[min(68vh,600px)]"
+                className="block h-auto w-full select-none [mask-image:linear-gradient(to_bottom,#000_82%,transparent)]"
                 draggable={false}
               />
             </picture>
+          </div>
+
+          {/* Large screens: subline in one bottom corner, buttons in the other */}
+          <p
+            data-reveal="text"
+            className="absolute start-0 bottom-8 z-10 hidden max-w-[280px] text-[16px] leading-[30px] text-ink-muted xl:block"
+          >
+            {t("subline")}
+          </p>
+          <div data-reveal="text" className="absolute end-0 bottom-8 z-10 hidden flex-col items-end gap-3 xl:flex xl:items-start">
+            <ButtonLink href={`/${locale}#contact`}>{t("primary")}</ButtonLink>
+            <ButtonLink href={`/${locale}#projects`} variant="secondary">
+              {t("secondary")}
+            </ButtonLink>
           </div>
         </div>
       </div>
