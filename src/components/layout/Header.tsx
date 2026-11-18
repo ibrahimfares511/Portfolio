@@ -40,8 +40,8 @@ export function Header() {
         scrolled || open ? "border-b border-line bg-bg/80 backdrop-blur-md" : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6 md:h-[72px]">
-        <a href={home} className="flex items-center text-ink" aria-label={`${tm("title")} · ${t("home")}`}>
+      <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto] items-center gap-6 px-4 sm:px-6 md:h-[72px] md:grid-cols-[1fr_auto_1fr]">
+        <a href={home} className="flex items-center justify-self-start text-ink" aria-label={`${tm("title")} · ${t("home")}`}>
           <LogoMark size={36} />
         </a>
 
@@ -60,7 +60,7 @@ export function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 justify-self-end">
           <span className="hidden sm:contents">
             <LocaleSwitch />
           </span>

@@ -24,6 +24,7 @@ export function Hero() {
   const proof = messages.hero.proof;
   const locale = useLocale();
   const isAr = locale === "ar";
+  const headlineLead = t("headline").replace(t("headlineAccent"), "").trim();
   const root = useRef<HTMLElement>(null);
 
   // Entrance once the cover opens: the words are "typed in", each one coming
@@ -103,7 +104,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-[radial-gradient(130%_100%_at_50%_45%,transparent_60%,color-mix(in_srgb,var(--bg)_85%,black)_100%)] opacity-40 dark:opacity-70" />
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 sm:px-6 xl:px-20">
+      <div className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
         {/* Headline, centred above the character */}
         <div className="relative z-10 pt-6 text-center md:pt-8">
           <p className="inline-flex items-center gap-2 rounded-full border border-line bg-bg/60 px-4 py-1.5 text-[14px] text-ink-muted backdrop-blur-sm">
@@ -118,7 +119,11 @@ export function Hero() {
                 : "mx-auto mt-4 max-w-5xl font-latin text-[38px] leading-[44px] font-bold tracking-[-0.03em] text-balance sm:text-[52px] sm:leading-[58px] lg:text-[58px] lg:leading-[66px] lg:whitespace-nowrap xl:text-[66px] xl:leading-[74px]"
             }
           >
-            <Words text={t("headline")} />
+            {/* The promise ("a system that actually works") in the brand clay, so the eye lands on it */}
+            <Words text={headlineLead} />{" "}
+            <span className="text-clay">
+              <Words text={t("headlineAccent")} />
+            </span>
             <span data-reveal="word" className="ms-2 inline-block size-[0.18em] rounded-full bg-clay" aria-hidden />
           </h1>
           {/* On small screens the subline + buttons sit under the headline */}
@@ -127,7 +132,7 @@ export function Hero() {
           </p>
           <div data-reveal="text" className="mt-6 flex flex-wrap items-center justify-center gap-3 xl:hidden">
             <ButtonLink href={`/${locale}#contact`}>{t("primary")}</ButtonLink>
-            <ButtonLink href={`/${locale}#projects`} variant="secondary">
+            <ButtonLink href={`/${locale}#projects`} variant="secondary" data-portrait="contact">
               {t("secondary")}
             </ButtonLink>
           </div>
@@ -152,7 +157,7 @@ export function Hero() {
           </p>
           <div data-reveal="text" className="absolute end-0 bottom-8 z-10 hidden flex-col items-end gap-3 xl:flex xl:items-start">
             <ButtonLink href={`/${locale}#contact`}>{t("primary")}</ButtonLink>
-            <ButtonLink href={`/${locale}#projects`} variant="secondary">
+            <ButtonLink href={`/${locale}#projects`} variant="secondary" data-portrait="contact">
               {t("secondary")}
             </ButtonLink>
           </div>
