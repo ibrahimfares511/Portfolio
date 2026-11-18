@@ -6,6 +6,7 @@ import { useLocale, useMessages, useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/ui/Button";
 import { onReveal } from "@/lib/motion";
 import { Words } from "@/components/ui/Words";
+import { LivingPortrait } from "@/components/hero/LivingPortrait";
 
 type Proof = { value: string; label: string };
 
@@ -24,7 +25,6 @@ export function Hero() {
   const locale = useLocale();
   const isAr = locale === "ar";
   const root = useRef<HTMLElement>(null);
-  const avatar = useRef<HTMLDivElement>(null);
 
   // Entrance once the cover opens: the words are "typed in", each one coming
   // out of a blur, then the buttons, the avatar and the proof numbers.
@@ -85,39 +85,6 @@ export function Hero() {
     };
   }, []);
 
-  // Gentle tilt + parallax of the whole avatar image with the mouse (never warp the face).
-  useEffect(() => {
-    const el = root.current;
-    const av = avatar.current;
-    if (!el || !av) return;
-    const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!fine || reduced) return;
-
-    const rx = gsap.quickTo(av, "rotationX", { duration: 0.8, ease: "power3.out" });
-    const ry = gsap.quickTo(av, "rotationY", { duration: 0.8, ease: "power3.out" });
-    const x = gsap.quickTo(av, "x", { duration: 0.9, ease: "power3.out" });
-    const move = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5; // -0.5 … 0.5
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      ry(px * 8);
-      rx(-py * 5);
-      x(px * 14);
-    };
-    const leave = () => {
-      rx(0);
-      ry(0);
-      x(0);
-    };
-    el.addEventListener("pointermove", move);
-    el.addEventListener("pointerleave", leave);
-    return () => {
-      el.removeEventListener("pointermove", move);
-      el.removeEventListener("pointerleave", leave);
-    };
-  }, []);
-
   return (
     <section
       ref={root}
@@ -166,33 +133,14 @@ export function Hero() {
           </div>
         </div>
 
-        {/* The character, centred and standing on the proof strip.
-            Previous full-body pose kept in /public/avatar/06-arms-crossed-* as a backup. */}
-        <div className="relative flex min-h-[300px] flex-1 items-end justify-center [perspective:1200px]">
-          <div
-            ref={avatar}
-            data-reveal="avatar"
-            className="relative w-[min(100vw,520px)] origin-[50%_85%] will-change-transform sm:w-[min(90vw,640px)] lg:w-[min(64vw,calc((100dvh-470px)*1.225),860px)] xl:w-[min(64vw,calc((100dvh-400px)*1.225),860px)]"
-          >
-            <picture className="block drop-shadow-[0_24px_60px_rgba(19,48,59,0.18)] dark:drop-shadow-[0_0_40px_rgba(127,179,196,0.22)]">
-              <source
-                type="image/avif"
-                srcSet="/avatar/hero-front-640.avif 640w, /avatar/hero-front-960.avif 960w, /avatar/hero-front-1280.avif 1280w, /avatar/hero-front-1808.avif 1808w"
-                sizes="(min-width: 1024px) 860px, 92vw"
-              />
-              <img
-                src="/avatar/hero-front-1280.webp"
-                srcSet="/avatar/hero-front-640.webp 640w, /avatar/hero-front-960.webp 960w, /avatar/hero-front-1280.webp 1280w, /avatar/hero-front-1808.webp 1808w"
-                sizes="(min-width: 1024px) 860px, 92vw"
-                width={1808}
-                height={1476}
-                alt={t("avatarAlt")}
-                fetchPriority="high"
-                decoding="async"
-                className="block h-auto w-full select-none [mask-image:linear-gradient(to_bottom,#000_82%,transparent)]"
-                draggable={false}
-              />
-            </picture>
+        {/* The character, centred and standing on the proof strip: a living portrait (eyes follow
+            the cursor, reacts to hover, taps and pulls). Previous still kept in /public/avatar/hero-front-*. */}
+        <div className="relative flex min-h-[300px] flex-1 items-end justify-center">
+          <div data-reveal="avatar" className="relative">
+            <LivingPortrait
+              alt={t("avatarAlt")}
+              className="w-[min(96vw,440px)] sm:w-[min(84vw,540px)] lg:w-[min(56vw,calc(100dvh-470px),700px)] xl:w-[min(56vw,calc(100dvh-400px),760px)]"
+            />
           </div>
 
           {/* Large screens: subline in one bottom corner, buttons in the other */}
