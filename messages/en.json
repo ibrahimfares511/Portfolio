@@ -72,6 +72,7 @@
     "cta": "Read the story",
     "next": "Next project",
     "prev": "Previous project",
+    "role": "My role",
     "status": {
       "live": "Live",
       "delivered": "Delivered"

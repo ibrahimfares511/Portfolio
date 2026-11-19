@@ -12,7 +12,7 @@ export async function Projects({ locale }: { locale: "ar" | "en" }) {
         lang={locale}
         title={t("title")}
         sub={t("subline")}
-        strings={{ cta: t("cta"), next: t("next"), prev: t("prev"), status: { live: t("status.live"), delivered: t("status.delivered") } }}
+        strings={{ cta: t("cta"), next: t("next"), prev: t("prev"), role: t("role"), status: { live: t("status.live"), delivered: t("status.delivered") } }}
       />
     </section>
   );

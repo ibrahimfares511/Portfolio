@@ -6,6 +6,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import type { Project } from "@/lib/projects";
 import { projectBySlug } from "@/lib/projects";
 import { LoopVideo } from "./LoopVideo";
+import { Words } from "@/components/ui/Words";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -15,9 +16,57 @@ export type ShowcaseStrings = {
   status: { live: string; delivered: string };
   next: string;
   prev: string;
+  role: string;
 };
 
 const pad = (n: number) => String(n).padStart(2, "0");
+
+/** "+13,000" → { prefix: "+", n: 13000 }; "~100" → { prefix: "~", n: 100 }. */
+function parseStat(value: string) {
+  const m = value.match(/^([+~]?)([\d,]+)(\+?)$/);
+  if (!m) return null;
+  return { prefix: m[1], n: Number(m[2].replace(/,/g, "")), suffix: m[3] };
+}
+const fmt = (n: number) => Math.round(n).toLocaleString("en-US"); // Western digits, always
+
+/** Bring a project's text in: words come out of a blur one by one, blocks follow, numbers count up. */
+function textIn(slide: HTMLElement, at: number, t: gsap.core.Timeline) {
+  const words = slide.querySelectorAll<HTMLElement>("[data-reveal='pw']");
+  const blocks = slide.querySelectorAll<HTMLElement>("[data-txt]");
+  t.fromTo(
+    words,
+    { opacity: 0, filter: "blur(10px)", y: "0.25em" },
+    { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.5, stagger: 0.028, ease: "power2.out", clearProps: "filter,transform" },
+    at,
+  ).fromTo(
+    blocks,
+    { opacity: 0, filter: "blur(8px)", y: 12 },
+    { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.55, stagger: 0.07, ease: "power2.out", clearProps: "filter,transform" },
+    at + 0.1,
+  );
+  slide.querySelectorAll<HTMLElement>("[data-count]").forEach((node, i) => {
+    const stat = parseStat(node.dataset.count!);
+    if (!stat || stat.n < 2) return;
+    const st = { n: 0 };
+    node.textContent = `${stat.prefix}0${stat.suffix}`;
+    t.to(
+      st,
+      {
+        n: stat.n,
+        duration: stat.n > 50 ? 1.4 : 0.9,
+        ease: "power2.out",
+        onUpdate: () => {
+          node.textContent = `${stat.prefix}${fmt(st.n)}${stat.suffix}`;
+        },
+        onComplete: () => {
+          node.textContent = node.dataset.count!;
+        },
+      },
+      at + 0.3 + i * 0.08,
+    );
+  });
+}
+
 
 /**
  * "Selected work" as a horizontal showcase.
@@ -121,8 +170,10 @@ export function ProjectShowcase({
     if (from === to) return;
     shown.current = to;
     const slides = Array.from(list.children) as HTMLElement[];
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!desktop()) {
       gsap.set(slides, { clearProps: "visibility" });
+      if (!still && slides[to]) textIn(slides[to], 0, gsap.timeline());
       return;
     }
     const out = slides[from], inn = slides[to];
@@ -139,9 +190,8 @@ export function ProjectShowcase({
     const fwd = to > from ? 1 : -1;
     const toStart = (document.documentElement.dir === "rtl" ? -1 : 1) * fwd; // +1: new one comes from the right
     const t = gsap.timeline({ defaults: { overwrite: "auto" } });
-    t.to(q(out, "[data-txt]"), { y: -14, opacity: 0, filter: "blur(6px)", duration: 0.32, stagger: 0.025, ease: "power2.in" }, 0)
+    t.to(q(out, "[data-txt], [data-reveal='pw']"), { y: -10, opacity: 0, filter: "blur(6px)", duration: 0.3, stagger: 0.008, ease: "power2.in" }, 0)
       .to(q(out, "[data-media]"), { xPercent: -10 * toStart, opacity: 0, scale: 0.96, duration: 0.5, ease: "power2.in" }, 0)
-      .to(q(out, "[data-num]"), { yPercent: -60 * fwd, opacity: 0, duration: 0.4, ease: "power2.in" }, 0)
       .set(out, { visibility: "hidden" })
       .set(inn, { visibility: "visible" }, 0.28)
       .fromTo(
@@ -150,16 +200,20 @@ export function ProjectShowcase({
         { clipPath: "inset(0% 0% 0% 0% round 28px)", duration: 1, ease: "power4.out", clearProps: "clipPath" },
         0.28,
       )
-      .fromTo(q(inn, "[data-media-in]"), { scale: 1.14, xPercent: 6 * toStart }, { scale: 1, xPercent: 0, duration: 1.25, ease: "power3.out", clearProps: "transform" }, 0.28)
-      .fromTo(q(inn, "[data-num]"), { yPercent: 60 * fwd, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.7, ease: "power3.out" }, 0.4)
-      .fromTo(
-        q(inn, "[data-txt]"),
-        { y: 22, opacity: 0, filter: "blur(10px)" },
-        { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.6, stagger: 0.06, ease: "power3.out", clearProps: "filter,transform" },
-        0.45,
-      );
+      .fromTo(q(inn, "[data-media-in]"), { scale: 1.14, xPercent: 6 * toStart }, { scale: 1, xPercent: 0, duration: 1.25, ease: "power3.out", clearProps: "transform" }, 0.28);
+    textIn(inn, 0.42, t);
     tl.current = t;
   }, [active]);
+
+  // The first time the section comes into view, the project in front writes itself in too.
+  const entered = useRef(false);
+  useEffect(() => {
+    if (!inView || entered.current) return;
+    entered.current = true;
+    const slide = track.current?.children[shown.current] as HTMLElement | undefined;
+    if (!slide || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    textIn(slide, 0.1, gsap.timeline());
+  }, [inView]);
 
   // Leaving desktop (resize): drop the inline states the swap left behind.
   useEffect(() => {
@@ -169,7 +223,7 @@ export function ProjectShowcase({
       if (!list) return;
       tl.current?.progress(1).kill();
       const slides = Array.from(list.children) as HTMLElement[];
-      gsap.set(slides.flatMap((s) => [s, ...Array.from(s.querySelectorAll("[data-media],[data-media-in],[data-txt],[data-num]"))]), { clearProps: "all" });
+      gsap.set(slides.flatMap((s) => [s, ...Array.from(s.querySelectorAll("[data-media],[data-media-in],[data-txt],[data-reveal='pw']"))]), { clearProps: "all" });
       shown.current = active;
     };
     mq.addEventListener("change", reset);
@@ -342,64 +396,69 @@ function Slide({
           </div>
         </div>
 
-        {/* The story in short */}
-        <div className="flex flex-col gap-4 lg:col-span-4 lg:gap-5">
-          <div className="flex items-center gap-3 overflow-hidden">
-            <span data-num className="num font-display text-[44px] leading-none text-petrol lg:text-[64px]" aria-hidden>
-              {pad(i + 1)}
-            </span>
-            <div data-txt className="flex flex-col gap-1.5">
-              <span className="inline-flex w-fit items-center gap-2 rounded-full border border-line px-3 py-1 text-[13px] text-ink-muted">
-                <span className={`relative size-2 rounded-full ${live ? "bg-petrol" : "bg-ink-muted/50"}`} aria-hidden>
-                  {live ? <span className="absolute inset-0 animate-ping rounded-full bg-petrol/60" /> : null}
-                </span>
-                {p.status === "live" ? strings.status.live : strings.status.delivered}
+        {/* The story in short: what it is, my role, two numbers, the way in */}
+        <div className="flex flex-col lg:col-span-4">
+          <div data-txt className="flex items-center gap-2.5 text-[13px] leading-[20px] text-ink-muted">
+            <span className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1">
+              <span className={`relative size-2 rounded-full ${live ? "bg-petrol" : "bg-ink-muted/50"}`} aria-hidden>
+                {live ? <span className="absolute inset-0 animate-ping rounded-full bg-petrol/60" /> : null}
               </span>
-              <span className="num text-[13px] text-ink-muted">{p.year}</span>
-            </div>
-          </div>
-
-          <div data-txt>
+              {p.status === "live" ? strings.status.live : strings.status.delivered}
+            </span>
+            <span className="num">{p.year}</span>
             {p.partOf ? (
-              <button
-                type="button"
-                onClick={() => onJump(p.partOf!.slug)}
-                className="mb-2 inline-flex items-center gap-1.5 rounded-sm bg-sky-soft/70 px-2 py-0.5 text-[13px] text-petrol transition-colors hover:bg-sky-soft"
-              >
-                {p.partOf.tag[lang]}
-              </button>
+              <>
+                <span aria-hidden className="text-line">·</span>
+                <button
+                  type="button"
+                  onClick={() => onJump(p.partOf!.slug)}
+                  className="truncate text-petrol underline decoration-petrol/30 underline-offset-4 transition-colors hover:decoration-petrol"
+                >
+                  {p.partOf.tag[lang]}
+                </button>
+              </>
             ) : null}
-            <h3
-              id={`project-${p.slug}-name`}
-              className={
-                isAr
-                  ? "text-[26px] leading-[40px] font-medium lg:text-[32px] lg:leading-[48px]"
-                  : "font-latin text-[26px] leading-[32px] font-bold tracking-[-0.015em] lg:text-[34px] lg:leading-[40px]"
-              }
-            >
-              {p.name[lang]}
-            </h3>
           </div>
 
-          <p data-txt className="text-[16px] leading-[28px] text-ink-muted lg:text-[17px] lg:leading-[30px]">
-            {p.card.line[lang]}
+          <h3
+            id={`project-${p.slug}-name`}
+            className={
+              isAr
+                ? "mt-4 text-[26px] leading-[40px] font-medium text-balance lg:text-[32px] lg:leading-[48px]"
+                : "mt-4 font-latin text-[26px] leading-[32px] font-bold tracking-[-0.015em] text-balance lg:text-[34px] lg:leading-[40px]"
+            }
+          >
+            <Words text={p.name[lang]} group="pw" />
+          </h3>
+          <p className="mt-2 text-[16px] leading-[28px] text-ink-muted lg:text-[17px] lg:leading-[30px]">
+            <Words text={p.card.line[lang]} group="pw" />
           </p>
 
-          <p data-txt className="flex items-start gap-2 text-[14px] leading-[22px] text-ink">
-            <span className="mt-[10px] h-px w-4 shrink-0 bg-clay" aria-hidden />
-            {p.card.role[lang]}
-          </p>
+          {/* My role, said plainly */}
+          <div className="mt-5 border-s-2 border-clay ps-4">
+            <p data-txt className="text-[12px] leading-[18px] font-medium tracking-[0.06em] text-ink-muted uppercase">
+              {strings.role}
+            </p>
+            <p className="mt-0.5 text-[15px] leading-[24px] font-medium text-ink">
+              <Words text={p.card.role[lang]} group="pw" />
+            </p>
+          </div>
 
-          <dl data-txt className="grid grid-cols-2 gap-4 border-t border-line pt-4">
+          <dl className="mt-5 grid grid-cols-2 gap-4 border-t border-line pt-5">
             {p.card.stats.map((s, k) => (
-              <div key={k} className="flex flex-col-reverse gap-1">
+              <div key={k} data-txt className="flex flex-col-reverse gap-1">
                 <dt className="text-[13px] leading-[20px] text-ink-muted">{s.label[lang]}</dt>
-                <dd className="num self-start font-display text-[32px] leading-[36px] text-petrol lg:text-[38px] lg:leading-[42px]">{s.value}</dd>
+                <dd className="num self-start font-display text-[34px] leading-[38px] text-petrol lg:text-[40px] lg:leading-[44px]">
+                  <span aria-hidden data-count={s.value}>
+                    {s.value}
+                  </span>
+                  <span className="sr-only">{s.value}</span>
+                </dd>
               </div>
             ))}
           </dl>
 
-          <div data-txt className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
+          <div data-txt className="mt-6 flex flex-col items-start gap-3">
             <a
               href={story}
               className="inline-flex h-11 items-center gap-2 rounded-md bg-ink px-5 text-[15px] font-medium text-bg transition-[filter] hover:brightness-110"
