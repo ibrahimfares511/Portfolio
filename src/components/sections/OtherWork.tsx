@@ -5,6 +5,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Words } from "@/components/ui/Words";
 import { CountUp } from "@/components/ui/CountUp";
 import { InViewVideo } from "@/components/projects/InViewVideo";
+import { ProjectLink } from "@/components/case/NextProject";
 
 /**
  * 3. Other work: Web Point (tier "other"), in the same language as the Selected work showcase but lighter:
@@ -43,7 +44,7 @@ export async function OtherWork({ locale }: { locale: "ar" | "en" }) {
                       <InViewVideo mp4={p.media.loop.mp4} webm={p.media.loop.webm} poster={p.media.loop.poster} label={p.title[locale]} />
                     </div>
                   </div>
-                  <a href={`/${locale}/projects/${p.slug}`} aria-hidden tabIndex={-1} data-cursor-label={tp("cta")} className="absolute inset-0 z-10" />
+                  <ProjectLink slug={p.slug} aria-hidden tabIndex={-1} data-cursor-label={tp("cta")} className="absolute inset-0 z-10" />
                 </div>
 
                 {/* The story in short */}
@@ -90,15 +91,15 @@ export async function OtherWork({ locale }: { locale: "ar" | "en" }) {
                   </dl>
 
                   <div data-reveal="text" className="mt-6">
-                    <a
-                      href={`/${locale}/projects/${p.slug}`}
+                    <ProjectLink
+                      slug={p.slug}
                       className="inline-flex h-11 items-center gap-2 rounded-md bg-ink px-5 text-[15px] font-medium text-bg transition-[filter] hover:brightness-110"
                     >
                       {tp("cta")}
                       <svg viewBox="0 0 16 16" className="size-4 rtl:-scale-x-100" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
                         <path d="M3 8h10M9 4l4 4-4 4" />
                       </svg>
-                    </a>
+                    </ProjectLink>
                   </div>
                 </div>
               </article>

@@ -248,7 +248,21 @@
     "next": "Next project",
     "close": "Close",
     "prev": "Previous",
-    "nextShot": "Next"
+    "nextShot": "Next",
+    "beforeAfter": "Before and after",
+    "before": "Before",
+    "after": "After",
+    "results": "Results",
+    "features": "Key features",
+    "inAction": "See it in action",
+    "myRole": "My role",
+    "inside": "Under the hood",
+    "forDevs": "For developers",
+    "allScreens": "All screens",
+    "more": "Read the story",
+    "play": "Play",
+    "pause": "Pause",
+    "open": "View larger"
   },
   "notFound": {
     "title": "This page doesn't exist.",

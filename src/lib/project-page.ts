@@ -12,9 +12,17 @@ export type CaseStudy = { title: string; lead: string; sections: CaseSection[] }
 export type Shot = { name: string; device: "desktop" | "mobile"; lang: "ar" | "en" | null; caption: Localized; image: ImageSet };
 export type Clip = { name: string; lang: "ar" | "en" | null; caption: Localized; mp4: string; webm: string | null; poster: ImageSet };
 
+export type Result = { value: string; label: Localized; verified?: boolean };
+
 export type ProjectPage = {
   slug: string;
   role: Localized;
+  /** short versions written for the page (the case study has the long ones) */
+  problem: Localized;
+  solution: Localized;
+  features: Localized[];
+  results: Result[];
+  techNotes: Localized;
   stack: string[];
   caseStudy: { ar: CaseStudy; en: CaseStudy };
   shots: Shot[];

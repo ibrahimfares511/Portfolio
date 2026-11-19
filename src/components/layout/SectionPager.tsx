@@ -23,7 +23,7 @@ const HEADER = 72;
  * The browser scrollbar is hidden; the side indicator replaces it (its dots
  * jump to a band).
  */
-export function SectionPager() {
+export function SectionPager({ paging = true }: { paging?: boolean } = {}) {
   const [labels, setLabels] = useState<string[]>([]);
   const [active, setActive] = useState(0);
   const [inner, setInner] = useState(0); // progress inside the active band (0–1)
@@ -80,7 +80,10 @@ export function SectionPager() {
     window.addEventListener("resize", onScroll);
 
     // Paging (desktop)
-    const mq = window.matchMedia("(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    // paging={false} (case studies): plain native scrolling; only the indicator and the header tone stay.
+    const mq = window.matchMedia(
+      paging ? "(min-width: 1024px) and (pointer: fine) and (prefers-reduced-motion: no-preference)" : "not all",
+    );
     let animating = false;
     let gate = true; // a new gesture may start
     let lastInput = 0;
@@ -104,7 +107,7 @@ export function SectionPager() {
       const k = Math.max(0, Math.min(els.length - 1, i));
       move(top(els[k]), 1.05);
     };
-    goRef.current = (i) => (mq.matches ? go(i) : els[i]?.scrollIntoView());
+    goRef.current = (i) => (mq.matches ? go(i) : els[i]?.scrollIntoView({ behavior: "smooth" }));
 
     const step = (dir: 1 | -1) => {
       if (animating || !gate) return;
@@ -207,9 +210,10 @@ export function SectionPager() {
       window.clearTimeout(flashTimer);
       gsap.killTweensOf(window);
     };
-  }, []);
+  }, [paging]);
 
-  if (!labels.length) return null;
+  // Without paging (case studies) the page scrolls freely; no side indicator over the bleeding screens.
+  if (!labels.length || !paging) return null;
   const pad = (n: number) => String(n).padStart(2, "0");
   return (
     <div aria-hidden className="pointer-events-none fixed inset-y-0 end-3 z-40 hidden items-center lg:flex xl:end-6">

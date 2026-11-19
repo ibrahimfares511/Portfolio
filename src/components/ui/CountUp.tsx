@@ -20,29 +20,53 @@ export function CountUp({ value, delay = 0.3 }: { value: string; delay?: number 
     if (!el || !stat || stat.n < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     el.textContent = `${stat.prefix}0${stat.suffix}`;
     let tw: gsap.core.Tween | undefined;
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (!e.isIntersecting) return;
-        io.disconnect();
-        const st = { n: 0 };
-        tw = gsap.to(st, {
-          n: stat.n,
-          delay,
-          duration: stat.n > 50 ? 1.4 : 0.9,
-          ease: "power2.out",
-          onUpdate: () => {
-            el.textContent = `${stat.prefix}${fmt(st.n)}${stat.suffix}`;
-          },
-          onComplete: () => {
-            el.textContent = value;
-          },
-        });
-      },
-      { threshold: 0.6 },
-    );
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      cleanup();
+      const st = { n: 0 };
+      tw = gsap.to(st, {
+        n: stat.n,
+        delay,
+        duration: stat.n > 50 ? 1.4 : 0.9,
+        ease: "power2.out",
+        onUpdate: () => {
+          el.textContent = `${stat.prefix}${fmt(st.n)}${stat.suffix}`;
+        },
+        onComplete: () => {
+          el.textContent = value;
+        },
+      });
+    };
+    // On screen? Checked by the observer, and also on scroll and when a cover
+    // (preloader, page transition) opens (a client-side move to another case study can scroll
+    // the page under the cover, which the observer alone may miss).
+    const inView = () => {
+      const r = el.getBoundingClientRect();
+      return r.bottom > 0 && r.top < window.innerHeight * 0.92 && r.width > 0;
+    };
+    const check = () => {
+      // under a cover (preloader, page transition) wait for it to open
+      if (!started && !window.__ifBusy && inView()) start();
+    };
+    // the cover is opening ("if:reveal" comes while __ifBusy is still true)
+    const opening = () => {
+      if (!started && inView()) start();
+    };
+    const io = new IntersectionObserver((entries) => entries.some((e) => e.isIntersecting) && !window.__ifBusy && start(), { threshold: 0.6 });
     io.observe(el);
-    return () => {
+    window.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("if:reveal", opening);
+    const raf = requestAnimationFrame(() => requestAnimationFrame(check));
+    function cleanup() {
       io.disconnect();
+      window.removeEventListener("scroll", check);
+      window.removeEventListener("if:reveal", opening);
+      cancelAnimationFrame(raf);
+    }
+    return () => {
+      cleanup();
       tw?.kill();
       el.textContent = value;
     };

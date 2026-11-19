@@ -9,6 +9,9 @@ import { LoopVideo } from "./LoopVideo";
 import { Words } from "@/components/ui/Words";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ProjectLink } from "@/components/case/NextProject";
+import { useRouter } from "@/i18n/navigation";
+import { coverSwitch, nextFrame, waitFor } from "@/lib/motion";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -101,6 +104,7 @@ export function ProjectShowcase({
   const shown = useRef(0);
   const tl = useRef<gsap.core.Timeline | null>(null);
   const n = projects.length;
+  const router = useRouter();
   const indexOf = (slug: string) => projects.findIndex((p) => p.slug === slug);
 
   const desktop = () => window.matchMedia("(min-width: 1024px)").matches;
@@ -294,7 +298,16 @@ export function ProjectShowcase({
                 onJump={(slug) => {
                   const k = indexOf(slug);
                   if (k >= 0) goTo(k);
-                  else window.location.assign(`/${lang}/projects/${slug}`);
+                  else {
+                    // a project outside the showcase (Web Point): open its case study through the brand cover
+                    const href = `/projects/${slug}`;
+                    void coverSwitch(window.innerWidth / 2, window.innerHeight / 2, async () => {
+                      router.push(href, { scroll: false });
+                      await waitFor(() => window.location.pathname.endsWith(href));
+                      await nextFrame();
+                      window.scrollTo({ top: 0, behavior: "instant" });
+                    });
+                  }
                 }}
               />
             ))}
@@ -357,7 +370,6 @@ function Slide({
 }) {
   const isAr = lang === "ar";
   const live = p.status === "live";
-  const story = `/${lang}/projects/${p.slug}`;
   const links = p.related.map((r) => ({ slug: r.slug, label: r.relation[lang], name: projectBySlug(r.slug)?.name[lang] ?? r.slug }));
 
   return (
@@ -383,7 +395,7 @@ function Slide({
               <LoopVideo mp4={p.media.loop.mp4} webm={p.media.loop.webm} poster={p.media.loop.poster} active={playing} label={p.title[lang]} />
             </div>
             {/* the picture opens the story too (mouse only; the button is the real link) */}
-            <a href={story} aria-hidden tabIndex={-1} data-cursor-label={strings.cta} className="absolute inset-0 z-10" />
+            <ProjectLink slug={p.slug} aria-hidden tabIndex={-1} data-cursor-label={strings.cta} className="absolute inset-0 z-10" />
           </div>
         </div>
 
@@ -450,15 +462,15 @@ function Slide({
           </dl>
 
           <div data-txt className="mt-6 flex flex-col items-start gap-3">
-            <a
-              href={story}
+            <ProjectLink
+              slug={p.slug}
               className="inline-flex h-11 items-center gap-2 rounded-md bg-ink px-5 text-[15px] font-medium text-bg transition-[filter] hover:brightness-110"
             >
               {strings.cta}
               <svg viewBox="0 0 16 16" className="size-4 rtl:-scale-x-100" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
                 <path d="M3 8h10M9 4l4 4-4 4" />
               </svg>
-            </a>
+            </ProjectLink>
             {links.map((l) => (
               <button
                 key={l.slug}
