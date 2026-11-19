@@ -1,13 +1,16 @@
 import { getTranslations } from "next-intl/server";
 
+/** WhatsApp by username, so the phone number stays private (wa.me/<username>). */
+export const WHATSAPP_HANDLE = "@ibrahimfares511";
+
 export const LINKS = {
-  whatsapp: "https://wa.me/201007218535",
+  whatsapp: "https://wa.me/ibrahimfares511",
   email: "mailto:ibrahimfares511@gmail.com",
   github: "https://github.com/ibrahimfares511",
   linkedin: "https://www.linkedin.com/in/ibrahimfares511",
 } as const;
 
-const ICONS: Record<keyof typeof LINKS, { viewBox: string; d: string; size: string }> = {
+export const ICONS: Record<keyof typeof LINKS, { viewBox: string; d: string; size: string }> = {
   whatsapp: {
     viewBox: "0 0 24 24",
     size: "size-[18px]",
@@ -34,7 +37,7 @@ const ICONS: Record<keyof typeof LINKS, { viewBox: string; d: string; size: stri
 export async function SocialLinks({ className = "" }: { className?: string }) {
   const t = await getTranslations("footer");
   const labels: Record<keyof typeof LINKS, string> = {
-    whatsapp: `${t("whatsapp")}: +20 100 721 8535`,
+    whatsapp: `${t("whatsapp")}: ${WHATSAPP_HANDLE}`,
     email: `${t("email")}: ibrahimfares511@gmail.com`,
     github: "GitHub",
     linkedin: "LinkedIn",

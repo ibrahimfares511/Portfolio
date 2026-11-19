@@ -2,14 +2,8 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Words } from "@/components/ui/Words";
-import { AboutVisual } from "@/components/about/AboutVisual";
+import { PoseStage, floatCard } from "@/components/ui/PoseStage";
 import { CvButton } from "@/components/about/CvButton";
-
-const CSS = `
-@keyframes ab-float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-9px) } }
-.ab-float { animation: ab-float 6s ease-in-out infinite; }
-@media (prefers-reduced-motion: reduce) { .ab-float { animation: none } }
-`;
 
 const icons = {
   place: (
@@ -25,6 +19,22 @@ const icons = {
     </g>
   ),
 };
+
+function Fact({ label, value, icon }: { label: string; value: string; icon: React.ReactNode }) {
+  return (
+    <div className={`${floatCard} flex items-center gap-2.5 px-3.5 py-2.5`}>
+      <span className="grid size-8 place-items-center rounded-full bg-sky-soft text-petrol">
+        <svg viewBox="0 0 20 20" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          {icon}
+        </svg>
+      </span>
+      <span className="flex flex-col">
+        <span className="text-[12px] leading-[16px] text-ink-muted">{label}</span>
+        <span className="text-[14px] leading-[20px] font-medium text-ink">{value}</span>
+      </span>
+    </div>
+  );
+}
 
 /**
  * 7. About me, in the same language as the rest of the page: the waving character on the brand
@@ -55,14 +65,14 @@ export async function About({ locale }: { locale: "ar" | "en" }) {
       aria-labelledby="about-title"
       className="mx-auto flex max-w-6xl flex-col justify-center px-4 py-20 sm:px-6 md:py-28 lg:min-h-dvh lg:pt-[96px] lg:pb-10"
     >
-      <style href="about-section" precedence="default">{CSS}</style>
       <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
         {/* The character, on the brand gradient, with two facts floating beside him */}
         <div className="relative order-last lg:order-none lg:col-span-5">
-          <AboutVisual
-            facts={[
-              { label: place.label, value: place.value, icon: icons.place },
-              { label: langs.label, value: langs.value, icon: icons.lang },
+          <PoseStage
+            pose="07-wave"
+            floating={[
+              { node: <Fact label={place.label} value={place.value} icon={icons.place} />, pos: "start-0 top-[14%] sm:-start-6" },
+              { node: <Fact label={langs.label} value={langs.value} icon={icons.lang} />, pos: "end-0 top-[46%] sm:-end-6" },
             ]}
           />
         </div>
