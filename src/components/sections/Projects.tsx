@@ -6,7 +6,7 @@ import { ProjectShowcase } from "@/components/projects/ProjectShowcase";
 export async function Projects({ locale }: { locale: "ar" | "en" }) {
   const t = await getTranslations("projects");
   return (
-    <section id="projects" aria-labelledby="projects-title" className="pt-20 pb-12 md:pt-24 lg:pt-0 lg:pb-0">
+    <section id="projects" aria-labelledby="projects-title" className="pt-20 pb-12 [overflow-x:clip] md:pt-24 lg:pt-0 lg:pb-0">
       <ProjectShowcase
         projects={mainProjects}
         lang={locale}
