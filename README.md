@@ -1,6 +1,6 @@
 # ibrahimfares.dev
 
-Ibrahim Fares' portfolio. Next.js 16 (App Router), TypeScript, Tailwind CSS 4, next-intl (`/ar`, `/en`), next-themes, GSAP.
+Ibrahim Fares' portfolio. Next.js 16 (App Router), TypeScript, Tailwind CSS 4, next-intl (`/ar`, `/en`), GSAP.
 
 ## Run
 
@@ -14,9 +14,19 @@ npm run build && npm start
 `node .next/standalone/server.js` (copy `public/` and `.next/static/` next to it).
 The same code deploys unchanged to Vercel.
 
-## Contact form
+## Deploy (VPS)
 
-`/api/contact` emails each message to Ibrahim through SMTP. Copy `.env.example` to `.env.local` (or set the same variables on the server) and fill in the SMTP account. With Gmail: turn on 2-step verification, create an App password, and use it as `SMTP_PASS`. In development without SMTP, messages are printed in the terminal instead. Spam guards: a hidden honeypot field, a minimum time on the form, and 5 messages per 10 minutes per IP.
+```bash
+npm ci
+npm run build
+cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
+cd .next/standalone && PORT=3000 HOSTNAME=127.0.0.1 node server.js   # behind nginx/Caddy with HTTPS
+```
+
+- Node 22 (`.nvmrc`). Keep it running with pm2 or a systemd service.
+- No secrets are needed. `NEXT_PUBLIC_SITE_URL` is only for a staging host (see `.env.example`).
+- Security headers (frame blocking, nosniff, referrer and permissions policies, HSTS) and a one-day cache for the media in `public/` are set in `next.config.ts`. HTTPS and the http → https redirect belong to the reverse proxy.
+- Contact is by WhatsApp and email links; there is no form and no API route.
 
 ## Project content
 
