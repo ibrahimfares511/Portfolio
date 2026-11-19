@@ -131,7 +131,7 @@ export async function Contact({ locale }: { locale: "ar" | "en" }) {
               bare
               mirror={locale === "ar"}
               widths={[320, 480, 640, 960]}
-              size={[960, 1152]}
+              size={[960, 1161]}
               sizes="(min-width: 1024px) 560px, 340px"
               floating={[
                 {
