@@ -21,12 +21,15 @@ export function PoseStage({
   pose,
   floating = [],
   mirror = false,
+  bare = false,
 }: {
   /** file stem in /public/avatar, available at 320/480/640 */
   pose: string;
   floating?: Floating[];
   /** flip the character so he faces the other way */
   mirror?: boolean;
+  /** no frame: the character stands on the bottom edge of whatever holds him, full height */
+  bare?: boolean;
 }) {
   const root = useRef<HTMLDivElement>(null);
 
@@ -58,14 +61,14 @@ export function PoseStage({
   }, []);
 
   return (
-    <div ref={root} className="relative">
+    <div ref={root} className={bare ? "relative h-full" : "relative"}>
       <style href="pose-stage" precedence="default">{CSS}</style>
       <div
         data-frame
-        className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[28px] bg-[radial-gradient(110%_80%_at_20%_0%,var(--sky-soft),transparent_62%),radial-gradient(90%_70%_at_100%_100%,var(--clay-soft),transparent_66%)] ring-1 ring-line lg:max-h-[calc(100dvh-200px)] lg:w-auto lg:max-w-full"
+        className={bare ? "relative h-full w-full" : "relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[28px] bg-[radial-gradient(110%_80%_at_20%_0%,var(--sky-soft),transparent_62%),radial-gradient(90%_70%_at_100%_100%,var(--clay-soft),transparent_66%)] ring-1 ring-line lg:max-h-[calc(100dvh-200px)] lg:w-auto lg:max-w-full"}
       >
-        <span aria-hidden className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(to_top,var(--bg),transparent)] opacity-40" />
-        <picture data-pose className="absolute inset-x-0 bottom-0 flex h-[92%] justify-center">
+        {bare ? null : <span aria-hidden className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(to_top,var(--bg),transparent)] opacity-40" />}
+        <picture data-pose className={`absolute inset-x-0 bottom-0 flex justify-center ${bare ? "h-full" : "h-[92%]"}`}>
           <source
             type="image/avif"
             srcSet={`/avatar/${pose}-320.avif 320w, /avatar/${pose}-480.avif 480w, /avatar/${pose}-640.avif 640w`}
@@ -97,6 +100,3 @@ export function PoseStage({
   );
 }
 
-/** The look of a small floating card beside the character. */
-export const floatCard =
-  "rounded-2xl border border-line bg-surface/90 shadow-[0_20px_40px_-24px_rgba(22,48,58,0.55)] backdrop-blur-sm dark:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.8)]";

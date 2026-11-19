@@ -2,7 +2,8 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Words } from "@/components/ui/Words";
-import { PoseStage, floatCard } from "@/components/ui/PoseStage";
+import { PoseStage } from "@/components/ui/PoseStage";
+import { floatCard } from "@/lib/ui-classes";
 import { CvButton } from "@/components/about/CvButton";
 
 const icons = {
