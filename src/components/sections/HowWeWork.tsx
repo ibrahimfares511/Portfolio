@@ -13,8 +13,9 @@ export async function HowWeWork({ locale }: { locale: "ar" | "en" }) {
   const steps = messages.process.steps.map((s, i) => ({ ...s, pose: POSES[i] }));
 
   return (
-    <section id="process" aria-labelledby="process-title" className="mx-auto max-w-6xl px-4 py-20 [overflow-x:clip] sm:px-6 md:py-28">
-      <Reveal>
+    <section id="process" aria-labelledby="process-title" className="relative mx-auto max-w-6xl px-4 py-20 [overflow-x:clip] sm:px-6 md:py-28 lg:py-0">
+      {/* desktop: the heading sits on the first chapter's screen */}
+      <Reveal className="lg:absolute lg:inset-x-6 lg:top-[100px] lg:z-10">
         <SectionHeading id="process-title" locale={locale} title={t("title")} sub={t("subline")} />
       </Reveal>
       <ProcessJourney steps={steps} lang={locale} closing={t("closing")} />

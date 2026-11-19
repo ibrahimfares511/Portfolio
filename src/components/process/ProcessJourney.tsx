@@ -19,7 +19,7 @@ const CSS = `
 
 /**
  * "How we work together" as a journey read top to bottom. A wavy pen line draws itself down the
- * section as you scroll, the pen tip leading; each time it reaches a chapter, that chapter comes to
+ * section as you scroll, the pen tip leading (desktop: one chapter per screen, the pen resting on its dot); each time it reaches a chapter, that chapter comes to
  * life: its little scene plays (a conversation, a plan being ticked off and signed, a screen being
  * built week by week, a delivery with two free months). Normal scrolling, no pinning.
  * Reduced motion: the line is drawn and every scene is shown finished.
@@ -40,7 +40,7 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const played = new Set<number>();
     const scenes = items.map((li) => buildScene(li));
-    let length = 1, anchorsY: number[] = [], raf = 0;
+    let length = 1, anchorLen: number[] = [], raf = 0;
 
     // Lay the wave through every chapter's anchor, swinging out between them.
     const layout = () => {
@@ -54,8 +54,10 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
         const a = li.querySelector<HTMLElement>("[data-anchor]")!.getBoundingClientRect();
         return [a.left + a.width / 2 - box.left, a.top + a.height / 2 - box.top] as [number, number];
       });
-      anchorsY = pts.map((p) => p[1]);
-      const start: [number, number] = [pts[0][0], 0];
+      // desktop: the line starts just under the section heading, so it never runs through it
+      const heading = document.getElementById("process-title")?.parentElement?.getBoundingClientRect();
+      const top0 = wide && heading ? Math.max(0, heading.bottom - box.top + 28) : 0;
+      const start: [number, number] = [pts[0][0], Math.min(top0, pts[0][1] - 60)];
       const end: [number, number] = [pts[pts.length - 1][0], h];
       const all = [start, ...pts, end];
       const swing = wide ? Math.min(220, w * 0.17) : 14;
@@ -72,6 +74,17 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
       ink.setAttribute("d", d);
       length = ink.getTotalLength();
       ink.style.strokeDasharray = `${length}`;
+      // how far along the line each chapter's dot sits (the path passes exactly through them)
+      const SAMPLES = 800;
+      const near = pts.map(() => ({ d: Infinity, at: 0 }));
+      for (let k = 0; k <= SAMPLES; k++) {
+        const at = (k / SAMPLES) * length, q = ink.getPointAtLength(at);
+        pts.forEach(([x, y], i) => {
+          const dd = (q.x - x) ** 2 + (q.y - y) ** 2;
+          if (dd < near[i].d) near[i] = { d: dd, at };
+        });
+      }
+      anchorLen = near.map((n) => n.at);
       marks.forEach((m, i) => {
         m.setAttribute("cx", String(pts[i][0]));
         m.setAttribute("cy", String(pts[i][1]));
@@ -84,13 +97,28 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
       raf = 0;
       const vh = window.innerHeight;
       const box = ol.getBoundingClientRect();
-      const p = reduced ? 1 : Math.min(1, Math.max(0, (vh * 0.58 - box.top) / box.height));
-      ink.style.strokeDashoffset = `${length * (1 - p)}`;
-      const pt = ink.getPointAtLength(length * p);
+      const clamp = (v: number) => Math.min(1, Math.max(0, v));
+      const ease = (t: number) => t * t * (3 - 2 * t);
+      let at: number;
+      if (reduced) at = length;
+      else if (window.matchMedia("(min-width: 1024px)").matches) {
+        // Desktop: one chapter per screen. On each stop the pen rests exactly on that chapter's dot;
+        // between stops it travels the stretch of line to the next one.
+        const raw = -box.top / vh, last = anchorLen.length - 1;
+        if (raw <= 0) at = anchorLen[0] * clamp(1 + raw);
+        else if (raw >= last) at = anchorLen[last] + (length - anchorLen[last]) * clamp((raw - last) / 0.7);
+        else {
+          const k = Math.floor(raw);
+          at = anchorLen[k] + (anchorLen[k + 1] - anchorLen[k]) * ease(raw - k);
+        }
+      } else at = length * clamp((vh * 0.58 - box.top) / box.height);
+      const p = at / length;
+      ink.style.strokeDashoffset = `${length - at}`;
+      const pt = ink.getPointAtLength(at);
       tip.setAttribute("transform", `translate(${pt.x} ${pt.y})`);
       tip.style.opacity = p > 0.002 && p < 0.998 ? "1" : "0";
-      anchorsY.forEach((y, i) => {
-        const on = pt.y >= y - 4;
+      anchorLen.forEach((l, i) => {
+        const on = at >= l - 3;
         marks[i].toggleAttribute("data-on", on);
         if (on && !played.has(i)) {
           played.add(i);
@@ -118,7 +146,7 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
   return (
     <div className="relative">
       <style href="process-journey" precedence="default">{CSS}</style>
-      <ol ref={root} className="relative mt-14 grid gap-24 ps-12 md:mt-20 lg:gap-36 lg:ps-0">
+      <ol ref={root} data-screens="" className="relative mt-14 grid gap-24 ps-12 md:mt-20 lg:mt-0 lg:gap-0 lg:ps-0">
         {/* the pen line */}
         <svg ref={svg} aria-hidden className="pointer-events-none absolute inset-0 overflow-visible">
           <path data-track fill="none" stroke="var(--line)" strokeWidth="2" strokeDasharray="2 9" strokeLinecap="round" />
@@ -141,12 +169,12 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
           const flip = i % 2 === 1;
           const last = i === steps.length - 1;
           return (
-            <li key={i} data-step className="relative grid items-center gap-8 lg:grid-cols-2 lg:gap-28">
+            <li key={i} data-step className={`relative grid items-center gap-8 lg:h-dvh lg:grid-cols-2 lg:gap-28 ${i === 0 ? "lg:pt-[250px] lg:pb-10" : "lg:pt-[110px] lg:pb-10"}`}>
               {/* where the line passes: the start edge on phones, between the columns on desktop */}
               <span
                 data-anchor
                 aria-hidden
-                className={`absolute -start-12 top-6 size-6 lg:top-1/2 lg:-translate-y-1/2 ${flip ? "lg:start-[calc(50%+10px)]" : "lg:start-[calc(50%-34px)]"}`}
+                className={`absolute -start-12 top-6 size-6 lg:-translate-y-1/2 ${i === 0 ? "lg:top-[calc(50%+105px)]" : "lg:top-[calc(50%+35px)]"} ${flip ? "lg:start-[calc(50%+10px)]" : "lg:start-[calc(50%-34px)]"}`}
               />
 
               {/* the character and the little scene of this chapter */}
