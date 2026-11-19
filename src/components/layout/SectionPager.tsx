@@ -116,13 +116,20 @@ export function SectionPager() {
       const b = t + el.offsetHeight;
       const tall = el.offsetHeight > vh + 8;
       const page = vh * 0.85;
+      // A band built of whole screens (the projects showcase): one step = exactly one screen.
+      const screens = el.querySelector<HTMLElement>("[data-screens]");
+      const st = screens ? top(screens) : t;
+      const snap = (k: number) => Math.max(t, Math.min(st + k * vh, b - vh));
+      const at = screens ? Math.round((y - st) / vh) : 0;
       if (dir > 0) {
+        if (screens && y + vh < b - 4) return move(snap(at + 1), 0.9);
         if (tall && y + vh < b - 4) return move(Math.min(y + page, b - vh), 0.8);
         if (i < els.length - 1) return go(i + 1);
         const end = document.documentElement.scrollHeight - vh; // footer
         if (y < end - 2) move(end, 0.75);
         return;
       }
+      if (screens && y > t + 4) return move(at - 1 <= 0 ? t : snap(at - 1), 0.9);
       if (y > t + 4) return move(tall ? Math.max(t, y - page) : t, tall ? 0.75 : 1);
       if (i > 0) {
         const prev = els[i - 1];

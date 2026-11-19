@@ -70,6 +70,8 @@
     "title": "Selected work",
     "subline": "Real systems for real clients, with my exact role in each.",
     "cta": "Read the story",
+    "next": "Next project",
+    "prev": "Previous project",
     "status": {
       "live": "Live",
       "delivered": "Delivered"

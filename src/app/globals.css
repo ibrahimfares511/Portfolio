@@ -174,36 +174,6 @@ html[lang="ar"] body {
 }
 
 /* ------------------------------------------------------------------
-   Stacked project cards (components/projects/ProjectStack.tsx).
-   Sticky only where a whole card fits on screen; otherwise a plain list.
-   ------------------------------------------------------------------ */
-.stack-item {
-  position: relative;
-}
-@media (min-height: 760px) {
-  .stack-item {
-    position: sticky;
-    top: calc(76px + var(--i) * 10px);
-  }
-}
-@media (min-width: 1024px) and (min-height: 680px) {
-  .stack-item {
-    position: sticky;
-    top: calc(96px + var(--i) * 14px);
-  }
-}
-/* Room after the last card: it settles on top of the others, the whole
-   stack holds for a moment, then leaves together. */
-.stack-spacer {
-  height: 14vh;
-}
-@media (min-width: 1024px) {
-  .stack-spacer {
-    height: 22vh;
-  }
-}
-
-/* ------------------------------------------------------------------
    Bands: every home-page section sits in a full-width band with a tone,
    so the page changes colour as you go (components/layout/Band.tsx).
    A tone only re-maps the brand variables, so everything inside follows.
