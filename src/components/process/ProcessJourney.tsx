@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { Words } from "@/components/ui/Words";
-import { Reveal } from "@/components/ui/Reveal";
 
 type Step = { lead: string; text: string; pose: string };
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -179,15 +178,16 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
 
               {/* the character and the little scene of this chapter */}
               <div className={`relative flex justify-center ${flip ? "lg:order-2" : ""}`}>
-                <div className="relative h-[250px] w-full max-w-[340px] sm:h-[300px] lg:h-[340px]">
-                  <span aria-hidden className="absolute inset-x-6 bottom-0 aspect-square translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,var(--sky-soft),transparent)]" />
-                  <div className="pj-float absolute inset-y-0 start-0 flex items-end" style={{ animationDelay: `${i * -1.4}s` }}>
+                <div className="relative h-[280px] w-full max-w-[360px] sm:h-[330px] lg:h-[min(60vh,540px)] lg:max-w-[500px]">
+                  <span data-glow aria-hidden className="absolute inset-x-0 bottom-0 aspect-square translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,var(--sky-soft),transparent)]" />
+                  <div data-pose className="absolute inset-y-0 start-0 flex items-end">
+                  <div className="pj-float flex h-full items-end" style={{ animationDelay: `${i * -1.4}s` }}>
                     <picture className="block h-full">
-                      <source type="image/avif" srcSet={`/avatar/${s.pose}-320.avif 320w, /avatar/${s.pose}-480.avif 480w`} sizes="230px" />
+                      <source type="image/avif" srcSet={`/avatar/${s.pose}-320.avif 320w, /avatar/${s.pose}-480.avif 480w`} sizes="(min-width: 1024px) 360px, 230px" />
                       <img
                         src={`/avatar/${s.pose}-480.webp`}
                         srcSet={`/avatar/${s.pose}-320.webp 320w, /avatar/${s.pose}-480.webp 480w`}
-                        sizes="230px"
+                        sizes="(min-width: 1024px) 360px, 230px"
                         width={842}
                         height={1264}
                         alt=""
@@ -198,16 +198,17 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
                       />
                     </picture>
                   </div>
-                  <div className="absolute end-0 bottom-4 w-[210px] sm:w-[230px]">
+                  </div>
+                  <div className="absolute end-0 bottom-4 w-[220px] sm:w-[240px] lg:-end-6 lg:bottom-8 lg:w-[290px]">
                     <Scene kind={i} />
                   </div>
                 </div>
               </div>
 
               {/* the chapter */}
-              <Reveal className={flip ? "lg:order-1" : ""}>
+              <div className={flip ? "lg:order-1" : ""}>
                 <div className={`flex flex-col ${flip ? "lg:items-end lg:text-end" : ""}`}>
-                  <p data-reveal="text" className="flex items-center gap-3 text-[14px] leading-[22px] text-ink-muted">
+                  <p data-st className="flex items-center gap-3 text-[14px] leading-[22px] text-ink-muted lg:text-[15px]">
                     <span className="num text-clay">{pad(i + 1)}</span>
                     <span aria-hidden className="h-px w-10 bg-clay/60" />
                     <span className="num">{pad(steps.length)}</span>
@@ -215,28 +216,28 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
                   <h3
                     className={
                       isAr
-                        ? "mt-2 text-[40px] leading-[60px] font-semibold text-ink lg:text-[56px] lg:leading-[80px]"
-                        : "mt-2 font-latin text-[40px] leading-[46px] font-bold tracking-[-0.03em] text-ink lg:text-[60px] lg:leading-[66px]"
+                        ? "mt-2 text-[44px] leading-[66px] font-semibold text-ink lg:text-[76px] lg:leading-[108px]"
+                        : "mt-2 font-latin text-[44px] leading-[50px] font-bold tracking-[-0.03em] text-ink lg:text-[80px] lg:leading-[86px]"
                     }
                   >
                     <Words text={s.lead} />
                     <span className="ms-2 inline-block size-[0.16em] rounded-full bg-clay" aria-hidden />
                   </h3>
-                  <p className="mt-3 max-w-md text-[17px] leading-[30px] text-ink-muted lg:text-[19px] lg:leading-[34px]">
+                  <p className="mt-4 max-w-lg text-[18px] leading-[32px] text-ink-muted lg:text-[23px] lg:leading-[42px]">
                     <Words text={s.text} />
                   </p>
                   {last ? (
                     <p
-                      data-reveal="text"
-                      className={`mt-7 max-w-md border-s-2 border-clay ps-5 ${
-                        isAr ? "text-[22px] leading-[36px] font-medium text-ink" : "font-display text-[28px] leading-[34px] text-ink lowercase"
+                      data-st
+                      className={`mt-8 max-w-lg border-s-2 border-clay ps-5 ${
+                        isAr ? "text-[22px] leading-[36px] font-medium text-ink lg:text-[28px] lg:leading-[44px]" : "font-display text-[28px] leading-[34px] text-ink lowercase lg:text-[34px] lg:leading-[40px]"
                       }`}
                     >
                       {closing}
                     </p>
                   ) : null}
                 </div>
-              </Reveal>
+              </div>
             </li>
           );
         })}
@@ -342,25 +343,49 @@ function Scene({ kind }: { kind: number }) {
 /** One paused timeline per chapter; it plays once, when the pen reaches the chapter. */
 function buildScene(li: HTMLElement) {
   const t = gsap.timeline({ paused: true, defaults: { ease: "power3.out" } });
+  // the character rises into the light, uncovered from the floor up
+  const pose = li.querySelector("[data-pose]"), glow = li.querySelector("[data-glow]");
+  if (glow) t.fromTo(glow, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 1.1 }, 0);
+  if (pose)
+    t.fromTo(
+      pose,
+      { clipPath: "inset(100% 0% 0% 0%)", y: 50, scale: 1.04, filter: "blur(10px)" },
+      { clipPath: "inset(0% 0% 0% 0%)", y: 0, scale: 1, filter: "blur(0px)", duration: 1.1, ease: "power4.out", clearProps: "clipPath,filter,transform" },
+      0,
+    );
+  // the words write themselves in, one by one out of a blur
+  t.fromTo(
+    li.querySelectorAll("[data-reveal='word']"),
+    { opacity: 0, filter: "blur(12px)", y: "0.25em" },
+    { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.55, stagger: 0.045, ease: "power2.out", clearProps: "filter,transform" },
+    0.15,
+  );
+  t.fromTo(
+    li.querySelectorAll("[data-st]"),
+    { opacity: 0, filter: "blur(8px)", y: 12 },
+    { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.6, stagger: 0.25, ease: "power2.out", clearProps: "filter,transform" },
+    0.05,
+  );
   const scene = li.querySelector<HTMLElement>("[data-scene]");
   if (!scene) return t;
-  t.fromTo(scene, { opacity: 0, y: 16, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.6 });
+  const o = 0.6; // the scene follows the character
+  t.fromTo(scene, { opacity: 0, y: 16, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.6 }, o);
   const sp = scene.querySelectorAll("[data-sp]");
-  if (sp.length) t.fromTo(sp, { opacity: 0, y: 10, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, stagger: 0.32, ease: "back.out(1.6)" }, 0.15);
+  if (sp.length) t.fromTo(sp, { opacity: 0, y: 10, scale: 0.85 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, stagger: 0.32, ease: "back.out(1.6)" }, o + 0.15);
   const ticks = scene.querySelectorAll("[data-tick]");
-  if (ticks.length) t.to(ticks, { strokeDashoffset: 0, duration: 0.3, stagger: 0.32, ease: "power2.out" }, 0.45);
+  if (ticks.length) t.to(ticks, { strokeDashoffset: 0, duration: 0.3, stagger: 0.32, ease: "power2.out" }, o + 0.45);
   const sign = scene.querySelector("[data-sign]");
   if (sign) t.to(sign, { strokeDashoffset: 0, duration: 0.9, ease: "power1.inOut" }, ">-0.05");
   const blk = scene.querySelectorAll("[data-blk]");
-  if (blk.length) t.fromTo(blk, { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.4, stagger: 0.18 }, 0.2);
+  if (blk.length) t.fromTo(blk, { scaleY: 0, opacity: 0 }, { scaleY: 1, opacity: 1, duration: 0.4, stagger: 0.18 }, o + 0.2);
   const weeks = scene.querySelectorAll("[data-week]");
-  if (weeks.length) t.to(weeks, { scaleX: 1, duration: 0.35, stagger: 0.28, ease: "power1.inOut" }, 0.3);
+  if (weeks.length) t.to(weeks, { scaleX: 1, duration: 0.35, stagger: 0.28, ease: "power1.inOut" }, o + 0.3);
   const ring = scene.querySelector("[data-ring]");
-  if (ring) t.to(ring, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, 0.15);
+  if (ring) t.to(ring, { strokeDashoffset: 0, duration: 0.7, ease: "power2.inOut" }, o + 0.15);
   const check = scene.querySelector("[data-check]");
   if (check) t.to(check, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, ">-0.1");
   const months = scene.querySelectorAll("[data-month]");
-  if (months.length) t.fromTo(months, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, stagger: 0.05 }, 0.5);
+  if (months.length) t.fromTo(months, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, stagger: 0.05 }, o + 0.5);
   // until the pen arrives, the scene waits hidden
   gsap.set(scene, { opacity: 0 });
   return t;
