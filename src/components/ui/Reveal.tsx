@@ -14,10 +14,13 @@ export function Reveal({
   children,
   className,
   threshold = 0.15,
+  wordStagger = 0.04,
 }: {
   children: ReactNode;
   className?: string;
   threshold?: number;
+  /** seconds between words; lower it for long passages so they still write in briskly */
+  wordStagger?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -49,7 +52,7 @@ export function Reveal({
             const words = pick("word");
             const texts = pick("text");
             const blocks = pick("block");
-            if (words.length) tl.fromTo(words, hidden.word, { ...done, duration: 0.5, stagger: 0.04 });
+            if (words.length) tl.fromTo(words, hidden.word, { ...done, duration: 0.5, stagger: wordStagger });
             if (blocks.length) tl.fromTo(blocks, hidden.block, { ...done, duration: 0.8, stagger: 0.1 }, 0);
             if (texts.length) tl.fromTo(texts, hidden.text, { ...done, duration: 0.55, stagger: 0.07 }, words.length ? "-=0.3" : 0.1);
             // Pen strokes (pathLength=100; GSAP rounds px values, so 0–1 would
@@ -77,7 +80,7 @@ export function Reveal({
       ctx?.revert();
       el.removeAttribute("data-shown");
     };
-  }, [threshold]);
+  }, [threshold, wordStagger]);
 
   return (
     <div ref={ref} className={className} data-reveal-root="">

@@ -2,6 +2,8 @@ import { getMessages, getTranslations } from "next-intl/server";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Words } from "@/components/ui/Words";
+import { AboutVisual } from "@/components/about/AboutVisual";
+import { CvButton } from "@/components/about/CvButton";
 
 const CSS = `
 @keyframes ab-float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-9px) } }
@@ -27,7 +29,7 @@ const icons = {
 /**
  * 7. About me, in the same language as the rest of the page: the waving character on the brand
  * gradient with two facts floating beside him (where, which languages), and on the other side the
- * title, the first line of the bio said large and written in word by word, the rest after it, what I'm open to
+ * title, the first line of the bio said large, then the rest, all written in word by word, what I'm open to
  * as two live cards, and the CV. One screen on desktop.
  */
 export async function About({ locale }: { locale: "ar" | "en" }) {
@@ -56,59 +58,17 @@ export async function About({ locale }: { locale: "ar" | "en" }) {
       <style href="about-section" precedence="default">{CSS}</style>
       <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
         {/* The character, on the brand gradient, with two facts floating beside him */}
-        <Reveal className="relative order-last lg:order-none lg:col-span-5">
-          <div
-            data-reveal="block"
-            className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[28px] bg-[radial-gradient(110%_80%_at_20%_0%,var(--sky-soft),transparent_62%),radial-gradient(90%_70%_at_100%_100%,var(--clay-soft),transparent_66%)] ring-1 ring-line lg:max-h-[calc(100dvh-200px)] lg:w-auto lg:max-w-full"
-          >
-            <span aria-hidden className="absolute inset-x-0 bottom-0 h-1/3 bg-[linear-gradient(to_top,var(--bg),transparent)] opacity-40" />
-            <picture className="absolute inset-x-0 bottom-0 flex h-[92%] justify-center">
-              <source
-                type="image/avif"
-                srcSet="/avatar/07-wave-320.avif 320w, /avatar/07-wave-480.avif 480w, /avatar/07-wave-640.avif 640w"
-                sizes="(min-width: 1024px) 400px, 300px"
-              />
-              <img
-                src="/avatar/07-wave-640.webp"
-                srcSet="/avatar/07-wave-320.webp 320w, /avatar/07-wave-480.webp 480w, /avatar/07-wave-640.webp 640w"
-                sizes="(min-width: 1024px) 400px, 300px"
-                width={848}
-                height={1264}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                draggable={false}
-                className="h-full w-auto select-none"
-              />
-            </picture>
-          </div>
-
-          {/* floating facts */}
-          {[
-            { row: place, icon: icons.place, pos: "start-0 top-[14%] sm:-start-6", delay: "0s" },
-            { row: langs, icon: icons.lang, pos: "end-0 top-[46%] sm:-end-6", delay: "-2.5s" },
-          ].map(({ row, icon, pos, delay }) => (
-            <div key={row.label} data-reveal="text" className={`absolute ${pos}`}>
-              <div
-                className="ab-float flex items-center gap-2.5 rounded-2xl border border-line bg-surface/90 px-3.5 py-2.5 shadow-[0_20px_40px_-24px_rgba(22,48,58,0.55)] backdrop-blur-sm dark:shadow-[0_20px_40px_-20px_rgba(0,0,0,0.8)]"
-                style={{ animationDelay: delay }}
-              >
-                <span className="grid size-8 place-items-center rounded-full bg-sky-soft text-petrol">
-                  <svg viewBox="0 0 20 20" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                    {icon}
-                  </svg>
-                </span>
-                <span className="flex flex-col">
-                  <span className="text-[12px] leading-[16px] text-ink-muted">{row.label}</span>
-                  <span className="text-[14px] leading-[20px] font-medium text-ink">{row.value}</span>
-                </span>
-              </div>
-            </div>
-          ))}
-        </Reveal>
+        <div className="relative order-last lg:order-none lg:col-span-5">
+          <AboutVisual
+            facts={[
+              { label: place.label, value: place.value, icon: icons.place },
+              { label: langs.label, value: langs.value, icon: icons.lang },
+            ]}
+          />
+        </div>
 
         {/* Who I am */}
-        <Reveal className="lg:col-span-7">
+        <Reveal className="lg:col-span-7" wordStagger={0.022}>
           <SectionHeading id="about-title" locale={locale} title={t("title")} />
 
           <p
@@ -121,8 +81,8 @@ export async function About({ locale }: { locale: "ar" | "en" }) {
             <Words text={lead} />
           </p>
           {rest ? (
-            <p data-reveal="text" className="mt-4 text-[17px] leading-[31px] text-ink-muted md:text-[18px] md:leading-[33px]">
-              {rest}
+            <p className="mt-4 text-[17px] leading-[31px] text-ink-muted md:text-[18px] md:leading-[33px]">
+              <Words text={rest} />
             </p>
           ) : null}
 
@@ -145,16 +105,7 @@ export async function About({ locale }: { locale: "ar" | "en" }) {
           </div>
 
           <div data-reveal="text" className="mt-7">
-            <a
-              href="/cv/Ibrahim-Fares-CV.pdf"
-              download
-              className="inline-flex h-12 items-center gap-2 rounded-md bg-ink px-6 text-[16px] font-medium text-bg transition-[filter] hover:brightness-110"
-            >
-              <svg viewBox="0 0 20 20" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <path d="M10 3v10M6 9l4 4 4-4M4 16h12" />
-              </svg>
-              {t("cv")}
-            </a>
+            <CvButton href="/cv/Ibrahim-Fares-CV.pdf" label={t("cv")} />
           </div>
         </Reveal>
       </div>
