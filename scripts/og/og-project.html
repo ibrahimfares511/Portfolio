@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- Social image (1200×630) for one case study. Rendered to public/og/projects/<slug>-<lang>.jpg
+     by scripts/og/render-projects.py against a running build (it borrows the site's fonts). -->
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="__CSS__">
+<style>
+  html,body{margin:0}
+  .og{width:1200px;height:630px;position:relative;overflow:hidden;background:
+    radial-gradient(700px 480px at 92% -10%, #CFE0E3 0%, transparent 70%),
+    radial-gradient(640px 420px at -6% 112%, #F0D2C3 0%, transparent 70%), #F3EFE9;
+    color:#16303A;box-sizing:border-box}
+  .txt{position:absolute;top:0;bottom:0;inset-inline-start:72px;width:470px;display:flex;flex-direction:column;justify-content:center;gap:18px;z-index:2}
+  .brand{display:flex;align-items:center;gap:14px}
+  .mark{width:40px;height:53px;flex:none}
+  .eyebrow{font-size:21px;color:#1F4E5F}
+  .name{font-weight:500;font-size:54px;line-height:1.3;margin-top:6px}
+  .line{font-size:23px;line-height:1.6;color:#3d555e}
+  .url{font-family:Nunito;font-weight:700;font-size:22px;color:#C2603F;direction:ltr;unicode-bidi:isolate;margin-top:6px}
+  [lang=ar] .txt{font-family:Alexandria}
+  [lang=ar] .url,[lang=ar] .name{text-align:right}
+  [lang=en] .txt{font-family:Nunito}
+  [lang=en] .name{font-weight:800;font-size:56px;line-height:1.1;letter-spacing:-0.02em}
+  [lang=en] .eyebrow{font-weight:600}
+  .pic{position:absolute;top:50%;transform:translateY(-50%);inset-inline-end:-40px;width:640px;border-radius:26px;
+    box-shadow:0 40px 80px -36px rgba(22,48,58,.55);outline:1px solid rgba(22,48,58,.08)}
+  .dot{display:inline-block;width:.2em;height:.2em;border-radius:50%;background:#C2603F;margin-inline-start:.12em;vertical-align:baseline}
+</style></head>
+<body><div class="og" lang="__LANG__" dir="__DIR__">
+  <div class="txt">
+    <div class="brand">
+      <svg class="mark" viewBox="16.5 8.5 73 97" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M28 78 V46" stroke="#16303A" stroke-width="11"/>
+        <path d="M80 18 Q62 18 62 36 V82 Q62 96 48 96 H36" stroke="#16303A" stroke-width="11"/>
+        <path d="M46 48 H78" stroke="#16303A" stroke-width="11"/>
+        <circle cx="28" cy="27" r="7.5" fill="#C2603F"/>
+      </svg>
+      <div class="eyebrow">__EYEBROW__</div>
+    </div>
+    <div class="name" dir="auto">__NAME__<span class="dot"></span></div>
+    <div class="line">__LINE__</div>
+    <div class="url">ibrahimfares.dev</div>
+  </div>
+  <img class="pic" src="__PIC__">
+</div></body></html>

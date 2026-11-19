@@ -63,9 +63,8 @@ export async function generateMetadata({
   const lang: Lang = locale === "en" ? "en" : "ar";
   const t = await getTranslations({ locale, namespace: "meta" });
   const title = `${p.name[lang]} · ${t("title")}`;
-  const images = p.media.og
-    ? [{ url: p.media.og, width: 1200, height: 630, alt: p.title[lang] }]
-    : [{ url: `/og/home-${lang}.jpg`, width: 1200, height: 630 }];
+  // Branded social card (logo, project name, line, address) from scripts/og/render-projects.py
+  const images = [{ url: `${SITE_URL}/og/projects/${slug}-${lang}.jpg`, width: 1200, height: 630, alt: p.title[lang] }];
   return {
     title,
     description: p.summary[lang],
@@ -196,7 +195,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
         description: p.summary[lang],
         url: `${SITE_URL}/${lang}/projects/${slug}`,
         inLanguage: lang,
-        image: p.media.og ? `${SITE_URL}${p.media.og}` : undefined,
+        image: `${SITE_URL}/og/projects/${slug}-${lang}.jpg`,
         keywords: page.stack.join(", "),
         creator: { "@type": "Person", "@id": PERSON_ID, name: isAr ? "إبراهيم فارس" : "Ibrahim Fares" },
       },

@@ -60,5 +60,5 @@ Run it again whenever a package changes. The generated files are committed, so a
 
 - `src/app/sitemap.ts` and `src/app/robots.ts` build `/sitemap.xml` and `/robots.txt` from the project list.
 - Every page has its title, description, canonical and `ar`/`en` alternates; the base address is `https://ibrahimfares.dev` (or `NEXT_PUBLIC_SITE_URL`).
-- Social images: case studies use each package's `og.jpg` (copied by `npm run sync`); the home page uses `public/og/home-ar.jpg` and `home-en.jpg`. To redraw those after changing the hero text: run a build on port 3100, then `python3 scripts/og/render.py` (needs Python Playwright).
+- Social images: each case study has a branded card per language in `public/og/projects/<slug>-<lang>.jpg` (logo, project name, line, address over the cover), drawn by `python3 scripts/og/render-projects.py [slug…]` against a build on port 3100; the home page uses `public/og/home-ar.jpg` and `home-en.jpg`. To redraw those after changing the hero text: run a build on port 3100, then `python3 scripts/og/render.py` (needs Python Playwright).
 - Structured data (JSON-LD): Person + WebSite on the home page, CreativeWork + breadcrumbs on each case study.
