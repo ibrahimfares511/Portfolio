@@ -207,7 +207,8 @@
   },
   "contactSection": {
     "title": "Let's start your project",
-    "subline": "Tell me about your idea in 2 minutes, and I'll reply within 24 hours.",
+    "subline": "Message me on WhatsApp or by email, and I'll reply within 24 hours.",
+    "elsewhere": "You can also find my work and experience on",
     "name": "Name",
     "reach": "How to reach you",
     "reachHint": "email or WhatsApp",

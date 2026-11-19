@@ -48,7 +48,7 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
       <Band label={ts("about")}>
         <About locale={lang} />
       </Band>
-      <Band label={ts("contact")} tone="clay" minHeight="calc(100vh - 136px)">
+      <Band label={ts("contact")} minHeight="calc(100vh - 136px)">
         <Contact locale={lang} />
       </Band>
       <SectionPager />

@@ -22,6 +22,9 @@ export function PoseStage({
   floating = [],
   mirror = false,
   bare = false,
+  widths = [320, 480, 640],
+  size = [848, 1264],
+  sizes = "(min-width: 1024px) 400px, 300px",
 }: {
   /** file stem in /public/avatar, available at 320/480/640 */
   pose: string;
@@ -30,6 +33,11 @@ export function PoseStage({
   mirror?: boolean;
   /** no frame: the character stands on the bottom edge of whatever holds him, full height */
   bare?: boolean;
+  /** widths the pose is exported at */
+  widths?: number[];
+  /** intrinsic width and height of the largest export (for the aspect ratio before load) */
+  size?: [number, number];
+  sizes?: string;
 }) {
   const root = useRef<HTMLDivElement>(null);
 
@@ -71,15 +79,15 @@ export function PoseStage({
         <picture data-pose className={`absolute inset-x-0 bottom-0 flex justify-center ${bare ? "h-full" : "h-[92%]"}`}>
           <source
             type="image/avif"
-            srcSet={`/avatar/${pose}-320.avif 320w, /avatar/${pose}-480.avif 480w, /avatar/${pose}-640.avif 640w`}
-            sizes="(min-width: 1024px) 400px, 300px"
+            srcSet={widths.map((w) => `/avatar/${pose}-${w}.avif ${w}w`).join(", ")}
+            sizes={sizes}
           />
           <img
-            src={`/avatar/${pose}-640.webp`}
-            srcSet={`/avatar/${pose}-320.webp 320w, /avatar/${pose}-480.webp 480w, /avatar/${pose}-640.webp 640w`}
-            sizes="(min-width: 1024px) 400px, 300px"
-            width={848}
-            height={1264}
+            src={`/avatar/${pose}-${widths[widths.length - 1]}.webp`}
+            srcSet={widths.map((w) => `/avatar/${pose}-${w}.webp ${w}w`).join(", ")}
+            sizes={sizes}
+            width={size[0]}
+            height={size[1]}
             alt=""
             loading="lazy"
             decoding="async"
