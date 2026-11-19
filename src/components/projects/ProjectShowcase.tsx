@@ -7,6 +7,8 @@ import type { Project } from "@/lib/projects";
 import { projectBySlug } from "@/lib/projects";
 import { LoopVideo } from "./LoopVideo";
 import { Words } from "@/components/ui/Words";
+import { Reveal } from "@/components/ui/Reveal";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -98,7 +100,6 @@ export function ProjectShowcase({
   const [inView, setInView] = useState(false);
   const shown = useRef(0);
   const tl = useRef<gsap.core.Timeline | null>(null);
-  const isAr = lang === "ar";
   const n = projects.length;
   const indexOf = (slug: string) => projects.findIndex((p) => p.slug === slug);
 
@@ -241,20 +242,10 @@ export function ProjectShowcase({
         <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6 lg:min-h-0">
           {/* Title, counter, arrows */}
           <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4">
-            <div className="max-w-2xl">
-              <h2
-                id="projects-title"
-                className={
-                  isAr
-                    ? "text-[30px] leading-[46px] font-medium md:text-[38px] md:leading-[56px]"
-                    : "font-display text-[38px] leading-[46px] lowercase md:text-[46px] md:leading-[52px]"
-                }
-              >
-                {title}
-                <span className="ms-1 inline-block size-[0.22em] rounded-full bg-clay align-baseline" aria-hidden />
-              </h2>
-              <p className="mt-1 text-[15px] leading-[26px] text-ink-muted md:text-[16px]">{sub}</p>
-            </div>
+            {/* Same heading as every section: title, clay dot, the pen stroke drawn under it */}
+            <Reveal>
+              <SectionHeading id="projects-title" locale={lang} title={title} sub={sub} />
+            </Reveal>
             <div className="flex shrink-0 items-center gap-4">
               <p className="num font-display text-[20px] leading-none text-ink-muted" aria-live="polite">
                 <span className="text-ink">{pad(active + 1)}</span> / {pad(n)}
@@ -381,7 +372,7 @@ function Slide({
         <div className="relative lg:col-span-8 lg:flex lg:h-full lg:min-h-0 lg:items-center lg:justify-center">
           <div
             data-media
-            className="relative w-full overflow-hidden rounded-[22px] bg-[radial-gradient(110%_90%_at_10%_0%,var(--sky-soft),transparent_62%),radial-gradient(90%_80%_at_100%_100%,var(--clay-soft),transparent_66%)] p-3 ring-1 ring-line sm:p-5 lg:max-w-[calc((100dvh-300px)*1.5)] lg:rounded-[28px] lg:p-7 dark:bg-[radial-gradient(110%_90%_at_10%_0%,var(--sky-soft),transparent_62%),radial-gradient(80%_70%_at_100%_100%,color-mix(in_oklab,var(--clay-soft)_55%,transparent),transparent_66%)]"
+            className="relative w-full overflow-hidden rounded-[22px] bg-[radial-gradient(110%_90%_at_10%_0%,var(--sky-soft),transparent_62%),radial-gradient(90%_80%_at_100%_100%,var(--clay-soft),transparent_66%)] p-3 ring-1 ring-line sm:p-5 lg:max-w-[calc((100dvh-360px)*1.5)] lg:rounded-[28px] lg:p-7 dark:bg-[radial-gradient(110%_90%_at_10%_0%,var(--sky-soft),transparent_62%),radial-gradient(80%_70%_at_100%_100%,color-mix(in_oklab,var(--clay-soft)_55%,transparent),transparent_66%)]"
           >
             <div data-media-in className="overflow-hidden rounded-xl border border-line/70 bg-surface shadow-[0_30px_60px_-30px_rgba(22,48,58,0.55)] dark:shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]" dir="ltr">
               <div className="flex h-7 items-center gap-1.5 border-b border-line bg-bg/70 px-3" aria-hidden>
@@ -449,7 +440,7 @@ function Slide({
               <div key={k} data-txt className="flex flex-col-reverse gap-1">
                 <dt className="text-[13px] leading-[20px] text-ink-muted">{s.label[lang]}</dt>
                 <dd className="num self-start font-display text-[34px] leading-[38px] text-petrol lg:text-[40px] lg:leading-[44px]">
-                  <span aria-hidden data-count={s.value}>
+                  <span aria-hidden dir="ltr" data-count={s.value}>
                     {s.value}
                   </span>
                   <span className="sr-only">{s.value}</span>
