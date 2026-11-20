@@ -62,9 +62,9 @@ export async function generateMetadata({
       alternateLocale: OG_LOCALE[lang === "ar" ? "en" : "ar"],
       images: [
         {
-          url: `/og/home-${lang}.jpg?v=2`, // ?v=2: a new address, so platforms fetch the new image
-          width: 1200,
-          height: 630,
+          url: `/og/home-${lang}.jpg?v=3`, // ?v=: a new address, so platforms fetch the new image
+          width: 2400,
+          height: 1260,
           alt: t("title"),
         },
       ],
@@ -73,7 +73,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      images: [`/og/home-${lang}.jpg?v=2`],
+      images: [`/og/home-${lang}.jpg?v=3`],
     },
   };
 }
