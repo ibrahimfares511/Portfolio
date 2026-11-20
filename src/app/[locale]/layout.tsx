@@ -44,7 +44,7 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     title: t("title"),
     description: t("description"),
-    applicationName: t("siteName"),
+    applicationName: t("title"),
     authors: [
       { name: lang === "ar" ? "إبراهيم فارس" : "Ibrahim Fares", url: SITE_URL },
     ],
@@ -55,7 +55,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       url: `/${locale}`,
-      siteName: t("siteName"),
+      siteName: t("title"),
       title: t("title"),
       description: t("description"),
       locale: OG_LOCALE[lang],

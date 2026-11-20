@@ -14,7 +14,7 @@ export async function Footer() {
   return (
     <footer className="border-t border-line bg-surface/40">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-10 sm:flex-row sm:justify-between sm:px-6 lg:h-[96px] lg:py-0">
-        <a href={`/${locale}`} className="text-ink" aria-label={tm("siteName")}>
+        <a href={`/${locale}`} className="text-ink" aria-label={tm("title")}>
           <LogoLockup height={30} />
         </a>
         <p className="text-sm text-ink-muted">{tf("rights")}</p>

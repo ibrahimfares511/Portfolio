@@ -82,7 +82,7 @@ export function Header() {
       }`}
     >
       <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto] items-center gap-6 px-4 sm:px-6 md:h-[72px] md:grid-cols-[1fr_auto_1fr]">
-        <a href={home} className="flex items-center justify-self-start text-ink" aria-label={`${tm("siteName")} · ${t("home")}`}>
+        <a href={home} className="flex items-center justify-self-start text-ink" aria-label={`${tm("title")} · ${t("home")}`}>
           <LogoMark size={36} />
         </a>
 
