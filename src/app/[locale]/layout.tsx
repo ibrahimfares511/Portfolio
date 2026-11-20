@@ -1,3 +1,4 @@
+import { PageTransitions } from "@/components/layout/PageTransitions";
 import { Cursor } from "@/components/layout/Cursor";
 import { SITE_URL, OG_LOCALE } from "@/lib/site";
 import type { Metadata, Viewport } from "next";
@@ -122,6 +123,7 @@ export default async function LocaleLayout({
           <main id="main">{children}</main>
           <Footer />
           <Cursor />
+          <PageTransitions />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -43,7 +43,7 @@ export async function Contact({ locale }: { locale: "ar" | "en" }) {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="mx-auto flex max-w-6xl flex-col px-4 py-16 sm:px-6 md:py-20 lg:h-[calc(100dvh-136px)] lg:pt-[92px] lg:pb-4"
+      className="mx-auto flex max-w-6xl flex-col px-4 py-16 sm:px-6 md:py-20 lg:h-[calc(100dvh-96px)] lg:pt-[92px] lg:pb-4"
     >
       <style href="contact-section" precedence="default">{CSS}</style>
       <Reveal className="grid min-h-0 flex-1 grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-6" wordStagger={0.03}>

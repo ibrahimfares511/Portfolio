@@ -288,7 +288,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
             <Reveal className={`mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-[26px] bg-[#B9D2DA]/25 md:mt-20 ${statCols} text-bg dark:bg-line dark:text-ink`}>
               {results.map((r, k) => (
                 <div key={k} data-reveal="text" className="bg-petrol px-5 py-7 md:px-8 md:py-9 dark:bg-surface">
-                  <p className="num font-display text-[36px] leading-[42px] text-[#B9D2DA] sm:text-[44px] sm:leading-[48px] md:text-[60px] md:leading-[64px] dark:text-petrol">
+                  <p className="num w-fit font-display text-[36px] leading-[42px] text-[#B9D2DA] sm:text-[44px] sm:leading-[48px] md:text-[60px] md:leading-[64px] dark:text-petrol">
                     <Stat value={r.value} />
                   </p>
                   <p className="mt-2 text-[14px] leading-[22px] opacity-80 md:text-[15px]">{r.label[lang]}</p>
@@ -337,7 +337,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
           <div className="mt-12 grid grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f, k) => (
               <Reveal key={k} className="border-t border-line pt-6" wordStagger={0.012}>
-                <span data-reveal="text" className="num block font-display text-[34px] leading-none text-clay">{two(k + 1)}</span>
+                <span data-reveal="text" className="num block w-fit font-display text-[34px] leading-none text-clay">{two(k + 1)}</span>
                 {f.title ? (
                   <p className="mt-4 text-[19px] leading-[30px] font-semibold text-ink">
                     <Words text={plainText(f.title)} />

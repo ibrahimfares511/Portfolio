@@ -155,7 +155,7 @@ export function ProcessJourney({ steps, lang, closing }: { steps: Step[]; lang: 
               key={i}
               data-mark
               r="9"
-              className="fill-[var(--bg)] stroke-[var(--line)] [stroke-width:2] transition-[stroke] duration-500 data-[on]:stroke-[var(--clay)]"
+              className="fill-[var(--bg)] stroke-[var(--line)] [stroke-width:2] [transform-box:fill-box] [transform-origin:center] transition-[stroke,fill,scale] duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] data-[on]:scale-125 data-[on]:fill-[var(--clay)] data-[on]:stroke-[var(--clay)]"
             />
           ))}
           <g data-tip style={{ opacity: 0 }}>

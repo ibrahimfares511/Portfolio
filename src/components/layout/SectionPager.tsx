@@ -158,16 +158,7 @@ export function SectionPager({ paging = true }: { paging?: boolean } = {}) {
       if (end) return move(document.documentElement.scrollHeight - window.innerHeight, 1.2);
       step(down ? 1 : -1);
     };
-    // Same-page links (#projects, #contact…): glide instead of jumping.
-    const onClick = (e: MouseEvent) => {
-      const a = (e.target as Element).closest<HTMLAnchorElement>("a[href*='#']");
-      if (!a || a.origin !== location.origin || a.pathname !== location.pathname) return;
-      const target = a.hash && document.getElementById(decodeURIComponent(a.hash.slice(1)));
-      if (!target) return;
-      e.preventDefault();
-      history.replaceState(history.state, "", a.hash);
-      move(Math.max(0, top(target.closest<HTMLElement>("[data-band]") ?? target)), 1);
-    };
+    // Same-page links (#projects, #contact…) go through the brand cover: see PageTransitions.
 
     const on = () => {
       root.classList.add("if-paging");
@@ -187,14 +178,12 @@ export function SectionPager({ paging = true }: { paging?: boolean } = {}) {
         onStopDelay: 0.18,
       });
       window.addEventListener("keydown", onKey);
-      document.addEventListener("click", onClick);
     };
     const off = () => {
       root.classList.remove("if-paging");
       obs?.kill();
       obs = undefined;
       window.removeEventListener("keydown", onKey);
-      document.removeEventListener("click", onClick);
     };
     const apply = () => (mq.matches ? on() : off());
     apply();

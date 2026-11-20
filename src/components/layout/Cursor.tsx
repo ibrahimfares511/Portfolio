@@ -8,9 +8,23 @@ import gsap from "gsap";
  * follows a little behind. Over links and buttons the ring opens; over an
  * element with data-cursor-label it fills with clay and shows that text
  * (existing copy only, e.g. "Read the story" on project pictures).
- * Elements with data-magnetic lean toward the pointer.
+ * Buttons lean toward the pointer, like the hero buttons: every element with
+ * data-magnetic, and every other link or button that is button-sized
+ * (small, not a picture or a whole card). data-magnetic="off" opts out.
  * Only for fine pointers with motion allowed; text fields keep their cursor.
  */
+/** The element that should lean toward the pointer, if any. */
+function magnetOf(target: Element | null): HTMLElement | null {
+  const el = target?.closest<HTMLElement>("[data-magnetic], a[href], button") ?? null;
+  if (!el) return null;
+  if (el.dataset.magnetic === "off") return null;
+  if (el.hasAttribute("data-magnetic")) return el;
+  if ((el as HTMLButtonElement).disabled) return null;
+  if (el.querySelector("img, picture, video, canvas")) return null;
+  const b = el.getBoundingClientRect();
+  return b.width <= 360 && b.height <= 72 ? el : null;
+}
+
 export function Cursor() {
   const dot = useRef<HTMLDivElement>(null);
   const ring = useRef<HTMLDivElement>(null);
@@ -54,7 +68,7 @@ export function Cursor() {
       rx(e.clientX);
       ry(e.clientY);
       // magnetic pull
-      const m = (e.target as Element | null)?.closest<HTMLElement>("[data-magnetic]") ?? null;
+      const m = magnetOf(e.target as Element | null);
       if (m !== magnet) {
         if (magnet) gsap.to(magnet, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.5)" });
         magnet = m;
