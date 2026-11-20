@@ -9,11 +9,31 @@ import gsap from "gsap";
  * element with data-cursor-label it fills with clay and shows that text
  * (existing copy only, e.g. "Read the story" on project pictures).
  * Buttons lean toward the pointer, like the hero buttons: every element with
- * data-magnetic, and every other link or button that is button-sized
- * (small, not a picture or a whole card). data-magnetic="off" opts out.
+ * data-magnetic, and every other link or button drawn as a button (see
+ * magnetOf). Text links stay still. data-magnetic="off" opts out.
  * Only for fine pointers with motion allowed; text fields keep their cursor.
  */
-/** The element that should lean toward the pointer, if any. */
+/**
+ * The element that should lean toward the pointer, if any: buttons only, not
+ * text links. Anything marked data-magnetic; otherwise a link or button that
+ * looks like a button (its own background or border), is button-sized and is
+ * not a picture. A link drawn as text (e.g. "Elite's dashboard") stays still.
+ */
+const looks = new WeakMap<Element, boolean>();
+function looksLikeButton(el: HTMLElement) {
+  let v = looks.get(el);
+  if (v === undefined) {
+    const cs = getComputedStyle(el);
+    const visible = (c: string) => c !== "transparent" && !/rgba?\([^)]*,\s*0\)$/.test(c) && !/\/\s*0\)$/.test(c);
+    const bg = visible(cs.backgroundColor) || cs.backgroundImage !== "none";
+    const border = ["Top", "Right", "Bottom", "Left"].some(
+      (s) => parseFloat(cs.getPropertyValue(`border-${s.toLowerCase()}-width`)) > 0 && visible(cs.getPropertyValue(`border-${s.toLowerCase()}-color`)),
+    );
+    v = bg || border;
+    looks.set(el, v);
+  }
+  return v;
+}
 function magnetOf(target: Element | null): HTMLElement | null {
   const el = target?.closest<HTMLElement>("[data-magnetic], a[href], button") ?? null;
   if (!el) return null;
@@ -22,7 +42,8 @@ function magnetOf(target: Element | null): HTMLElement | null {
   if ((el as HTMLButtonElement).disabled) return null;
   if (el.querySelector("img, picture, video, canvas")) return null;
   const b = el.getBoundingClientRect();
-  return b.width <= 360 && b.height <= 72 ? el : null;
+  if (b.width > 360 || b.height > 72) return null;
+  return looksLikeButton(el) ? el : null;
 }
 
 export function Cursor() {

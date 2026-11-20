@@ -65,7 +65,7 @@ export type PortraitElements = {
 export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/"): () => void {
   const { wrap, canvas, fallback, fly, hand } = els;
   const gl = canvas.getContext("webgl", { alpha: true, premultipliedAlpha: true, antialias: true });
-  if (!gl) return () => {}; // no WebGL: the plain picture stays
+  if (!gl || gl.isContextLost()) return () => {}; // no WebGL (or none right now): the plain picture stays
 
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const url = (name: Face) => `${base}${name}.webp`;
@@ -440,11 +440,12 @@ export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/
   addEventListener("scroll", onScroll, { passive: true });
   wrap.addEventListener("pointerdown", onDown);
 
-  let visible = true;
+  let visible = true, seenCheck = 0;
   const io = new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold: 0 });
   io.observe(canvas);
   const ro = new ResizeObserver(() => {
     const r = Math.min(devicePixelRatio || 1, 2), b = canvas.getBoundingClientRect();
+    if (!b.width || !b.height) return; // hidden for a moment: keep the last size
     canvas.width = Math.round(b.width * r);
     canvas.height = Math.round(b.height * r);
     gl.viewport(0, 0, canvas.width, canvas.height);
@@ -456,6 +457,12 @@ export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/
     raf = requestAnimationFrame(frame);
     const dt = Math.min(0.04, (now - last) / 1000);
     last = now;
+    // the observer can miss a change while the page is swapped under the cover: check by hand now and then
+    if (!visible && now - seenCheck > 500) {
+      seenCheck = now;
+      const b = canvas.getBoundingClientRect();
+      visible = b.bottom > 0 && b.top < innerHeight && b.width > 0;
+    }
     if (!ready || !visible || document.hidden) return;
     const f = (r: number) => 1 - Math.exp(-dt * r);
 

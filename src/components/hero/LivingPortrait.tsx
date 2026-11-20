@@ -40,13 +40,32 @@ export function LivingPortrait({ alt, className = "" }: { alt: string; className
 
   useEffect(() => {
     if (!wrap.current || !canvas.current || !fallback.current || !fly.current || !hand.current) return;
-    return startLivingPortrait({
-      wrap: wrap.current,
-      canvas: canvas.current,
-      fallback: fallback.current,
-      fly: fly.current,
-      hand: hand.current,
-    });
+    const els = { wrap: wrap.current, canvas: canvas.current, fallback: fallback.current, fly: fly.current, hand: hand.current };
+    const c = els.canvas;
+    let stop = startLivingPortrait(els);
+    // The GPU can take the WebGL context back (too many contexts, a driver reset, a sleeping
+    // laptop). Show the plain picture meanwhile, and start again when the context comes back.
+    const onLost = (e: Event) => {
+      e.preventDefault(); // ask the browser to restore it
+      stop();
+      stop = () => {};
+    };
+    const onRestored = () => {
+      stop = startLivingPortrait(els);
+    };
+    c.addEventListener("webglcontextlost", onLost);
+    c.addEventListener("webglcontextrestored", onRestored);
+    return () => {
+      c.removeEventListener("webglcontextlost", onLost);
+      c.removeEventListener("webglcontextrestored", onRestored);
+      stop();
+      // Leaving the page (not a StrictMode remount): free the GPU context now instead of
+      // waiting for garbage collection, so coming back and forth never piles contexts up
+      // until the browser starts dropping them.
+      window.setTimeout(() => {
+        if (!c.isConnected) c.getContext("webgl")?.getExtension("WEBGL_lose_context")?.loseContext();
+      }, 0);
+    };
   }, []);
 
   return (

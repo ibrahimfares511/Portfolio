@@ -1,19 +1,25 @@
 "use client";
 
 import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { useRouter } from "next/navigation";
 import { coverSwitch, nextFrame, waitFor } from "@/lib/motion";
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const HEADER = 72;
 
 /**
- * Every move inside the site goes through the brand cover, like the language
- * and theme switches: a circle grows from where you clicked until it covers
- * the screen, the "if" mark is written while the new page (or section) is put
- * in place underneath, then the circle closes back into the same point.
+ * Moving to another page goes through the brand cover, like the language and
+ * theme switches: a circle grows from where you clicked until it covers the
+ * screen, the "if" mark is written while the new page is put in place
+ * underneath, then the circle closes back into the same point.
+ * Moving within the same page (#projects, #contact, "technical") is a plain,
+ * smooth scroll, with no cover.
  *
  * One click listener for the whole site, so every internal link gets it:
- * header and footer links, buttons, "Read the story", back links, the 404.
+ * header links, buttons, "Read the story", back links, the logo, the 404.
  * Links that already run the cover themselves (project links, the language
  * switch) call preventDefault, so they are left alone here. New tabs,
  * modifier keys, downloads, external links, mailto/tel and the skip link keep
@@ -23,31 +29,34 @@ export function PageTransitions() {
   const router = useRouter();
 
   useEffect(() => {
-    // The element a hash points at, scrolled to its band (home page) or itself.
-    const scrollToHash = (hash: string) => {
+    // Where a hash points: its band (home page), its own screen in the projects
+    // showcase, or the element itself under the header. null: the page top.
+    const destination = (hash: string) => {
       const id = hash ? decodeURIComponent(hash.slice(1)) : "";
       const el = id ? document.getElementById(id) : null;
-      if (!el) {
-        window.scrollTo({ top: 0, behavior: "instant" });
-        return;
-      }
       const pageY = (n: Element) => n.getBoundingClientRect().top + window.scrollY;
-      // One screen of a band built of whole screens (the projects showcase): its own screen.
+      if (!el) return { y: 0, el: null as HTMLElement | null, inline: false };
       const screens = el.closest<HTMLElement>("[data-screens]");
       if (screens && el.tagName === "LI" && el.parentElement) {
         const k = Array.from(el.parentElement.children).filter((c) => c.tagName === "LI").indexOf(el);
-        if (window.matchMedia("(min-width: 1024px)").matches) {
-          window.scrollTo({ top: pageY(screens) + k * window.innerHeight, behavior: "instant" });
-        } else {
-          const band = el.closest<HTMLElement>("[data-band]") ?? screens;
-          window.scrollTo({ top: Math.max(0, pageY(band)), behavior: "instant" });
-          el.scrollIntoView({ behavior: "instant", block: "nearest", inline: "center" });
-        }
-        return;
+        if (window.matchMedia("(min-width: 1024px)").matches) return { y: pageY(screens) + k * window.innerHeight, el, inline: false };
+        const band = el.closest<HTMLElement>("[data-band]") ?? screens;
+        return { y: Math.max(0, pageY(band)), el, inline: true }; // phones: the carousel then slides to it
       }
       const band = el.closest<HTMLElement>("[data-band]");
-      const top = pageY(band ?? el) - (band ? 0 : HEADER);
-      window.scrollTo({ top: Math.max(0, top), behavior: "instant" });
+      return { y: Math.max(0, pageY(band ?? el) - (band ? 0 : HEADER)), el, inline: false };
+    };
+    const jump = (hash: string) => {
+      const d = destination(hash);
+      window.scrollTo({ top: d.y, behavior: "instant" });
+      if (d.inline) d.el?.scrollIntoView({ behavior: "instant", block: "nearest", inline: "center" });
+    };
+    const glide = (hash: string) => {
+      const d = destination(hash);
+      const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const after = () => { if (d.inline) d.el?.scrollIntoView({ behavior: still ? "instant" : "smooth", block: "nearest", inline: "center" }); };
+      if (still) { window.scrollTo({ top: d.y, behavior: "instant" }); after(); return; }
+      gsap.to(window, { scrollTo: { y: d.y, autoKill: false }, duration: 1, ease: "power3.out", overwrite: true, onComplete: after });
     };
 
     const onClick = (e: MouseEvent) => {
@@ -59,7 +68,14 @@ export function PageTransitions() {
       if (a.origin !== location.origin) return; // external, mailto:, tel:
       const samePage = a.pathname === location.pathname && a.search === location.search;
       if (samePage && a.hash === "#main") return; // skip link: plain focus jump
-      if (samePage && a.hash && !document.getElementById(decodeURIComponent(a.hash.slice(1)))) return;
+      if (samePage) {
+        // Same page: just scroll there, smoothly.
+        if (a.hash && !document.getElementById(decodeURIComponent(a.hash.slice(1)))) return;
+        e.preventDefault();
+        history.replaceState(history.state, "", a.hash || a.pathname);
+        glide(a.hash);
+        return;
+      }
 
       e.preventDefault();
       // Where the pointer was, or the link's centre (keyboard).
@@ -71,16 +87,12 @@ export function PageTransitions() {
       }
       const hash = a.hash;
       void coverSwitch(x, y, async () => {
-        if (samePage) {
-          history.replaceState(history.state, "", hash || a.pathname);
-        } else {
-          router.push(a.pathname + a.search + hash, { scroll: false });
-          await waitFor(() => location.pathname === a.pathname);
-          await nextFrame();
-          await nextFrame();
-          await document.fonts.ready;
-        }
-        scrollToHash(hash);
+        router.push(a.pathname + a.search + hash, { scroll: false });
+        await waitFor(() => location.pathname === a.pathname);
+        await nextFrame();
+        await nextFrame();
+        await document.fonts.ready;
+        jump(hash);
       });
     };
 
