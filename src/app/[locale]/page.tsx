@@ -27,28 +27,28 @@ export default async function Home({ params }: PageProps<"/[locale]">) {
   return (
     <>
       <JsonLd data={personLd(lang, role)} />
-      <Band label={name}>
+      <Band label={name} track="home-hero">
         <Hero />
       </Band>
-      <Band label={ts("projects")}>
+      <Band label={ts("projects")} track="home-projects">
         <Projects locale={lang} />
       </Band>
-      <Band label={ts("otherWork")} tone="sky">
+      <Band label={ts("otherWork")} track="home-other-work" tone="sky">
         <OtherWork locale={lang} />
       </Band>
-      <Band label={ts("build")}>
+      <Band label={ts("build")} track="home-what-i-build">
         <WhatICanBuild locale={lang} />
       </Band>
-      <Band label={ts("process")} tone="petrol">
+      <Band label={ts("process")} track="home-process" tone="petrol">
         <HowWeWork locale={lang} />
       </Band>
-      <Band label={ts("tools")} tone="sky">
+      <Band label={ts("tools")} track="home-tools" tone="sky">
         <Tools locale={lang} />
       </Band>
-      <Band label={ts("about")}>
+      <Band label={ts("about")} track="home-about">
         <About locale={lang} />
       </Band>
-      <Band label={ts("contact")} minHeight="calc(100vh - 96px)">
+      <Band label={ts("contact")} track="home-contact" minHeight="calc(100vh - 96px)">
         <Contact locale={lang} />
       </Band>
       <SectionPager />

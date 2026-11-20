@@ -76,6 +76,8 @@ export async function WhatICanBuild({ locale }: { locale: "ar" | "en" }) {
                       <li key={p.slug}>
                         <a
                           href={`#project-${p.slug}`}
+                          data-track="proof-chip"
+                          data-track-project={p.slug}
                           className="inline-flex items-center gap-1.5 rounded-full border border-line bg-bg/60 px-3 py-1.5 text-[14px] text-ink transition-colors hover:border-petrol/50 hover:text-petrol"
                         >
                           {(CHIP_NAME[p.slug] ?? p.name)[locale]}
@@ -90,7 +92,7 @@ export async function WhatICanBuild({ locale }: { locale: "ar" | "en" }) {
               ) : (
                 <>
                   <div className="relative z-10 mt-auto flex items-end pt-8 max-lg:min-h-[200px]">
-                    <ButtonLink href={`/${locale}#contact`}>{t("cta")}</ButtonLink>
+                    <ButtonLink href={`/${locale}#contact`} data-track="build-lets-talk">{t("cta")}</ButtonLink>
                   </div>
                   <picture>
                     <source type="image/avif" srcSet="/avatar/08-thinking-320.avif 320w, /avatar/08-thinking-480.avif 480w" sizes="200px" />

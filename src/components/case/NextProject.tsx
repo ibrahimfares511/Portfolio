@@ -34,7 +34,7 @@ export function ProjectLink({
     });
   };
   return (
-    <Link {...rest} href={href} scroll={false} onClick={onClick} className={className}>
+    <Link data-track="open-project" data-track-project={slug} {...rest} href={href} scroll={false} onClick={onClick} className={className}>
       {children}
     </Link>
   );

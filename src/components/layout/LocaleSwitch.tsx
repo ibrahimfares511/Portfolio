@@ -41,6 +41,8 @@ export function LocaleSwitch({ className = "" }: { className?: string }) {
       lang={other}
       scroll={false}
       onClick={onClick}
+      data-track="switch-language"
+      data-track-to={other}
       aria-label={t("languageLabel")}
       className={`inline-flex h-10 items-center rounded-full border border-line bg-surface/60 px-4 text-sm font-medium text-ink transition-colors hover:border-petrol/40 hover:text-petrol ${
         other === "ar" ? "font-arabic" : "font-latin"

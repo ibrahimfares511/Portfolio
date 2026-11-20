@@ -47,6 +47,7 @@ export function CvButton({ href, label }: { href: string; label: string }) {
       ref={ref}
       href={href}
       download
+      data-track="cv-download"
       onClick={() => setDone(true)}
       data-done={done ? "" : undefined}
       className="cv-btn group relative inline-flex h-12 items-center overflow-hidden rounded-md bg-ink px-6 text-[16px] font-medium text-bg shadow-[0_10px_30px_-14px_var(--ink)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_34px_-14px_var(--clay)] active:translate-y-0"

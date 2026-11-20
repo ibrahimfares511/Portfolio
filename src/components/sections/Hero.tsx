@@ -139,8 +139,8 @@ export function Hero() {
             <Words text={t("subline")} />
           </p>
           <div data-reveal="text" className="mt-6 flex flex-wrap items-center justify-center gap-3 xl:hidden [&>a]:min-w-44">
-            <ButtonLink href={`/${locale}#contact`}>{t("primary")}</ButtonLink>
-            <ButtonLink href={`/${locale}#projects`} variant="secondary" data-portrait="contact">
+            <ButtonLink href={`/${locale}#contact`} data-track="hero-start-project">{t("primary")}</ButtonLink>
+            <ButtonLink href={`/${locale}#projects`} variant="secondary" data-portrait="contact" data-track="hero-see-work">
               {t("secondary")}
             </ButtonLink>
           </div>
@@ -164,8 +164,8 @@ export function Hero() {
             {t("subline")}
           </p>
           <div data-reveal="text" className="absolute end-0 bottom-8 z-10 hidden flex-col items-stretch gap-3 xl:flex">
-            <ButtonLink href={`/${locale}#contact`}>{t("primary")}</ButtonLink>
-            <ButtonLink href={`/${locale}#projects`} variant="secondary" data-portrait="contact">
+            <ButtonLink href={`/${locale}#contact`} data-track="hero-start-project">{t("primary")}</ButtonLink>
+            <ButtonLink href={`/${locale}#projects`} variant="secondary" data-portrait="contact" data-track="hero-see-work">
               {t("secondary")}
             </ButtonLink>
           </div>

@@ -22,6 +22,8 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
     <button
       type="button"
       onClick={onClick}
+      data-track="switch-theme"
+      data-track-to={isDark ? "light" : "dark"}
       aria-label={t("theme")}
       title={isDark ? t("light") : t("dark")}
       className={`inline-flex size-10 items-center justify-center rounded-full border border-line bg-surface/60 text-ink transition-colors hover:border-petrol/40 hover:text-petrol ${className}`}

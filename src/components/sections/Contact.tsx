@@ -59,6 +59,7 @@ export async function Contact({ locale }: { locale: "ar" | "en" }) {
               <li key={r.k} data-reveal="text" className="border-b border-line">
                 <a
                   href={r.href}
+                  data-track={`contact-${r.k}`}
                   {...(r.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   className="group relative flex items-center gap-4 py-5 sm:gap-5"
                 >
@@ -102,6 +103,7 @@ export async function Contact({ locale }: { locale: "ar" | "en" }) {
                 <a
                   key={o.k}
                   href={LINKS[o.k]}
+                  data-track={`profile-${o.k}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-3 rounded-full border border-line bg-surface py-2 ps-2 pe-5 text-ink transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-ink/30 hover:shadow-[0_14px_30px_-20px_rgba(22,48,58,0.6)]"

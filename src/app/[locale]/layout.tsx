@@ -1,5 +1,6 @@
 import Script from "next/script";
 import { PageTransitions } from "@/components/layout/PageTransitions";
+import { Analytics } from "@/components/analytics/Analytics";
 import { Cursor } from "@/components/layout/Cursor";
 import { SITE_URL, OG_LOCALE } from "@/lib/site";
 import type { Metadata, Viewport } from "next";
@@ -125,6 +126,7 @@ export default async function LocaleLayout({
           <Footer />
           <Cursor />
           <PageTransitions />
+          <Analytics />
           {/* Visitor stats (self-hosted Umami at analytics.ibrahimfares.dev): no cookies, under 10 KB,
               counts only the live domains (not localhost), ignores #section jumps within a page. */}
           <Script

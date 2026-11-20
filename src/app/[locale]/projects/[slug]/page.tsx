@@ -225,7 +225,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       <JsonLd data={ld} />
 
       {/* 1. Hero: the story in two lines and the project's own video; the numbers under it */}
-      <Band label={p.name[lang]}>
+      <Band label={p.name[lang]} track="case-top" project={p.slug}>
         <section className={`${wrap} pt-28 pb-16 md:pt-36 md:pb-24`}>
           <div className="grid grid-cols-1 items-center gap-12 lg:min-h-[calc(100dvh-330px)] lg:grid-cols-12 lg:gap-12">
             <Reveal className="lg:col-span-5" wordStagger={0.025}>
@@ -252,7 +252,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
               </div>
               <div data-reveal="text" className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
                 {p.links.live ? (
-                  <a href={p.links.live} target="_blank" rel="noopener" className="inline-flex h-11 items-center gap-2 rounded-md bg-ink px-5 text-[15px] font-medium text-bg transition-[filter] hover:brightness-110">
+                  <a href={p.links.live} target="_blank" rel="noopener" data-track="visit-live-site" data-track-project={p.slug} className="inline-flex h-11 items-center gap-2 rounded-md bg-ink px-5 text-[15px] font-medium text-bg transition-[filter] hover:brightness-110">
                     {t("visit")}
                     <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
                       <path d="M7 17L17 7M9 7h8v8" />
@@ -300,7 +300,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       </Band>
 
       {/* 2. Before → after */}
-      <Band label={t("beforeAfter")} tone="sky">
+      <Band label={t("beforeAfter")} track="case-before-after" project={p.slug} tone="sky">
         <section className={`${wrap} ${pad}`} aria-labelledby="before-after">
           <Reveal>
             <SectionHeading id="before-after" locale={lang} title={t("beforeAfter")} />
@@ -329,7 +329,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       </Band>
 
       {/* 3. Key features */}
-      <Band label={t("features")}>
+      <Band label={t("features")} track="case-features" project={p.slug}>
         <section className={`${wrap} ${pad}`} aria-labelledby="features">
           <Reveal>
             <SectionHeading id="features" locale={lang} title={t("features")} />
@@ -354,7 +354,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
       {/* 4. The videos: a small theatre, the stage stays while the page scrolls */}
       {videos.length ? (
-        <Band label={t("inAction")} tone="petrol">
+        <Band label={t("inAction")} track="case-videos" project={p.slug} tone="petrol">
           <VideoTheater
             clips={videos}
             lang={lang}
@@ -369,7 +369,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
       {/* 5. Desktop screens: one large viewer and the strip of them all */}
       {desktopShots.length ? (
-        <Band label={t("screens")}>
+        <Band label={t("screens")} track="case-screens" project={p.slug}>
           <section className={`${wrap} ${pad}`} aria-labelledby="screens">
             <Reveal className="flex flex-wrap items-end justify-between gap-4">
               <SectionHeading id="screens" locale={lang} title={t("screens")} />
@@ -391,7 +391,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
 
       {/* 6. Phone screens: on an arc */}
       {mobileShots.length ? (
-        <Band label={t("mobile")} tone="sky">
+        <Band label={t("mobile")} track="case-mobile" project={p.slug} tone="sky">
           <section className={`[overflow-x:clip] ${wrap} ${pad}`} aria-labelledby="mobile-screens">
             <Reveal className="flex flex-col items-center text-center [&_svg]:mx-auto">
               <SectionHeading id="mobile-screens" locale={lang} title={t("mobile")} />
@@ -406,7 +406,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       ) : null}
 
       {/* 7. My role, the status, and any extra part of the story (Elite: its admin dashboard) */}
-      <Band label={t("myRole")}>
+      <Band label={t("myRole")} track="case-role" project={p.slug}>
         <section className={`${wrap} ${pad}`} aria-labelledby="my-role">
           <Reveal className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12" wordStagger={0.02}>
             <div className="lg:col-span-7">
@@ -448,7 +448,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       </Band>
 
       {/* 8. Under the hood: its own dark band, easy to skip */}
-      <Band label={t("inside")} tone="petrol">
+      <Band label={t("inside")} track="case-technical" project={p.slug} tone="petrol">
         <div className="cs-paper">
           <section id="inside" className={`${wrap} ${pad}`} aria-labelledby="inside-title">
             <Reveal className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
@@ -489,7 +489,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       </Band>
 
       {/* 9. The next project */}
-      <Band label={t("next")}>
+      <Band label={t("next")} track="case-next-project" project={p.slug}>
         <section className={`${wrap} ${pad}`} aria-labelledby="next-title">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
             <Reveal className="lg:col-span-5" wordStagger={0.02}>
@@ -549,7 +549,7 @@ export default async function ProjectPage({ params }: { params: Promise<Params> 
       </Band>
 
       {/* 10. Let's start your project: the same close as the home page */}
-      <Band label={ts("contact")}>
+      <Band label={ts("contact")} track="case-contact" project={p.slug}>
         <Contact locale={lang} />
       </Band>
       <SectionPager paging={false} />
