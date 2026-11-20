@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { startLivingPortrait } from "./living-portrait";
+import { onReveal } from "@/lib/motion";
 
 // Kept next to the component (React hoists and dedupes it via href/precedence).
 const CSS = `
@@ -42,7 +43,14 @@ export function LivingPortrait({ alt, className = "" }: { alt: string; className
     if (!wrap.current || !canvas.current || !fallback.current || !fly.current || !hand.current) return;
     const els = { wrap: wrap.current, canvas: canvas.current, fallback: fallback.current, fly: fly.current, hand: hand.current };
     const c = els.canvas;
-    let stop = startLivingPortrait(els);
+    // Start once the page is uncovered and the hero's entrance is under way, so the
+    // preloader and the first animations get the processor to themselves. Until then
+    // the plain resting picture (the same face) is what shows.
+    let stop: () => void = () => {};
+    let startTimer = 0;
+    const cancelReveal = onReveal(() => {
+      startTimer = window.setTimeout(() => { stop = startLivingPortrait(els); }, 900);
+    });
     // The GPU can take the WebGL context back (too many contexts, a driver reset, a sleeping
     // laptop). Show the plain picture meanwhile, and start again when the context comes back.
     const onLost = (e: Event) => {
@@ -58,6 +66,8 @@ export function LivingPortrait({ alt, className = "" }: { alt: string; className
     return () => {
       c.removeEventListener("webglcontextlost", onLost);
       c.removeEventListener("webglcontextrestored", onRestored);
+      cancelReveal();
+      clearTimeout(startTimer);
       stop();
       // Leaving the page (not a StrictMode remount): free the GPU context now instead of
       // waiting for garbage collection, so coming back and forth never piles contexts up

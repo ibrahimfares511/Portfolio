@@ -68,6 +68,8 @@ export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/
   if (!gl || gl.isContextLost()) return () => {}; // no WebGL (or none right now): the plain picture stays
 
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Phones (no cursor): the face moves gently, so 30 frames a second and a lighter canvas are enough.
+  const lowPower = matchMedia("(pointer: coarse)").matches;
   const url = (name: Face) => `${base}${name}.webp`;
   const idleGap = () => 12000 + Math.random() * 8000; // quiet time before he starts doing something on his own
 
@@ -137,7 +139,10 @@ export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/
   // a handful of skin: nodes near the point follow the hand, fully at the centre
   type Brush = { u: number; v: number; list: [number, number, number, number][]; px: number; py: number };
   let brush: Brush | null = null;
+  // The sheet sleeps while it is still: no simulation and no upload until something shoves it.
+  let calm = false;
   function takeHold(u: number, v: number, radius = 0.22) {
+    if (calm) { calm = false; simLeft = 0; }
     const list: Brush["list"] = [];
     for (let k = 0; k < count; k++) {
       const dx = rest[k * 2] + ux[k] - u, dy = rest[k * 2 + 1] + uy[k] - v;
@@ -188,6 +193,7 @@ export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/
   }
   // a shove from nowhere: jolts, a fly landing
   function poke(u: number, v: number, dx: number, dy: number, radius = 0.09) {
+    if (calm) { calm = false; simLeft = 0; }
     for (let k = 0; k < count; k++) {
       const ax = rest[k * 2] - u, ay = rest[k * 2 + 1] - v, w = Math.exp(-(ax * ax + ay * ay) / (radius * radius));
       vx[k] += dx * w;
@@ -440,12 +446,16 @@ export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/
   addEventListener("scroll", onScroll, { passive: true });
   wrap.addEventListener("pointerdown", onDown);
 
-  let visible = true, seenCheck = 0;
+  let visible = true, seenCheck = 0, cssW = 1;
+  // what the last drawn frame showed: an unchanged, settled face isn't drawn again
+  let drawnA = "", drawnB = "", drawnFade = -1, drawnLX = 0, drawnLY = 0;
   const io = new IntersectionObserver((es) => { visible = es[0].isIntersecting; }, { threshold: 0 });
   io.observe(canvas);
   const ro = new ResizeObserver(() => {
-    const r = Math.min(devicePixelRatio || 1, 2), b = canvas.getBoundingClientRect();
+    const r = Math.min(devicePixelRatio || 1, lowPower ? 1.5 : 2), b = canvas.getBoundingClientRect();
     if (!b.width || !b.height) return; // hidden for a moment: keep the last size
+    cssW = b.width;
+    drawnFade = -1; // the canvas was cleared by the resize: draw again
     canvas.width = Math.round(b.width * r);
     canvas.height = Math.round(b.height * r);
     gl.viewport(0, 0, canvas.width, canvas.height);
@@ -455,6 +465,7 @@ export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/
   // ---- frame ----
   function frame(now: number) {
     raf = requestAnimationFrame(frame);
+    if (lowPower && now - last < 30) return; // ~30 fps on phones
     const dt = Math.min(0.04, (now - last) / 1000);
     last = now;
     // the observer can miss a change while the page is swapped under the cover: check by hand now and then
@@ -534,36 +545,56 @@ export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/
     leanX += lvX * dt;
     leanY += lvY * dt;
 
-    // skin
-    simLeft += dt;
-    let steps = 0;
-    while (simLeft >= H && steps < 9) { step(H); simLeft -= H; steps++; }
-    if (steps === 9) simLeft = 0;
-    for (let j = 0; j < M; j++)
-      for (let i = 0; i < M; i++) {
-        const k = j * M + i, edge = i === 0 || j === 0 || i === N || j === N;
-        sx[k] = edge ? ux[k] : (ux[k] * 4 + ux[k - 1] + ux[k + 1] + ux[k - M] + ux[k + M]) / 8;
-        sy[k] = edge ? uy[k] : (uy[k] * 4 + uy[k - 1] + uy[k + 1] + uy[k - M] + uy[k + M]) / 8;
-      }
-    untangle();
-    for (let k = 0, o = 0; k < count; k++) {
-      dyn[o++] = sx[k];
-      dyn[o++] = sy[k];
-      const r = k % M, c = (k / M) | 0;
-      let shade = 1;
-      if (r > 0 && r < N && c > 0 && c < N)
-        shade = Math.max(0.86, Math.min(1.16, 1 - (sx[k + 1] - sx[k - 1] + (sy[k + M] - sy[k - M])) * 1.8));
-      dyn[o++] = shade;
-    }
+    // skin (skipped entirely while the sheet sleeps)
     const g = gl!;
-    g.bindBuffer(g.ARRAY_BUFFER, dynBuf);
-    g.bufferSubData(g.ARRAY_BUFFER, 0, dyn);
+    let moved = false;
+    if (!calm || brush) {
+      moved = true;
+      simLeft += dt;
+      let steps = 0;
+      while (simLeft >= H && steps < 9) { step(H); simLeft -= H; steps++; }
+      if (steps === 9) simLeft = 0;
+      for (let j = 0; j < M; j++)
+        for (let i = 0; i < M; i++) {
+          const k = j * M + i, edge = i === 0 || j === 0 || i === N || j === N;
+          sx[k] = edge ? ux[k] : (ux[k] * 4 + ux[k - 1] + ux[k + 1] + ux[k - M] + ux[k + M]) / 8;
+          sy[k] = edge ? uy[k] : (uy[k] * 4 + uy[k - 1] + uy[k + 1] + uy[k - M] + uy[k + M]) / 8;
+        }
+      untangle();
+      let energy = 0;
+      for (let k = 0, o = 0; k < count; k++) {
+        dyn[o++] = sx[k];
+        dyn[o++] = sy[k];
+        const r = k % M, c = (k / M) | 0;
+        let shade = 1;
+        if (r > 0 && r < N && c > 0 && c < N)
+          shade = Math.max(0.86, Math.min(1.16, 1 - (sx[k + 1] - sx[k - 1] + (sy[k + M] - sy[k - M])) * 1.8));
+        dyn[o++] = shade;
+        const e = Math.abs(ux[k]) + Math.abs(uy[k]) + (Math.abs(vx[k]) + Math.abs(vy[k])) * 0.05;
+        if (e > energy) energy = e;
+      }
+      // settled (well under a hundredth of a pixel): snap to rest and let the sheet sleep
+      if (!brush && energy < 2e-6) {
+        calm = true;
+        ux.fill(0); uy.fill(0); vx.fill(0); vy.fill(0);
+        for (let k = 0, o = 0; k < count; k++) { dyn[o++] = 0; dyn[o++] = 0; dyn[o++] = 1; }
+      }
+      g.bindBuffer(g.ARRAY_BUFFER, dynBuf);
+      g.bufferSubData(g.ARRAY_BUFFER, 0, dyn);
+    }
+    // nothing visible changed since the last frame (same pictures, fade done, the lean moved
+    // less than a third of a pixel, the sheet asleep): keep what is on screen
+    const fadeNow = Math.min(1, (now - fadeT) / fadeMs);
+    const tol = (0.33 * OVER) / Math.max(1, cssW);
+    if (!moved && faceA === drawnA && faceB === drawnB && fadeNow === 1 && drawnFade === 1 &&
+        Math.abs(leanX - drawnLX) < tol && Math.abs(leanY - drawnLY) < tol) return;
+    drawnA = faceA; drawnB = faceB; drawnFade = fadeNow; drawnLX = leanX; drawnLY = leanY;
     g.clear(g.COLOR_BUFFER_BIT);
     g.activeTexture(g.TEXTURE0);
     g.bindTexture(g.TEXTURE_2D, tex[faceA] ?? tex.rest!);
     g.activeTexture(g.TEXTURE1);
     g.bindTexture(g.TEXTURE_2D, tex[faceB] ?? tex.rest!);
-    g.uniform1f(uFade, Math.min(1, (now - fadeT) / fadeMs));
+    g.uniform1f(uFade, fadeNow);
     g.uniform2f(uLean, leanX, leanY);
     g.drawElements(g.TRIANGLES, idx.length, g.UNSIGNED_SHORT, 0);
   }
@@ -584,8 +615,10 @@ export function startLivingPortrait(els: PortraitElements, base = "/avatar/face/
     await take("closed");
     await take("half");
     const names = FACES.filter((n) => !["rest", "closed", "half"].includes(n));
+    // the other faces are only needed once he reacts: fetch them when the browser is idle
+    await new Promise<void>((r) => ("requestIdleCallback" in window ? requestIdleCallback(() => r(), { timeout: 4000 }) : setTimeout(r, 2000)));
     let i = 0;
-    await Promise.all(Array.from({ length: 6 }, async () => { while (i < names.length && alive) await take(names[i++]); }));
+    await Promise.all(Array.from({ length: lowPower ? 2 : 4 }, async () => { while (i < names.length && alive) await take(names[i++]); }));
   })();
 
   return () => {

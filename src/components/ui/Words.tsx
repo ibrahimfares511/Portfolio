@@ -29,7 +29,7 @@ export function Words({ text, group = "word" }: { text: string; group?: string }
     <>
       {chunks.map((w, i) => (
         <Fragment key={i}>
-          <span data-reveal={group} className="inline-block will-change-[filter,opacity,transform]">
+          <span data-reveal={group} className="inline-block">
             {w}
           </span>
           {i < chunks.length - 1 ? " " : null}
