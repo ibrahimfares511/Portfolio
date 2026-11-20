@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { PageTransitions } from "@/components/layout/PageTransitions";
 import { Cursor } from "@/components/layout/Cursor";
 import { SITE_URL, OG_LOCALE } from "@/lib/site";
@@ -124,6 +125,15 @@ export default async function LocaleLayout({
           <Footer />
           <Cursor />
           <PageTransitions />
+          {/* Visitor stats (self-hosted Umami at analytics.ibrahimfares.dev): no cookies, under 10 KB,
+              counts only the live domains (not localhost), ignores #section jumps within a page. */}
+          <Script
+            src="https://analytics.ibrahimfares.dev/script.js"
+            data-website-id="213c8d02-bb78-4ed8-bd47-c0a883daacc1"
+            data-domains="ibrahimfares.dev,www.ibrahimfares.dev"
+            data-exclude-hash="true"
+            strategy="afterInteractive"
+          />
         </NextIntlClientProvider>
       </body>
     </html>
