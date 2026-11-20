@@ -175,10 +175,10 @@ export function ProjectShowcase({
     if (from === to) return;
     shown.current = to;
     const slides = Array.from(list.children) as HTMLElement[];
-    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!desktop()) {
+      // Phones: the cards just slide by. The words write themselves in only once, when the
+      // section first comes into view (see below), not again on every swipe.
       gsap.set(slides, { clearProps: "visibility" });
-      if (!still && slides[to]) textIn(slides[to], 0, gsap.timeline());
       return;
     }
     const out = slides[from], inn = slides[to];
