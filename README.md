@@ -14,20 +14,22 @@ npm run build && npm start
 `node .next/standalone/server.js` (copy `public/` and `.next/static/` next to it).
 The same code deploys unchanged to Vercel.
 
-## Deploy (VPS)
+## Deploy (VPS, Docker)
+
+The site runs in its own container next to the other projects on the VPS:
 
 ```bash
-npm ci
-npm run build
-cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
-cd .next/standalone && PORT=3000 HOSTNAME=127.0.0.1 node server.js   # behind nginx/Caddy with HTTPS
+git clone <repo> ibrahimfares.dev && cd ibrahimfares.dev   # first time
+git pull                                                    # every update
+docker compose up -d --build
 ```
 
-- Node 22 (`.nvmrc`). Keep it running with pm2 or a systemd service.
+- `Dockerfile` builds the Next.js standalone server (Node 22); `docker-compose.yml` publishes it on `127.0.0.1:3005` only.
+- nginx on the VPS terminates HTTPS and forwards `ibrahimfares.dev` and `www` to `http://127.0.0.1:3005`. It must pass the original host (`proxy_set_header Host $host;` and `proxy_set_header X-Forwarded-Proto $scheme;`), or the language `Link` headers point at the internal address.
 - No secrets are needed. `NEXT_PUBLIC_SITE_URL` is only for a staging host (see `.env.example`).
-- The reverse proxy must pass the original host (nginx: `proxy_set_header Host $host;` and `proxy_set_header X-Forwarded-Proto $scheme;`), or the language `Link` headers point at the internal address.
-- Security headers (frame blocking, nosniff, referrer and permissions policies, HSTS) and a one-day cache for the media in `public/` are set in `next.config.ts`. HTTPS and the http → https redirect belong to the reverse proxy.
+- Security headers (frame blocking, nosniff, referrer and permissions policies, HSTS) and a one-day cache for the media in `public/` are set in `next.config.ts`. HTTPS and the http → https redirect belong to nginx.
 - Contact is by WhatsApp and email links; there is no form and no API route.
+- Without Docker: `npm ci && npm run build`, copy `public/` and `.next/static/` into `.next/standalone/`, then `PORT=3000 node .next/standalone/server.js`.
 
 ## Project content
 

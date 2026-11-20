@@ -1,0 +1,10 @@
+# ibrahimfares.dev on the VPS, next to the other projects.
+# The site listens only on 127.0.0.1:3005; the reverse proxy (nginx, with HTTPS) forwards ibrahimfares.dev to it.
+services:
+  portfolio:
+    build: .
+    image: ibrahimfares-portfolio
+    container_name: ibrahimfares-portfolio
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3005:3000"
