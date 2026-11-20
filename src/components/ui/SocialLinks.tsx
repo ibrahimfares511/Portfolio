@@ -1,10 +1,10 @@
 import { getTranslations } from "next-intl/server";
 
-/** WhatsApp by username, so the phone number stays private (wa.me/<username>). */
-export const WHATSAPP_HANDLE = "@ibrahimfares511";
+/** WhatsApp by phone number (wa.me needs the number in international form, digits only). */
+export const WHATSAPP_HANDLE = "+20 100 721 8535";
 
 export const LINKS = {
-  whatsapp: "https://wa.me/ibrahimfares511",
+  whatsapp: "https://wa.me/201007218535",
   email: "mailto:ibrahimfares511@gmail.com",
   github: "https://github.com/ibrahimfares511",
   linkedin: "https://www.linkedin.com/in/ibrahimfares511",

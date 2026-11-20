@@ -173,7 +173,7 @@ export function Hero() {
               data-reveal="proof"
               className="flex flex-col gap-1 border-line py-5 odd:pe-4 even:border-s even:ps-4 [&:nth-child(-n+2)]:border-b md:py-7 md:odd:pe-6 md:even:ps-6 md:[&:nth-child(-n+2)]:border-b-0 md:[&:nth-child(n+2)]:border-s md:[&:nth-child(n+2)]:ps-6"
             >
-              <span className="num self-start font-display text-[36px] leading-[42px] text-petrol sm:text-[44px] sm:leading-[50px] lg:text-[52px] lg:leading-[58px] xl:text-[58px] xl:leading-[62px]">
+              <span className="num self-start font-display text-[36px] leading-[42px] text-petrol sm:text-[44px] sm:leading-[50px] md:text-[30px] md:leading-[36px] lg:text-[44px] lg:leading-[50px] xl:text-[50px] xl:leading-[56px]">
                 <span aria-hidden data-count={p.value}>
                   {p.value}
                 </span>

@@ -25,6 +25,7 @@ cd .next/standalone && PORT=3000 HOSTNAME=127.0.0.1 node server.js   # behind ng
 
 - Node 22 (`.nvmrc`). Keep it running with pm2 or a systemd service.
 - No secrets are needed. `NEXT_PUBLIC_SITE_URL` is only for a staging host (see `.env.example`).
+- The reverse proxy must pass the original host (nginx: `proxy_set_header Host $host;` and `proxy_set_header X-Forwarded-Proto $scheme;`), or the language `Link` headers point at the internal address.
 - Security headers (frame blocking, nosniff, referrer and permissions policies, HSTS) and a one-day cache for the media in `public/` are set in `next.config.ts`. HTTPS and the http → https redirect belong to the reverse proxy.
 - Contact is by WhatsApp and email links; there is no form and no API route.
 

@@ -135,9 +135,13 @@ const engine = String.raw`
   // ---------------------------------------------------------------- preloader
   function preload() {
     var el = doc.getElementById('preloader');
-    if (!el || el.__started) return;
+    if (!el || el.__started) return false;
+    // While the HTML is still streaming, the element can exist before its SVG
+    // is complete: wait until the mark's last parts (nib and dot) are parsed.
+    var svg = el.querySelector('svg');
+    if (!svg || !svg.querySelector('[data-dot]') || !svg.querySelector('[data-nib]')) return false;
     el.__started = true;
-    var mark = new Mark(el.querySelector('svg'));
+    var mark = new Mark(svg);
     var loaded = doc.readyState === 'complete';
     var started = Date.now();
     window.addEventListener('load', function () { loaded = true; });
@@ -175,7 +179,9 @@ const engine = String.raw`
         .then(function () { emit('if:reveal'); return tween(480, function (v) { clip(el, x, y, R * (1 - v)); }, inCubic); })
         .then(finish);
     }
-    cycle();
+    // If anything goes wrong mid-animation, never leave the page covered.
+    cycle().catch(function () { emit('if:reveal'); finish(); });
+    return true;
   }
 
   // ---------------------------------------------------------------- switch transition
@@ -242,12 +248,12 @@ const engine = String.raw`
   window.__ifMotion = { preload: preload, transition: transition, reduce: reduce, setTheme: setTheme };
 
   // Start the preloader the moment its markup is parsed.
-  if (doc.getElementById('preloader')) preload();
-  else {
+  if (!preload()) {
     var watch = new MutationObserver(function () {
-      if (doc.getElementById('preloader')) { watch.disconnect(); preload(); }
+      if (preload()) watch.disconnect();
     });
     watch.observe(root, { childList: true, subtree: true });
+    doc.addEventListener('DOMContentLoaded', function () { watch.disconnect(); preload(); });
   }
   // A preloader runs on every page load; until it ends, entrances wait.
   window.__ifBusy = true;

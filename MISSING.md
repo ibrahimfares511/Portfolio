@@ -1,7 +1,8 @@
 # Missing assets
 
-Assets the site needs but doesn't have yet. Each one uses a clear placeholder until it arrives.
+Assets the site still waits for. Each one has a working stand-in until it arrives.
 
-| Asset | Where it's used | Placeholder now | Status |
+| Asset | Where it's used | Now | Status |
 | --- | --- | --- | --- |
-| 3D model of the avatar (`.glb`) | Hero | The WebP poses from the brand pack, with a gentle tilt and parallax (no three.js for now) | Not available yet |
+| Upscaled face images (living portrait) | Hero (`public/avatar/face/`) | The current Gemini images | Ibrahim upscales them and hands them over to swap in |
+| Before/after numbers for the WMS | WMS case study | The case study runs without them | Asked from the client |

@@ -164,7 +164,8 @@ async function buildPage(slug, dir, p, pdir) {
     problem: p.problem,
     solution: p.solution,
     features: p.features,
-    results: p.results,
+    // Site rule: the plus sign comes first ("+1,000", like "+13,000"), whatever the package wrote.
+    results: (p.results ?? []).map((r) => ({ ...r, value: r.value.replace(/^([\d.,]+)\+$/, "+$1") })),
     stack: p.stack,
     techNotes: p.tech_notes,
     caseStudy: { ar: read("ar"), en: read("en") },
