@@ -284,7 +284,7 @@ export function ProjectShowcase({
           {/* The projects: a swipe row on phones, stacked in one place on desktop */}
           <ol
             ref={track}
-            className="-mx-4 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:mt-7 lg:grid lg:min-h-0 lg:flex-1 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden"
+            className="-mx-4 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pt-1 pb-10 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:mt-7 lg:grid lg:min-h-0 lg:flex-1 lg:overflow-visible lg:px-0 lg:pb-0 [&::-webkit-scrollbar]:hidden"
           >
             {projects.map((p, i) => (
               <Slide
@@ -379,7 +379,7 @@ function Slide({
       aria-label={`${pad(i + 1)} / ${pad(n)}`}
       className={`w-[86%] shrink-0 snap-center sm:w-[70%] lg:w-auto lg:[grid-area:1/1] lg:min-h-0 ${i === 0 ? "" : "lg:invisible"}`}
     >
-      <article aria-labelledby={`project-${p.slug}-name`} className="grid h-full grid-cols-1 gap-5 lg:grid-cols-12 lg:items-center lg:gap-12">
+      <article aria-labelledby={`project-${p.slug}-name`} className="flex h-full flex-col gap-5 rounded-[26px] bg-surface p-3 pb-6 shadow-[0_24px_48px_-28px_rgba(22,48,58,0.45)] ring-1 ring-line lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:rounded-none lg:bg-transparent lg:p-0 lg:shadow-none lg:ring-0 dark:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.8)] lg:dark:shadow-none">
         {/* The screen recording, large, on the brand gradient */}
         <div className="relative lg:col-span-8 lg:flex lg:h-full lg:min-h-0 lg:items-center lg:justify-center">
           <div
@@ -400,7 +400,7 @@ function Slide({
         </div>
 
         {/* The story in short: what it is, my role, two numbers, the way in */}
-        <div className="flex flex-col lg:col-span-4">
+        <div className="flex flex-1 flex-col px-2 lg:col-span-4 lg:flex-none lg:px-0">
           <div data-txt className="flex items-center gap-2.5 text-[13px] leading-[20px] text-ink-muted">
             <span className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1">
               <span className={`relative size-2 rounded-full ${live ? "bg-petrol" : "bg-ink-muted/50"}`} aria-hidden>
@@ -438,7 +438,7 @@ function Slide({
           </p>
 
           {/* My role, said plainly */}
-          <div className="mt-5 border-s-2 border-clay ps-4">
+          <div className="mt-5 mb-5 border-s-2 border-clay ps-4 lg:mb-0">
             <p data-txt className="text-[12px] leading-[18px] font-medium tracking-[0.06em] text-ink-muted uppercase">
               {strings.role}
             </p>
@@ -447,7 +447,7 @@ function Slide({
             </p>
           </div>
 
-          <dl className="mt-5 grid grid-cols-2 gap-4 border-t border-line pt-5">
+          <dl className="mt-auto grid grid-cols-2 gap-4 border-t border-line pt-5 lg:mt-5">
             {p.card.stats.map((s, k) => (
               <div key={k} data-txt className="flex flex-col-reverse gap-1">
                 <dt className="text-[13px] leading-[20px] text-ink-muted">{s.label[lang]}</dt>
@@ -461,7 +461,7 @@ function Slide({
             ))}
           </dl>
 
-          <div data-txt className="mt-6 flex flex-col items-start gap-3">
+          <div data-txt className="mt-6 flex min-h-[76px] flex-col items-start gap-3 lg:min-h-0">
             <ProjectLink
               slug={p.slug}
               className="inline-flex h-11 items-center gap-2 rounded-md bg-ink px-5 text-[15px] font-medium text-bg transition-[filter] hover:brightness-110"
@@ -481,7 +481,7 @@ function Slide({
                 <svg viewBox="0 0 16 16" className="size-3.5 shrink-0 rtl:-scale-x-100" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
                   <path d="M6 3h7v7M13 3 4 12" />
                 </svg>
-                <span>
+                <span className="min-w-0 max-lg:truncate">
                   {l.label} · <span className="text-ink underline decoration-line underline-offset-4 group-hover:text-petrol group-hover:decoration-petrol">{l.name}</span>
                 </span>
               </button>
