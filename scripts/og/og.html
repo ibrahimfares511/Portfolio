@@ -1,36 +1,65 @@
 <!doctype html>
-<!-- Social image (1200×630) for the home page. Rendered to public/og/home-<lang>.png (saved as .jpg)
-     by scripts/og/render.py against a running build (it borrows the site's fonts). -->
+<!-- Social image (1200×630) for the home page: the promise, the proof (three numbers) and a real
+     screen behind the character. Rendered to public/og/home-<lang>.jpg by scripts/og/render.py
+     against a running build (it borrows the site's fonts and images). -->
 <html><head><meta charset="utf-8">
 <link rel="stylesheet" href="__CSS__">
 <style>
   html,body{margin:0}
-  .og{width:1200px;height:630px;position:relative;overflow:hidden;background:
-    radial-gradient(700px 480px at 88% -8%, #CFE0E3 0%, transparent 70%),
-    radial-gradient(640px 420px at -4% 112%, #F0D2C3 0%, transparent 70%), #F3EFE9;
-    color:#16303A;display:flex;align-items:center;box-sizing:border-box;padding:0 84px}
-  .txt{width:640px;display:flex;flex-direction:column;gap:22px;position:relative;z-index:2}
-  .mark{width:58px;height:77px}
-  .eyebrow{font-size:26px;color:#1F4E5F}
-  .head{font-weight:500;font-size:62px;line-height:1.38}
-  [lang=en] .head{font-family:Nunito;font-weight:700;font-size:64px;line-height:1.12;letter-spacing:-0.02em}
-  [lang=en] .eyebrow{font-family:Nunito;font-weight:600}
-  .url{font-family:Nunito;font-weight:700;font-size:24px;color:#C2603F;direction:ltr;unicode-bidi:isolate}
+  .og{width:1200px;height:630px;position:relative;overflow:hidden;box-sizing:border-box;color:#16303A;
+    background:
+      radial-gradient(720px 500px at 92% -10%, #CFE0E3 0%, transparent 70%),
+      radial-gradient(640px 420px at -6% 115%, #F0D2C3 0%, transparent 70%), #F3EFE9}
+  [dir=rtl] .og{background:
+      radial-gradient(720px 500px at 8% -10%, #CFE0E3 0%, transparent 70%),
+      radial-gradient(640px 420px at 106% 115%, #F0D2C3 0%, transparent 70%), #F3EFE9}
+
+  /* the proof side: a real screen of the WMS, the character in front of it */
+  .shot{position:absolute;top:96px;inset-inline-end:-70px;width:560px;border-radius:18px;background:#fff;
+    box-shadow:0 40px 80px -36px rgba(22,48,58,.55),0 0 0 1px rgba(22,48,58,.08);overflow:hidden;
+    transform:rotate(-4deg)}
+  [dir=rtl] .shot{transform:rotate(4deg)}
+  .shot .bar{height:26px;background:#EFEAE3;display:flex;gap:7px;align-items:center;padding:0 12px;direction:ltr}
+  .shot .bar i{width:9px;height:9px;border-radius:50%;background:#D8D1C7;display:block}
+  .shot img{display:block;width:100%}
+  .av{position:absolute;bottom:-34px;height:560px;inset-inline-end:100px;filter:drop-shadow(0 30px 30px rgba(22,48,58,.25))}
+
+  /* the words */
+  .txt{position:absolute;top:0;bottom:0;inset-inline-start:64px;width:650px;display:flex;flex-direction:column;justify-content:center;gap:20px;z-index:2}
+  .top{display:flex;align-items:center;gap:16px}
+  .mark{width:40px;height:53px;flex:none}
+  .eyebrow{font-size:23px;color:#1F4E5F}
+  .head{font-weight:600;font-size:52px;line-height:1.42}
+  .head b{font-weight:600;color:#C2603F}
+  .stats{display:flex;gap:0;margin-top:6px;border-top:1.5px solid rgba(22,48,58,.14);padding-top:22px}
+  .stat{flex:1 1 0;min-width:0;padding-inline-end:14px;margin-inline-end:14px;border-inline-end:1.5px solid rgba(22,48,58,.14)}
+  .stat:last-child{border:0;margin:0;padding:0}
+  .num{font-family:Nunito;font-weight:800;font-size:38px;line-height:1;color:#1F4E5F;direction:ltr;unicode-bidi:isolate;display:inline-block;letter-spacing:-.01em}
+  .lab{font-size:16px;line-height:1.4;color:#46616a;margin-top:8px}
+  .url{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-top:4px;
+    font-family:Nunito;font-weight:800;font-size:22px;color:#fff;background:#B5552F;border-radius:999px;padding:9px 20px;direction:ltr}
   [lang=ar] .txt{font-family:Alexandria}
-  [lang=ar] .url{text-align:right}
-  .av{position:absolute;bottom:-40px;height:640px;inset-inline-end:40px}
+  [lang=en] .txt{font-family:Nunito}
+  [lang=en] .head{font-weight:800;font-size:56px;line-height:1.1;letter-spacing:-.025em}
+  [lang=en] .head b{font-weight:800}
+  [lang=en] .eyebrow{font-weight:600}
+  [lang=en] .lab{font-size:16px}
 </style></head>
 <body><div class="og" lang="__LANG__" dir="__DIR__">
-  <div class="txt">
-    <svg class="mark" viewBox="16.5 8.5 73 97" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M28 78 V46" stroke="#16303A" stroke-width="11"/>
-      <path d="M80 18 Q62 18 62 36 V82 Q62 96 48 96 H36" stroke="#16303A" stroke-width="11"/>
-      <path d="M46 48 H78" stroke="#16303A" stroke-width="11"/>
-      <circle cx="28" cy="27" r="7.5" fill="#C2603F"/>
-    </svg>
-    <div class="eyebrow">__EYEBROW__</div>
-    <div class="head">__HEAD__</div>
-    <div class="url">ibrahimfares.dev</div>
-  </div>
+  <div class="shot"><div class="bar"><i></i><i></i><i></i></div><img src="__SHOT__"></div>
   <img class="av" src="__AVATAR__">
+  <div class="txt">
+    <div class="top">
+      <svg class="mark" viewBox="16.5 8.5 73 97" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M28 78 V46" stroke="#16303A" stroke-width="11"/>
+        <path d="M80 18 Q62 18 62 36 V82 Q62 96 48 96 H36" stroke="#16303A" stroke-width="11"/>
+        <path d="M46 48 H78" stroke="#16303A" stroke-width="11"/>
+        <circle cx="28" cy="27" r="7.5" fill="#C2603F"/>
+      </svg>
+      <div class="eyebrow">__EYEBROW__</div>
+    </div>
+    <div class="head">__HEAD__</div>
+    <div class="stats">__STATS__</div>
+    <div class="url">__URL__</div>
+  </div>
 </div></body></html>

@@ -44,7 +44,7 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     title: t("title"),
     description: t("description"),
-    applicationName: t("title"),
+    applicationName: t("siteName"),
     authors: [
       { name: lang === "ar" ? "إبراهيم فارس" : "Ibrahim Fares", url: SITE_URL },
     ],
@@ -55,14 +55,14 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       url: `/${locale}`,
-      siteName: t("title"),
+      siteName: t("siteName"),
       title: t("title"),
       description: t("description"),
       locale: OG_LOCALE[lang],
       alternateLocale: OG_LOCALE[lang === "ar" ? "en" : "ar"],
       images: [
         {
-          url: `/og/home-${lang}.jpg`,
+          url: `/og/home-${lang}.jpg?v=2`, // ?v=2: a new address, so platforms fetch the new image
           width: 1200,
           height: 630,
           alt: t("title"),
@@ -73,7 +73,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
-      images: [`/og/home-${lang}.jpg`],
+      images: [`/og/home-${lang}.jpg?v=2`],
     },
   };
 }

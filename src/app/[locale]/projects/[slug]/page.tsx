@@ -62,7 +62,7 @@ export async function generateMetadata({
   if (!p) return {};
   const lang: Lang = locale === "en" ? "en" : "ar";
   const t = await getTranslations({ locale, namespace: "meta" });
-  const title = `${p.name[lang]} · ${t("title")}`;
+  const title = `${p.name[lang]} · ${t("siteName")}`;
   // Branded social card (logo, project name, line, address) from scripts/og/render-projects.py
   const images = [{ url: `${SITE_URL}/og/projects/${slug}-${lang}.jpg`, width: 1200, height: 630, alt: p.title[lang] }];
   return {
@@ -79,7 +79,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       url: `/${locale}/projects/${slug}`,
-      siteName: t("title"),
+      siteName: t("siteName"),
       title,
       description: p.summary[lang],
       locale: OG_LOCALE[lang],
