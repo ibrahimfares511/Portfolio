@@ -25,6 +25,10 @@ export function Hero() {
   const locale = useLocale();
   const isAr = locale === "ar";
   const headlineLead = t("headline").replace(t("headlineAccent"), "").trim();
+  const accent = t("headlineAccent");
+  const cut = accent.lastIndexOf(" ");
+  const accentHead = cut > 0 ? accent.slice(0, cut) : "";
+  const accentTail = cut > 0 ? accent.slice(cut + 1) : accent;
   const root = useRef<HTMLElement>(null);
 
   // Entrance once the cover opens: the words are "typed in", each one coming
@@ -122,9 +126,13 @@ export function Hero() {
             {/* The promise ("a system that actually works") in the brand clay, so the eye lands on it */}
             <Words text={headlineLead} />{" "}
             <span className="text-clay">
-              <Words text={t("headlineAccent")} />
+              <Words text={accentHead} />{accentHead ? " " : null}
+              {/* the last word and the brand dot never part across lines */}
+              <span className="whitespace-nowrap">
+                <Words text={accentTail} />
+                <span data-reveal="word" className="ms-2 inline-block size-[0.18em] rounded-full bg-clay" aria-hidden />
+              </span>
             </span>
-            <span data-reveal="word" className="ms-2 inline-block size-[0.18em] rounded-full bg-clay" aria-hidden />
           </h1>
           {/* On small screens the subline + buttons sit under the headline */}
           <p className="mx-auto mt-4 max-w-md text-[16px] leading-[28px] text-ink-muted xl:hidden">
